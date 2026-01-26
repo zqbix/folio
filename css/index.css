@@ -128,9 +128,9 @@ a:focus-visible {
 }
 #reel .iframe {
 	position: relative;
-	border: 1px solid #404040;
+/*	border: 1px solid #404040; */
 	width: 100%;
-	max-width: 960px;
+	max-width: 1280px;
 	aspect-ratio: 16/9;
 }
 /* ====================================================================================================
