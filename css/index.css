@@ -1,0 +1,150 @@
+/* ====================================================================================================
+	ROOT VARIABLES
+==================================================================================================== */
+:root {
+	--bg: #111111;
+	--fg: #bdbdbd;
+	--fg-strong: #ffffff;
+	--accent: #aaaaaa;
+}
+/* ====================================================================================================
+	FONT
+==================================================================================================== */
+@font-face {
+	font-family: federo;
+	src: url("../font/federo.ttf");
+	font-display: swap;
+}
+/* ====================================================================================================
+	BASE RESET
+==================================================================================================== */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html {
+	background: var(--bg);
+	scroll-behavior: smooth;
+	color: var(--fg);
+	font-family: 'federo', sans-serif;
+}
+body {
+	overflow-x: hidden;
+	text-align: center;
+}
+/* ====================================================================================================
+	TYPOGRAPHY
+==================================================================================================== */
+.text_large {
+	font-size: clamp(40px, 10vw, 80px);
+	font-style: italic;
+	letter-spacing: clamp(1px, 10px, 6px);
+}
+.text_medium {
+	font-size: 14px;
+	font-style: italic;
+	letter-spacing: 2px;
+}
+.text_small {
+	font-size: 11px;
+	letter-spacing: 1px;
+	font-style: italic;
+}
+a {
+	color: var(--fg);
+	text-decoration: none;
+}
+a:hover {
+	color: var(--fg-strong);
+}
+a:focus-visible {
+  outline: 1px solid var(--fg-strong);
+}
+/* ====================================================================================================
+	GANG
+==================================================================================================== */
+#gang {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100dvh;
+	z-index: 0;
+	opacity: 1;
+	background-image: url("../img/gang.png");
+	background-position: center center;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+/* ====================================================================================================
+	LOGO
+==================================================================================================== */
+#logo {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+	opacity: 1;
+	background-image: url("../img/000-logo.png");
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: default;
+}
+/* ====================================================================================================
+	REEL
+==================================================================================================== */
+#reel {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	transform: scale(0,0);
+	opacity: 0;
+}
+@keyframes reel {
+	0% {
+		transform: scale(0,0);
+		opacity: 0;
+	}
+    100% {
+		transform: scale(1,1);
+		opacity: 1;
+    }
+}
+#reel:target {
+	animation: reel 1s ease forwards;
+}
+#reel .iframe {
+	position: relative;
+	border: 1px solid #404040;
+	width: 100%;
+	max-width: 960px;
+	aspect-ratio: 16/9;
+}
+/* ====================================================================================================
+	404
+==================================================================================================== */
+#v0v {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	z-index: 0;
+}
