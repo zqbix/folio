@@ -6,11 +6,11 @@
 	--clr-font-nrml: #aaaaaa;
 	--clr-font-hvr: #ffffff;
 
-	--ani-gang: 2s cubic-bezier(1,0,1,1) 1s forwards;
-	--ani-eyes: 2s ease 1s forwards;
-	--ani-logo: 1s cubic-bezier(1,0,1,1) 0s forwards;
-	--ani-dvdr: var(--ani-logo);
-	--ani-navi: var(--ani-logo);;
+	--ani-gang: 2s cubic-bezier(1,0,1,1) 1.5s forwards;
+	--ani-eyes: 2s ease 1.5s forwards;
+	--ani-logo: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
+	--ani-dvdr: 1.5s cubic-bezier(1,0,1,1) 0s forwards;
+	--ani-navi: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
 	--ani-reel: 1s ease 0s forwards;
 }
 /* ====================================================================================================
@@ -78,7 +78,6 @@ a:hover {
 	width: 100%;
 	height: 100%;
 	background-position: center;
-	background-size: contain;
 	background-repeat: no-repeat;
 	opacity: 0;
 }
@@ -120,6 +119,7 @@ a:hover {
 	background-position: center bottom;
 	background-size: contain;
 	background-repeat: no-repeat;
+	opacity: 0;
 	cursor: default;
 	animation: logo var(--ani-logo);
 }
@@ -160,6 +160,7 @@ a:hover {
 #navi {
 	padding-top: 10px;
 	white-space: nowrap;
+	opacity: 0;
 	animation: navi var(--ani-navi);
 }
 @keyframes navi {
@@ -187,7 +188,7 @@ a:hover {
 #reel:target {
 	animation: reel var(--ani-reel);
 }
-.video{
+.video {
 	width: 100%;
 	aspect-ratio: 16/9;
 }
@@ -202,7 +203,7 @@ a:hover {
 	}
 }
 #bgG, #bgE, #logo, #divider, #navi, #reel {
-    will-change: opacity, transform; /*transform, opacity, letter-spacing, width;*/
+    will-change: opacity, transform;
 }
 /* ====================================================================================================
 	404
