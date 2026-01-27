@@ -2,10 +2,9 @@
 	ROOT VARIABLES
 ==================================================================================================== */
 :root {
-	--bg: #111111;
-	--fg: #bdbdbd;
-	--fg-strong: #ffffff;
-	--accent: #aaaaaa;
+	--clr-bg: #111111;
+	--clr-font-nrml: #aaaaaa;
+	--clr-font-hvr: #ffffff;
 
 	--ani-gang: 2s cubic-bezier(1,0,1,1) 1s forwards;
 	--ani-eyes: 2s ease 1s forwards;
@@ -31,9 +30,9 @@
 	box-sizing: border-box;
 }
 html {
-	background: var(--bg);
+	background: var(--clr-bg);
 	scroll-behavior: smooth;
-	color: var(--fg);
+	color: var(--clr-font-nrml);
 	font-family: 'federo', sans-serif;
 }
 body {
@@ -52,11 +51,11 @@ body {
 	font-style: italic;
 }
 a {
-	color: var(--fg);
+	color: var(--clr-font-nrml);
 	text-decoration: none;
 }
 a:hover {
-	color: var(--fg-strong);
+	color: var(--clr-font-hvr);
 }
 /* ====================================================================================================
 	BASE
@@ -139,7 +138,7 @@ a:hover {
 ==================================================================================================== */
 #divider {
 	height: 1px;
-	background-color: #404040;
+	background-color: var(--clr-font-nrml);
 	animation: divider var(--ani-dvdr);
 }
 @keyframes divider {
@@ -148,7 +147,7 @@ a:hover {
 						opacity: 0;
 	}
 	50% {
-						opacity: 1;
+						opacity: 0.3;
 	}
 	100% {
 						width: 20%;
@@ -201,6 +200,9 @@ a:hover {
 						transform: scale(1);
 						opacity: 1;
 	}
+}
+#bgG, #bgE, #logo, #divider, #navi, #reel {
+    will-change: transform, opacity, letter-spacing, width;
 }
 /* ====================================================================================================
 	404
