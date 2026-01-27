@@ -159,7 +159,7 @@ a:hover {
 ==================================================================================================== */
 #navi {
 	padding-top: 10px;
-	text-wrap: nowrap;
+	white-space: nowrap;
 	animation: navi var(--ani-navi);
 }
 @keyframes navi {
@@ -202,7 +202,7 @@ a:hover {
 	}
 }
 #bgG, #bgE, #logo, #divider, #navi, #reel {
-    will-change: transform, opacity, letter-spacing, width;
+    will-change: opacity, transform; /*transform, opacity, letter-spacing, width;*/
 }
 /* ====================================================================================================
 	404
