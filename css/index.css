@@ -34,6 +34,7 @@ html {
 	scroll-behavior: smooth;
 	color: var(--clr-font-nrml);
 	font-family: 'federo', sans-serif;
+	font-style: italic;
 }
 body {
 	overflow-x: hidden;
@@ -44,11 +45,9 @@ body {
 ==================================================================================================== */
 .text_large {
 	font-size: clamp(40px, 10vw, 80px);
-	font-style: italic;
 }
 .text_medium {
 	font-size: 14px;
-	font-style: italic;
 }
 a {
 	color: var(--clr-font-nrml);
