@@ -187,7 +187,7 @@ a:hover {
 #reel:target {
 	animation: reel var(--ani-reel);
 }
-#test {
+#close-grad {
 	position: relative;
 	width: 50%;
 	height: auto;
@@ -210,19 +210,4 @@ a:hover {
 }
 #bgG, #bgE, #logo, #divider, #navi, #reel {
     will-change: opacity, transform;
-}
-/* ====================================================================================================
-	404
-==================================================================================================== */
-#v0v {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	height: 100dvh;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-	z-index: 0;
 }
