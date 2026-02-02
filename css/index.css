@@ -14,8 +14,12 @@
 	--ani-logo: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
 	--ani-dvdr: 1.5s cubic-bezier(1,0,1,1) 0s forwards;
 	--ani-navi: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
-	--ani-reel: 1s ease 0s forwards;
-	--ani-cntct: 1s ease 0s forwards;
+	--ani-reel: 1.5s ease 0s forwards;
+	--ani-video: 2s cubic-bezier(1,0,1,1) 1s forwards;
+	--ani-bttnC: 3s ease-out 0s forwards;
+	--ani-cntct: 1s ease-out 0s forwards;
+	--ani-bttnL: var(--ani-cntct);
+	--ani-bttnR: var(--ani-cntct);
 }
 /* ====================================================================================================
 	FONT
@@ -35,6 +39,7 @@
 	font-family: 'federo', sans-serif;
 	font-style: italic;
 	color: var(--clr-font-nrml);
+	outline: none;
 }
 html {
 	background: var(--clr-bg);
@@ -61,26 +66,13 @@ a:hover {
 	color: var(--clr-font-hvr);
 }
 /* ====================================================================================================
-	BASE
+	BG
 ==================================================================================================== */
-#base {
-	position: relative;
+#bg > div {
+	position: fixed;
 	width: 100%;
 	height: 100vh;
 	height: 100dvh;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: center;
-}
-/* ====================================================================================================
-	BG
-==================================================================================================== */
-.bg {
-	position: fixed;
-	width: 100%;
-	height: 100%;
 	opacity: 0;
 }
 .gang {
@@ -117,7 +109,7 @@ a:hover {
 						opacity: 1;
 	}
 	100% {
-						opacity: 0;
+						opacity: 0.5;
 						filter: blur(0px);
 	}
 }
@@ -154,10 +146,23 @@ a:hover {
 	}
 }
 /* ====================================================================================================
+	BASE
+==================================================================================================== */
+#base {
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+}
+/* ====================================================================================================
 	LOGO
 ==================================================================================================== */
 #logo {
-	padding-bottom: 5px;
 	background-image: url("../img/000-logo.png");
 	background-position: center bottom;
 	background-size: contain;
@@ -181,6 +186,7 @@ a:hover {
 ==================================================================================================== */
 #divider {
 	height: 1px;
+	margin: 5px 0px 10px;
 	background-color: var(--clr-font-nrml);
 	animation: divider var(--ani-dvdr);
 }
@@ -193,7 +199,7 @@ a:hover {
 						opacity: 0.3;
 	}
 	100% {
-						width: 20%;
+						width: 10%;
 						opacity: 0;
 	}
 }
@@ -201,7 +207,6 @@ a:hover {
 	NAVI
 ==================================================================================================== */
 #navi {
-	padding-top: 10px;
 	white-space: nowrap;
 	opacity: 0;
 	animation: navi var(--ani-navi);
@@ -220,36 +225,57 @@ a:hover {
 	REEL
 ==================================================================================================== */
 #reel {
-	position: fixed;
 	border: 1px solid var(--clr-gray);
+	position: fixed;
 	width: 100%;
-	max-width: 990px;
-	aspect-ratio: 16/9;
+	max-width: 1280px;
 	padding: 15px;
-	background-color: rgb(17 17 17 / 50%);
-	backdrop-filter: blur(10px);
+	background-color: rgb(17 17 17 / 70%);
+	overflow: hidden;
 	transform: scale(1,0);
-	opacity: 0;
 }
 #reel:target {
 	animation: reel var(--ani-reel);
 }
+#reel:target .video {
+	animation: video var(--ani-video);
+}
+#reel:target #button_center {
+	animation: bttnC var(--ani-bttnC);
+}
 .video {
 	width: 100%;
 	aspect-ratio: 16/9;
+	opacity: 0;
 }
 @keyframes reel {
 	0% {
 						transform: scale(1,0);
-						opacity: 0;
+						backdrop-filter: blur(0px);
 	}
 	100% {
 						transform: scale(1);
+						backdrop-filter: blur(5px);
+	}
+}
+@keyframes video {
+	0% {
+						opacity: 0;
+	}
+	100% {
 						opacity: 1;
 	}
 }
+@keyframes bttnC {
+	0% {
+						width: 70%;
+	}
+	100% {
+						width: 50%;
+	}
+}
 #button_center {
-	width: 100%;
+	width: 70%;
 	margin-top: 10px;
 }
 /* ====================================================================================================
@@ -263,22 +289,44 @@ a:hover {
 	height: auto;
 	padding: 15px;
 	overflow: hidden;
-	background-color: rgb(17 17 17 / 50%);
-	backdrop-filter: blur(10px);
+	background-color: rgb(17 17 17 / 70%);
 	transform: scale(1,0);
-	opacity: 0;
 }
 #contact:target {
 	animation: cntct var(--ani-cntct);
 }
+#contact:target #button_left {
+	animation: bttnL var(--ani-bttnL);
+	transform-origin: center;
+}
+#contact:target #button_right {
+	animation: bttnR var(--ani-bttnR);
+	transform-origin: center;
+}
 @keyframes cntct {
 	0% {
 						transform: scale(1,0);
-						opacity: 0;
+						backdrop-filter: blur(0px);
 	}
 	100% {
 						transform: scale(1);
-						opacity: 1;
+						backdrop-filter: blur(5px);
+	}
+}
+@keyframes bttnL {
+	0% {
+						width: 35%;
+	}
+	100% {
+						width: 69%;
+	}
+}
+@keyframes bttnR {
+	0% {
+						width: 15%;
+	}
+	100% {
+						width: 29%;
 	}
 }
 textarea {
@@ -289,9 +337,8 @@ textarea {
 	width: 100%;
 	padding: 15px;
 	background-color: transparent;
-	outline: none;
 	border: 1px solid transparent;
-	border-left: 1px  solid var(--clr-gray);
+	border-left: 1px solid var(--clr-gray);
 	font-size: 15px;
 	resize: vertical;
 	overflow: hidden;
@@ -303,16 +350,13 @@ textarea:focus {
 	border: 1px solid var(--clr-gray);
 }
 #button_left {
-	width: 80%;
 	float: left;
 }
 #button_right {
-	width: 19%;
 	float: right;
 }
 .button {
 	padding: 15px;
-	border: none;
 	background-color: transparent;
 	border: 1px solid var(--clr-gray);
 	font-size: 15px;
