@@ -24,14 +24,10 @@
 <!-- BASE -->
 		<div id="base">
 <!-- BG -->
-			<div id="bg_Gang" class="gang">
-			</div>
-			<div id="bg_Eyes" class="eyes">
-			</div>
-			<div id="bg_DustA" class="dust a">
-			</div>
-			<div id="bg_DustB" class="dust b">
-			</div>
+			<div class="bg gang"></div>
+			<div class="bg eyes"></div>
+			<div class="bg dust a"></div>
+			<div class="bg dust b"></div>
 <!-- LOGO -->
 			<div id="logo">
 				<p class="text_large">zqbix</p>
@@ -43,26 +39,36 @@
 			<div id="navi">
 				<p class="text_medium">
 					<a href="#reel" aria-label="OPEN REEL" title="OPEN REEL">REEL</a>
-					&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
+					&#8226;
 					<a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link"
 					   target="_blank"
 					   rel="noopener noreferrer"
 					   aria-label="OPEN GOOGLE DRIVE"
 					   title="OPEN GOOGLE DRIVE">VFX-DUMP</a>
-					&nbsp;&nbsp;&#8226;&nbsp;&nbsp;
-					<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#122;&#113;&#98;&#105;&#120;&#64;&#112;&#114;&#111;&#116;&#111;&#110;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">&#x4d;&#x41;&#x49;&#x4c;</a>
+					   &#8226;
+					<a href="#contact" aria-label="OPEN CONTACT FORM" title="OPEN CONTACT FORM">CONTACT</a>
 				</p>
 			</div>
 <!-- REEL -->
 			<div id="reel">
-				<a href="#" aria-label="CLOSE REEL" role="button">
-					<span aria-hidden="true" class="text_medium">CLOSE</span>
-				</a>
-				<p class="text_medium">&nbsp;</p>
 				<video class="video" controls preload="metadata" poster="./reel/reel.jpg" aria-label="SHOWREEL">
 					<source src="./reel/reel.mp4" type="video/mp4">
 					<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.</p>
 				</video>
+				<form action="#" novalidate>
+					<button id="button_center" class="button" type="submit">CLOSE</button>
+				</form>
+			</div>
+<!-- CONTACT -->
+			<div id="contact">
+				<form action="https://formspree.io/f/xzdvrrbp" method="post" target="_blank">
+					<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+					<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+					<button id="button_left" class="button" type="submit">SUBMIT</button>
+				</form>
+				<form action="#" novalidate>
+					<button id="button_right" class="button" type="submit">CLOSE</button>
+				</form>
 			</div>
 		</div>
 	</body>
