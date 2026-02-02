@@ -3,6 +3,7 @@
 ==================================================================================================== */
 :root {
 	--clr-bg: #111111;
+	--clr-gray: #404040;
 	--clr-font-nrml: #aaaaaa;
 	--clr-font-hvr: #ffffff;
 
@@ -14,6 +15,7 @@
 	--ani-dvdr: 1.5s cubic-bezier(1,0,1,1) 0s forwards;
 	--ani-navi: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
 	--ani-reel: 1s ease 0s forwards;
+	--ani-cntct: 1s ease 0s forwards;
 }
 /* ====================================================================================================
 	FONT
@@ -30,26 +32,26 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	font-family: 'federo', sans-serif;
+	font-style: italic;
+	color: var(--clr-font-nrml);
 }
 html {
 	background: var(--clr-bg);
 	scroll-behavior: smooth;
-	color: var(--clr-font-nrml);
-	font-family: 'federo', sans-serif;
-	font-style: italic;
 }
 body {
-	overflow-x: hidden;
+	overflow: hidden;
 	text-align: center;
 }
 /* ====================================================================================================
 	TYPOGRAPHY
 ==================================================================================================== */
 .text_large {
-	font-size: clamp(40px, 10vw, 80px);
+	font-size: 80px;
 }
 .text_medium {
-	font-size: 14px;
+	font-size: 12px;
 }
 a {
 	color: var(--clr-font-nrml);
@@ -62,8 +64,9 @@ a:hover {
 	BASE
 ==================================================================================================== */
 #base {
-	position: fixed;
+	position: relative;
 	width: 100%;
+	height: 100vh;
 	height: 100dvh;
 	display: flex;
 	flex-direction: column;
@@ -74,24 +77,22 @@ a:hover {
 /* ====================================================================================================
 	BG
 ==================================================================================================== */
-div[id^='bg_'] {
+.bg {
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	background-position: center;
-	background-repeat: no-repeat;
 	opacity: 0;
 }
 .gang {
-	background: url(../img/gang.png);
+	background: url(../img/gang.png) center no-repeat;
 	animation: gang var(--ani-gang);
 }
 .eyes {
-	background: url(../img/eyes.png);
+	background: url(../img/eyes.png) center no-repeat;
 	animation: eyes var(--ani-eyes);
 }
 .dust {
-	background: url(../img/dust.png);
+	background: url(../img/dust.png) center no-repeat;
 }
 .a {
 	animation: dust_a var(--ani-dust-a);
@@ -156,7 +157,7 @@ div[id^='bg_'] {
 	LOGO
 ==================================================================================================== */
 #logo {
-	padding-bottom: 15px;
+	padding-bottom: 5px;
 	background-image: url("../img/000-logo.png");
 	background-position: center bottom;
 	background-size: contain;
@@ -220,11 +221,14 @@ div[id^='bg_'] {
 ==================================================================================================== */
 #reel {
 	position: fixed;
+	border: 1px solid var(--clr-gray);
 	width: 100%;
-	max-width: 960px;
+	max-width: 990px;
 	aspect-ratio: 16/9;
-	z-index: 3;
-	transform: scale(0);
+	padding: 15px;
+	background-color: rgb(17 17 17 / 50%);
+	backdrop-filter: blur(10px);
+	transform: scale(1,0);
 	opacity: 0;
 }
 #reel:target {
@@ -236,7 +240,7 @@ div[id^='bg_'] {
 }
 @keyframes reel {
 	0% {
-						transform: scale(0);
+						transform: scale(1,0);
 						opacity: 0;
 	}
 	100% {
@@ -244,6 +248,83 @@ div[id^='bg_'] {
 						opacity: 1;
 	}
 }
-div[id^='bg_'], #logo, #divider, #navi, #reel {
+#button_center {
+	width: 100%;
+	margin-top: 10px;
+}
+/* ====================================================================================================
+	CONTACT
+==================================================================================================== */
+#contact {
+	position: fixed;
+	border: 1px solid var(--clr-gray);
+	width: 100%;
+	max-width: 666px;
+	height: auto;
+	padding: 15px;
+	overflow: hidden;
+	background-color: rgb(17 17 17 / 50%);
+	backdrop-filter: blur(10px);
+	transform: scale(1,0);
+	opacity: 0;
+}
+#contact:target {
+	animation: cntct var(--ani-cntct);
+}
+@keyframes cntct {
+	0% {
+						transform: scale(1,0);
+						opacity: 0;
+	}
+	100% {
+						transform: scale(1);
+						opacity: 1;
+	}
+}
+textarea {
+	margin: 15px 0px;
+}
+input[type="email"],
+textarea {
+	width: 100%;
+	padding: 15px;
+	background-color: transparent;
+	outline: none;
+	border: 1px solid transparent;
+	border-left: 1px  solid var(--clr-gray);
+	font-size: 15px;
+	resize: vertical;
+	overflow: hidden;
+}
+input[type="email"]:hover,
+input[type="email"]:focus,
+textarea:hover,
+textarea:focus {
+	border: 1px solid var(--clr-gray);
+}
+#button_left {
+	width: 80%;
+	float: left;
+}
+#button_right {
+	width: 19%;
+	float: right;
+}
+.button {
+	padding: 15px;
+	border: none;
+	background-color: transparent;
+	border: 1px solid var(--clr-gray);
+	font-size: 15px;
+	overflow: hidden;
+}
+.button:hover {
+	color: var(--clr-font-hvr);
+	border: 1px solid var(--clr-font-nrml);
+}
+/* ====================================================================================================
+	MISC
+==================================================================================================== */
+#logo, #divider, #navi, #reel, #contact, .bg, .eyes, .dust, .a, .b {
     will-change: opacity, transform;
 }
