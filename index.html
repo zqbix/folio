@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -21,14 +22,15 @@
 		<link rel="stylesheet" href="./css/index.css">
 	</head>
 	<body>
+<!-- BG -->
+		<div id="bg">
+			<div class="gang"></div>
+			<div class="eyes"></div>
+			<div class="dust a"></div>
+			<div class="dust b"></div>
+		</div>
 <!-- BASE -->
 		<div id="base">
-<!-- BG -->
-			<div class="bg gang"></div>
-			<div class="bg eyes"></div>
-			<div class="bg dust a"></div>
-			<div class="bg dust b"></div>
-<!-- LOGO -->
 			<div id="logo">
 				<p class="text_large">zqbix</p>
 			</div>
@@ -38,7 +40,7 @@
 <!-- NAVI -->
 			<div id="navi">
 				<p class="text_medium">
-					<a href="#reel" aria-label="OPEN REEL" title="OPEN REEL">REEL</a>
+					<a href="#reel" title="OPEN REEL">REEL</a>
 					&#8226;
 					<a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link"
 					   target="_blank"
@@ -51,7 +53,7 @@
 			</div>
 <!-- REEL -->
 			<div id="reel">
-				<video class="video" controls preload="metadata" poster="./reel/reel.jpg" aria-label="SHOWREEL">
+				<video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
 					<source src="./reel/reel.mp4" type="video/mp4">
 					<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.</p>
 				</video>
