@@ -47,57 +47,100 @@
 		<link rel="stylesheet" href="./css/index.css">
 	</head>
 	<body>
-<!-- BG -->
-		<div id="bg">
-			<div class="gang"></div>
-			<div class="eyes"></div>
-			<div class="dust a"></div>
-			<div class="dust b"></div>
-		</div>
-<!-- BASE -->
-		<div id="base">
-<!-- LOGO -->
-			<div id="logo">
-				<p class="text_large">zqbix</p>
+
+	<div id="bg">
+	</div>
+
+<div id="hack_open_reel">
+<div id="hack_open_contact">
+
+
+		<div id="flex_base">
+
+			<div id="flex_cell_logo">
+				<div id="logo">
+					<a href="#" title="BACK TO START"><p class="text_large">zqbix</p></a>
+				</div>
 			</div>
-<!-- DIVIDER -->
-			<div id="divider">
+
+
+
+			<div id="flex_cell_content">
+
+				<div id="reel">
+					<video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
+						<source src="./reel/reel.mp4" type="video/mp4">
+						<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.</p>
+					</video>
+				</div>
+
+
+
+				<div id="contact">
+					<form action="https://formspree.io/f/xzdvrrbp" method="POST" target="_blank">
+						<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+						<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+						<button class="button" type="submit">SUBMIT</button>
+					</form>
+				</div>
+
+
+
+
+
+
+
+
+
+
 			</div>
-<!-- NAVI -->
-			<div id="navi">
-				<p class="text_medium">
-					<a href="#reel" title="OPEN REEL">REEL</a>
-					&#8226;
-					<a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link"
+
+
+			<div id="flex_cell_navi">
+				<div id="navi">
+					<p class="text_medium">
+						<a href="#hack_open_reel" title="OPEN REEL">REEL</a>
+						&#8226;
+						<a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link"
 					   target="_blank"
 					   rel="noopener noreferrer"
 					   aria-label="OPEN GOOGLE DRIVE"
 					   title="OPEN GOOGLE DRIVE">VFX-DUMP</a>
 					   &#8226;
-					<a href="#contact" aria-label="OPEN CONTACT FORM" title="OPEN CONTACT FORM">CONTACT</a>
-				</p>
+						<a href="#hack_open_contact" aria-label="OPEN CONTACT FORM" title="OPEN CONTACT FORM">CONTACT</a>
+					</p>
+				</div>
 			</div>
-<!-- REEL -->
-			<div id="reel">
-				<video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
-					<source src="./reel/reel.mp4" type="video/mp4">
-					<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.</p>
-				</video>
-				<form action="#" novalidate>
-					<button id="button_center" class="button" type="submit">CLOSE</button>
-				</form>
-			</div>
-<!-- CONTACT -->
-			<div id="contact">
-				<form action="https://formspree.io/f/xzdvrrbp" method="POST" target="_blank">
-					<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
-					<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
-					<button id="button_left" class="button" type="submit">SUBMIT</button>
-				</form>
-				<form action="#" novalidate>
-					<button id="button_right" class="button" type="submit">CLOSE</button>
-				</form>
-			</div>
-		</div>
+
+		</div>	
+
+
+				</div>
+				</div>
 	</body>
 </html>
+
+
+
+<!--
+
+
+				<div id="reel">
+					<video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
+						<source src="./reel/reel.mp4" type="video/mp4">
+						<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT THE VIDEO TAG.</p>
+					</video>
+				</div>
+
+
+
+				<div id="contact">
+					<form action="https://formspree.io/f/xzdvrrbp" method="POST" target="_blank">
+						<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+						<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+						<button class="button" type="submit">SUBMIT</button>
+					</form>
+				</div>
+
+
+-->
