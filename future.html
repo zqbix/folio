@@ -41,7 +41,7 @@
 	<body>
 		<div class="bg"></div>
 		<div class="flex-wrap">
-			<div class="text-wrap">
+			<div class="content-wrap">
 				<header class="logo">
 					<h1 class="federo">zqbix</h1>
 				</header>
@@ -72,6 +72,15 @@
 							</p>
 						</div>
 					<button class="button" popovertarget="CONTACT"><span class="text-medium julius">C O N T A C T</span></button>
+						<div popover id="CONTACT" class="popover contact">
+						<form action="https://formspree.io/f/xzdvrrbp" method="POST" target="_blank">
+							<label for="email" hidden>EMAIL</label>
+							<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required class="text-medium julius">
+							<label for="message" hidden>MESSAGE</label>
+							<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required class="text-medium julius"></textarea>
+							<button class="button text-medium julius" type="submit">SUBMIT</button>
+						</form>
+						</div>
 				</nav>
 			</div>
 		</div>	
