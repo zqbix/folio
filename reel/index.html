@@ -8,20 +8,25 @@
       * {
         margin: 0;
         padding: 0;
+        box-sizing: border-box; 
       }
       body {
         height: 100vh;
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: nowrap;
         justify-content: center;
         align-items: center;
         background: #111111;
       }
+      @font-face {
+        font-family: federo;
+        src: url("../font/federo.ttf");
+        font-display: swap;
+      }
       .text_large {
-        font-family: 'federo', sans-serif;
-        font-style: italic;
-        font-size: 10vw;
+        font: italic 10vw/100% federo;
+        letter-spacing: 1vw;
       }
       a {
         color: #aaaaaa;
@@ -33,6 +38,6 @@
     </style>
   </head>
   <body>
-    <a href ="../index.html"><p class="text_large">404</p></a>
+    <a href ="../index.html" class="text_large">404</a>
   </body>
 </html>
