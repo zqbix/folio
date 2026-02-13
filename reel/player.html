@@ -3,19 +3,61 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VIDEO PLAYER</title>
+    <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      background: hsla(0, 0%, 7%, 100%);
+      scroll-behavior: smooth;
+    }
+    body {
+      text-align: center;
+    }
+    @font-face {
+      font-family: federo;
+      src: url("../font/federo.ttf");
+      font-display: swap;
+    }
+    .fl3x {
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .v1deo {
+      width: 100%;
+      max-width: 1280px;
+      aspect-ratio: 16/9;
+    }
+    .t3xt {
+      font-style: italic;
+      font-variant: normal;
+      font-weight: 400;
+      font-stretch: normal;
+      font-size: 15px;
+      font-family: federo;
+      line-height: 100%;
+      letter-spacing: 0px;
+      word-spacing: 0px;
+      color: hsla(0, 0%, 67%, 100%);
+    }
+    </style>
   </head>
   <body>
-    <title>VIDEO PLAYER</title>
-    <style type="text/css">
-      video {
-        width: 100%;
-        max-width: 960px;
-        height: auto;
-      }
-    </style>
-    <video controls>
-      <source src="https://zqbix.github.io/folio/reel/reel.mp4" type="video/mp4">
-      YOUR BROWSER DOES NOT SUPPORT VIDEO
-    </video>
+    <div class="fl3x">
+      <video class="v1deo" poster="./reel.jpg" preload="metadata" controls disablePictureInPicture>
+        <source src="./reel.mp4" type="video/mp4">
+        <p class="t3xt">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
+      </video>
+    </div>
   </body>
 </html> 
