@@ -35,17 +35,64 @@
 		<link rel="preload" href="./reel/reel.jpg" as="image">
 		<link rel="icon" href="img/favicon.png">
 		<link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-		<link rel="stylesheet" href="./css/index.css">
+		<link rel="stylesheet" href="./css/bc.css">
 	</head>
 	<body>
-		<div class="flex-wrap">
-			<p class="text">
-				<span class="header">C O N T I N U E &nbsp; W I T H . .</span>
-				<br><br><br><br>
-				<span class="navi"><a class="link" href="./bc.html">O L D E R</a> O R <a class="link" href="./ad.html">M O D E R N</a></span>
-				<br><br><br>
-				<span class="footer">. . B R O W S E R ?</span>
-			</p>
-		</div>	
+		<div id="bg"></div>
+		<div id="open-reel">
+		<div id="open-dump">
+		<div id="open-contact">
+			<div id="flex_base">
+				<header>
+					<div id="logo">
+						<a href="#" title="BACK TO START"><h1>zqbix</h1></a>
+					</div>
+				</header>
+				<main>
+					<section id="reel">
+						<video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
+							<source src="./reel/reel.mp4" type="video/mp4">
+							<p class="text_medium">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
+						</video>
+					</section>
+					<section id="dump">
+						<p class="text_medium dump">FEEL FREE TO VISIT MY GOOGLE-DRIVE FOR A COLLECTION OF OLD JUST-FOR-FUN PROJECTS.</p>
+						<p class="text_medium dump">&nbsp;</p>
+						<p class="text_medium dump">BUT BE AWARE .. YOU MIGHT FIND SOME UGLY STUFF THERE..</p>
+						<p class="text_medium dump">&nbsp;</p>
+						<p class="text_medium dump">&nbsp;</p>
+						<p class="text_medium dump">&nbsp;</p>
+						<p class="text_medium dump">
+							<a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link"
+					   		target="_blank"
+					   		rel="noopener noreferrer"
+					   		title="OPEN GOOGLE DRIVE">VFX-DUMP</a>
+						</p>
+					</section>
+					<section id="contact">
+						<form action="https://formspree.io/f/xzdvrrbp" method="POST" target="_blank">
+							<label for="email" hidden>EMAIL</label>
+							<input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+							<label for="message" hidden>MESSAGE</label>
+							<textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+							<button class="button" type="submit">SUBMIT</button>
+						</form>
+					</section>
+				</main>
+				<nav>
+					<div id="navi">
+						<p class="text_medium">
+							<a href="#open-reel" title="OPEN REEL">REEL</a>
+							&#8226;
+							<a href="#open-dump" title="OPEN GOOGLE DRIVE">VFX-DUMP</a>
+					   	&#8226;
+							<a href="#open-contact" title="OPEN CONTACT FORM">CONTACT</a>
+						</p>
+					</div>
+				</nav>
+			</div>	
+		</div>
+		</div>
+		</div>
 	</body>
 </html>
