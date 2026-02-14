@@ -1,6 +1,3 @@
-/* ====================================================================================================
-    ROOT VARIABLES
-==================================================================================================== */
 :root {
     --clr-bg: hsla(0, 0%, 7%, 100%);
     --clr-gray: hsla(0, 0%, 25%, 100%);
@@ -8,14 +5,11 @@
     --clr-font-nrml: hsla(0, 0%, 60%, 100%);
     --clr-font-hvr: hsla(0, 0%, 100%, 100%);
     --trans-hvr: 0.3s ease 0s;
-    --ani-bg: 3s ease 1.5s forwards;
-    --ani-logo-big: 2s cubic-bezier(1,0,1,1) 0s forwards;
+    --trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
     --ani-h1: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
-    --ani-navi: var(--ani-bg);
+    --ani-navi: 3s ease 1.5s forwards;
 }
-/* ====================================================================================================
-    BASE RESET
-==================================================================================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -31,31 +25,28 @@ html {
 body {
     text-align: center;
 }
-/* ====================================================================================================
-    IMPORT FONTS
-==================================================================================================== */
+
 @font-face {
-    font-family: federo;
-    src: url("../font/federo.ttf");
-    font-display: swap;
+    font-family:federo;
+    src:url(../font/federo.ttf);
+    font-display:swap;
 }
+
 @font-face {
-    font-family: amanojaku;
-    src: url("../font/amanojaku.otf");
-    font-display: swap;
+    font-family:amanojaku;
+    src:url(../font/amanojaku.otf);
+    font-display:swap;
 }
-/* ====================================================================================================
-    TYPOGRAPHY
-==================================================================================================== */
+
 .text-bg {
     font-style: italic;
     font-variant: normal;
     font-weight: 400;
     font-stretch: normal;
-    font-size: 80rem; 
+    font-size: 80rem;
     font-family: amanojaku;
     line-height: 100%;
-    letter-spacing: 0px;
+    letter-spacing: 0;
     word-spacing: normal;
     padding-top: 20vh;
     padding-right: 10vw;
@@ -99,8 +90,8 @@ h2 {
     font-size: 2.5rem;
     font-family: federo;
     line-height: 100%;
-    letter-spacing: 0px;
-    word-spacing: 0px;
+    letter-spacing: 0;
+    word-spacing: 0;
     color: var(--clr-font-nrml);
 }
 
@@ -112,8 +103,8 @@ h2 {
     font-size: 1rem;
     font-family: federo;
     line-height: 100%;
-    letter-spacing: 0px;
-    word-spacing: 0px;
+    letter-spacing: 0;
+    word-spacing: 0;
     color: var(--clr-font-nrml);
 }
 
@@ -151,7 +142,7 @@ h2 {
     font-size: 2rem;
     font-family: federo;
     line-height: 100%;
-    word-spacing: 0px;
+    word-spacing: 0;
     color: var(--clr-gray);
     transition: all var(--trans-hvr);
 }
@@ -170,24 +161,7 @@ a {
 a:hover {
     color: var(--clr-font-hvr);
 }
-/* ====================================================================================================
-    BG
-==================================================================================================== */
-.bg {
-    position: fixed;
-    width: 100%;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    justify-content: center;
-    align-items: center;
-}
-/* ====================================================================================================
-    BASE
-==================================================================================================== */
+
 .flex-wrap {
     position: fixed;
     width: 100%;
@@ -201,22 +175,37 @@ a:hover {
     align-items: center;
 }
 
-.flex-content {
-    width: 100%;
+.flex-wrap:after {
+    content: "zqbix";
+    position: fixed;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 20vh;
+    font-family: amanojaku;
+    white-space: nowrap;
+    color: var(--clr-font-bg);
+    transform: translate(-20px,-15px);
+    z-index: -1;
 }
-/* ====================================================================================================
-    LOGO
-==================================================================================================== */
 
 .logo {
+    width: 100%;
+    height: auto;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
 }
 
+.divider {
+    width: 100%;
+    height: 10px;
+}
+
 .navi {
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -241,11 +230,11 @@ a:hover {
     width: auto;
     margin: 0 5px;
     padding: 20px 15px;
-    background-color: transparent;
+    background-color: #fff0;
     border-top: 1px solid var(--clr-gray);
-    border-right: 1px solid transparent;
-    border-bottom: 1px solid transparent;
-    border-left: 1px solid transparent;
+    border-right: 1px solid #fff0;
+    border-bottom: 1px solid #fff0;
+    border-left: 1px solid #fff0;
     overflow: hidden;
     cursor: pointer;
     outline: none;
@@ -257,7 +246,19 @@ a:hover {
     border-top: 1px solid var(--clr-font-nrml);
 }
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width:500px) {
+    .flex-wrap:after {
+        font-size: 120vh;
+    }
+
+    .logo {
+        padding-top: 15vh;
+    }
+
+    .divider {
+        height: 100%;
+    }
+
     .navi {
         flex-direction: column;
     }
@@ -269,18 +270,18 @@ a:hover {
 
 .popover:popover-open {
     opacity: 1;
-    @starting-style {
-        opacity: 0;
-}
-}
+    @starting-style{opacity: 0;
+}&>.popover-flex {
+    opacity: 1;
+    @starting-style{opacity: 0;
+}}}
 
 .popover {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border: 0px;
-    background-color: hsla(0, 0%, 6%, 70%);
-    backdrop-filter: blur(10px);
+    border: 0;
+    background-color: var(--clr-bg);
     opacity: 0;
     transition: all 1s allow-discrete;
 }
@@ -293,18 +294,23 @@ a:hover {
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    opacity: 0;
+    transition: all var(--trans-fade);
+}
+
+.button-popover-close {
+    width: 100%;
+    padding: 0 20px 20px 0;
+    background-color: #fff0;
+    cursor: pointer;
+    border: 0;
+    outline: none;
+    text-align: right;
 }
 
 .reel {
     width: 100%;
     max-width: 1280px;
-}
-
-.iframe {
-    width: 100%;
-    max-width: 1280px;
-    aspect-ratio: 16/9;
-    border: none;
 }
 
 .video {
@@ -323,16 +329,6 @@ a:hover {
     max-width: 960px;
 }
 
-.button-popover-close {
-    width: 100%;
-    padding: 0px 20px 20px 0px;
-    background-color: transparent;
-    cursor: pointer;
-    border: 0px;
-    outline: none;
-    text-align: right;
-}
-
 .form-contact {
     border: 1px solid var(--clr-gray);
     width: 100%;
@@ -344,8 +340,8 @@ a:hover {
 .input-contact {
     width: 100%;
     padding: 15px;
-    background-color: transparent;
-    border: 1px solid transparent;
+    background-color: #fff0;
+    border: 1px solid #fff0;
     border-left: 1px solid var(--clr-gray);
     resize: vertical;
     overflow: hidden;
@@ -353,18 +349,17 @@ a:hover {
     transition: all var(--trans-hvr);
 }
 
-.input-contact:hover,
-.input-contact:focus {
+.input-contact:hover,.input-contact:focus {
     border: 1px solid var(--clr-gray);
 }
 
 .textarea-contact {
     width: 100%;
-    margin: 15px 0px;
+    margin: 15px 0;
     height: 150px;
     padding: 15px;
-    background-color: transparent;
-    border: 1px solid transparent;
+    background-color: #fff0;
+    border: 1px solid #fff0;
     border-left: 1px solid var(--clr-gray);
     resize: vertical;
     overflow: hidden;
@@ -372,15 +367,14 @@ a:hover {
     transition: all var(--trans-hvr);
 }
 
-.textarea-contact:hover,
-.textarea-contact:focus {
+.textarea-contact:hover,.textarea-contact:focus {
     border: 1px solid var(--clr-gray);
 }
 
 .button-contact {
     width: 100%;
     padding: 15px;
-    background-color: transparent;
+    background-color: #fff0;
     border: 1px solid var(--clr-gray);
     overflow: hidden;
     cursor: pointer;
