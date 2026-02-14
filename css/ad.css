@@ -1,0 +1,394 @@
+/* ====================================================================================================
+	ROOT VARIABLES
+==================================================================================================== */
+:root {
+    --clr-bg: hsla(0, 0%, 7%, 100%);
+    --clr-x: hsla(0, 0%, 8.5%, 100%);
+    --clr-gray: hsla(0, 0%, 25%, 100%);
+    --clr-font-nrml: hsla(0, 0%, 67%, 100%);
+    --clr-font-hvr: hsla(0, 0%, 100%, 100%);
+    --trans-hvr: 0.3s ease 0s;
+    --ani-bg: 3s ease 1.5s forwards;
+    --ani-logo-big: 2s cubic-bezier(1,0,1,1) 0s forwards;
+    --ani-h1: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
+    --ani-navi: var(--ani-bg);
+}
+/* ====================================================================================================
+	BASE RESET
+==================================================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--clr-bg);
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    text-align: center;
+}
+/* ====================================================================================================
+	IMPORT FONTS
+==================================================================================================== */
+@font-face {
+    font-family: federo;
+	src: url("../font/federo.ttf");
+	font-display: swap;
+}
+@font-face {
+    font-family: amanojaku;
+    src: url("../font/amanojaku.otf");
+    font-display: swap;
+}
+/* ====================================================================================================
+	TYPOGRAPHY
+==================================================================================================== */
+.text-x {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 80rem; 
+    font-family: amanojaku;
+    line-height: 100%;
+    letter-spacing: 0px;
+    word-spacing: normal;
+    padding-top: 20vh;
+    padding-right: 10vw;
+    cursor: default;
+    color: var(--clr-x);
+}
+
+h1 {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 5rem;
+    font-family: amanojaku;
+    line-height: 100%;
+    letter-spacing: 7rem;
+    word-spacing: normal;
+    cursor: default;
+    color: var(--clr-font-nrml);
+    opacity: 0;
+    animation: h1 var(--ani-h1);
+}
+
+@keyframes h1 {
+    0% {
+        letter-spacing: 7rem;
+        opacity: 0;
+    }
+
+    100% {
+        letter-spacing: 1rem;
+        opacity: 1;
+    }
+}
+
+h2 {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 2.5rem;
+    font-family: federo;
+    line-height: 100%;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: var(--clr-font-nrml);
+}
+
+.text-menu {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 1rem;
+    font-family: federo;
+    line-height: 100%;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: var(--clr-font-nrml);
+}
+
+.text-dump {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 1rem;
+    font-family: federo;
+    line-height: 150%;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    color: var(--clr-font-nrml);
+}
+
+.text-contact {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 1rem;
+    font-family: federo;
+    line-height: 100%;
+    letter-spacing: 1px;
+    word-spacing: 2px;
+    color: var(--clr-font-nrml);
+}
+
+.text-popover-close {
+    font-style: italic;
+    font-variant: normal;
+    font-weight: 400;
+    font-stretch: normal;
+    font-size: 2rem;
+    font-family: federo;
+    line-height: 100%;
+    word-spacing: 0px;
+    color: var(--clr-gray);
+    transition: all var(--trans-hvr);
+}
+
+.text-popover-close:hover {
+    font-weight: 900;
+    color: var(--clr-hvr);
+}
+
+a {
+    text-decoration: none;
+    color: var(--clr-font-nrml);
+    transition: color var(--trans-hvr);
+}
+
+a:hover {
+    color: var(--clr-font-hvr);
+}
+/* ====================================================================================================
+	BG
+==================================================================================================== */
+.x {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+/* ====================================================================================================
+	BASE
+==================================================================================================== */
+.flex-wrap {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-content {
+    width: 100%;
+}
+/* ====================================================================================================
+	LOGO
+==================================================================================================== */
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.navi {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    opacity: 0;
+    animation: navi var(--ani-navi);
+}
+
+@keyframes navi {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.button-navi {
+    width: auto;
+    margin: 0 5px;
+    padding: 20px 15px;
+    background-color: transparent;
+    border-top: 1px solid var(--clr-gray);
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    border-left: 1px solid transparent;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    transition: all var(--trans-hvr);
+}
+
+.button-navi:hover {
+    padding: 20px 30px;
+    border-top: 1px solid var(--clr-font-nrml);
+}
+
+@media only screen and (max-width: 500px) {
+    .navi {
+        flex-direction: column;
+    }
+
+    .button-navi {
+        width: 100%;
+    }
+}
+
+.popover:popover-open {
+    opacity: 1;
+    @starting-style {
+		opacity: 0;
+}
+}
+
+.popover {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 0px;
+    background-color: hsla(0, 0%, 6%, 70%);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transition: all 1s allow-discrete;
+}
+
+.popover-flex {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.reel {
+    width: 100%;
+    max-width: 1280px;
+}
+
+.iframe {
+    width: 100%;
+    max-width: 1280px;
+    aspect-ratio: 16/9;
+    border: none;
+}
+
+.video {
+    width: 100%;
+    max-width: 1280px;
+    aspect-ratio: 16/9;
+}
+
+.dump {
+    width: 100%;
+    max-width: 400px;
+}
+
+.contact {
+    width: 100%;
+    max-width: 960px;
+}
+
+.button-popover-close {
+    width: 100%;
+    padding: 0px 20px 20px 0px;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0px;
+    outline: none;
+    text-align: right;
+}
+
+.form-contact {
+    border: 1px solid var(--clr-gray);
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    overflow: hidden;
+}
+
+.input-contact {
+    width: 100%;
+    padding: 15px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-left: 1px solid var(--clr-gray);
+    resize: vertical;
+    overflow: hidden;
+    outline: none;
+    transition: all var(--trans-hvr);
+}
+
+.input-contact:hover,
+.input-contact:focus {
+    border: 1px solid var(--clr-gray);
+}
+
+.textarea-contact {
+    width: 100%;
+    margin: 15px 0px;
+    height: 150px;
+    padding: 15px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-left: 1px solid var(--clr-gray);
+    resize: vertical;
+    overflow: hidden;
+    outline: none;
+    transition: all var(--trans-hvr);
+}
+
+.textarea-contact:hover,
+.textarea-contact:focus {
+    border: 1px solid var(--clr-gray);
+}
+
+.button-contact {
+    width: 100%;
+    padding: 15px;
+    background-color: transparent;
+    border: 1px solid var(--clr-gray);
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    transition: all var(--trans-hvr);
+}
+
+.button-contact:hover {
+    color: var(--clr-font-hvr);
+    border: 1px solid var(--clr-font-nrml);
+}
