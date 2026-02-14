@@ -42,26 +42,26 @@
 <body>
     <div class="flex-wrap">
         <header class="logo">
-            <h1>zQbix</h1>
+            <h1 class="ff-base h1 ff-amanojaku">zQbix</h1>
         </header>
         <div class="divider"></div>
         <nav class="navi">
-            <button type="button" class="button-navi" commandfor="showreel" command="show-popover"><span class="text-menu">S H O W R E E L</span>
+            <button type="button" class="button-navi" commandfor="showreel" command="show-popover"><span class="ff-base txt-navi ff-federo">S H O W R E E L</span>
             </button>
-            <button type="button" class="button-navi" commandfor="vfx-dump" command="show-popover"><span class="text-menu">V F X - D U M P</span>
+            <button type="button" class="button-navi" commandfor="vfx-dump" command="show-popover"><span class="ff-base txt-navi ff-federo">V F X - D U M P</span>
             </button>
-            <button type="button" class="button-navi" commandfor="contact" command="show-popover"><span class="text-menu">C O N T A C T</span>
+            <button type="button" class="button-navi" commandfor="contact" command="show-popover"><span class="ff-base txt-navi ff-federo">C O N T A C T</span>
             </button>
         </nav>
     </div>
     <div popover id="showreel" class="popover" ontoggle="this.querySelector('video')?.pause()">
         <div class="popover-flex">
             <div class="reel">
-                <button class="button-popover-close" commandfor="showreel" command="hide-popover"><span class="text-popover-close">&#10005;</span>
+                <button class="button-popover-close" commandfor="showreel" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
                 </button>
                 <video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture>
                     <source src="./reel/reel.mp4" type="video/mp4">
-                        <p class="text-menu">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
+                        <p class="ff-base txt-navi ff-federo">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
                 </video>
             </div>
         </div>
@@ -69,10 +69,10 @@
     <div popover id="vfx-dump" class="popover">
         <div class="popover-flex">
             <div class="dump">
-                <button class="button-popover-close" commandfor="vfx-dump" command="hide-popover"><span class="text-popover-close">&#10005;</span>
+                <button class="button-popover-close" commandfor="vfx-dump" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
                 </button>
-                <h2>VFX-DUMP</h2>
-                <p class="text-dump">
+                <h2 class="ff-base h2 ff-federo">VFX-DUMP</h2>
+                <p class="ff-base txt-dump ff-federo">
                     <br>&#128900;
                     <br>
                     <br>IF U HAVE SOME TIME TO K!LL..
@@ -91,7 +91,7 @@
                     <br>
                     <br>
                 </p>
-                <p class="text-dump"><a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE"> VISIT DUMP.. </a>
+                <p class="ff-base txt-dump ff-federo"><a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE"> VISIT DUMP.. </a>
                 </p>
             </div>
         </div>
@@ -99,14 +99,14 @@
     <div popover id="contact" class="popover">
         <div class="popover-flex">
             <div class="contact">
-                <button class="button-popover-close" commandfor="contact" command="hide-popover"><span class="text-popover-close">&#10005;</span>
+                <button class="button-popover-close" commandfor="contact" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
                 </button>
                 <form class="form-contact" action="https://formspree.io/f/xzdvrrbp" method="post" target="_blank">
                     <label for="email" hidden> EMAIL </label>
-                    <input class="input-contact text-contact" type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+                    <input class="input-contact ff-base txt-contact ff-federo" type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
                     <label for="message" hidden> MESSAGE </label>
-                    <textarea class="textarea-contact text-contact" id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
-                    <button class="button-contact text-contact" type="submit"> SUBMIT </button>
+                    <textarea class="textarea-contact ff-base txt-contact ff-federo" id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+                    <button class="button-contact ff-base txt-contact ff-federo" type="submit"> SUBMIT </button>
                 </form>
             </div>
         </div>
