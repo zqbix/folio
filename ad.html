@@ -40,22 +40,19 @@
 </head>
 
 <body>
-    <div class="bg"><span class="text-bg">zqbix</span>
-    </div>
     <div class="flex-wrap">
-        <div class="flex-content">
-            <header class="logo">
-                <h1>zQbix</h1>
-            </header>
-            <nav class="navi">
-                <button type="button" class="button-navi" commandfor="showreel" command="show-popover"><span class="text-menu">S H O W R E E L</span>
-                </button>
-                <button type="button" class="button-navi" commandfor="vfx-dump" command="show-popover"><span class="text-menu">V F X - D U M P</span>
-                </button>
-                <button type="button" class="button-navi" commandfor="contact" command="show-popover"><span class="text-menu">C O N T A C T</span>
-                </button>
-            </nav>
-        </div>
+        <header class="logo">
+            <h1>zQbix</h1>
+        </header>
+        <div class="divider"></div>
+        <nav class="navi">
+            <button type="button" class="button-navi" commandfor="showreel" command="show-popover"><span class="text-menu">S H O W R E E L</span>
+            </button>
+            <button type="button" class="button-navi" commandfor="vfx-dump" command="show-popover"><span class="text-menu">V F X - D U M P</span>
+            </button>
+            <button type="button" class="button-navi" commandfor="contact" command="show-popover"><span class="text-menu">C O N T A C T</span>
+            </button>
+        </nav>
     </div>
     <div popover id="showreel" class="popover" ontoggle="this.querySelector('video')?.pause()">
         <div class="popover-flex">
