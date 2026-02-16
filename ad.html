@@ -40,26 +40,26 @@
 </head>
 
 <body>
-    <div class="flex-wrap">
-        <header class="logo">
-            <h1 class="ff-base h1 ff-amanojaku">zQbix</h1>
+    <main class="flex-wrap">
+        <header>
+            <h1>zQbix</h1>
         </header>
-        <div class="divider"></div>
-        <nav class="navi">
-            <button type="button" class="button-navi" commandfor="showreel" command="show-popover"><span class="ff-base txt-navi ff-federo">S H O W R E E L</span>
+        <section></section>
+        <nav>
+            <button type="button" commandfor="showreel" command="show-popover"><p>S H O W R E E L</p>
             </button>
-            <button type="button" class="button-navi" commandfor="vfx-dump" command="show-popover"><span class="ff-base txt-navi ff-federo">V F X - D U M P</span>
+            <button type="button" commandfor="vfx-dump" command="show-popover"><p>V F X - D U M P</p>
             </button>
-            <button type="button" class="button-navi" commandfor="contact" command="show-popover"><span class="ff-base txt-navi ff-federo">C O N T A C T</span>
+            <button type="button" commandfor="contact" command="show-popover"><p>C O N T A C T</p>
             </button>
         </nav>
-    </div>
+    </main>
     <div popover id="showreel" class="popover" ontoggle="this.querySelector('video')?.pause()">
         <div class="popover-flex">
             <div class="reel">
                 <button class="button-popover-close" commandfor="showreel" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
                 </button>
-                <video class="video" poster="./reel/reel.jpg" preload="metadata" controls disablePictureInPicture playsinline>
+                <video class="video" poster="./reel/reel.jpg" preload="metadata" controls playsinline>
                     <source src="./reel/reel.mp4" type="video/mp4">
                         <p class="ff-base txt-navi ff-federo">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
                 </video>
