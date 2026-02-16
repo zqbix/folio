@@ -1,385 +1,301 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>?!</title>
-<link rel="preload" href="../font/federo.ttf" as="font" type="font/ttf" crossorigin>
-<link rel="preload" href="../font/amanojaku.otf" as="font" type="font/otf" crossorigin>
-<link rel="icon" href="img/favicon.png">
-<style>
-:root {
---clr-bg: hsla(0, 0%, 7%, 100%);
---clr-gray: hsla(0, 0%, 25%, 100%);
---clr-font-bg: hsla(0, 0%, 8.5%, 100%);
---clr-font-nrml: hsla(0, 0%, 60%, 100%);
---clr-font-hvr: hsla(0, 0%, 100%, 100%);
---trans-hvr: 0.3s ease 0s;
---trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
-}
-@font-face {
-    font-family:federo;
-    src:url(../font/federo.ttf);
-    font-display:swap;
-}
-@font-face {
-    font-family:amanojaku;
-    src:url(../font/amanojaku.otf);
-    font-display:swap;
-}
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-}
-html {
-background: var(--clr-bg);
-scroll-behavior: smooth;
-font-size: 62.5%;
-}
-body {
-text-align: center;
-font-size: 1.6rem;
-}
-h1, h2, h3, h4, h5, h6, p {
-    font-style: italic;
-    font-variant: normal;
-    font-weight: normal;
-    font-stretch: normal;
-    font-size: 1rem;
-    line-height: 100%;
-    letter-spacing: normal;
-    word-spacing: normal;
-    color: var(--clr-font-nrml);
-}
-h1 {
-	font-size: 6rem;
-    font-family: amanojaku;
-}
-h6 {
-	font-size: 3rem;
-    font-family: amanojaku;
-}
-
-a {
-text-decoration: none;
-    color: var(--clr-font-nrml);
-transition: color var(--trans-hover);
-}
-a:hover {
-color: var(--clr-font-hvr);
-}
-
-body > div {
-width: 100%;
-display: flex;
-flex-direction: column;
-flex-wrap: nowrap;
-justify-content: center;
-align-items: center;
-}
-
-header {
-width: 100%;
-height: auto;
-padding-top: 80px;
-display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-justify-content: center;
-align-items: center;
-}
-
-main {
-width: 100%;
-max-width: 1920px;
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-}
-main > div {
-aspect-ratio: 2/1;
-padding: 20px;
-display: flex;
-flex-direction: column;
-flex-wrap: nowrap;
-justify-content: center;
-align-items: center;
-overflow: hidden;
-opacity: 0.5;
-transform: scale(0.95);
-transition: all var(--trans-hvr);
-}
-main > div:hover {
-opacity: 1;
-transform: scale(1);
-}
-main p {
-    font-family: federo;
-}
-main p:nth-child(1) {
-	font-size: 2rem;
-    letter-spacing: 6px;
-}
-main p:nth-child(2) {
-	font-size: 2rem;
-	margin: 5px 0;
-	cursor: default;
-}
-main p:nth-child(3) {
-	font-size: 1.5rem;
-    line-height: 150%;
-    letter-spacing: 1px;
-    word-spacing: 2px;
-	cursor: default;
-}
-main .red {
-color: hsla(330, 100%, 50%, 100%);
-}
-main .green {
-color: hsla(160, 100%, 50%, 100%);
-}
-
-footer {
-width: 100%;
-height: auto;
-padding-bottom: 50px;
-display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-justify-content: center;
-align-items: center;
-}
-</style>
-</head>
-
-<body>
-
-<div>
-	<header><h1>HEADER</h1></header>
-	<main>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+		<title>J O B - D I A R Y</title>
+		<link rel="preload" href="../font/federo.ttf" as="font" type="font/ttf" crossorigin>
+		<link rel="preload" href="../font/amanojaku.otf" as="font" type="font/otf" crossorigin>
+		<link rel="icon" href="../img/favicon.png">
+		<style>
+			:root {
+				--clr-bg: hsla(0, 0%, 7%, 100%);
+				--clr-gray: hsla(0, 0%, 8%, 100%);
+				--clr-font-gray: hsla(0, 0%, 30%, 100%);
+				--clr-font-nrml: hsla(0, 0%, 60%, 100%);
+				--clr-font-hvr: hsla(0, 0%, 100%, 100%);
+				--trans-hvr: 0.3s ease 0s;
+			}
+			@font-face {
+				font-family:federo;
+				src:url(../font/federo.ttf);
+				font-display:swap;
+			}
+			@font-face {
+				font-family:amanojaku;
+				src:url(../font/amanojaku.otf);
+				font-display:swap;
+			}
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				background: var(--clr-bg);
+				scroll-behavior: smooth;
+				font-size: 62.5%;
+			}
+			body {
+				text-align: center;
+				font-size: 1.6rem;
+			}
+			h1, h2, h3, h4, h5, h6, p {
+				font-style: italic;
+				font-variant: normal;
+				font-weight: normal;
+				font-stretch: normal;
+				font-size: 1rem;
+				line-height: 100%;
+				letter-spacing: normal;
+				word-spacing: normal;
+				color: var(--clr-font-nrml);
+				cursor: default;
+			}
+			h1 {
+				font-size: 3rem;
+				font-family: federo;
+			}
+			h2 {
+				font-size: 1.5rem;
+				font-family: federo;
+				color: var(--clr-font-gray);
+			}
+			a {
+				text-decoration: none;
+				color: var(--clr-font-nrml);
+				transition: color var(--trans-hover);
+			}
+			a:hover {
+				color: var(--clr-font-hvr);
+			}
+			body > div {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: nowrap;
+				justify-content: center;
+				align-items: center;
+			}
+			header {
+				width: 100%;
+				height: auto;
+				padding: 40px 20px;
+				border-bottom: 1px solid var(--clr-font-gray);
+			}
+			main {
+				width: 100%;
+				max-width: 1920px;
+				margin-bottom: 1px;
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+			}
+			main > div {
+				aspect-ratio: 2/1;
+				display: flex;
+				flex-direction: column;
+				flex-wrap: nowrap;
+				justify-content: center;
+				align-items: center;
+				overflow: hidden;
+				opacity: 0.5;
+				transform: scale(0.95);
+				transition: all var(--trans-hvr);
+			}
+			main > div:hover {
+				background-color: var(--clr-gray);
+				opacity: 1;
+				transform: scale(1);
+			}
+			main p {
+					font-family: federo;
+			}
+			main p:nth-child(1) {
+				font-size: 2rem;
+				letter-spacing: 6px;
+			}
+			main p:nth-child(2) {
+				font-size: 2rem;
+				margin: 5px 0;
+			}
+			main p:nth-child(2)::after {
+				content: "\00A0 \2715 \00A0" ;
+			}
+			main p:nth-child(3) {
+				font-size: 1.5rem;
+				line-height: 150%;
+				letter-spacing: 1px;
+				word-spacing: 3px;
+			}
+			main .red {
+				color: hsla(330, 100%, 50%, 100%);
+			}
+			main .green {
+				color: hsla(160, 100%, 50%, 100%);
+			}
+			footer {
+				width: 100%;
+				height: auto;
+				padding: 20px 10px;
+				border-top: 1px solid var(--clr-font-gray);
+			}
+		</style>
+	</head>
+	<body>
 		<div>
-			<p><a href="">STUDIO</a></p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
+			<header>
+				<h1>J O B - D I A R Y</h1>
+			</header>
+			<main>
+				<div>
+					<p><a href="https://www.faber-courtial.de/">FABER COURTIAL</a></p>
+					<p class="red"></p>
+					<p>NO H ANYMORE</p>
+				</div>
+				<div>
+					<p><a href="https://www.pixelpec.de/">PIXELPEC</a></p>
+					<p class="red"></p>
+					<p>NO H JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.seed-network.de/">SEEDFILM</a></p>
+					<p class="red"></p>
+					<p>NO 3D NEEDED</p>
+				</div>
+				<div>
+					<p><a href="https://www.58animation.com/">FIFTYEIGHT</a></p>
+					<p class="red"></p>
+					<p>NO JOBS AT ALL</p>
+				</div>
+				<div>
+					<p><a href="https://www.metricminds.com/">METRICMINDS</a></p>
+					<p class="green"></p>
+					<p>ASKED FOR USED SOFTWARE<br>NO ANSWER YET</p>
+				</div>
+				<div>
+					<p><a href="https://www.ilpvfx.com/">IMPORTANT LOOKING PIRATES</a></p>
+					<p class="green"></p>
+					<p>SIGNED UP AT "CONNECT"<br>THEIR INT RECRUITMENT DATABASE</p>
+				</div>
+				<div>
+					<p><a href="https://www.scanmotion.de/">SCANMOTION</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.motiondistrict.de/">MOTIONDISTRICT</a></p>
+					<p class="green"></p>
+					<p>ASKED FOR USED SOFTWARE<br>NO ANSWER YET</p>
+				</div>
+				<div>
+					<p><a href="https://www.nur-muth.com/">NUR MUTH</a></p>
+					<p class="green"></p>
+					<p>ASKED FOR USED SOFTWARE<br>NO ANSWER YET</p>
+				</div>
+				<div>
+					<p><a href="https://www.pixomondo.com/">PIXOMONDO</a></p>
+					<p class="red"></p>
+					<p >NO JOBS @FFM</p>
+				</div>
+				<div>
+					<p><a href="https://www.orbispro.de/">ORBISPRO</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.nutcracker.de/">NUTCRACKER</a></p>
+					<p class="red"></p>
+					<p>NO H JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.mainfilm.tv/">MAINFILM</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.studioprogressive.de/">STUDIO PROGRESSIVE</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.filmhafen.de/">FILMHAFEN</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.diezwo.de/">DIE ZWO</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.departmentstudios.de/">DEPARTMENT STUDIOS</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.lookinfriday.de/">LOOKIN FRIDAY</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.mainframefx.com/">MAINFRAME FX</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.mapp-media.com/">MAPP MEDIA</a></p>
+					<p class="red"></p>
+					<p>NO JOBS</p>
+				</div>
+				<div>
+					<p><a href="https://www.acht.studio/">ACHT</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.gradientfx.com/">GRADIENT FX</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.helios-medien.de/">HELIOS MEDIEN</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.magnamana.com/">MAGNAMANA</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.kombinatrotweiss.de/">KOMBINAT ROTWEISS</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.tagundnachtmedia.de/">TAG UND NACHT MEDIA</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.silentvillage.de/">SILENT VILLAGE</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.wagner-design.de/">WAGNER DESIGN</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+				<div>
+					<p><a href="https://www.markgraph.de/">MARKGRAPH</a></p>
+					<p class=""></p>
+					<p></p>
+				</div>
+			</main>
+			<footer>
+				<h2>E O F</h2>
+			</footer>
 		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="green">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-		<div>
-			<p>STUDIO</p>
-			<p class="red">&#10005;</p>
-			<p>INFORMATION GOES HERE .. INFORMATION VERWEILT HIER .. UND AUCH HIER</p>
-		</div>
-	</main>
-	<footer><h6>FOOTER</h6></footer>
-</div>
-
-</body>
+	</body>
 </html>
