@@ -6,9 +6,20 @@
     --clr-font-hvr: hsla(0, 0%, 100%, 100%);
     --trans-hvr: 0.3s ease 0s;
     --trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
+    --trans-dscrt: 1s allow-discrete;
     --ani-bg: 3s ease 1.5s forwards;
     --ani-h1: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
     --ani-navi: 3s ease 1.5s forwards;
+}
+@font-face {
+    font-family:federo;
+    src:url(../font/federo.ttf);
+    font-display:swap;
+}
+@font-face {
+    font-family:amanojaku;
+    src:url(../font/amanojaku.otf);
+    font-display:swap;
 }
 * {
     margin: 0;
@@ -22,16 +33,6 @@ html {
 }
 body {
     text-align: center;
-}
-@font-face {
-    font-family:federo;
-    src:url(../font/federo.ttf);
-    font-display:swap;
-}
-@font-face {
-    font-family:amanojaku;
-    src:url(../font/amanojaku.otf);
-    font-display:swap;
 }
 .ff-base {
     font-style: italic;
@@ -51,7 +52,7 @@ body {
     animation: h1 var(--ani-h1);
 }
 .h2 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     color: var(--clr-font-nrml);
 }
 .txt-navi {
@@ -75,7 +76,13 @@ body {
 }
 .txt-pop-close:hover {
     font-weight: 900;
-    color: var(--clr-hvr);
+    color: var(--clr-font-hvr);
+}
+.ff-federo {
+    font-family: federo;
+}
+.ff-amanojaku {
+    font-family: amanojaku;
 }
 a {
     text-decoration: none;
@@ -84,12 +91,6 @@ a {
 }
 a:hover {
     color: var(--clr-font-hvr);
-}
-.ff-federo {
-    font-family: federo;
-}
-.ff-amanojaku {
-    font-family: amanojaku;
 }
 
 
@@ -216,7 +217,7 @@ a:hover {
     border-top: 1px solid var(--clr-font-nrml);
 }
 
-@media only screen and (max-width:500px) {
+@media (max-width: 480px) {
     .flex-wrap:after {
         font-size: 120vh;
     }
@@ -235,15 +236,16 @@ a:hover {
 
     .button-navi {
         width: 100%;
+        min-height: 48px;
     }
 }
 
 .popover:popover-open {
     opacity: 1;
-    @starting-style{opacity: 0;}
+    @starting-style{ opacity: 0; }
 & > .popover-flex {
         opacity: 1;
-        @starting-style{opacity: 0;}
+        @starting-style{ opacity: 0; }
     }
 }
 
@@ -254,7 +256,7 @@ a:hover {
     border: 0;
     background-color: var(--clr-bg);
     opacity: 0;
-    transition: all 1s allow-discrete;
+    transition: all var(--trans-dscrt);
 }
 
 .popover-flex {
