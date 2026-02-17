@@ -3,143 +3,180 @@
 ==================================================================================================== */
 :root {
     --clr-bg: hsla(0, 0%, 7%, 100%);
-    --clr-gray: hsla(0, 0%, 25%, 100%);
-    --clr-font-nrml: hsla(0, 0%, 67%, 100%);
+    --clr-font-gray: hsla(0, 0%, 25%, 100%);
+    --clr-font-nrml: hsla(0, 0%, 60%, 100%);
     --clr-font-hvr: hsla(0, 0%, 100%, 100%);
     --trans-hvr: 0.3s ease 0s;
-    --trans-ttip: 1s ease 0s;
-    --ani-header: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
+    --ani-header: 3s ease 3s forwards;
+    --ani-section1: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
     --ani-navi: 1s cubic-bezier(1,0,1,1) 1s forwards;
-    --ani-footer: 1s cubic-bezier(1,0,1,1) 1.5s forwards;
+    --ani-section2: 1s cubic-bezier(1,0,1,1) 1.5s forwards;
+    --ani-footer: var(--ani-header);
 }
-/* ====================================================================================================
-	BASE RESET
-==================================================================================================== */
+@font-face {
+    font-family: federo;
+    src: url("../font/federo.ttf");
+    font-display: swap;
+}
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html {
-    background: var(--clr-bg);
+    background-color: var(--clr-bg);
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: 62.5%;
 }
-
 body {
-    text-align: center;
-}
-/* ====================================================================================================
-	IMPORT FONTS
-==================================================================================================== */
-@font-face {
-    font-family: federo;
-	src: url("../font/federo.ttf");
-	font-display: swap;
-}
-/* ====================================================================================================
-	MAIN
-==================================================================================================== */
-.flex-wrap {
-    position: fixed;
     width: 100%;
     height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
     display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    text-align: center;
+    overflow: hidden;
+    font-size: 16px;
 }
-
-.text {
-    position: relative;
-    width: 400px;
+h1, h2, h3, h4, h5, h6, p, a {
     font-style: italic;
+    font-variant: normal;
+    font-weight: normal;
+    font-stretch: normal;
     font-size: 1rem;
-    font-family: federo;
     line-height: 100%;
-    cursor: default;
+    font-family: federo;
+    text-decoration: none;
+    letter-spacing: normal;
+    word-spacing: normal;
     color: var(--clr-font-nrml);
 }
-
-.header {
+main {
+    width: 340px;
+    height: 600px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;
     opacity: 0;
-    animation: main var(--ani-header);
+    z-index: -1;
+    transform: translateY(255px);
+    animation: header var(--ani-header);
 }
-
-.navi {
+header > p {
+    font-size: 1.6rem;
+    line-height: 150%;
+    letter-spacing: 1px;
+    color: var(--clr-font-gray);
+    cursor: default;
+    transition: color var(--trans-hvr); 
+}
+:root:has(nav > a:nth-of-type(1):hover) header > p {
+    color: var(--clr-font-nrml);
+}
+section {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-bg);
+    z-index: 0;
+}
+section > p {
     opacity: 0;
-    animation: main var(--ani-navi);
+    font-size: 1.6rem;
+    cursor: default;   
 }
-
-.footer {
-    opacity: 0;
-    animation: main var(--ani-footer);
+section:nth-of-type(1) > p {
+    animation: main var(--ani-section1);
 }
-
-@keyframes main {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
+section:nth-of-type(2) > p {
+    animation: main var(--ani-section2);
 }
-
-.link {
-    padding: 10px 20px;
-    border-top: 1px solid var(--clr-gray);
+nav {
+    width: 100%;
+    padding: 20px 0 10px 0;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-bg);
+    z-index: 0;
+}
+nav > a {
+    font-size: 1.6rem;
+    padding: 20px 20px;
+    border-top: 1px solid var(--clr-font-gray);
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
     border-left: 1px solid transparent;
-    cursor: pointer;
-    color: var(--clr-font-nrml);
-    text-decoration: none;
+    opacity: 0;
     transition: all var(--trans-hvr);
+    animation: main var(--ani-navi);
 }
-
-.link:hover {
-    padding: 10px 40px;
+nav > a:hover {
+    padding: 20px 40px;
     border-top: 1px solid var(--clr-font-hvr);
+    color: var(--clr-font-hvr);
 }
-
-.tooltip {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    line-height: 170%;
-    letter-spacing: 2px;
-    background-color: var(--clr-bg);
+nav > p {
+    font-size: 1.6rem;
     cursor: default;
-    pointer-events: none;
-}
-
-.present {
-    bottom: 100%;
-    border-top: 1px solid var(--clr-gray);
-    padding: 0;
     opacity: 0;
-    transition: all var(--trans-ttip);
+    animation: main var(--ani-navi);
 }
-
-.future {
-    top: 100%;
-    border-bottom: 1px solid var(--clr-gray);
-    padding: 0;
+footer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+    align-items: center;
+    overflow: hidden;
     opacity: 0;
-    transition: all var(--trans-ttip);
+    z-index: -1;
+    transform: translateY(-255px);
+    animation: footer var(--ani-footer);
 }
-
-a[title*="PRESENT"]:hover > .present {
-    padding: 30px 0;
-    opacity: 1;
+footer > p {
+    font-size: 1.6rem;
+    line-height: 150%;
+    letter-spacing: 1px;
+    color: var(--clr-font-gray);
+    cursor: default;   
+    transition: color var(--trans-hvr); 
 }
-
-a[title*="FUTURE"]:hover > .future {
-    padding: 30px 0;
-    opacity: 1;
+:root:has(nav > a:nth-of-type(2):hover) footer > p {
+    color: var(--clr-font-nrml);
+}
+@keyframes main {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes header {
+    0% { opacity: 0;
+         transform: translateY(255px);
+        }
+    100% { opacity: 1;
+           transform: translateX(0);
+        }
+}
+@keyframes footer {
+    0% { opacity: 0;
+         transform: translateY(-255px);
+        }
+    100% { opacity: 1;
+           transform: translateX(0);
+        }
 }
