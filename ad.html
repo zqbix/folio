@@ -1,116 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <title>VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION</title>
-    <meta name="description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
-    <meta name="author" content="zqbix">
-    <meta name="robots" content="index, follow, max-image-preview:large">
-    <link rel="canonical" href="https://zqbix.github.io/folio/">
-    <meta property="og:type" content="video.other">
-    <meta property="og:site_name" content="zqbix - HOUDINI FX ARTIST">
-    <meta property="og:title" content="zqbix - HOUDINI FX REEL">
-    <meta property="og:description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
-    <meta property="og:url" content="https://zqbix.github.io/folio/">
-    <meta property="og:video" content="https://zqbix.github.io/folio/reel/reel.mp4">
-    <meta property="og:video:secure_url" content="https://zqbix.github.io/folio/reel/reel.mp4">
-    <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="960">
-    <meta property="og:video:height" content="536">
-    <meta property="og:image" content="https://zqbix.github.io/folio/reel/reel.jpg">
-    <meta property="og:image:width" content="1920">
-    <meta property="og:image:height" content="1080">
-    <meta property="og:image:alt" content="VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION">
-    <meta name="twitter:card" content="player">
-    <meta name="twitter:title" content="VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION">
-    <meta name="twitter:description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
-    <meta name="twitter:image" content="https://zqbix.github.io/folio/reel/reel.jpg">
-    <meta name="twitter:player" content="https://zqbix.github.io/folio/reel/player.html">
-    <meta name="twitter:player:width" content="960">
-    <meta name="twitter:player:height" content="536">
-    <meta name="theme-color" content="#111111">
-    <meta name="color-scheme" content="dark light">
-    <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin>
-    <link rel="preload" href="./reel/reel.jpg" as="image">
-    <link rel="icon" href="img/favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
-    <link rel="stylesheet" href="./css/ad.css">
-</head>
-
-<body>
-    <main class="flex-wrap">
-        <header>
-            <h1>zQbix</h1>
-        </header>
-        <section></section>
-        <nav>
-            <button type="button" commandfor="showreel" command="show-popover"><p>S H O W R E E L</p>
-            </button>
-            <button type="button" commandfor="vfx-dump" command="show-popover"><p>V F X - D U M P</p>
-            </button>
-            <button type="button" commandfor="contact" command="show-popover"><p>C O N T A C T</p>
-            </button>
-        </nav>
-    </main>
-    <div popover id="showreel" class="popover" ontoggle="this.querySelector('video')?.pause()">
-        <div class="popover-flex">
-            <div class="reel">
-                <button class="button-popover-close" commandfor="showreel" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+        <title>VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION</title>
+        <meta name="description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
+        <meta name="author" content="zqbix">
+        <meta name="robots" content="index, follow, max-image-preview:large">
+        <link rel="canonical" href="https://zqbix.github.io/folio/">
+        <meta property="og:type" content="video.other">
+        <meta property="og:site_name" content="zqbix - HOUDINI FX ARTIST">
+        <meta property="og:title" content="zqbix - HOUDINI FX REEL">
+        <meta property="og:description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
+        <meta property="og:url" content="https://zqbix.github.io/folio/">
+        <meta property="og:video" content="https://zqbix.github.io/folio/reel/reel.mp4">
+        <meta property="og:video:secure_url" content="https://zqbix.github.io/folio/reel/reel.mp4">
+        <meta property="og:video:type" content="video/mp4">
+        <meta property="og:video:width" content="960">
+        <meta property="og:video:height" content="536">
+        <meta property="og:image" content="https://zqbix.github.io/folio/reel/reel.jpg">
+        <meta property="og:image:width" content="1920">
+        <meta property="og:image:height" content="1080">
+        <meta property="og:image:alt" content="VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION">
+        <meta name="twitter:card" content="player">
+        <meta name="twitter:title" content="VFX ARTIST REEL - zqbix - PROCEDURAL VFX AND SIMULATION">
+        <meta name="twitter:description" content="VFX ARTIST REEL - zqbix - PROCEDURAL SIMULATIONS AND CINEMATIC VISUAL EFFECTS FOR FILM, EPISODIC, AND COMMERCIAL PRODUCTION">
+        <meta name="twitter:image" content="https://zqbix.github.io/folio/reel/reel.jpg">
+        <meta name="twitter:player" content="https://zqbix.github.io/folio/reel/player.html">
+        <meta name="twitter:player:width" content="960">
+        <meta name="twitter:player:height" content="536">
+        <meta name="theme-color" content="#111111">
+        <meta name="color-scheme" content="dark light">
+        <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin>
+        <link rel="preload" href="./reel/reel.jpg" as="image">
+        <link rel="icon" href="img/favicon.png">
+        <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
+        <link rel="stylesheet" href="./css/ad.css">
+    </head>
+    <body>
+        <main>
+            <header>
+                <h1>zQbix</h1>
+            </header>
+            <div></div>
+            <nav>
+                <button type="button" commandfor="showreel" command="show-popover">
+                    <p>S H O W R E E L</p>
                 </button>
-                <video class="video" poster="./reel/reel.jpg" preload="metadata" controls playsinline>
-                    <source src="./reel/reel.mp4" type="video/mp4">
-                        <p class="ff-base txt-navi ff-federo">YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
-                </video>
+                <button type="button" commandfor="vfx-dump" command="show-popover">
+                    <p>V F X - D U M P</p>
+                </button>
+                <button type="button" commandfor="contact" command="show-popover">
+                    <p>C O N T A C T</p>
+                </button>
+            </nav>
+        </main>
+        <div popover id="showreel" ontoggle="this.querySelector('video')?.pause()">
+            <div>
+                <section class="reel">
+                    <button type="button" commandfor="showreel" command="hide-popover">
+                        <p>&#10005;</p>
+                    </button>
+                    <video poster="./reel/reel.jpg" preload="metadata" controls playsinline>
+                        <source src="./reel/reel.mp4" type="video/mp4">
+                            <p>YOUR BROWSER DOES NOT SUPPORT VIDEO</p>
+                    </video>
+                </section>
             </div>
         </div>
-    </div>
-    <div popover id="vfx-dump" class="popover">
-        <div class="popover-flex">
-            <div class="dump">
-                <button class="button-popover-close" commandfor="vfx-dump" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
-                </button>
-                <h2 class="ff-base h2 ff-federo">VFX-DUMP</h2>
-                <p class="ff-base txt-dump ff-federo">
-                    <br>&#x2022;
-                    <br>
-                    <br>IF U HAVE SOME TIME TO K!LL..
-                    <br>
-                    <br>FEEL FREE TO VISIT MY COLLECTION OF
-                    <br>JUST-FOR-FUN AND NOT-SO-FUN PROJECTS
-                    <br>FROM THE PAST.
-                    <br>
-                    <br>&#x2022;
-                    <br>
-                    <br>BUT BE AWARE..
-                    <br>
-                    <br>NOT EVERYTHING OLD IS GOLD!
-                    <br>
-                    <br>&#x2022;
-                    <br>
-                    <br>
-                </p>
-                <p class="ff-base txt-dump ff-federo"><a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE"> VISIT DUMP.. </a>
-                </p>
+        <div popover id="vfx-dump">
+            <div>
+                <section class="dump">
+                    <button type="button" commandfor="vfx-dump" command="hide-popover">
+                        <p>&#10005;</p>
+                    </button>
+                    <h2>VFX-DUMP</h2>
+                    <p><br>&#x2022;<br><br>IF U HAVE SOME TIME TO K!LL..<br><br>FEEL FREE TO VISIT MY COLLECTION OF<br>JUST-FOR-FUN AND NOT-SO-FUN PROJECTS<br>FROM THE PAST.<br><br>&#x2022;<br><br>BUT BE AWARE..<br><br>NOT EVERYTHING OLD IS GOLD!<br><br>&#x2022;<br><br></p>
+                    <a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE">VISIT DUMP..</a>
+                </section>
             </div>
         </div>
-    </div>
-    <div popover id="contact" class="popover">
-        <div class="popover-flex">
-            <div class="contact">
-                <button class="button-popover-close" commandfor="contact" command="hide-popover"><span class="ff-base txt-pop-close ff-federo">&#10005;</span>
-                </button>
-                <form class="form-contact" action="https://formspree.io/f/xzdvrrbp" method="post" target="_blank">
-                    <label for="email" hidden> EMAIL </label>
-                    <input class="input-contact ff-base txt-contact ff-federo" type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
-                    <label for="message" hidden> MESSAGE </label>
-                    <textarea class="textarea-contact ff-base txt-contact ff-federo" id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
-                    <button class="button-contact ff-base txt-contact ff-federo" type="submit"> SUBMIT </button>
-                </form>
+        <div popover id="contact">
+            <div>
+                <section class="contact">
+                    <button type="button" commandfor="contact" command="hide-popover">
+                        <p>&#10005;</p>
+                    </button>
+                    <form action="https://formspree.io/f/xzdvrrbp" method="post" target="_blank">
+                        <label for="email" hidden>EMAIL</label>
+                        <input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
+                        <label for="message" hidden>MESSAGE</label>
+                        <textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
+                        <button type="submit"><p>SUBMIT</p></button>
+                    </form>
+                </section>
             </div>
         </div>
-    </div>
-</body>
-
+    </body>
 </html>
