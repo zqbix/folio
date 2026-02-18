@@ -38,7 +38,6 @@ h1, h2, h3, h4, h5, h6, p, a, :required {
     font-style: italic;
     font-weight: 400;
     font-size: 1rem;
-    line-height: 100%;
     font-family: federo;
     text-decoration: none;
     color: var(--clr-font-nrml);
@@ -72,6 +71,7 @@ main {
         align-items: center;
         & > h1 {
             font-size: 5rem;
+            line-height: 100%;
             font-family: amanojaku;
             letter-spacing: 7rem;
             cursor: default;
@@ -138,15 +138,21 @@ main {
         @starting-style {
             opacity: 0;
         }
-        & > section > button {
+        & > section {
             width: 100%;
-            padding: 0 20px 20px 0;
+            anchor-name: --closeX;
+        }
+        & > section > button {
+            position: fixed;
+            position-anchor: --closeX;
+            bottom: anchor(--closeX top);
+            right: anchor(--closeX right);
             background-color: transparent;
             cursor: pointer;
             border: 0;
             outline: none;
-            text-align: right;
             & > p {
+                padding: 0 20px 10px 0;
                 font-size: 2rem;
                 color: var(--clr-gray);
                 transition: font-weight var(--trans-hvr), color var(--trans-hvr);
@@ -157,7 +163,6 @@ main {
             }
         }
         & > section[class="reel"] {
-            width: 100%;
             max-width: 1280px;
             & > video {
                 width: 100%;
@@ -166,7 +171,6 @@ main {
             }
         }
         & > section[class="dump"] {
-            width: 100%;
             max-width: 400px;
             & > h2 {
                 font-size: 2.2rem;
@@ -184,7 +188,6 @@ main {
             }
         }
         & > section[class="contact"] {
-            width: 100%;
             max-width: 960px;
             & > form {
                 width: 100%;
@@ -225,10 +228,14 @@ main {
                     &:hover {
                         color: var(--clr-font-hvr);
                         border: 1px solid var(--clr-font-nrml);
+                        & > p {
+                            color: var(--clr-font-hvr);
+                        }
                     }
                     & > p {
                         letter-spacing: 1px;
                         word-spacing: 2px;
+                        transition: color var(--trans-hvr);
                     }
                 }
             }
