@@ -8,7 +8,7 @@
     --trans-hvr2: .6s cubic-bezier(.25,.8,.25,1) 0s;
     --trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
     --trans-dscrt: 1s allow-discrete;
-    --ani-start: 4s ease 0s forwards;
+    --ani-start: 2s ease 0s forwards;
 }
 @font-face {
     font-family:federo;
