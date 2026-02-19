@@ -45,24 +45,25 @@
             <div class="center"></div>
             <nav>
                 <button type="button" commandfor="showreel" command="show-popover">
-                    <p>S H O W R E E L</p>
+                    <span class="p">S H O W R E E L</span>
                 </button>
                 <button type="button" commandfor="vfx-dump" command="show-popover">
-                    <p>V F X - D U M P</p>
+                    <span class="p">V F X - D U M P</span>
                 </button>
                 <button type="button" commandfor="portfolio" command="show-popover">
-                    <p>P O R T F O L I O</p>
+                    <span class="p">P O R T F O L I O</span>
                 </button>
                 <button type="button" commandfor="contact" command="show-popover">
-                    <p>C O N T A C T</p>
+                    <span class="p">C O N T A C T</span>
                 </button>
             </nav>
         </main>
         <div popover id="showreel" ontoggle="this.querySelector('video')?.pause()">
             <div class="pop-flex">
                 <section class="reel">
+                    <h2>R E E L . .</h2>
                     <button type="button" commandfor="showreel" command="hide-popover">
-                        <p>&#10005;</p>
+                        <span class="p">&#10005;</span>
                     </button>
                     <video poster="./reel/reel.jpg" preload="metadata" controls playsinline>
                         <source src="./reel/reel.mp4" type="video/mp4">
@@ -74,26 +75,24 @@
         <div popover id="vfx-dump">
             <div class="pop-flex">
                 <section class="dump">
+                    <h3>D U M P . .</h3>
                     <button type="button" commandfor="vfx-dump" command="hide-popover">
-                        <p>&#10005;</p>
+                        <span class="p">&#10005;</span>
                     </button>
-                    <h2>VFX-DUMP</h2>
-                    <p><br>&#x2022;<br><br>IF U HAVE SOME TIME TO K!LL..<br><br>FEEL FREE TO VISIT MY COLLECTION OF<br>JUST-FOR-FUN AND NOT-SO-FUN PROJECTS<br>FROM THE PAST.<br><br>&#x2022;<br><br>BUT BE AWARE..<br><br>NOT EVERYTHING OLD IS GOLD!<br><br>&#x2022;<br><br></p>
-                    <button type="button">
-                        <a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE">VISIT DUMP..</a>
-                    </button>
+                    <p><br><br>IF U HAVE SOME TIME TO K!LL..<br><br>FEEL FREE TO VISIT MY COLLECTION OF<br>JUST-FOR-FUN AND NOT-SO-FUN PROJECTS<br>FROM THE PAST.<br><br>&#x2022;<br><br>BUT BE AWARE..<br><br>NOT EVERYTHING OLD IS GOLD!<br><br>&#x2022;<br><br><a href="https://drive.google.com/drive/folders/1nseAXDgj6uw92RAILhRkZ_AbGvoUSNnw?usp=drive_link" target="_blank" rel="noopener noreferrer" title="OPEN GOOGLE DRIVE">VISIT DUMP..</a></p>
                 </section>
             </div>
         </div>
         <div popover id="portfolio">
             <div class="pop-flex">
                 <section class="portfolio">
+                    <h4>F O L I O . .</h4>
                     <button type="button" commandfor="portfolio" command="hide-popover">
-                        <p>&#10005;</p>
+                        <span class="p">&#10005;</span>
                     </button>
                     <div class="folio-grid">
                          <div class="grid-cell">
-                            <a href="./folio/web/117-5rr7.mp4" target="_blank">
+                            <a href="./folio/web/117-5rr7.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/117-5rr7.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">5RR7</p>
@@ -103,7 +102,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/116-r0_outro.mp4" target="_blank">
+                            <a href="./folio/web/116-r0_outro.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/116-r0_outro.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">R0 OUTRO</p>
@@ -113,7 +112,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/115-r0_intro.mp4" target="_blank">
+                            <a href="./folio/web/115-r0_intro.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/115-r0_intro.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">R0 INTRO</p>
@@ -123,7 +122,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/114-espuma.mp4" target="_blank">
+                            <a href="./folio/web/114-espuma.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/114-espuma.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ESPUMA</p>
@@ -133,7 +132,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/113-plamel.mp4" target="_blank">
+                            <a href="./folio/web/113-plamel.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/113-plamel.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">PLAMEL</p>
@@ -143,7 +142,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/112-tf.mp4" target="_blank">
+                            <a href="./folio/web/112-tf.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/112-tf.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">TF</p>
@@ -153,7 +152,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/111-bb.mp4" target="_blank">
+                            <a href="./folio/web/111-bb.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/111-bb.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BB</p>
@@ -163,7 +162,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/110-m1f1.mp4" target="_blank">
+                            <a href="./folio/web/110-m1f1.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/110-m1f1.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">M1F1</p>
@@ -173,7 +172,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/109-oOoOo.mp4" target="_blank">
+                            <a href="./folio/web/109-oOoOo.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/109-oOoOo.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">oOoOo</p>
@@ -183,7 +182,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/108-qirmizi_og.mp4" target="_blank">
+                            <a href="./folio/web/108-qirmizi_og.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/108-qirmizi_og.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">QIRMIZI OG</p>
@@ -193,7 +192,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/108-qirmizi_bw.mp4" target="_blank">
+                            <a href="./folio/web/108-qirmizi_bw.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/108-qirmizi_bw.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">QIRMIZI BW</p>
@@ -203,7 +202,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/107-smowqryng_d.mp4" target="_blank">
+                            <a href="./folio/web/107-smowqryng_d.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/107-smowqryng_d.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SMOWQRYNG D</p>
@@ -213,7 +212,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/107-smowqryng_c.mp4" target="_blank">
+                            <a href="./folio/web/107-smowqryng_c.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/107-smowqryng_c.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SMOWQRYNG C</p>
@@ -223,7 +222,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/107-smowqryng_b.mp4" target="_blank">
+                            <a href="./folio/web/107-smowqryng_b.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/107-smowqryng_b.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SMOWQRYNG B</p>
@@ -233,7 +232,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/107-smowqryng_a.mp4" target="_blank">
+                            <a href="./folio/web/107-smowqryng_a.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/107-smowqryng_a.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SMOWQRYNG A</p>
@@ -243,7 +242,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/106-powpl.mp4" target="_blank">
+                            <a href="./folio/web/106-powpl.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/106-powpl.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">POWPL</p>
@@ -253,7 +252,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/105-000001.mp4" target="_blank">
+                            <a href="./folio/web/105-000001.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/105-000001.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">000001</p>
@@ -263,7 +262,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/104-ethereveal.mp4" target="_blank">
+                            <a href="./folio/web/104-ethereveal.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/104-ethereveal.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ETHEREVEAL</p>
@@ -273,7 +272,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/103-reel_opener.mp4" target="_blank">
+                            <a href="./folio/web/103-reel_opener.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/103-reel_opener.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">REEL OPENER</p>
@@ -283,7 +282,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/102-scream.mp4" target="_blank">
+                            <a href="./folio/web/102-scream.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/102-scream.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SCREAM</p>
@@ -293,7 +292,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/101-variegated.png" target="_blank">
+                            <a href="./folio/web/101-variegated.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/101-variegated.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">VARIEGATED</p>
@@ -303,7 +302,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/100-succs_crassula.png" target="_blank">
+                            <a href="./folio/web/100-succs_crassula.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/100-succs_crassula.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SUCCS'CRASSULA</p>
@@ -313,7 +312,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/099-succs_fenestraria.png" target="_blank">
+                            <a href="./folio/web/099-succs_fenestraria.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/099-succs_fenestraria.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SUCCS'FENESTRARIA</p>
@@ -323,7 +322,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/098-velslice.mp4" target="_blank">
+                            <a href="./folio/web/098-velslice.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/098-velslice.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">VELSLICE</p>
@@ -333,7 +332,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/097-succs_echeveria.png" target="_blank">
+                            <a href="./folio/web/097-succs_echeveria.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/097-succs_echeveria.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SUCCS'ECHEVERIA</p>
@@ -343,7 +342,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/096-wired.mp4" target="_blank">
+                            <a href="./folio/web/096-wired.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/096-wired.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">WIRED'B</p>
@@ -353,7 +352,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/095-wired.mp4" target="_blank">
+                            <a href="./folio/web/095-wired.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/095-wired.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">WIRED'A</p>
@@ -363,7 +362,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/094-wtflowerz.mp4" target="_blank">
+                            <a href="./folio/web/094-wtflowerz.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/094-wtflowerz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">WTFLOWERZ</p>
@@ -373,7 +372,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/093-davidandfriends.mp4" target="_blank">
+                            <a href="./folio/web/093-davidandfriends.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/093-davidandfriends.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">DAVID AND FRIENDS</p>
@@ -383,7 +382,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/092-qopf.png" target="_blank">
+                            <a href="./folio/web/092-qopf.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/092-qopf.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">QOPF</p>
@@ -393,7 +392,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/091-qopf.png" target="_blank">
+                            <a href="./folio/web/091-qopf.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/091-qopf.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">QOPF</p>
@@ -403,7 +402,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/090-sore.mp4" target="_blank">
+                            <a href="./folio/web/090-sore.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/090-sore.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SORE</p>
@@ -413,7 +412,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/089-moon.png" target="_blank">
+                            <a href="./folio/web/089-moon.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/089-moon.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">MOON</p>
@@ -423,7 +422,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/088-blooming_matter.mp4" target="_blank">
+                            <a href="./folio/web/088-blooming_matter.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/088-blooming_matter.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BLOOMING MATTER</p>
@@ -433,7 +432,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/087-thespacebetweenus.mp4" target="_blank">
+                            <a href="./folio/web/087-thespacebetweenus.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/087-thespacebetweenus.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">THE SPACE BETWEEN US</p>
@@ -443,7 +442,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/086-thespacebetweenus.mp4" target="_blank">
+                            <a href="./folio/web/086-thespacebetweenus.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/086-thespacebetweenus.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">THE SPACE BETWEEN US</p>
@@ -453,7 +452,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/085-fourhorsemen_pale.png" target="_blank">
+                            <a href="./folio/web/085-fourhorsemen_pale.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/085-fourhorsemen_pale.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FOURHORSEMEN (PALE)</p>
@@ -463,7 +462,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/084-fourhorsemen_black.png" target="_blank">
+                            <a href="./folio/web/084-fourhorsemen_black.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/084-fourhorsemen_black.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FOURHORSEMEN (BLACK)</p>
@@ -473,7 +472,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/083-fourhorsemen_red.png" target="_blank">
+                            <a href="./folio/web/083-fourhorsemen_red.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/083-fourhorsemen_red.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FOURHORSEMEN (RED)</p>
@@ -483,7 +482,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/082-fourhorsemen_white.png" target="_blank">
+                            <a href="./folio/web/082-fourhorsemen_white.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/082-fourhorsemen_white.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FOURHORSEMEN (WHITE)</p>
@@ -493,7 +492,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/081-lalinea.png" target="_blank">
+                            <a href="./folio/web/081-lalinea.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/081-lalinea.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">LALINEA</p>
@@ -503,7 +502,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/080-lalinea.png" target="_blank">
+                            <a href="./folio/web/080-lalinea.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/080-lalinea.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">LALINEA</p>
@@ -513,7 +512,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/079-lalinea.png" target="_blank">
+                            <a href="./folio/web/079-lalinea.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/079-lalinea.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">LALINEA</p>
@@ -523,7 +522,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/078-dno.mp4" target="_blank">
+                            <a href="./folio/web/078-dno.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/078-dno.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">DNO</p>
@@ -533,7 +532,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/077-a36999.mp4" target="_blank">
+                            <a href="./folio/web/077-a36999.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/077-a36999.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">A36999</p>
@@ -543,7 +542,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/076-chezplash.mp4" target="_blank">
+                            <a href="./folio/web/076-chezplash.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/076-chezplash.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CHEZPLASH</p>
@@ -553,7 +552,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/075-epacse.mp4" target="_blank">
+                            <a href="./folio/web/075-epacse.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/075-epacse.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">EPACSE</p>
@@ -563,7 +562,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/074-x39666.mp4" target="_blank">
+                            <a href="./folio/web/074-x39666.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/074-x39666.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">X39666</p>
@@ -573,7 +572,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/073-xmax.mp4" target="_blank">
+                            <a href="./folio/web/073-xmax.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/073-xmax.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">XMAX</p>
@@ -583,7 +582,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/072-zqlinti.mp4" target="_blank">
+                            <a href="./folio/web/072-zqlinti.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/072-zqlinti.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ZQLINTI</p>
@@ -593,7 +592,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/071-venefica.mp4" target="_blank">
+                            <a href="./folio/web/071-venefica.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/071-venefica.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">VENEFICA</p>
@@ -603,7 +602,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/070-wrapped.mp4" target="_blank">
+                            <a href="./folio/web/070-wrapped.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/070-wrapped.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">WRAPPED</p>
@@ -613,7 +612,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/069-qutz.png" target="_blank">
+                            <a href="./folio/web/069-qutz.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/069-qutz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">B` QUTZ</p>
@@ -623,7 +622,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/068-qutz.png" target="_blank">
+                            <a href="./folio/web/068-qutz.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/068-qutz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">G` QUTZ</p>
@@ -633,7 +632,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/067-qutz.png" target="_blank">
+                            <a href="./folio/web/067-qutz.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/067-qutz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">R` QUTZ</p>
@@ -643,7 +642,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/066-bloom.mp4" target="_blank">
+                            <a href="./folio/web/066-bloom.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/066-bloom.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BLOOM</p>
@@ -653,7 +652,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/065-zqatrix.mp4" target="_blank">
+                            <a href="./folio/web/065-zqatrix.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/065-zqatrix.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ZQATRIX</p>
@@ -663,7 +662,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/064-zprm.mp4" target="_blank">
+                            <a href="./folio/web/064-zprm.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/064-zprm.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ZPRM</p>
@@ -673,7 +672,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/063-rocco.mp4" target="_blank">
+                            <a href="./folio/web/063-rocco.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/063-rocco.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">ROCCO</p>
@@ -683,7 +682,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/062-anuzz.mp4" target="_blank">
+                            <a href="./folio/web/062-anuzz.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/062-anuzz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">A` NUZZ</p>
@@ -693,7 +692,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/061-anuzz.png" target="_blank">
+                            <a href="./folio/web/061-anuzz.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/061-anuzz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">A` NUZZ</p>
@@ -703,7 +702,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/060-anuzz.png" target="_blank">
+                            <a href="./folio/web/060-anuzz.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/060-anuzz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">A` NUZZ</p>
@@ -713,7 +712,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/059-parface.mp4" target="_blank">
+                            <a href="./folio/web/059-parface.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/059-parface.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">PARFACE</p>
@@ -723,7 +722,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/058-rtj4d.png" target="_blank">
+                            <a href="./folio/web/058-rtj4d.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/058-rtj4d.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">RTJ4D</p>
@@ -733,7 +732,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/057-rtj4d.mp4" target="_blank">
+                            <a href="./folio/web/057-rtj4d.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/057-rtj4d.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">RTJ4D (STEALTH EDIT)</p>
@@ -743,7 +742,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/056-rtj4d.mp4" target="_blank">
+                            <a href="./folio/web/056-rtj4d.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/056-rtj4d.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">RTJ4D (ORIGINAL EDIT)</p>
@@ -753,7 +752,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/055-naja.png" target="_blank">
+                            <a href="./folio/web/055-naja.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/055-naja.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">NAJA</p>
@@ -763,7 +762,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/054-naja.png" target="_blank">
+                            <a href="./folio/web/054-naja.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/054-naja.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">NAJA</p>
@@ -773,7 +772,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/053-clotholia.png" target="_blank">
+                            <a href="./folio/web/053-clotholia.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/053-clotholia.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CLOTHOLIA</p>
@@ -783,7 +782,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/052-apztraqto.png" target="_blank">
+                            <a href="./folio/web/052-apztraqto.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/052-apztraqto.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">APZTRAQTO</p>
@@ -793,7 +792,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/051-necklace.png" target="_blank">
+                            <a href="./folio/web/051-necklace.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/051-necklace.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">NECKLACE</p>
@@ -803,7 +802,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/050-poem.png" target="_blank">
+                            <a href="./folio/web/050-poem.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/050-poem.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">POEM</p>
@@ -813,7 +812,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/049-circolo.mp4" target="_blank">
+                            <a href="./folio/web/049-circolo.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/049-circolo.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CIRCOLO</p>
@@ -823,7 +822,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/048-havoc_turntable.mp4" target="_blank">
+                            <a href="./folio/web/048-havoc_turntable.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/048-havoc_turntable.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">HAVOC TURNTABLE</p>
@@ -833,7 +832,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/047-havoc_logo.png" target="_blank">
+                            <a href="./folio/web/047-havoc_logo.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/047-havoc_logo.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">HAVOC LOGO</p>
@@ -843,7 +842,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/046-havoc.png" target="_blank">
+                            <a href="./folio/web/046-havoc.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/046-havoc.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">HAVOC</p>
@@ -853,7 +852,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/045-soap.png" target="_blank">
+                            <a href="./folio/web/045-soap.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/045-soap.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SOAP</p>
@@ -863,7 +862,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/044-carbon_android.png" target="_blank">
+                            <a href="./folio/web/044-carbon_android.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/044-carbon_android.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CARBON ANDROID</p>
@@ -873,7 +872,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/043-sopirale.mp4" target="_blank">
+                            <a href="./folio/web/043-sopirale.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/043-sopirale.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SOPIRALE</p>
@@ -883,7 +882,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/042-oloid.mp4" target="_blank">
+                            <a href="./folio/web/042-oloid.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/042-oloid.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">OLOID</p>
@@ -893,7 +892,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/041-cravel.mp4" target="_blank">
+                            <a href="./folio/web/041-cravel.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/041-cravel.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CRAVEL</p>
@@ -903,7 +902,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/040-statue.png" target="_blank">
+                            <a href="./folio/web/040-statue.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/040-statue.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">STATUE</p>
@@ -913,7 +912,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/039-canyon_bike.mp4" target="_blank">
+                            <a href="./folio/web/039-canyon_bike.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/039-canyon_bike.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CANYON BIKE</p>
@@ -923,7 +922,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/038-sandstorm.mp4" target="_blank">
+                            <a href="./folio/web/038-sandstorm.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/038-sandstorm.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SANDSCOPE LOGO OPENER II</p>
@@ -934,7 +933,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/037-coilporn.jpg" target="_blank">
+                            <a href="./folio/web/037-coilporn.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/037-coilporn.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">COILPORN</p>
@@ -944,7 +943,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/036-betta.jpg" target="_blank">
+                            <a href="./folio/web/036-betta.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/036-betta.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BETTA</p>
@@ -953,7 +952,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/035-influencia.mp4" target="_blank">
+                            <a href="./folio/web/035-influencia.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/035-influencia.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">INFLUENCIA</p>
@@ -963,7 +962,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/034-lidl_pizza.mp4" target="_blank">
+                            <a href="./folio/web/034-lidl_pizza.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/034-lidl_pizza.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">LIDL PIZZA</p>
@@ -974,7 +973,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/033-cloth.jpg" target="_blank">
+                            <a href="./folio/web/033-cloth.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/033-cloth.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">CLOTH RND</p>
@@ -985,7 +984,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/032-rpg.jpg" target="_blank">
+                            <a href="./folio/web/032-rpg.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/032-rpg.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">RPG</p>
@@ -996,7 +995,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/031-coke.jpg" target="_blank">
+                            <a href="./folio/web/031-coke.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/031-coke.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">COKE</p>
@@ -1007,7 +1006,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/030-bomb.jpg" target="_blank">
+                            <a href="./folio/web/030-bomb.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/030-bomb.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BOMB</p>
@@ -1018,7 +1017,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/029-sandscope.mp4" target="_blank">
+                            <a href="./folio/web/029-sandscope.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/029-sandscope.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SANDSCOPE LOGO OPENER I</p>
@@ -1029,7 +1028,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/028-ndt.jpg" target="_blank">
+                            <a href="./folio/web/028-ndt.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/028-ndt.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">NDT</p>
@@ -1039,7 +1038,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/027-excretion.mp4" target="_blank">
+                            <a href="./folio/web/027-excretion.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/027-excretion.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">EXCRETION</p>
@@ -1049,7 +1048,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/026-tsaraffe.jpg" target="_blank">
+                            <a href="./folio/web/026-tsaraffe.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/026-tsaraffe.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">TSARAFFE</p>
@@ -1059,7 +1058,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/025-deepsilkcocoon.png" target="_blank">
+                            <a href="./folio/web/025-deepsilkcocoon.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/025-deepsilkcocoon.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">DEEPSILKCOCOON</p>
@@ -1069,7 +1068,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/024-flipchart.mp4" target="_blank">
+                            <a href="./folio/web/024-flipchart.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/024-flipchart.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FLIPCHART</p>
@@ -1080,7 +1079,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/023-jungheinrich.png" target="_blank">
+                            <a href="./folio/web/023-jungheinrich.png" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/023-jungheinrich.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">JUNGHEINRICH</p>
@@ -1090,7 +1089,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/022-shelter.mp4" target="_blank">
+                            <a href="./folio/web/022-shelter.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/022-shelter.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SHELTER</p>
@@ -1100,7 +1099,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/021-mortality.mp4" target="_blank">
+                            <a href="./folio/web/021-mortality.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/021-mortality.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">MORTALITY</p>
@@ -1110,7 +1109,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/020-grethers.mp4" target="_blank">
+                            <a href="./folio/web/020-grethers.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/020-grethers.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">GRETHERS</p>
@@ -1120,7 +1119,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/019-twister.mp4" target="_blank">
+                            <a href="./folio/web/019-twister.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/019-twister.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">TWISTER</p>
@@ -1130,7 +1129,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/018-tonyshat.jpg" target="_blank">
+                            <a href="./folio/web/018-tonyshat.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/018-tonyshat.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">TONYS HAT</p>
@@ -1140,7 +1139,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/017-viera.jpg" target="_blank">
+                            <a href="./folio/web/017-viera.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/017-viera.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">VIERA</p>
@@ -1150,7 +1149,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/016-santaklaus.mp4" target="_blank">
+                            <a href="./folio/web/016-santaklaus.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/016-santaklaus.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SANTA UND KLAUS</p>
@@ -1160,7 +1159,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/015-batscat.jpg" target="_blank">
+                            <a href="./folio/web/015-batscat.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/015-batscat.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BATSCAT</p>
@@ -1170,7 +1169,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/014-kopp.jpg" target="_blank">
+                            <a href="./folio/web/014-kopp.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/014-kopp.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">KOPP</p>
@@ -1180,7 +1179,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/013-birth.mp4" target="_blank">
+                            <a href="./folio/web/013-birth.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/013-birth.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BIRTH</p>
@@ -1191,7 +1190,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/012-hyundai.mp4" target="_blank">
+                            <a href="./folio/web/012-hyundai.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/012-hyundai.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">HYUNDAI</p>
@@ -1201,7 +1200,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/011-geostones.mp4" target="_blank">
+                            <a href="./folio/web/011-geostones.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/011-geostones.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">GEOSTONES</p>
@@ -1212,7 +1211,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/010-flipflop.mp4" target="_blank">
+                            <a href="./folio/web/010-flipflop.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/010-flipflop.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">FLIPFLOP</p>
@@ -1222,7 +1221,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/009-techpack.jpg" target="_blank">
+                            <a href="./folio/web/009-techpack.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/009-techpack.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">TECHPACK</p>
@@ -1232,7 +1231,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/008-savannah.mp4" target="_blank">
+                            <a href="./folio/web/008-savannah.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/008-savannah.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">SAVANNAH</p>
@@ -1242,7 +1241,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/007-2088.mp4" target="_blank">
+                            <a href="./folio/web/007-2088.mp4" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/007-2088.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">2088</p>
@@ -1252,7 +1251,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/006-theclump.jpg" target="_blank">
+                            <a href="./folio/web/006-theclump.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/006-theclump.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">THE CLUMP</p>
@@ -1262,7 +1261,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/005-rim.jpg" target="_blank">
+                            <a href="./folio/web/005-rim.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/005-rim.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">RIM</p>
@@ -1272,7 +1271,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/004-liquido.jpg" target="_blank">
+                            <a href="./folio/web/004-liquido.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/004-liquido.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">LIQUIDO</p>
@@ -1282,7 +1281,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/003-qneiph.jpg" target="_blank">
+                            <a href="./folio/web/003-qneiph.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/003-qneiph.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">QNEIPH</p>
@@ -1292,7 +1291,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/002-velviz.jpg" target="_blank">
+                            <a href="./folio/web/002-velviz.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/002-velviz.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">VELVIZ</p>
@@ -1302,7 +1301,7 @@
                             </a>
                         </div>
                         <div class="grid-cell">
-                            <a href="./folio/web/001-birdofprey.jpg" target="_blank">
+                            <a href="./folio/web/001-birdofprey.jpg" target="_blank" rel="noopener noreferrer">
                                 <img src="./folio/thumbs/001-birdofprey.jpg" alt="" loading="lazy">
                                 <div class="cell-info">
                                     <p class="info-1">BIRD OF PREY</p>
@@ -1318,15 +1317,16 @@
         <div popover id="contact">
             <div class="pop-flex">
                 <section class="contact">
+                    <h5>C O N T A C T . .</h5>
                     <button type="button" commandfor="contact" command="hide-popover">
-                        <p>&#10005;</p>
+                        <span class="p">&#10005;</span>
                     </button>
                     <form action="https://formspree.io/f/xzdvrrbp" method="post" target="_blank">
                         <label for="email" hidden>EMAIL</label>
                         <input type="email" id="email" name="email" placeholder="YOUR EMAIL.." required>
                         <label for="message" hidden>MESSAGE</label>
                         <textarea id="message" name="message" placeholder="YOUR MESSAGE.." required></textarea>
-                        <button type="submit"><p>SUBMIT</p></button>
+                        <button type="submit"><span class="p">SUBMIT</span></button>
                     </form>
                 </section>
             </div>
