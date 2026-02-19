@@ -34,7 +34,7 @@ body {
     text-align: center;
     overflow: hidden;
 }
-h1, h2, h3, h4, h5, h6, p, a, :required {
+h1, h2, h3, h4, h5, h6, p, a, .p, :required {
     font-style: italic;
     font-weight: 400;
     font-size: 1rem;
@@ -85,6 +85,10 @@ nav {
         margin: 0 5px;
         padding: 20px 15px;
         background-color: transparent;
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: center;
+        align-items: center;
         border-top: 1px solid var(--clr-gray);
         border-right: 1px solid transparent;
         border-bottom: 1px solid transparent;
@@ -174,12 +178,12 @@ nav {
         cursor: pointer;
         border: 0;
         outline: none;
-        & > p {
+        & > .p {
             font-size: 2rem;
             color: var(--clr-gray);
             transition: font-weight var(--trans-hvr), color var(--trans-hvr);
         }
-        &:is(:hover, :focus) > p {
+        &:is(:hover, :focus) > .p {
             font-weight: 900;
             color: var(--clr-font-hvr);
         }
@@ -187,6 +191,15 @@ nav {
 }
 section[class="reel"] {
     max-width: 1280px;
+    & > h2 {
+        position: fixed;
+        position-anchor: --closeX;
+        bottom: anchor(--closeX top);
+        left: anchor(--closeX left);
+        margin: 0 0 10px 20px;
+        font-size: 1.5rem;
+        color: var(--clr-gray);
+    }
     & > video {
         width: 100%;
         max-width: 1280px;
@@ -196,25 +209,25 @@ section[class="reel"] {
 }
 section[class="dump"] {
     max-width: 400px;
-    & > h2 {
-        font-size: 2.2rem;
+    & > h3 {
+        position: fixed;
+        position-anchor: --closeX;
+        bottom: anchor(--closeX top);
+        left: anchor(--closeX left);
+        margin: 0 0 10px 20px;
+        font-size: 1.5rem;
+        color: var(--clr-gray);
     }
     & > p {
         line-height: 150%;
         letter-spacing: 1px;
         word-spacing: 2px;
-    }
-    & button:last-child { 
-        background-color: transparent;
-        border: 0;
-        outline: none;
         & > a {
-            letter-spacing: 1px;
-            word-spacing: 2px;
-            transition: font-weight var(--trans-hvr), color var(--trans-hvr);
-        }
-        &:is(:hover, :focus) > a {
-            color: var(--clr-font-hvr);
+            letter-spacing: 2px;
+            word-spacing: 4px;
+            &:is(:hover, :active) {
+                color: var(--clr-font-hvr);
+            }
         }
     }
 }
@@ -224,6 +237,15 @@ section[class="portfolio"] {
     overflow-x: hidden;
     overflow-y: scroll;
     scrollbar-color: var(--clr-gray) transparent;
+    & > h4 {
+        position: fixed;
+        position-anchor: --closeX;
+        bottom: anchor(--closeX top);
+        left: anchor(--closeX left);
+        margin: 0 0 10px 20px;
+        font-size: 1.5rem;
+        color: var(--clr-gray);
+    }
     & .folio-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
@@ -286,6 +308,15 @@ section[class="portfolio"] {
 }
 section[class="contact"] {
     max-width: 960px;
+    & > h5 {
+        position: fixed;
+        position-anchor: --closeX;
+        bottom: anchor(--closeX top);
+        left: anchor(--closeX left);
+        margin: 0 0 10px 20px;
+        font-size: 1.5rem;
+        color: var(--clr-gray);
+    }
     & form {
         width: 100%;
         padding: 15px;
@@ -326,11 +357,11 @@ section[class="contact"] {
         &:is(:hover, :focus) {
             color: var(--clr-font-hvr);
             border: 1px solid var(--clr-font-nrml);
-            & > p {
+            & > .p {
                 color: var(--clr-font-hvr);
             }
         }
-        & > p {
+        & > .p {
             letter-spacing: 1px;
             word-spacing: 2px;
             transition: color var(--trans-hvr);
