@@ -8,9 +8,7 @@
     --trans-hvr2: .6s cubic-bezier(.25,.8,.25,1) 0s;
     --trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
     --trans-dscrt: 1s allow-discrete;
-    --ani-bg: 3s ease 1.5s forwards;
-    --ani-h1: 1s cubic-bezier(1,0,1,1) 0.5s forwards;
-    --ani-navi: 6s ease 2s forwards;
+    --ani-start: 4s ease 0s forwards;
 }
 @font-face {
     font-family:federo;
@@ -51,19 +49,6 @@ main {
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
-    &:after {
-        content: "zqbix";
-        position: fixed;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 12vh;
-        font-family: amanojaku;
-        color: var(--clr-bg);
-        white-space: nowrap;
-        transform: translate(-20px,-20px);
-        z-index: -1;
-        animation: bg var(--ani-bg);
-    }
     & > header {
         width: 100%;
         display: flex;
@@ -74,10 +59,9 @@ main {
             font-size: 5rem;
             line-height: 100%;
             font-family: amanojaku;
-            letter-spacing: 7rem;
+            letter-spacing: 1rem;
             cursor: default;
-            color: var(--clr-bg);
-            animation: h1 var(--ani-h1);
+            animation: logo var(--ani-start);
         }
     }
     & > div {
@@ -91,8 +75,7 @@ main {
         justify-content: center;
         align-items: center;
         white-space: nowrap;
-        opacity: 0;
-        animation: navi var(--ani-navi);
+        animation: navi var(--ani-start);
         & > button {
             margin: 0 5px;
             padding: 20px 15px;
@@ -109,6 +92,18 @@ main {
                 padding-left: 30px;
                 padding-right: 30px;
                 border-top: 1px solid var(--clr-font-nrml);
+            }
+            &:nth-child(1) {
+                animation: btn1 var(--ani-start);
+            }
+            &:nth-child(2) {
+                animation: btn2 var(--ani-start);
+            }
+            &:nth-child(3) {
+                animation: btn3 var(--ani-start);
+            }
+            &:nth-child(4) {
+                animation: btn4 var(--ani-start);
             }
         }
     }
@@ -326,19 +321,30 @@ main {
         }
     }
 }
-@keyframes bg {
-    0% { color: var(--clr-bg); }
-    10% { color: var(--clr-gray); }
-    100% { color: var(--clr-bg); }
-}
-@keyframes h1 {
-    0% { color: var(--clr-bg); letter-spacing: 7rem; }
-    50% { color: var(--clr-font-bg); }
-    100% { color: var(--clr-font-nrml); letter-spacing: 1rem; }
+@keyframes logo {
+    0% { opacity: 0; transform:scaleX(1.1); }
+    100% { opacity: 1; transform:scaleX(1); }
 }
 @keyframes navi {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+    0% { opacity: 0; filter: blur(3px); }
+    20% { opacity: 0; }
+    100% { opacity: 1; filter: blur(0px); }
+}
+@keyframes btn1 {
+    0% { transform:translateX(-100px); }
+    100% { transform:translateX(0px); }
+}
+@keyframes btn2 {
+    0% { transform:translateX(-50px); }
+    100% { transform:translateX(0px); }
+}
+@keyframes btn3 {
+    0% { transform:translateX(50px); }
+    100% { transform:translateX(0px); }
+}
+@keyframes btn4 {
+    0% { transform:translateX(100px); }
+    100% { transform:translateX(0px); }
 }
 @media (max-width: 480px) {
     main:after {
