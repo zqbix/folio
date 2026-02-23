@@ -1,353 +1,89 @@
 :root {
-    --clr-bg: hsl(0, 0%, 7%);
-    --clr-gray: hsl(0, 0%, 25%);
-    --clr-font-bg: hsl(0, 0%, 8.5%);
-    --clr-font-nrml: hsl(0, 0%, 60%);
-    --clr-font-hvr: hsl(0, 0%, 100%);
-    --trans-hvr: 0.3s ease 0s;
-    --trans-hvr2: .6s cubic-bezier(.25,.8,.25,1) 0s;
-    --trans-fade: 1s cubic-bezier(1,0,1,1) 0.5s;
-    --trans-dscrt: 1s allow-discrete;
-    --ani-start: 2s ease 0s forwards;
+    --bg: hsl(0,0%,7%);
+    --g: hsl(0,0%,25%);
+    --n: hsl(0,0%,60%);
+    --w: hsl(0,0%,100%);
+    --t1: .3s ease;
+    --t2: .6s cubic-bezier(.25,.8,.25,1);
+    --t3: 1s cubic-bezier(1,0,1,1) .5s;
+    --t4: 1s allow-discrete;
+    --a: 2s ease forwards;
 }
-@font-face {
-    font-family: federo;
-    src: url(../font/federo.ttf);
-    font-display: swap;
-}
-@font-face {
-    font-family: amanojaku;
-    src: url(../font/amanojaku.otf);
-    font-display: swap;
-}
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-html {
-    background: var(--clr-bg);
-    scroll-behavior: smooth;
-    font-size: 100%;
-}
-body {
-    text-align: center;
-    overflow: hidden;
-}
-h1, h2, h3, h4, h5, h6, p, a, .p, :required {
-    font-style: italic;
-    font-weight: 400;
-    font-size: 1rem;
-    font-family: federo;
-    text-decoration: none;
-    color: var(--clr-font-nrml);
-}
-main {
-    width: 100%;
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-header {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & > h1 {
-        font-size: 5rem;
-        line-height: 1;
-        font-family: amanojaku;
-        letter-spacing: 1rem;
-        cursor: default;
-        animation: logo var(--ani-start);
-    }
-}
+@font-face { font-family: federo; src: url(../font/federo.ttf); font-display: swap }
+@font-face { font-family: amanojaku; src: url(../font/amanojaku.otf); font-display: swap }
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { background: var(--bg); scroll-behavior: smooth }
+body { text-align: center; overflow: hidden }
+h1,h2,h3,h4,h5,h6,p,a,.p,:required { font: italic 400 1rem federo; text-decoration: none; color: var(--n) }
+main { width: 100%; height: 100dvh; display: flex; flex-direction: column; justify-content: center; align-items: center }
+header { width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center }
+header > h1 { font-size: 5rem; line-height:1; font-family:amanojaku; letter-spacing: 1rem; cursor: default; animation: logo var(--a) }
 @keyframes logo {
-    0% { opacity: 0; transform: scaleX(1.1); filter: blur(1px); }
-    100% { opacity: 1; transform: scaleX(1); filter: blur(0); }
+    from { opacity: 0; transform: scaleX(1.1); filter: blur(1px) }
+    to { opacity: 1; transform: scaleX(1); filter: none }
 }
-.center {
-    width: 100%;
-    height: 5px;
+.center { width: 100%; height: 5px }
+nav { width: 100%; display: flex; justify-content: center; align-items: center; white-space: nowrap; animation: navi var(--a) }
+nav > button {
+    margin: 0 5px; padding: 20px 25px;
+    background: none; border: 1px solid transparent; border-top-color: var(--g);
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden; cursor: pointer; outline: none;
+    transition: padding-inline var(--t1), border-top-color var(--t1);
 }
-nav {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
-    animation: navi var(--ani-start);
-    & > button {
-        margin: 0 5px;
-        padding: 20px 15px;
-        background: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid transparent;
-        border-top-color: var(--clr-gray);
-        overflow: hidden;
-        cursor: pointer;
-        outline: none;
-        transition: padding-inline var(--trans-hvr), border-top-color var(--trans-hvr);
-        &:hover {
-            padding-inline: 30px;
-            border-top-color: var(--clr-font-nrml);
-        }
-        &:nth-child(1) { animation: btn1 var(--ani-start); }
-        &:nth-child(2) { animation: btn2 var(--ani-start); }
-        &:nth-child(3) { animation: btn3 var(--ani-start); }
-        &:nth-child(4) { animation: btn4 var(--ani-start); }
-    }
-}
-@keyframes navi {
-    0% { opacity: 0; filter: blur(3px); }
-    20% { opacity: 0; }
-    100% { opacity: 1; filter: blur(0); }
-}
-@keyframes btn1 {
-    0% { transform: translateX(-100px); }
-    100% { transform: translateX(0); }
-}
-@keyframes btn2 {
-    0% { transform: translateX(-50px); }
-    100% { transform: translateX(0); }
-}
-@keyframes btn3 {
-    0% { transform: translateX(50px); }
-    100% { transform: translateX(0); }
-}
-@keyframes btn4 {
-    0% { transform: translateX(100px); }
-    100% { transform: translateX(0); }
-}
-[popover] {
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border: 0;
-    background: var(--clr-bg);
-    opacity: 0;
-    transition: all var(--trans-dscrt);
-    &:popover-open {
-        opacity: 1;
-        @starting-style { opacity: 0; }
-    }
-    & .pop-flex {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        opacity: 1;
-        transition: opacity var(--trans-fade);
-        @starting-style { opacity: 0; }
-    }
-    & section {
-        width: 100%;
-        anchor-name: --closeX;
-    }
-    & button[command="hide-popover"] {
-        position: fixed;
-        position-anchor: --closeX;
-        bottom: anchor(--closeX top);
-        right: anchor(--closeX right);
-        margin: 0 20px 10px 0;
-        background: none;
-        cursor: pointer;
-        border: 0;
-        outline: none;
-        & > .p {
-            font-size: 2rem;
-            color: var(--clr-gray);
-            transition: font-weight var(--trans-hvr), color var(--trans-hvr);
-        }
-        &:is(:hover, :focus) > .p {
-            font-weight: 900;
-            color: var(--clr-font-hvr);
-        }
-    }
-}
-:is(section.reel, section.about, section.portfolio, section.contact) > :is(h2, h3, h4, h5) {
-    position: fixed;
-    position-anchor: --closeX;
-    bottom: anchor(--closeX top);
-    left: anchor(--closeX left);
-    margin: 0 0 10px 20px;
-    font-size: 1.5rem;
-    color: var(--clr-gray);
-}
-section.reel {
-    max-width: 1280px;
-    & > video {
-        width: 100%;
-        aspect-ratio: 16/9;
-        outline: none;
-    }
-}
-section.about {
-    max-width: 400px;
-    & > p {
-        line-height: 1.5;
-        letter-spacing: 1px;
-        word-spacing: 2px;
-        &:nth-child(odd) {
-            color: var(--clr-gray);
-        }
-    }
-    & > a, & .p {
-        letter-spacing: 2px;
-        word-spacing: 4px;
-        transition: color var(--trans-hvr);
-    }
-    & > a:is(:hover, :active),
-    & .p:is(:hover, :focus) {
-        color: var(--clr-font-hvr);
-    }
-    & > .small {
-        font-size: 0.7rem;
-    }
-    & > button.jump2contact {
-        all: initial;
-        cursor: pointer;
-    }
-}
-section.portfolio {
-    max-width: 1920px;
-    margin: 100px 0;
-    overflow: hidden scroll;
-    scrollbar-color: var(--clr-gray) transparent;
-    & .folio-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-    }
-    & .grid-cell {
-        position: relative;
-        overflow: hidden;
-        aspect-ratio: 1;
-        cursor: pointer;
-        &:hover img {
-            transform: scale(1.15);
-            filter: blur(10px);
-            opacity: 0.05;
-        }
-        &:hover .info-1 {
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
-        }
-        &:hover .info-2 {
-            opacity: 0.5;
-            transform: translateY(0);
-            filter: blur(0);
-        }
-    }
-    & img {
-        width: 100%;
-        height: 100%;
-        transition: transform var(--trans-hvr2), filter var(--trans-hvr2), opacity var(--trans-hvr2);
-    }
-    & .cell-info {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        pointer-events: none;
-    }
-    & :is(.info-1, .info-2) {
-        opacity: 0;
-        filter: blur(10px);
-        transition: transform var(--trans-hvr2), filter var(--trans-hvr2), opacity var(--trans-hvr2);
-    }
-    & .info-1 {
-        font-size: 1rem;
-        line-height: 3;
-        letter-spacing: 2px;
-        word-spacing: 2px;
-        transform: translateX(-30px);
-    }
-    & .info-2 {
-        font-size: 0.7rem;
-        line-height: 1.5;
-        letter-spacing: 1px;
-        word-spacing: 2px;
-        transform: translateY(15px);
-    }
-}
-section.contact {
-    max-width: 960px;
-    & form {
-        width: 100%;
-        padding: 15px;
-        border: 1px solid var(--clr-gray);
-        overflow: hidden;
-    }
-    & textarea {
-        margin: 15px 0;
-        height: 150px;
-    }
-    & :is(input, textarea) {
-        width: 100%;
-        padding: 15px;
-        background: none;
-        border: 1px solid transparent;
-        border-left-color: var(--clr-gray);
-        resize: vertical;
-        overflow: hidden;
-        outline: none;
-        transition: border var(--trans-hvr);
-        &:is(:hover, :focus) {
-            border-color: var(--clr-gray);
-        }
-        &:required {
-            letter-spacing: 1px;
-            word-spacing: 2px;
-        }
-    }
-    & button[type="submit"] {
-        width: 100%;
-        padding: 15px;
-        background: none;
-        border: 1px solid var(--clr-gray);
-        overflow: hidden;
-        cursor: pointer;
-        outline: none;
-        transition: color var(--trans-hvr), border-color var(--trans-hvr);
-        &:is(:hover, :focus) {
-            color: var(--clr-font-hvr);
-            border-color: var(--clr-font-nrml);
-        }
-        & > .p {
-            letter-spacing: 1px;
-            word-spacing: 2px;
-            transition: color var(--trans-hvr);
-        }
-    }
-}
+nav > button:is(:hover,:focus) { padding-inline: 40px; border-top-color: var(--n) }
+nav > button:nth-child(1) { animation: b1 var(--a) }
+nav > button:nth-child(2) { animation: b2 var(--a) }
+nav > button:nth-child(3) { animation: b3 var(--a) }
+nav > button:nth-child(4) { animation: b4 var(--a) }
+@keyframes navi { 0%,20% { opacity: 0; filter: blur(3px) } to { opacity: 1; filter: none } }
+@keyframes b1 { from { transform: translateX(-100px) } to { transform: none } }
+@keyframes b2 { from { transform: translateX(-50px) } to { transform: none } }
+@keyframes b3 { from { transform: translateX(50px) } to { transform: none } }
+@keyframes b4 { from { transform: translateX(100px) } to { transform: none } }
+[popover] { width: 100%; height: 100%; overflow: hidden; border: 0; background: var(--bg); opacity: 0; transition: all var(--t4) }
+[popover]:popover-open { opacity: 1 }
+@starting-style { [popover]:popover-open { opacity: 0 } }
+[popover] .pop-flex { width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; opacity: 1; transition: opacity var(--t3) }
+@starting-style { [popover] .pop-flex { opacity: 0 } }
+[popover] section { width: 100%; anchor-name: --x }
+[popover] button[command="hide-popover"] { position: fixed; position-anchor: --x; bottom: anchor(--x top); right: anchor(--x right); margin: 0 20px 10px 0; background: none; border: 0; outline: none; cursor: pointer }
+[popover] button[command="hide-popover"] > .p { font-size: 2rem; color: var(--g); transition: font-weight var(--t1), color var(--t1) }
+[popover] button[command="hide-popover"]:is(:hover,:focus) > .p { font-weight: 900; color: var(--w) }
+:is(section.reel,section.info,section.dump,section.gude) > :is(h2,h3,h4,h5) { position: fixed; position-anchor: --x; bottom: anchor(--x top); left: anchor(--x left); margin: 0 0 10px 20px; font-size: 1.5rem; color: var(--g) }
+section.reel { max-width: 1280px }
+section.reel > video { width: 100%; aspect-ratio: 16/9; outline: none }
+section.info { max-width: 400px }
+section.info > p { line-height: 1.5; letter-spacing: 1px; word-spacing: 2px }
+section.info > p:nth-child(odd) { color: var(--g) }
+section.info > a, section.info .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--t1) }
+section.info > a:is(:hover,:active), section.info .p:is(:hover,:focus) { color: var(--w) }
+section.info > .small { font-size: .7rem }
+section.info > button.jump2gude { all: initial; cursor: pointer }
+section.dump { max-width: 1920px; margin: 100px 0; overflow: hidden scroll; scrollbar-color: var(--g) transparent }
+section.dump .folio-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(360px,1fr)) }
+section.dump .grid-cell { position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer }
+section.dump .grid-cell:hover img { transform: scale(1.15); filter: blur(10px); opacity: .05 }
+section.dump .grid-cell:hover .info-1 { opacity: 1; transform: none; filter: none }
+section.dump .grid-cell:hover .info-2 { opacity: .5; transform: none; filter: none }
+section.dump img { width: 100%; height: 100%; transition: transform var(--t2), filter var(--t2), opacity var(--t2) }
+section.dump .cell-info { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; pointer-events: none }
+section.dump :is(.info-1,.info-2) { opacity: 0; filter: blur(10px); transition: transform var(--t2), filter var(--t2), opacity var(--t2) }
+section.dump .info-1 { font-size: 1rem; line-height: 3; letter-spacing: 2px; word-spacing: 2px; transform: translateX(-30px) }
+section.dump .info-2 { font-size: .7rem; line-height: 1.5; letter-spacing: 1px; word-spacing: 2px; transform: translateY(15px) }
+section.gude { max-width: 960px }
+section.gude form { width: 100%; padding: 15px; border: 1px solid var(--g); overflow: hidden }
+section.gude textarea { margin: 15px 0; height: 150px }
+section.gude :is(input,textarea) { width: 100%; padding: 15px; background: none; border: 1px solid transparent; border-left-color: var(--g); resize: vertical; overflow: hidden; outline: none; transition: border var(--t1) }
+section.gude :is(input,textarea):is(:hover,:focus) { border-color: var(--g) }
+section.gude :is(input,textarea):required { letter-spacing: 1px; word-spacing: 2px }
+section.gude button[type="submit"] { width: 100%; padding: 15px; background: none; border: 1px solid var(--g); overflow: hidden; cursor: pointer; outline: none; transition: color var(--t1), border-color var(--t1) }
+section.gude button[type="submit"]:is(:hover,:focus) { color: var(--w); border-color: var(--n) }
+section.gude button[type="submit"] > .p { letter-spacing: 1px; word-spacing: 2px; transition: color var(--t1) }
 @media (max-width: 480px) {
-    header {
-        height: 100%;
-        justify-content: flex-end;
-    }
-    .center {
-        margin: 30px 0;
-    }
-    nav {
-        height: 100%;
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-    button[command="show-popover"] {
-        width: 70%;
-        min-height: 48px;
-    }
-    button[commandfor="contact"] {
-        border-bottom: 1px solid var(--clr-gray);
-    }
+    header { height: 100%; justify-content: flex-end }
+    .center { margin: 30px 0 }
+    nav { height: 100%; flex-direction: column; justify-content: flex-start }
+    button[command="show-popover"] { width: 70%; min-height: 48px }
+    button[commandfor="gude"] { border-bottom: 1px solid var(--g) }
 }
