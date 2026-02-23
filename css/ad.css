@@ -56,10 +56,12 @@ section.reel > video { width: 100%; aspect-ratio: 16/9; outline: none }
 section.info { max-width: 400px }
 section.info > p { line-height: 1.5; letter-spacing: 1px; word-spacing: 2px }
 section.info > p:nth-child(odd) { color: var(--g) }
-section.info > a, section.info .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--t1) }
-section.info > a:is(:hover,:active), section.info .p:is(:hover,:focus) { color: var(--w) }
+section.info > section.info .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--t1) }
+section.info > section.info .p:is(:hover,:focus) { color: var(--w) }
 section.info > .small { font-size: .7rem }
 section.info > button.jump2gude { all: initial; cursor: pointer }
+section.info > button.jump2gude > .icon { font-style: normal; font-size: 2rem; transform: scale(-1,1); color: var(--n) }
+section.info > button.jump2gude > .icon:hover { color: var(--w); transition: color var(--t1) }
 section.dump { max-width: 1920px; margin: 100px 0; overflow: hidden scroll; scrollbar-color: var(--g) transparent }
 section.dump .folio-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(360px,1fr)) }
 section.dump .grid-cell { position: relative; overflow: hidden; aspect-ratio: 1; cursor: pointer }
@@ -79,7 +81,9 @@ section.gude :is(input,textarea):is(:hover,:focus) { border-color: var(--g) }
 section.gude :is(input,textarea):required { letter-spacing: 1px; word-spacing: 2px }
 section.gude button[type="submit"] { width: 100%; padding: 15px; background: none; border: 1px solid var(--g); overflow: hidden; cursor: pointer; outline: none; transition: color var(--t1), border-color var(--t1) }
 section.gude button[type="submit"]:is(:hover,:focus) { color: var(--w); border-color: var(--n) }
-section.gude button[type="submit"] > .p { letter-spacing: 1px; word-spacing: 2px; transition: color var(--t1) }
+section.gude button[type="submit"] > .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--t1) }
+section.gude a { letter-spacing: 1px; word-spacing: 2px; color: var(--g); transition: color var(--t1) }
+section.gude a:is(:hover,:active) { color: var(--n) }
 @media (max-width: 480px) {
     header { height: 100%; justify-content: flex-end }
     .center { margin: 30px 0 }
