@@ -37,6 +37,7 @@
 <link rel="icon" href="img/favicon.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png">
 <link rel="stylesheet" href="./css/ad.css">
+<script src="./ad-folio-items.js"></script>
 </head>
 
 <body>
@@ -123,16 +124,8 @@
 
 document.getElementById('dump').addEventListener('toggle', function () {
   if (this.matches(':popover-open') && !this.dataset.loaded) {
-    fetch('./ad-folio-items.html')
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        return r.text();
-      })
-      .then(html => {
-        this.querySelector('.folio-grid').innerHTML = html;
-        this.dataset.loaded = true;
-      })
-      .catch(err => console.error('Failed to load dump grid:', err));
+    this.querySelector('.folio-grid').innerHTML = FOLIO_ITEMS;
+    this.dataset.loaded = true;
   }
 });
 </script>
