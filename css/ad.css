@@ -1,26 +1,24 @@
 :root {
     --bg: hsl(0,0%,7%);
-    --g: hsl(0,0%,25%);
-    --n: hsl(0,0%,60%);
-    --w: hsl(0,0%,100%);
-    --t1: .3s ease;
-    --t2: .6s cubic-bezier(.25,.8,.25,1);
-    --t3: 1s cubic-bezier(1,0,1,1) .5s;
-    --t4: 1s allow-discrete;
-    --a: 2s ease forwards;
+    --g:  hsl(0,0%,25%);
+    --n:  hsl(0,0%,60%);
+    --w:  hsl(0,0%,100%);
+    --e1: .3s ease;
+    --e2: .6s cubic-bezier(.25,.8,.25,1);
+    --e3: 1s cubic-bezier(1,0,1,1) .5s;
+    --a:  2s ease forwards;
 }
 
-@font-face { font-family: federo; src: url(../font/federo.ttf); font-display: swap }
+@font-face { font-family: federo;    src: url(../font/federo.ttf);    font-display: swap }
 @font-face { font-family: amanojaku; src: url(../font/amanojaku.otf); font-display: swap }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box }
 
 html { background: var(--bg) }
-
 body { text-align: center; overflow: hidden }
 
 h1, h2, dt, dd, p, a, .p, :required {
-    font: italic 400 1rem federo;
+    font: italic 400 1rem/1 federo;
     text-decoration: none;
     color: var(--n);
 }
@@ -35,10 +33,9 @@ main {
     gap: 5px;
 }
 
+/* ── LOGO ── */
 header > h1 {
-    font-size: 5rem;
-    line-height: 1;
-    font-family: amanojaku;
+    font: italic 400 5rem/1 amanojaku;
     letter-spacing: 1rem;
     cursor: default;
     animation: logo var(--a);
@@ -46,9 +43,10 @@ header > h1 {
 
 @keyframes logo {
     from { opacity: 0; transform: scaleX(1.1); filter: blur(1px) }
-    to   { opacity: 1; transform: scaleX(1);   filter: none }
+    to   { opacity: 1; transform: none;         filter: none }
 }
 
+/* ── NAVI ── */
 nav {
     width: 100%;
     height: 55px;
@@ -61,7 +59,7 @@ nav {
     & > button {
         position: relative;
         height: 100%;
-        padding: 0 25px;
+        padding-inline: 25px;
         background: none;
         border: 1px solid transparent;
         border-top-color: var(--g);
@@ -71,33 +69,35 @@ nav {
         overflow: hidden;
         cursor: pointer;
         outline: none;
-        transition: padding-inline var(--t1), border-top-color var(--t1);
+        transition: padding-inline var(--e1), border-top-color var(--e1);
 
-        &:is(:hover, :focus) { padding-inline: 40px; border-top-color: var(--n) }
+        &:is(:hover,:focus) {
+            padding-inline: 40px;
+            border-top-color: var(--n);
+
+            & > svg { transform: none; opacity: 1; filter: none }
+            & > .p  { transform: scale(.5,1.5); opacity: 0; filter: blur(2px) }
+        }
 
         & > svg {
             position: absolute;
             height: 1.5rem;
             aspect-ratio: 1;
-            transform: scale(2, 0.5);
+            transform: scale(2,.5);
             opacity: 0;
             filter: blur(2px);
-            transition: transform var(--t2), opacity var(--t2), filter var(--t2);
+            transition: transform var(--e2), opacity var(--e2), filter var(--e2);
 
-            & > path { fill: var(--n) }
+            & path { fill: var(--n) }
 
-            & > path.path-reel  { d: path("M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm4 0v6h8V1zm8 8H4v6h8zM1 1v2h2V1zm2 3H1v2h2zM1 7v2h2V7zm2 3H1v2h2zm-2 3v2h2v-2zM15 1h-2v2h2zm-2 3v2h2V4zm2 3h-2v2h2zm-2 3v2h2v-2zm2 3h-2v2h2z") }
-            & > path.path-info1 { d: path("M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z") }
-            & > path.path-info2 { d: path("m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0") }
-            & > path.path-dump  { d: path("M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z") }
-            & > path.path-gude  { d: path("m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z") }
+            & .path-reel  { d: path("M0 1a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm4 0v6h8V1zm8 8H4v6h8zM1 1v2h2V1zm2 3H1v2h2zM1 7v2h2V7zm2 3H1v2h2zm-2 3v2h2v-2zM15 1h-2v2h2zm-2 3v2h2V4zm2 3h-2v2h2zm-2 3v2h2v-2zm2 3h-2v2h2z") }
+            & .path-info1 { d: path("M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z") }
+            & .path-info2 { d: path("m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0") }
+            & .path-dump  { d: path("M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z") }
+            & .path-gude  { d: path("m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z") }
         }
 
-        &:is(:hover, :focus) > svg { transform: none; opacity: 1; filter: none }
-
-        & > .p { transition: transform var(--t2), opacity var(--t2), filter var(--t2) }
-
-        &:is(:hover, :focus) > .p { transform: scale(0.5, 1.5); opacity: 0; filter: blur(2px) }
+        & > .p { transition: transform var(--e2), opacity var(--e2), filter var(--e2) }
 
         &:nth-child(1) { animation: b1 var(--a) }
         &:nth-child(2) { animation: b2 var(--a) }
@@ -111,6 +111,7 @@ nav {
 @keyframes b3 { from, 20% { transform: translateX(50px);   opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
 @keyframes b4 { from, 20% { transform: translateX(100px);  opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
 
+/* ── POPOVER ── */
 [popover] {
     width: 100%;
     height: 100%;
@@ -118,13 +119,10 @@ nav {
     border: 0;
     background: var(--bg);
     opacity: 0;
-    transition: all var(--t4);
+    transition: all 1s allow-discrete;
 
     &:popover-open { opacity: 1 }
-
-    @starting-style {
-        &:popover-open { opacity: 0 }
-    }
+    @starting-style { &:popover-open { opacity: 0 } }
 
     & .pop-flex {
         width: 100%;
@@ -134,15 +132,12 @@ nav {
         justify-content: center;
         align-items: center;
         opacity: 1;
-        transition: opacity var(--t3);
+        transition: opacity var(--e3);
 
         @starting-style { opacity: 0 }
     }
 
-    & section {
-        width: 100%;
-        anchor-name: --x;
-    }
+    & section { width: 100%; anchor-name: --x }
 
     & button[command="hide-popover"] {
         position: fixed;
@@ -158,14 +153,15 @@ nav {
         & > .p {
             font-size: 2rem;
             color: var(--g);
-            transition: font-weight var(--t1), color var(--t1);
+            transition: font-weight var(--e1), color var(--e1);
         }
 
-        &:is(:hover, :focus) > .p { font-weight: 900; color: var(--w) }
+        &:is(:hover,:focus) > .p { font-weight: 900; color: var(--w) }
     }
 }
 
-:is(section.reel, section.info, section.dump, section.gude) > h2 {
+/* ── SECTION HEADINHS (ANCHORED) ── */
+:is(.reel,.info,.dump,.gude) > h2 {
     position: fixed;
     position-anchor: --x;
     bottom: anchor(--x top);
@@ -175,12 +171,14 @@ nav {
     color: var(--g);
 }
 
+/* ── REEL ── */
 section.reel {
     max-width: 1280px;
 
     & > video { width: 100%; aspect-ratio: 16/9; outline: none }
 }
 
+/* ── INFO ── */
 section.info {
     max-width: 400px;
 
@@ -203,27 +201,25 @@ section.info {
             all: initial;
             cursor: pointer;
 
-            & > svg {
-                height: 1.5rem;
-                aspect-ratio: 1;
-
-                & > path {
-                    d: path("M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z");
-                    fill: var(--n);
-                    transition: fill var(--t1);
-                }
+            & path {
+                d: path("M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z");
+                fill: var(--n);
+                transition: fill var(--e1);
             }
 
-            &:is(:hover, :focus) path { fill: var(--w) }
+            & svg { height: 1.5rem; aspect-ratio: 1 }
+
+            &:is(:hover,:focus) path { fill: var(--w) }
         }
     }
 }
 
+/* ── DUMP ── */
 section.dump {
-    --dump-m: 100px;
+    --m: 100px;
     max-width: 1920px;
-    max-height: calc(100dvh - var(--dump-m) * 2);
-    margin: var(--dump-m) 0;
+    max-height: calc(100dvh - var(--m) * 2);
+    margin: var(--m) 0;
     overflow: hidden scroll;
     scrollbar-color: var(--g) transparent;
 
@@ -239,16 +235,16 @@ section.dump {
         cursor: pointer;
 
         &:hover {
-            & img { transform: scale(1.15); filter: blur(10px); opacity: .05 }
-            & .info-1 { opacity: 1; transform: none; filter: none }
-            & .info-2 { opacity: .5; transform: none; filter: none }
+            & img      { transform: scale(1.15); filter: blur(10px); opacity: .05 }
+            & .info-1  { opacity: 1; transform: none; filter: none }
+            & .info-2  { opacity: .5; transform: none; filter: none }
         }
     }
 
     & img {
         width: 100%;
         height: 100%;
-        transition: transform var(--t2), filter var(--t2), opacity var(--t2);
+        transition: transform var(--e2), filter var(--e2), opacity var(--e2);
     }
 
     & .cell-info {
@@ -261,16 +257,17 @@ section.dump {
         pointer-events: none;
     }
 
-    & :is(.info-1, .info-2) {
+    & :is(.info-1,.info-2) {
         opacity: 0;
         filter: blur(10px);
-        transition: transform var(--t2), filter var(--t2), opacity var(--t2);
+        transition: transform var(--e2), filter var(--e2), opacity var(--e2);
     }
 
     & .info-1 { font-size: 1rem;  line-height: 3;   letter-spacing: 2px; word-spacing: 2px; transform: translateX(-30px) }
     & .info-2 { font-size: .7rem; line-height: 1.5; letter-spacing: 1px; word-spacing: 2px; transform: translateY(15px)  }
 }
 
+/* ── GUDE ── */
 section.gude {
     max-width: 960px;
 
@@ -283,7 +280,7 @@ section.gude {
 
     & textarea { margin: 20px 0; height: 100px }
 
-    & :is(input, textarea) {
+    & :is(input,textarea) {
         width: 100%;
         padding: 15px;
         background: none;
@@ -292,9 +289,9 @@ section.gude {
         resize: vertical;
         overflow: hidden;
         outline: none;
-        transition: border var(--t1);
+        transition: border var(--e1);
 
-        &:is(:hover, :focus) { border-color: var(--g) }
+        &:is(:hover,:focus) { border-color: var(--g) }
         &:required { letter-spacing: 1px; word-spacing: 2px }
     }
 
@@ -306,11 +303,11 @@ section.gude {
         overflow: hidden;
         cursor: pointer;
         outline: none;
-        transition: color var(--t1), border-color var(--t1);
+        transition: color var(--e1), border-color var(--e1);
 
-        &:is(:hover, :focus) { color: var(--w); border-color: var(--n) }
+        &:is(:hover,:focus) { color: var(--w); border-color: var(--n) }
 
-        & > .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--t1) }
+        & > .p { letter-spacing: 2px; word-spacing: 4px; transition: color var(--e1) }
     }
 
     & a {
@@ -320,14 +317,15 @@ section.gude {
         letter-spacing: 1px;
         word-spacing: 2px;
         color: var(--g);
-        transition: color var(--t1);
+        transition: color var(--e1);
 
-        &:is(:hover, :active) { color: var(--n) }
+        &:is(:hover,:active) { color: var(--n) }
     }
 }
 
+/* ── MOBILE ── */
 @media (width <= 480px) {
     header { height: 100%; justify-content: flex-end }
     nav { height: 100%; flex-direction: column; justify-content: flex-start }
-    button[command="show-popover"] { width: 70%; max-height: 55px }
+    button[popovertarget] { width: 70%; max-height: 55px }
 }
