@@ -17,17 +17,13 @@
 
     /* dialog max-widths */
     --reel-w:          1280px;
-    --info-w:          400px;
+    --info-w:          960px;
     --dump-w:          1920px;
-    --gude-w:          960px;
 
     /* nav */
     --nav-h:           55px;
     --btn-pad:         25px;
     --btn-pad-hover:   50px;
-
-    /* form */
-    --form-pad:        15px;
 
     /* typography */
     --ls:              1px;   /* standard letter-spacing */
@@ -35,33 +31,20 @@
     --ls4:             4px;
     --ls-h2:           8px;
     --ws:              2px;   /* standard word-spacing */
-    --ws4:             4px;
 
     /* dump grid */
     --cell-min:        360px;
     --cell-blur:       10px;
 
-    /* chromatic aberration */
-    --ca-spread:       3px;
-    --ca-mult:         0.3;
-    --ca-red:          hsl(0, 100%, 60%, var(--ca-mult));
-    --ca-cyan:         hsl(185, 100%, 55%, var(--ca-mult));
-    --ca-shadow:       drop-shadow(calc(var(--ca-spread) * -1) 0 0 var(--ca-red))
-                       drop-shadow(var(--ca-spread) 0 0 var(--ca-cyan));
-    --ca-text:         calc(var(--ca-spread) * -1) 0 0 var(--ca-red),
-                       var(--ca-spread) 0 0 var(--ca-cyan);
-
     /* shared clip-path defaults — nav SVGs and text */
     --clip-r:          inset(0 100% 0 0);   /* hidden from right */
     --clip-l:          inset(0 0 0 100%);   /* hidden from left  */
     --clip-t:          inset(0 0 100% 0);   /* hidden from top   */
-    --clip-b:          inset(100% 0 0 0);   /* hidden from bottom*/
     --clip-open:       inset(0 0 0 0);      /* fully visible     */
     --clip-text:       inset(0 -10px 0 -10px);
     --clip-text-hide-r: inset(0 -10px 0 110%);
     --clip-text-hide-l: inset(0 110% 0 -10px);
     --clip-text-hide-t: inset(0 -10px 110% -10px);
-    --clip-text-hide-b: inset(110% -10px 0 -10px);
 
     /* cell info translate distances */
     --info-1-tx:       -30px;
@@ -89,15 +72,6 @@ body { text-align: center; overflow: hidden }
     outline: 1px solid var(--n);
 }
 
-/* ── BASE TYPE ──────────────────────────────────────────────────────────── */
-h1, h2, dt, dd, p, a, .p,
-input, textarea {
-    font: italic 400 1rem/1 federo;
-    color: var(--n);
-}
-
-a { text-decoration: none }
-
 /* ── MAIN ───────────────────────────────────────────────────────────────── */
 main {
     width: 100%;
@@ -118,6 +92,7 @@ body.dialog-open main { opacity: 0 }
 header > h1 {
     font: italic 400 5rem/1 amanojaku;
     letter-spacing: 1rem;
+    color: var(--n);
     cursor: default;
     animation: logo var(--a);
 }
@@ -178,8 +153,7 @@ nav > button::before {
 }
 
 /* buttons 2 & 3 — horizontal edge line for vertical travel */
-nav > button:nth-child(2)::before,
-nav > button:nth-child(4)::before {
+nav > button:nth-child(2)::before {
     top: -2px;
     left: 15%;
     height: 1px;
@@ -197,13 +171,7 @@ nav > button:nth-child(2):focus::before { animation: edge-top var(--ed) forwards
 
 nav > button:nth-child(2):not(:hover):not(:focus)::before { animation: edge-bottom var(--ed) forwards }
 
-/* button 3 — edge sweeps bottom→top */
-nav > button:nth-child(4):hover::before,
-nav > button:nth-child(4):focus::before { animation: edge-bottom var(--ed) forwards }
-
-nav > button:nth-child(4):not(:hover):not(:focus)::before { animation: edge-top var(--ed) forwards }
-
-/* button 4 — reversed edge direction (keep original left) */
+/* button 3 — reversed edge direction */
 nav > button:nth-child(3):hover::before,
 nav > button:nth-child(3):focus::before { animation: edge-left var(--ed) forwards }
 
@@ -225,7 +193,7 @@ nav > button:nth-child(3):not(:hover):not(:focus)::before { animation: edge-righ
 
 @keyframes edge-right {
     0%   { left: 0%;   opacity: 0 }
-    5%   { left: 0%; opacity: 1 }
+    5%   { left: 0%;   opacity: 1 }
     95%  { left: 100%; opacity: 1 }
     100% { left: 100%; opacity: 0 }
 }
@@ -253,16 +221,12 @@ nav > button:nth-child(3) > svg {
     clip-path: var(--clip-l);
 }
 
-nav > button:nth-child(4) > svg {
-    clip-path: var(--clip-b);
-}
-
 nav > button > svg path { fill: var(--n) }
 
 nav > button:hover > svg,
 nav > button:focus > svg {
     animation: wipe-in var(--ed) forwards;
-    will-change: clip-path, filter, transform;
+    will-change: clip-path, transform;
 }
 
 nav > button:not(:hover):not(:focus) > svg { animation: wipe-out var(--ed) forwards }
@@ -277,21 +241,18 @@ nav > button:nth-child(3):focus > svg { animation: wipe-in-l var(--ed) forwards 
 
 nav > button:nth-child(3):not(:hover):not(:focus) > svg { animation: wipe-out-l var(--ed) forwards }
 
-nav > button:nth-child(4):hover > svg,
-nav > button:nth-child(4):focus > svg { animation: wipe-in-b var(--ed) forwards }
-
-nav > button:nth-child(4):not(:hover):not(:focus) > svg { animation: wipe-out-b var(--ed) forwards }
-
 /* ── NAV TEXT ───────────────────────────────────────────────────────────── */
 nav > button > .p {
+    font: italic 400 1rem/1 federo;
     letter-spacing: var(--ls4);
+    color: var(--n);
     clip-path: var(--clip-text);
 }
 
 nav > button:hover > .p,
 nav > button:focus > .p {
     animation: wipe-out-text var(--ed) forwards;
-    will-change: clip-path, filter, transform;
+    will-change: clip-path, transform;
 }
 
 nav > button:not(:hover):not(:focus) > .p { animation: wipe-in-text var(--ed) forwards }
@@ -306,127 +267,84 @@ nav > button:nth-child(3):focus > .p { animation: wipe-out-text-l var(--ed) forw
 
 nav > button:nth-child(3):not(:hover):not(:focus) > .p { animation: wipe-in-text-l var(--ed) forwards }
 
-nav > button:nth-child(4):hover > .p,
-nav > button:nth-child(4):focus > .p { animation: wipe-out-text-b var(--ed) forwards }
-
-nav > button:nth-child(4):not(:hover):not(:focus) > .p { animation: wipe-in-text-b var(--ed) forwards }
-
 /* ── WIPE KEYFRAMES ─────────────────────────────────────────────────────── */
 /* SVG wipes — right */
 @keyframes wipe-in {
-    0%   { clip-path: var(--clip-r);    transform: scale(3, .5); filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-open); transform: none;         filter: none }
+    0%   { clip-path: var(--clip-r);    transform: scale(3, .5)}
+    100% { clip-path: var(--clip-open); transform: none}
 }
 
 @keyframes wipe-out {
-    0%   { clip-path: var(--clip-open); transform: none;         filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-r);    transform: scale(3, .5); filter: none }
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-r);    transform: scale(3, .5)}
 }
 
 /* SVG wipes — left */
 @keyframes wipe-in-l {
-    0%   { clip-path: var(--clip-l);    transform: scale(3, .5); filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-open); transform: none;         filter: none }
+    0%   { clip-path: var(--clip-l);    transform: scale(3, .5)}
+    100% { clip-path: var(--clip-open); transform: none}
 }
 
 @keyframes wipe-out-l {
-    0%   { clip-path: var(--clip-open); transform: none;         filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-l);    transform: scale(3, .5); filter: none }
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-l);    transform: scale(3, .5)}
 }
 
 /* SVG wipes — top-to-bottom */
 @keyframes wipe-in-t {
-    0%   { clip-path: var(--clip-t);    transform: scale(.5, 3); filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-open); transform: none;         filter: none }
+    0%   { clip-path: var(--clip-t);    transform: scale(.5, 3)}
+    100% { clip-path: var(--clip-open); transform: none}
 }
 
 @keyframes wipe-out-t {
-    0%   { clip-path: var(--clip-open); transform: none;         filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-t);    transform: scale(.5, 3); filter: none }
-}
-
-/* SVG wipes — bottom-to-top */
-@keyframes wipe-in-b {
-    0%   { clip-path: var(--clip-b);    transform: scale(.5, 3); filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-open); transform: none;         filter: none }
-}
-
-@keyframes wipe-out-b {
-    0%   { clip-path: var(--clip-open); transform: none;         filter: none }
-    50%  { filter: var(--ca-shadow) }
-    100% { clip-path: var(--clip-b);    transform: scale(.5, 3); filter: none }
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-t);    transform: scale(.5, 3)}
 }
 
 /* text wipes — right */
 @keyframes wipe-out-text {
-    0%   { clip-path: var(--clip-text);        transform: none;        text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text-hide-r); transform: scale(2, 1); text-shadow: none }
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-r); transform: scale(2, 1) }
 }
 
 @keyframes wipe-in-text {
-    0%   { clip-path: var(--clip-text-hide-r); transform: scale(2, 1); text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text);        transform: none;        text-shadow: none }
+    0%   { clip-path: var(--clip-text-hide-r); transform: scale(2, 1) }
+    100% { clip-path: var(--clip-text);        transform: none}
 }
 
 /* text wipes — left */
 @keyframes wipe-out-text-l {
-    0%   { clip-path: var(--clip-text);        transform: none;        text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text-hide-l); transform: scale(2, 1); text-shadow: none }
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-l); transform: scale(2, 1) }
 }
 
 @keyframes wipe-in-text-l {
-    0%   { clip-path: var(--clip-text-hide-l); transform: scale(2, 1); text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text);        transform: none;        text-shadow: none }
+    0%   { clip-path: var(--clip-text-hide-l); transform: scale(2, 1) }
+    100% { clip-path: var(--clip-text);        transform: none}
 }
 
 /* text wipes — top-to-bottom */
 @keyframes wipe-out-text-t {
-    0%   { clip-path: var(--clip-text);        transform: none;           text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2);    text-shadow: none }
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2)}
 }
 
 @keyframes wipe-in-text-t {
-    0%   { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2);    text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text);        transform: none;           text-shadow: none }
-}
-
-/* text wipes — bottom-to-top */
-@keyframes wipe-out-text-b {
-    0%   { clip-path: var(--clip-text);        transform: none;           text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text-hide-b); transform: scale(1.5, 2);    text-shadow: none }
-}
-
-@keyframes wipe-in-text-b {
-    0%   { clip-path: var(--clip-text-hide-b); transform: scale(1.5, 2);    text-shadow: none }
-    50%  { text-shadow: var(--ca-text) }
-    100% { clip-path: var(--clip-text);        transform: none;           text-shadow: none }
+    0%   { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2)}
+    100% { clip-path: var(--clip-text);        transform: none}
 }
 
 /* ── NAV ENTRANCE ───────────────────────────────────────────────────────── */
 nav > button:nth-child(1) { animation: b1 var(--a) }
 nav > button:nth-child(2) { animation: b2 var(--a) }
 nav > button:nth-child(3) { animation: b3 var(--a) }
-nav > button:nth-child(4) { animation: b4 var(--a) }
 
-@keyframes b1 { from, 20% { transform: translateX(-100px); opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
-@keyframes b2 { from, 20% { transform: translateX(-50px);  opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
-@keyframes b3 { from, 20% { transform: translateX(50px);   opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
-@keyframes b4 { from, 20% { transform: translateX(100px);  opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+@keyframes b1 { from, 20% { transform: translateX(-50px) scaleX(2); opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+@keyframes b2 { from, 20% { transform: translateY(50px) scaleX(1.5);  opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+@keyframes b3 { from, 20% { transform: translateX(50px) scaleX(2);   opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+
 /* ── DIALOG BASE ────────────────────────────────────────────────────────── */
+
 dialog {
     position: fixed;
     top: 0;
@@ -435,10 +353,11 @@ dialog {
     left: 0;
     margin: 0;
     width: 100%;
+    max-width: 100%;
     height: 100%;
+    max-height: 100%;
     overflow: hidden;
     border: 0;
-    padding: 0;
     background: var(--bg);
     opacity: 0;
     transition: opacity 1s ease;
@@ -457,7 +376,11 @@ dialog::backdrop { display: none }
 dialog.is-open   { opacity: 1 }
 
 /* dump — top-aligned scrolling grid layout */
-#dump { justify-content: flex-start; padding-top: 100px; padding-bottom: 100px }
+#dump {
+    justify-content: flex-start;
+    padding-top: calc(100px + env(safe-area-inset-top));
+    padding-bottom: 40px;
+}
 
 /* ── H2-CLOSE BAR ───────────────────────────────────────────────────────── */
 dialog section,
@@ -472,9 +395,14 @@ dialog .h2-close {
     padding-right: 20px;
 }
 
-dialog h2 { font-size: 1.5rem; letter-spacing: var(--ls-h2); color: var(--g) }
+dialog h2 { 
+    font: italic 400 1.5rem/1 federo;
+    letter-spacing: var(--ls-h2);
+    color: var(--g)
+}
 
 /* ── CLOSE BUTTON ───────────────────────────────────────────────────────── */
+
 dialog .close-btn {
     background: none;
     border: 0;
@@ -486,7 +414,7 @@ dialog .close-btn:not(:focus-visible) {
 }
 
 dialog .close-btn > .p {
-    font-size: 2rem;
+    font: italic 400 2rem/1 federo;
     color: var(--g);
     transition: color var(--e1);
 }
@@ -498,7 +426,6 @@ dialog .close-btn:focus > .p { color: var(--w) }
 #reel .h2-close, #reel section { max-width: var(--reel-w) }
 #info .h2-close, #info section { max-width: var(--info-w) }
 #dump .h2-close, #dump section { max-width: var(--dump-w) }
-#gude .h2-close, #gude section { max-width: var(--gude-w) }
 
 /* ── REEL ───────────────────────────────────────────────────────────────── */
 section.reel > video {
@@ -511,34 +438,40 @@ section.reel > video:not(:focus-visible) {
 }
 
 /* ── INFO ───────────────────────────────────────────────────────────────── */
-section.info > dl > dt {
-    line-height: 2;
-    letter-spacing: var(--ls);
-    word-spacing: var(--ws);
-    color: var(--g);
+
+section.info {
+    width: 100%;
+    padding: 50px 20px 0;
+    border-top: 1px solid var(--g);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
 }
 
-section.info > dl > dd {
-    padding-bottom: 1.5rem;
-    line-height: 1.5;
-    letter-spacing: var(--ls);
-    word-spacing: var(--ws);
+section.info p {
+    font: italic 400 1.5rem/1 federo;
+    letter-spacing:var(--ls2);
+    color: var(--n);
+}
+section.info a {
+    font: italic 400 clamp(1vw,5rem,8vw)/1 federo;
+    letter-spacing: var(--ls2);
+    color: var(--n);
+    text-decoration: none;
+    transition: color var(--e1);
+}
+section.info a:hover,
+section.info a:active {
+    color: var(--w);
 }
 
-section.info > dl > dd:last-child { padding-bottom: 0 }
-
-section.info > dl > dd > button {
-    all: initial;
-    cursor: pointer;
-}
-
-section.info > dl > dd > button svg  { height: 1.5rem; width: 1.5rem }
-section.info > dl > dd > button path { fill: var(--n); transition: fill var(--e1) }
-
-section.info > dl > dd > button:hover path,
-section.info > dl > dd > button:focus path { fill: var(--w) }
+section.info .email::before { content: attr(data-user) }
+section.info .email::after  { content: "@" attr(data-domain) }
 
 /* ── DUMP ───────────────────────────────────────────────────────────────── */
+
 section.dump {
     flex: 1;
     min-height: 0;
@@ -593,18 +526,18 @@ section.dump .info-2 {
 }
 
 section.dump .info-1 {
-    font-size: 1rem;
-    line-height: 3;
+    font: italic 400 1rem/3 federo;
     letter-spacing: var(--ls2);
     word-spacing: var(--ws);
+    color: var(--n);
     transform: translateX(var(--info-1-tx));
 }
 
 section.dump .info-2 {
-    font-size: .7rem;
-    line-height: 1.5;
+    font: italic 400 0.7rem/1.5 federo;
     letter-spacing: var(--ls);
     word-spacing: var(--ws);
+    color: var(--n);
     transform: translateY(var(--info-2-ty));
 }
 
@@ -619,94 +552,14 @@ section.dump .grid-cell:focus-within .info-2 {
 
 section.dump .grid-cell:hover .info-2 { opacity: .5 }
 
-/* ── GUDE ───────────────────────────────────────────────────────────────── */
-section.gude form {
-    width: 100%;
-    padding: var(--form-pad);
-    border: 1px solid var(--g);
-}
-
-section.gude textarea { margin: 20px 0; height: 100px }
-
-section.gude input,
-section.gude textarea {
-    width: 100%;
-    padding: var(--form-pad);
-    background: none;
-    border: 1px solid transparent;
-    border-left-color: var(--g);
-    resize: vertical;
-    transition: border-color var(--e1);
-    letter-spacing: var(--ls);
-    word-spacing: var(--ws);
-}
-
-section.gude input:not(:focus-visible),
-section.gude textarea:not(:focus-visible) {
-    outline: none;
-}
-
-section.gude input:hover,
-section.gude input:focus,
-section.gude textarea:hover,
-section.gude textarea:focus { border-color: var(--g) }
-
-section.gude button[type="submit"] {
-    width: 100%;
-    padding: var(--form-pad);
-    background: none;
-    border: 1px solid var(--g);
-    cursor: pointer;
-    transition: border-color var(--e1);
-}
-
-section.gude button[type="submit"]:disabled { opacity: .5; cursor: not-allowed }
-
-section.gude button[type="submit"]:not(:focus-visible) {
-    outline: none;
-}
-
-section.gude button[type="submit"] > .p {
-    letter-spacing: var(--ls4);
-    word-spacing: var(--ws4);
-    transition: color var(--e1);
-}
-
-section.gude button[type="submit"]:hover,
-section.gude button[type="submit"]:focus { border-color: var(--n) }
-
-section.gude button[type="submit"]:hover > .p,
-section.gude button[type="submit"]:focus > .p { color: var(--w) }
-
-section.gude a {
-    display: block;
-    text-align: right;
-    margin-top: var(--form-pad);
-    letter-spacing: var(--ls);
-    word-spacing: var(--ws);
-    color: var(--n);
-    transition: color var(--e1);
-}
-
-section.gude a:hover,
-section.gude a:active { color: var(--w) }
-
-section.gude .email::before { content: attr(data-user) }
-section.gude .email::after  { content: "@" attr(data-domain) }
-
-
-/* ── REDUCED MOTION ────────────────────────────────────────────────────── */
-
-
-
-
 /* ── MOBILE ─────────────────────────────────────────────────────────────── */
+
 @media (max-width: 480px) {
     header {
         height: 50%;
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
     }
 
     nav {
@@ -718,8 +571,5 @@ section.gude .email::after  { content: "@" attr(data-domain) }
     nav > button {
         width: 70%;
         max-height: var(--nav-h);
-    }
-    #dump {
-        padding-bottom: 40px
     }
 }
