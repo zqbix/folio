@@ -1,0 +1,575 @@
+/* ── CUSTOM PROPERTIES ─────────────────────────────────────────────────── */
+:root {
+    /* colours */
+    --bg:              hsl(0, 0%, 7%);
+    --g:               hsl(0, 0%, 25%);
+    --n:               hsl(0, 0%, 60%);
+    --w:               hsl(0, 0%, 100%);
+
+    /* easings */
+    --e1:              .3s ease;
+    --e2:              .6s cubic-bezier(.25, .8, .25, 1);
+    --ew:              cubic-bezier(.76, 0, .24, 1);  /* wipe easing curve */
+    --ed:              .5s var(--ew);                 /* wipe duration + easing */
+
+    /* entrance animation */
+    --a:               2s ease forwards;
+
+    /* dialog max-widths */
+    --reel-w:          1280px;
+    --info-w:          960px;
+    --dump-w:          1920px;
+
+    /* nav */
+    --nav-h:           55px;
+    --btn-pad:         25px;
+    --btn-pad-hover:   50px;
+
+    /* typography */
+    --ls:              1px;   /* standard letter-spacing */
+    --ls2:             2px;
+    --ls4:             4px;
+    --ls-h2:           8px;
+    --ws:              2px;   /* standard word-spacing */
+
+    /* dump grid */
+    --cell-min:        360px;
+    --cell-blur:       10px;
+
+    /* shared clip-path defaults — nav SVGs and text */
+    --clip-r:          inset(0 100% 0 0);   /* hidden from right */
+    --clip-l:          inset(0 0 0 100%);   /* hidden from left  */
+    --clip-t:          inset(0 0 100% 0);   /* hidden from top   */
+    --clip-open:       inset(0 0 0 0);      /* fully visible     */
+    --clip-text:       inset(0 -10px 0 -10px);
+    --clip-text-hide-r: inset(0 -10px 0 110%);
+    --clip-text-hide-l: inset(0 110% 0 -10px);
+    --clip-text-hide-t: inset(0 -10px 110% -10px);
+
+    /* cell info translate distances */
+    --info-1-tx:       -30px;
+    --info-2-ty:       15px;
+}
+
+/* ── FONTS ─────────────────────────────────────────────────────────────── */
+@font-face { font-family: federo;    src: url(../font/federo.ttf);    font-display: swap }
+@font-face { font-family: amanojaku; src: url(../font/amanojaku.otf); font-display: swap }
+
+/* ── RESET ─────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html { background: var(--bg) }
+
+body { text-align: center; overflow: hidden }
+
+:focus-visible {
+    outline: 1px solid var(--n);
+}
+
+/* ── MAIN ───────────────────────────────────────────────────────────────── */
+main {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    transition: opacity 1s ease;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+body.dialog-open main { opacity: 0 }
+
+/* ── LOGO ───────────────────────────────────────────────────────────────── */
+header > h1 {
+    font: italic 400 5rem/1 amanojaku;
+    letter-spacing: 1rem;
+    color: var(--n);
+    cursor: default;
+    animation: logo var(--a);
+}
+
+@keyframes logo {
+    from { opacity: 0; transform: scaleX(1.1); filter: blur(1px) }
+    to   { opacity: 1; transform: none;         filter: none }
+}
+
+/* ── NAV ────────────────────────────────────────────────────────────────── */
+nav {
+    width: 100%;
+    height: var(--nav-h);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    gap: 10px;
+}
+
+nav > button {
+    position: relative;
+    height: 100%;
+    padding-left: var(--btn-pad);
+    padding-right: var(--btn-pad);
+    background: none;
+    border: 1px solid transparent;
+    border-top-color: var(--g);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    cursor: pointer;
+    transition: padding-left var(--e1), padding-right var(--e1), border-top-color var(--e1);
+}
+
+nav > button:not(:focus-visible) {
+    outline: none;
+}
+
+nav > button:hover,
+nav > button:focus {
+    padding-left: var(--btn-pad-hover);
+    padding-right: var(--btn-pad-hover);
+    border-top-color: var(--n);
+}
+
+/* ── NAV WIPE EDGE ──────────────────────────────────────────────────────── */
+nav > button::before {
+    content: '';
+    position: absolute;
+    top: 15%;
+    left: -2px;
+    height: 70%;
+    width: 1px;
+    background: var(--g);
+    opacity: 0;
+}
+
+/* buttons 2 & 3 — horizontal edge line for vertical travel */
+nav > button:nth-child(2)::before {
+    top: -2px;
+    left: 15%;
+    height: 1px;
+    width: 70%;
+}
+
+nav > button:hover::before,
+nav > button:focus::before  { animation: edge-right var(--ed) forwards }
+
+nav > button:not(:hover):not(:focus)::before { animation: edge-left var(--ed) forwards }
+
+/* button 2 — edge sweeps top→bottom */
+nav > button:nth-child(2):hover::before,
+nav > button:nth-child(2):focus::before { animation: edge-top var(--ed) forwards }
+
+nav > button:nth-child(2):not(:hover):not(:focus)::before { animation: edge-bottom var(--ed) forwards }
+
+/* button 3 — reversed edge direction */
+nav > button:nth-child(3):hover::before,
+nav > button:nth-child(3):focus::before { animation: edge-left var(--ed) forwards }
+
+nav > button:nth-child(3):not(:hover):not(:focus)::before { animation: edge-right var(--ed) forwards }
+
+@keyframes edge-top {
+    0%   { top: 0%;   opacity: 0 }
+    5%   { top: 0%;   opacity: 1 }
+    95%  { top: 100%; opacity: 1 }
+    100% { top: 100%; opacity: 0 }
+}
+
+@keyframes edge-bottom {
+    0%   { top: 100%; opacity: 0 }
+    5%   { top: 100%; opacity: 1 }
+    95%  { top: 0%;   opacity: 1 }
+    100% { top: 0%;   opacity: 0 }
+}
+
+@keyframes edge-right {
+    0%   { left: 0%;   opacity: 0 }
+    5%   { left: 0%;   opacity: 1 }
+    95%  { left: 100%; opacity: 1 }
+    100% { left: 100%; opacity: 0 }
+}
+
+@keyframes edge-left {
+    0%   { left: 100%; opacity: 0 }
+    5%   { left: 100%; opacity: 1 }
+    95%  { left: 0%;   opacity: 1 }
+    100% { left: 0%;   opacity: 0 }
+}
+
+/* ── NAV SVG ────────────────────────────────────────────────────────────── */
+nav > button > svg {
+    position: absolute;
+    height: 1.5rem;
+    width: 1.5rem;
+    clip-path: var(--clip-r);
+}
+
+nav > button:nth-child(2) > svg {
+    clip-path: var(--clip-t);
+}
+
+nav > button:nth-child(3) > svg {
+    clip-path: var(--clip-l);
+}
+
+nav > button > svg path { fill: var(--n) }
+
+nav > button:hover > svg,
+nav > button:focus > svg {
+    animation: wipe-in var(--ed) forwards;
+    will-change: clip-path, transform;
+}
+
+nav > button:not(:hover):not(:focus) > svg { animation: wipe-out var(--ed) forwards }
+
+nav > button:nth-child(2):hover > svg,
+nav > button:nth-child(2):focus > svg { animation: wipe-in-t var(--ed) forwards }
+
+nav > button:nth-child(2):not(:hover):not(:focus) > svg { animation: wipe-out-t var(--ed) forwards }
+
+nav > button:nth-child(3):hover > svg,
+nav > button:nth-child(3):focus > svg { animation: wipe-in-l var(--ed) forwards }
+
+nav > button:nth-child(3):not(:hover):not(:focus) > svg { animation: wipe-out-l var(--ed) forwards }
+
+/* ── NAV TEXT ───────────────────────────────────────────────────────────── */
+nav > button > .p {
+    font: italic 400 1rem/1 federo;
+    letter-spacing: var(--ls4);
+    color: var(--n);
+    clip-path: var(--clip-text);
+}
+
+nav > button:hover > .p,
+nav > button:focus > .p {
+    animation: wipe-out-text var(--ed) forwards;
+    will-change: clip-path, transform;
+}
+
+nav > button:not(:hover):not(:focus) > .p { animation: wipe-in-text var(--ed) forwards }
+
+nav > button:nth-child(2):hover > .p,
+nav > button:nth-child(2):focus > .p { animation: wipe-out-text-t var(--ed) forwards }
+
+nav > button:nth-child(2):not(:hover):not(:focus) > .p { animation: wipe-in-text-t var(--ed) forwards }
+
+nav > button:nth-child(3):hover > .p,
+nav > button:nth-child(3):focus > .p { animation: wipe-out-text-l var(--ed) forwards }
+
+nav > button:nth-child(3):not(:hover):not(:focus) > .p { animation: wipe-in-text-l var(--ed) forwards }
+
+/* ── WIPE KEYFRAMES ─────────────────────────────────────────────────────── */
+/* SVG wipes — right */
+@keyframes wipe-in {
+    0%   { clip-path: var(--clip-r);    transform: scale(3, .5)}
+    100% { clip-path: var(--clip-open); transform: none}
+}
+
+@keyframes wipe-out {
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-r);    transform: scale(3, .5)}
+}
+
+/* SVG wipes — left */
+@keyframes wipe-in-l {
+    0%   { clip-path: var(--clip-l);    transform: scale(3, .5)}
+    100% { clip-path: var(--clip-open); transform: none}
+}
+
+@keyframes wipe-out-l {
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-l);    transform: scale(3, .5)}
+}
+
+/* SVG wipes — top-to-bottom */
+@keyframes wipe-in-t {
+    0%   { clip-path: var(--clip-t);    transform: scale(.5, 3)}
+    100% { clip-path: var(--clip-open); transform: none}
+}
+
+@keyframes wipe-out-t {
+    0%   { clip-path: var(--clip-open); transform: none}
+    100% { clip-path: var(--clip-t);    transform: scale(.5, 3)}
+}
+
+/* text wipes — right */
+@keyframes wipe-out-text {
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-r); transform: scale(2, 1) }
+}
+
+@keyframes wipe-in-text {
+    0%   { clip-path: var(--clip-text-hide-r); transform: scale(2, 1) }
+    100% { clip-path: var(--clip-text);        transform: none}
+}
+
+/* text wipes — left */
+@keyframes wipe-out-text-l {
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-l); transform: scale(2, 1) }
+}
+
+@keyframes wipe-in-text-l {
+    0%   { clip-path: var(--clip-text-hide-l); transform: scale(2, 1) }
+    100% { clip-path: var(--clip-text);        transform: none}
+}
+
+/* text wipes — top-to-bottom */
+@keyframes wipe-out-text-t {
+    0%   { clip-path: var(--clip-text);        transform: none}
+    100% { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2)}
+}
+
+@keyframes wipe-in-text-t {
+    0%   { clip-path: var(--clip-text-hide-t); transform: scale(1.5, 2)}
+    100% { clip-path: var(--clip-text);        transform: none}
+}
+
+/* ── NAV ENTRANCE ───────────────────────────────────────────────────────── */
+nav > button:nth-child(1) { animation: b1 var(--a) }
+nav > button:nth-child(2) { animation: b2 var(--a) }
+nav > button:nth-child(3) { animation: b3 var(--a) }
+
+@keyframes b1 { from, 20% { transform: translateX(-50px) scaleX(2); opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+@keyframes b2 { from, 20% { transform: translateY(50px) scaleX(1.5);  opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+@keyframes b3 { from, 20% { transform: translateX(50px) scaleX(2);   opacity: 0; filter: blur(3px) } to { transform: none; opacity: 1; filter: none } }
+
+/* ── DIALOG BASE ────────────────────────────────────────────────────────── */
+
+dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    border: 0;
+    background: var(--bg);
+    opacity: 0;
+    transition: opacity 1s ease;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+dialog::backdrop { display: none }
+dialog.is-open   { opacity: 1 }
+
+/* dump — top-aligned scrolling grid layout */
+#dump {
+    justify-content: flex-start;
+    padding-top: calc(100px + env(safe-area-inset-top));
+    padding-bottom: 40px;
+}
+
+/* ── H2-CLOSE BAR ───────────────────────────────────────────────────────── */
+dialog section,
+dialog .h2-close { width: 100% }
+
+dialog .h2-close {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+dialog h2 { 
+    font: italic 400 1.5rem/1 federo;
+    letter-spacing: var(--ls-h2);
+    color: var(--g)
+}
+
+/* ── CLOSE BUTTON ───────────────────────────────────────────────────────── */
+
+dialog .close-btn {
+    background: none;
+    border: 0;
+    cursor: pointer;
+}
+
+dialog .close-btn:not(:focus-visible) {
+    outline: none;
+}
+
+dialog .close-btn > .p {
+    font: italic 400 2rem/1 federo;
+    color: var(--g);
+    transition: color var(--e1);
+}
+
+dialog .close-btn:hover > .p,
+dialog .close-btn:focus > .p { color: var(--w) }
+
+/* ── PER-DIALOG MAX-WIDTHS ──────────────────────────────────────────────── */
+#reel .h2-close, #reel section { max-width: var(--reel-w) }
+#info .h2-close, #info section { max-width: var(--info-w) }
+#dump .h2-close, #dump section { max-width: var(--dump-w) }
+
+/* ── REEL ───────────────────────────────────────────────────────────────── */
+section.reel > video {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+section.reel > video:not(:focus-visible) {
+    outline: none;
+}
+
+/* ── INFO ───────────────────────────────────────────────────────────────── */
+
+section.info {
+    width: 100%;
+    padding: 50px 20px 0;
+    border-top: 1px solid var(--g);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+section.info p {
+    font: italic 400 1.5rem/1 federo;
+    letter-spacing:var(--ls2);
+    color: var(--n);
+}
+section.info a {
+    font: italic 400 clamp(1vw,5rem,8vw)/1 federo;
+    letter-spacing: var(--ls2);
+    color: var(--n);
+    text-decoration: none;
+    transition: color var(--e1);
+}
+section.info a:hover,
+section.info a:active {
+    color: var(--w);
+}
+
+section.info .email::before { content: attr(data-user) }
+section.info .email::after  { content: "@" attr(data-domain) }
+
+/* ── DUMP ───────────────────────────────────────────────────────────────── */
+
+section.dump {
+    flex: 1;
+    min-height: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: var(--g) transparent;
+}
+
+section.dump .folio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--cell-min), 1fr));
+}
+
+section.dump .grid-cell {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+section.dump .grid-cell img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transition: transform var(--e2), filter var(--e2), opacity var(--e2);
+}
+
+section.dump .grid-cell:hover img {
+    transform: scale(1.15);
+    filter: blur(var(--cell-blur));
+    opacity: .05;
+}
+
+section.dump .cell-info {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+}
+
+section.dump .info-1,
+section.dump .info-2 {
+    opacity: 0;
+    filter: blur(var(--cell-blur));
+    transition: transform var(--e2), filter var(--e2), opacity var(--e2);
+}
+
+section.dump .info-1 {
+    font: italic 400 1rem/3 federo;
+    letter-spacing: var(--ls2);
+    word-spacing: var(--ws);
+    color: var(--n);
+    transform: translateX(var(--info-1-tx));
+}
+
+section.dump .info-2 {
+    font: italic 400 0.7rem/1.5 federo;
+    letter-spacing: var(--ls);
+    word-spacing: var(--ws);
+    color: var(--n);
+    transform: translateY(var(--info-2-ty));
+}
+
+section.dump .grid-cell:hover .info-1,
+section.dump .grid-cell:hover .info-2,
+section.dump .grid-cell:focus-within .info-1,
+section.dump .grid-cell:focus-within .info-2 {
+    opacity: 1;
+    transform: none;
+    filter: none;
+}
+
+section.dump .grid-cell:hover .info-2 { opacity: .5 }
+
+/* ── MOBILE ─────────────────────────────────────────────────────────────── */
+
+@media (max-width: 480px) {
+    header {
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    nav {
+        height: 50%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    nav > button {
+        width: 70%;
+        max-height: var(--nav-h);
+    }
+}
