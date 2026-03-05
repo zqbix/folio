@@ -1,3 +1,9 @@
+// ── close-timeout registry ─────────────────────────────────────────────────
+
+// tracks any pending closeDialog setTimeout per dialog id so it can be
+// cancelled if the same dialog is re-opened before the fade-out completes
+const closeTimers = {};
+
 // ── event listeners ────────────────────────────────────────────────────────
 
 // nav buttons — dialog id is derived from button text content
@@ -22,6 +28,16 @@ document.querySelectorAll('dialog').forEach(dialog => {
 
 function openDialog(id) {
   const dialog = document.getElementById(id);
+
+  // cancel any in-flight close fade-out for this dialog (#24)
+  if (closeTimers[id]) {
+    clearTimeout(closeTimers[id]);
+    delete closeTimers[id];
+    dialog.close(); // snap it shut cleanly before re-opening
+  }
+
+  // guard: showModal() throws if the dialog is already open (#22)
+  if (dialog.open) return;
 
   // lazy-load the folio grid on the first open of dump
   if (id === 'dump' && !dialog.dataset.loaded) {
@@ -57,7 +73,9 @@ function closeDialog(id) {
   // duration is read from CSS so JS stays in sync if the value ever changes
   const duration = parseFloat(getComputedStyle(dialog).transitionDuration) * 1000;
 
-  setTimeout(() => {
+  // store the timer so openDialog can cancel it if the dialog is re-opened (#24)
+  closeTimers[id] = setTimeout(() => {
+    delete closeTimers[id];
     dialog.close();
     // clear any lingering focus state on nav buttons
     document.activeElement.blur();
