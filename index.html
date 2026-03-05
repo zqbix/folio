@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="hsl(0, 0%, 7%)" />
+  <meta name="theme-color" content="#121212" />
   <meta name="robots" content="index, follow" />
   <meta name="referrer" content="no-referrer" />
   <meta name="description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
@@ -14,16 +14,23 @@
   <meta property="og:title" content="zqbix" />
   <meta property="og:description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
   <meta property="og:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
+  <meta property="og:image:width" content="1920" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:image:alt" content="zqbix — vfx artist reel thumbnail" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:site_name" content="zqbix" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:url" content="https://zqbix.github.io/folio/" />
   <meta name="twitter:title" content="zqbix" />
   <meta name="twitter:description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
   <meta name="twitter:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
+  <meta name="twitter:image:alt" content="zqbix — vfx artist reel thumbnail" />
   <link rel="canonical" href="https://zqbix.github.io/folio/" />
   <link rel="icon" type="image/png" href="./img/favicon.png" />
   <link rel="apple-touch-icon" href="./img/apple-touch-icon.png" />
   <title>zqbix</title>
   <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./reel/reel.jpg" as="image" />
   <link rel="stylesheet" href="./css/index.css" />
   <script src="./js/folio-items.js" defer></script>
   <script src="./js/index.js" defer></script>
@@ -38,9 +45,9 @@
       <h1>zqbix</h1>
     </header>
     <nav aria-label="site navigation">
-      <button aria-haspopup="dialog" aria-controls="reel">reel</button>
-      <button aria-haspopup="dialog" aria-controls="info">info</button>
-      <button aria-haspopup="dialog" aria-controls="dump">dump</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="reel">reel</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="info">info</button>
+      <button type="button" aria-haspopup="dialog" aria-controls="dump">dump</button>
     </nav>
   </main>
 
@@ -49,7 +56,7 @@
   <dialog id="reel" aria-labelledby="reel-title" aria-modal="true">
     <div>
       <h2 id="reel-title">reel</h2>
-      <button aria-label="close reel">&#10005;</button>
+      <button type="button" aria-label="close reel">&#10005;</button>
     </div>
     <section class="reel" aria-labelledby="reel-title">
       <video poster="./reel/reel.jpg" preload="metadata" controls playsinline aria-label="vfx reel">
@@ -64,7 +71,7 @@
   <dialog id="info" aria-labelledby="info-title" aria-modal="true">
     <div>
       <h2 id="info-title">info</h2>
-      <button aria-label="close info">&#10005;</button>
+      <button type="button" aria-label="close info">&#10005;</button>
     </div>
     <section class="info" aria-labelledby="info-title">
       <p>chris..germany near ffm<br>..3d modeling- and vfx-artist<br>houdini maya nuke..</p>
@@ -77,7 +84,7 @@
   <dialog id="dump" aria-labelledby="dump-title" aria-modal="true">
     <div>
       <h2 id="dump-title">dump</h2>
-      <button aria-label="close dump">&#10005;</button>
+      <button type="button" aria-label="close dump">&#10005;</button>
     </div>
     <section class="dump" aria-labelledby="dump-title">
       <div class="folio-grid" aria-live="polite" aria-busy="true" aria-label="folio grid"></div>
