@@ -1,0 +1,391 @@
+@font-face {
+  font-family: federo;
+  src: url(../font/federo.ttf);
+  font-display: swap;
+}
+
+/* ─── variables ──────────────────────────────────────────────────────────── */
+
+:root {
+
+  /* palette — four stops from bg to full white */
+  --color-bg:  hsl(0, 0%, 7%);   /* page and dialog background  */
+  --color-dim: hsl(0, 0%, 25%);  /* subtle borders, scrollbar   */
+  --color-mid: hsl(0, 0%, 60%);  /* default text and ui         */
+  --color-fg:  hsl(0, 0%, 100%); /* hover and focus highlight   */
+
+  /* transitions */
+  --transition-ui:     0.3s ease;                          /* buttons, links  */
+  --transition-dialog: 1s ease;                            /* dialog fade     */
+  --transition-grid:   .6s cubic-bezier(.25, .8, .25, 1); /* dump grid cells */
+
+  /* layout */
+  --bar-height:  55px; /* nav and dialog bar — tied to video max-height calc  */
+  --spacing-gap: 10px; /* h1 bottom / nav top padding — keeps them in rhythm  */
+
+  /* type scale */
+  --text-xl:   5rem;   /* h1              */
+  --text-lg:   1.5rem; /* close button    */
+  --text-base: 1rem;   /* nav, dialog, ui */
+  --text-sm:   0.7rem; /* dump subtitle   */
+
+  /* letter-spacing scale */
+  --tracking-xl: 0.5rem; /* h1              */
+  --tracking-md: 0.3rem; /* nav, dialog bar */
+  --tracking-sm: 0.2rem; /* info paragraph  */
+  --tracking-xs: 0.1rem; /* email link      */
+
+  /* effects */
+  --blur-grid: 10px; /* image blur on cell hover and overlay initial state */
+
+}
+
+/* ─── reset ─────────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ─── focus ──────────────────────────────────────────────────────────────── */
+
+/* restores the focus ring killed by outline:none on buttons — WCAG 2.4.7 */
+:focus-visible {
+  outline: 1px solid var(--color-mid);
+}
+
+/* ─── motion ─────────────────────────────────────────────────────────────── */
+
+/* respects the OS reduced-motion preference — kills all transitions */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+  }
+}
+
+/* ─── root ───────────────────────────────────────────────────────────────── */
+
+html {
+  font-size: 16px;
+  background: var(--color-bg);
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* ─── main ───────────────────────────────────────────────────────────────── */
+
+/* position:fixed pins main to the viewport so document scroll can never shift it */
+main {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ─── header ─────────────────────────────────────────────────────────────── */
+
+/* padding-bottom mirrors nav padding-top — keeps h1 and nav optically centred */
+main > header > h1 {
+  padding-bottom: var(--spacing-gap);
+  font: italic 400 var(--text-xl)/1 federo;
+  letter-spacing: var(--tracking-xl);
+  color: var(--color-mid);
+  cursor: default;
+}
+
+/* ─── nav ────────────────────────────────────────────────────────────────── */
+
+main > nav {
+  width: 100%;
+  height: var(--bar-height);
+  padding-top: var(--spacing-gap);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* buttons expand horizontally on hover — border-top brightens to match */
+main > nav > button {
+  appearance: none;
+  background: none;
+  border: 1px solid transparent;
+  border-top-color: var(--color-dim);
+  outline: none;
+  height: 100%;
+  padding: 0 25px;
+  margin: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: italic 400 var(--text-base)/1 federo;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-md);
+  color: var(--color-mid);
+  cursor: pointer;
+  transition: color            var(--transition-ui),
+              border-top-color var(--transition-ui),
+              padding          var(--transition-ui);
+}
+
+main > nav > button:hover,
+main > nav > button:focus {
+  padding: 0 50px;
+  border-top-color: var(--color-mid);
+  color: var(--color-fg);
+}
+
+/* ─── dialog ─────────────────────────────────────────────────────────────── */
+
+/* display:none when closed — prevents intercepting pointer events on the page */
+dialog {
+  display: none;
+  border: none;
+  padding: 0;
+  margin: auto;
+  max-height: 100dvh;
+  flex-direction: column;
+  background: var(--color-bg);
+  opacity: 0;
+  transition: opacity var(--transition-dialog);
+}
+
+/* display:flex on open — opacity:0 holds it invisible until .is-visible is added */
+dialog[open] {
+  display: flex;
+  opacity: 0;
+}
+
+/* js adds .is-visible after showModal() to trigger the fade-in */
+dialog[open].is-visible {
+  opacity: 1;
+}
+
+dialog::backdrop {
+  background: var(--color-bg);
+}
+
+/* ─── dialog dimensions ──────────────────────────────────────────────────── */
+
+/* min() clamps each dialog to viewport width on small screens */
+dialog#reel { width: min(1280px, 100%); }
+dialog#info  { width: min(640px,  100%); }
+dialog#dump  { width: min(1920px, 100%); }
+
+/* ─── dialog bar ─────────────────────────────────────────────────────────── */
+
+/* height mirrors --bar-height so open and closed states feel visually continuous */
+dialog > div {
+  width: 100%;
+  height: var(--bar-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  flex-shrink: 0;
+}
+
+/* title sits left — font and tracking match nav buttons exactly */
+dialog > div > h2 {
+  font: italic 400 var(--text-base)/1 federo;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-md);
+  color: var(--color-mid);
+  cursor: default;
+}
+
+/* close button sits right */
+dialog > div > button {
+  appearance: none;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font: italic 400 var(--text-lg)/1 federo;
+  color: var(--color-mid);
+  cursor: pointer;
+  transition: color var(--transition-ui);
+}
+
+dialog > div > button:hover,
+dialog > div > button:focus {
+  color: var(--color-fg);
+}
+
+/* ─── reel ───────────────────────────────────────────────────────────────── */
+
+dialog > section.reel {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* subtracting --bar-height keeps the video inside the viewport at any height */
+dialog > section.reel > video {
+  width: 100%;
+  max-height: calc(100dvh - var(--bar-height));
+  aspect-ratio: 16/9;
+}
+
+/* shown only when the browser has no video support */
+dialog > section.reel > video > p {
+  font: italic 400 var(--text-base)/1 federo;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-md);
+  color: var(--color-mid);
+}
+
+/* ─── info ───────────────────────────────────────────────────────────────── */
+
+dialog > section.info {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+dialog > section.info > p {
+  font: italic 400 var(--text-base)/1.2 federo;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-sm);
+  color: var(--color-mid);
+}
+
+dialog > section.info > a {
+  margin: 25px 0 5px;
+  font: italic 400 var(--text-base)/1 federo;
+  letter-spacing: var(--tracking-xs);
+  color: var(--color-mid);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-ui);
+}
+
+dialog > section.info > a:hover,
+dialog > section.info > a:active {
+  color: var(--color-fg);
+}
+
+/* email assembled via data attributes — address never sits in the DOM directly */
+dialog > section.info > a::before { content: attr(data-user); }
+dialog > section.info > a::after  { content: "@" attr(data-domain); }
+
+/* ─── dump ───────────────────────────────────────────────────────────────── */
+
+/* flex:1 + min-height:0 lets the section grow to fill the dialog and scroll */
+dialog > section.dump {
+  flex: 1;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-color: var(--color-dim) transparent;
+}
+
+/* columns auto-fill — each cell never narrower than 360px */
+dialog > section.dump .folio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+}
+
+dialog > section.dump .grid-cell {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+dialog > section.dump .grid-cell img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform var(--transition-grid),
+              filter   var(--transition-grid),
+              opacity  var(--transition-grid);
+}
+
+/* on hover the image blurs and recedes — making room for the overlay */
+dialog > section.dump .grid-cell:hover img {
+  transform: scale(1.15);
+  filter: blur(var(--blur-grid));
+  opacity: .05;
+}
+
+/* overlay sits above the image — pointer-events off so it doesn't trap clicks */
+dialog > section.dump .cell-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+/* both lines start blurred and hidden — animated in on hover */
+dialog > section.dump .info-1,
+dialog > section.dump .info-2 {
+  opacity: 0;
+  filter: blur(var(--blur-grid));
+  transition: transform var(--transition-grid),
+              filter   var(--transition-grid),
+              opacity  var(--transition-grid);
+}
+
+/* title — slides in from the left */
+dialog > section.dump .info-1 {
+  font: italic 400 var(--text-base)/3 federo;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: var(--color-mid);
+  transform: translateX(-30px);
+}
+
+/* subtitle — slides in from below */
+dialog > section.dump .info-2 {
+  font: italic 400 var(--text-sm)/1.5 federo;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  color: var(--color-mid);
+  transform: translateY(15px);
+}
+
+/* reveal on hover or keyboard focus-within — covers both mouse and tab users */
+dialog > section.dump .grid-cell:hover .info-1,
+dialog > section.dump .grid-cell:hover .info-2,
+dialog > section.dump .grid-cell:focus-within .info-1,
+dialog > section.dump .grid-cell:focus-within .info-2 {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* subtitle stays gently dimmed even at full reveal */
+dialog > section.dump .grid-cell:hover .info-2 { opacity: .5; }
+
+/* ─── mobile ─────────────────────────────────────────────────────────────── */
+
+/* at 480px the nav stacks vertically — height lifted so all three buttons fit */
+@media (max-width: 480px) {
+
+  main > nav {
+    height: auto;
+    flex-direction: column;
+  }
+
+  main > nav > button {
+    height: var(--bar-height);
+  }
+
+}
