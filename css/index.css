@@ -293,10 +293,11 @@ dialog > section.dump {
   scrollbar-color: var(--color-dim) transparent;
 }
 
-/* columns auto-fill — each cell never narrower than 360px */
+/* columns auto-fill — each cell never narrower than min(360px, 100%) so the
+   grid never overflows on viewports narrower than 360px (e.g. 320px phones) */
 dialog > section.dump .folio-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
 }
 
 dialog > section.dump .grid-cell {
