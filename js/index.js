@@ -71,7 +71,7 @@ function closeDialog(id) {
   dialog.querySelectorAll('video, audio').forEach(media => media.pause());
 
   // duration is read from CSS so JS stays in sync if the value ever changes
-  const duration = parseFloat(getComputedStyle(dialog).transitionDuration) * 1000;
+  const duration = parseFloat(getComputedStyle(dialog).transitionDuration.split(',')[0]) * 1000;
 
   // store the timer so openDialog can cancel it if the dialog is re-opened (#24)
   closeTimers[id] = setTimeout(() => {
