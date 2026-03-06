@@ -115,7 +115,8 @@ main > nav {
 
 /* buttons expand horizontally on hover — border-top brightens to match */
 main > nav > button {
-  appearance: none;
+  appearance:none;
+  -webkit-appearance:none;
   background: none;
   border: 1px solid transparent;
   border-top-color: var(--color-dim);
@@ -143,6 +144,11 @@ main > nav > button:focus {
   color: var(--color-fg);
 }
 
+main > nav > button:focus-visible {
+  outline: none;
+  border-bottom-color: var(--color-dim);
+}
+
 /* ─── dialog ─────────────────────────────────────────────────────────────── */
 
 /* display:none when closed — prevents intercepting pointer events on the page */
@@ -151,6 +157,7 @@ dialog {
   border: none;
   padding: 0;
   margin: auto;
+  max-height: 100vh;
   max-height: 100dvh;
   flex-direction: column;
   background: var(--color-bg);
@@ -204,7 +211,8 @@ dialog > div > h2 {
 
 /* close button sits right */
 dialog > div > button {
-  appearance: none;
+  appearance:none;
+  -webkit-appearance:none;
   background: none;
   border: none;
   outline: none;
@@ -233,6 +241,7 @@ dialog > section.reel {
 /* subtracting --bar-height keeps the video inside the viewport at any height */
 dialog > section.reel > video {
   width: 100%;
+  max-height: calc(100vh - var(--bar-height));
   max-height: calc(100dvh - var(--bar-height));
   aspect-ratio: 16/9;
 }
@@ -317,7 +326,8 @@ dialog > section.dump .grid-cell img {
 }
 
 /* on hover the image blurs and recedes — making room for the overlay */
-dialog > section.dump .grid-cell:hover img {
+dialog > section.dump .grid-cell:hover img,
+dialog > section.dump .grid-cell:focus-within img {
   transform: scale(1.15);
   filter: blur(var(--blur-grid));
   opacity: .05;
@@ -373,7 +383,10 @@ dialog > section.dump .grid-cell:focus-within .info-2 {
 }
 
 /* subtitle stays gently dimmed even at full reveal */
-dialog > section.dump .grid-cell:hover .info-2 { opacity: .5; }
+dialog > section.dump .grid-cell:hover .info-2,
+dialog > section.dump .grid-cell:focus-within .info-2 {
+  opacity: .5;
+}
 
 /* ─── mobile ─────────────────────────────────────────────────────────────── */
 
