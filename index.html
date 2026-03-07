@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color" content="#121212" />
@@ -16,6 +17,7 @@
   <meta property="og:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
   <meta property="og:image:width" content="1920" />
   <meta property="og:image:height" content="1080" />
+  <meta property="og:image:type" content="image/jpeg" />
   <meta property="og:image:alt" content="zqbix — vfx artist reel thumbnail" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="zqbix" />
@@ -26,68 +28,42 @@
   <meta name="twitter:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
   <meta name="twitter:image:alt" content="zqbix — vfx artist reel thumbnail" />
   <link rel="canonical" href="https://zqbix.github.io/folio/" />
+  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml" />
   <link rel="icon" type="image/png" href="./img/favicon.png" />
-  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png" />
   <title>zqbix</title>
   <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin />
-  <link rel="preload" href="./reel/reel.jpg" as="image" />
+  <link rel="preload" href="./reel/reel.jpg" as="image" fetchpriority="low" />
   <link rel="stylesheet" href="./css/index.css" />
-  <script src="./js/folio-items.js" defer></script>
   <script src="./js/index.js" defer></script>
 </head>
 
 <body>
 
-  <!-- ─── main ─────────────────────────────────────────────────────────────── -->
-
   <main>
-    <header>
-      <h1>zqbix</h1>
-    </header>
-    <nav aria-label="site navigation">
-      <button type="button" aria-haspopup="dialog" aria-controls="reel">reel</button>
-      <button type="button" aria-haspopup="dialog" aria-controls="info">info</button>
-      <button type="button" aria-haspopup="dialog" aria-controls="dump">dump</button>
-    </nav>
+    <section id="start" aria-labelledby="line01">
+      <h1 class="layer line01">gude..</h1>
+      <p class="layer line02">i'm a houdini vfx-artist</p>
+      <p class="layer line03">with maya modeling background</p>
+      <p class="layer line04">and a few needed nuke skillz</p>
+      <p class="layer line05">located in germany — near ffm</p>
+      <p class="layer line06">feel free to check out my</p>
+      <button class="layer line07" type="button" aria-label="open showreel">showreel</button>
+      <p class="layer line08">and drop me a line at</p>
+      <button class="layer line09" type="button"><span data-user="zqbix" data-domain="protonmail.com"></span></button>
+    </section>
   </main>
 
-  <!-- ─── dialog / reel ────────────────────────────────────────────────────── -->
-
-  <dialog id="reel" aria-labelledby="reel-title" aria-modal="true">
-    <div>
+  <dialog id="reel" aria-modal="true" aria-labelledby="reel-title">
+    <header>
       <h2 id="reel-title">reel</h2>
-      <button type="button" aria-label="close reel">&#10005;</button>
-    </div>
+      <button type="button" aria-label="close showreel">&#10005;</button>
+    </header>
     <section class="reel">
-      <video poster="./reel/reel.jpg" preload="metadata" controls playsinline aria-label="vfx reel">
-        <source src="./reel/reel.mp4" type="video/mp4">
+      <video poster="./reel/reel.jpg" preload="metadata" controls playsinline aria-label="vfx showreel">
+        <source src="./reel/reel.mp4" type="video/mp4" />
         <p>your browser does not support video</p>
       </video>
-    </section>
-  </dialog>
-
-  <!-- ─── dialog / info ────────────────────────────────────────────────────── -->
-
-  <dialog id="info" aria-labelledby="info-title" aria-modal="true">
-    <div>
-      <h2 id="info-title">info</h2>
-      <button type="button" aria-label="close info">&#10005;</button>
-    </div>
-    <section class="info">
-      <p>chris..germany near ffm<br>..3d modeling- and vfx-artist<br>houdini maya nuke..</p>
-      <a data-user="zqbix" data-domain="protonmail.com" aria-label="send email"></a>
-    </section>
-  </dialog>
-
-  <!-- ─── dialog / dump ────────────────────────────────────────────────────── -->
-
-  <dialog id="dump" aria-labelledby="dump-title" aria-modal="true">
-    <div>
-      <h2 id="dump-title">dump</h2>
-      <button type="button" aria-label="close dump">&#10005;</button>
-    </div>
-    <section class="dump">
-      <div class="folio-grid" aria-live="polite" aria-busy="true" aria-label="folio grid"></div>
     </section>
   </dialog>
 
