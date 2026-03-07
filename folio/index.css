@@ -1,0 +1,116 @@
+@font-face {
+  font-family: federo;
+  src: url(../font/federo.ttf);
+  font-display: swap;
+}
+
+:root {
+  --bg:  hsl(0, 0%, 7%);
+  --dim: hsl(0, 0%, 20%);
+  --mid: hsl(0, 0%, 55%);
+  --fg:  hsl(0, 0%, 100%);
+  --transition-ui:     0.3s ease;
+  --transition-dialog: 1s ease;
+  --bar-height: 55px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:focus-visible { outline: 1px solid var(--mid); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
+
+html, body {
+  width: 100%;
+  background: var(--bg);
+}
+
+.flex-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.folio {
+  width: min(1920px, 100%);
+}
+
+.folio .folio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
+}
+
+.folio .grid-cell {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1;
+  cursor: pointer;
+}
+
+.folio .grid-cell img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  transition: transform .6s cubic-bezier(.25,.8,.25,1),
+              filter   .6s cubic-bezier(.25,.8,.25,1),
+              opacity  .6s cubic-bezier(.25,.8,.25,1);
+}
+
+.folio .grid-cell:hover img,
+.folio .grid-cell:focus-within img {
+  transform: scale(1.15);
+  filter: blur(10px);
+  opacity: .05;
+}
+
+.folio .cell-info {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.folio .info-1,
+.folio .info-2 {
+  opacity: 0;
+  filter: blur(10px);
+  transition: transform .6s cubic-bezier(.25,.8,.25,1),
+              filter   .6s cubic-bezier(.25,.8,.25,1),
+              opacity  .6s cubic-bezier(.25,.8,.25,1);
+}
+
+.folio .info-1 {
+  font: italic 400 1rem/3 federo;
+  letter-spacing: 2px;
+  word-spacing: 2px;
+  color: var(--mid);
+  transform: translateX(-30px);
+}
+
+.folio .info-2 {
+  font: italic 400 0.7rem/1.5 federo;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  color: var(--mid);
+  transform: translateY(15px);
+}
+
+.folio .grid-cell:hover .info-1,
+.folio .grid-cell:hover .info-2,
+.folio .grid-cell:focus-within .info-1,
+.folio .grid-cell:focus-within .info-2 {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+.folio .grid-cell:hover .info-2,
+.folio .grid-cell:focus-within .info-2 {
+  opacity: .5;
+}
