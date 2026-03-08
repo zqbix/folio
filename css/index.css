@@ -1,39 +1,84 @@
+/*
+  font-display: optional — paired with the <link rel="preload"> in HTML.
+  "optional" means: use the font if it's already cached or arrives before
+  the very first paint; otherwise skip it and never swap in later.
+  this eliminates layout shift entirely. the preload makes sure the font
+  is ready in time on first visit, so optional is safe to use here
+*/
 @font-face {
   font-family: federo;
   src: url(../font/federo.ttf);
   font-display: optional;
 }
 
+/* ── design tokens ────────────────────────────────────────────────────────── */
+
+/*
+  colors are named by lightness value (07 = 7% lightness) rather than
+  by role (--clr-bg, --clr-text) — keeps naming stable when values change
+  and makes the visual weight immediately obvious from the variable name
+*/
 :root {
-  --clr-07:  hsl(0, 0%, 7%);
-  --clr-20:  hsl(0, 0%, 20%);
+  --clr-07:  hsl(0, 0%, 7%);   /* page background */
+  --clr-10:  hsl(0, 0%, 10%);  /* greeting resting state */
+  --clr-20:  hsl(0, 0%, 20%);  /* button hover gradient peak */
   --clr-22:  hsl(0, 0%, 22%);
   --clr-35:  hsl(0, 0%, 35%);
   --clr-48:  hsl(0, 0%, 48%);
-  --clr-49:  hsl(0, 0%, 49%);
+  --clr-49:  hsl(0, 0%, 49%);  /* email — min lightness that passes WCAG 3:1 on this bg */
   --clr-55:  hsl(0, 0%, 55%);
   --clr-70:  hsl(0, 0%, 70%);
   --clr-72:  hsl(0, 0%, 72%);
   --clr-100: hsl(0, 0%, 100%);
-  --transition-ui:     0.3s ease;
-  --transition-dialog: 1s ease;
-  --bar-height: 55px;
+
+  --transition-ui:     0.3s ease; /* interactive elements */
+  --transition-dialog: 1s ease;   /* dialog fade — slower feels cinematic */
+  --bar-height: 55px;             /* dialog header height, referenced in video max-height calc */
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── reset ────────────────────────────────────────────────────────────────── */
 
+/*
+  include ::before and ::after in the reset — both pseudo-elements are used
+  for decorative gradients on buttons and they need predictable box sizing
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+  kill all motion for users who have requested it at the OS level.
+  !important overrides any inline or component-level transition/animation
+  so this acts as a global kill-switch regardless of specificity
+*/
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { transition: none !important; animation: none !important; }
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
+
+/* ── document ─────────────────────────────────────────────────────────────── */
 
 html, body {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   background: var(--clr-07);
+  /*
+    overflow:hidden prevents any scroll — the layout is intentionally fixed
+    to a single viewport-filling frame with no scrollable content
+  */
   overflow: hidden;
 }
 
-/* ── stage ──────────────────────────────────────────────────────────── */
+/* ── stage ────────────────────────────────────────────────────────────────── */
 
+/*
+  position:fixed rather than absolute — stays in place even if anything
+  ever causes document overflow. inset:0 is shorthand for top/right/bottom/left:0
+*/
 main {
   position: fixed;
   inset: 0;
@@ -43,171 +88,268 @@ main {
   justify-content: center;
 }
 
-/* ── text stack ─────────────────────────────────────────────────────── */
+/* ── text stack ───────────────────────────────────────────────────────────── */
 
 section#start {
   width: min(1280px, 92vw);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  /*
+    overflow:visible is explicit here because a parent (main) uses flex,
+    which can sometimes clip children — this makes the intent clear
+    and allows button ::before pseudo-elements to bleed outside bounds
+  */
   overflow: visible;
 }
 
-
-/* shared layer defaults */
+/*
+  shared typographic base for all stack lines.
+  pointer-events:none and user-select:none on the base prevent any
+  accidental text selection or click interception on the decorative lines —
+  interactive elements (line07, line09, #egg) override these individually
+*/
 section#start .layer {
   font-family: federo;
   font-style: italic;
   font-weight: 400;
   line-height: 1;
   text-transform: uppercase;
-}
-
-/* "gude.." — flares in bright, then fades to very dim */
-section#start .line01 {
-  font-size: clamp(3.5rem, 10.5vw, 9.5rem);
-  letter-spacing: 0.04em;
-  color: var(--clr-100);
-  opacity: 0;
-  animation: greetingFlare 4s ease 0.05s forwards;
-  margin-bottom: 2rem;
   pointer-events: none;
   user-select: none;
 }
 
-/* "i'm a houdini vfx-artist" */
+/* ── stack lines ──────────────────────────────────────────────────────────── */
+
+/*
+  color starts at bg color (invisible) — the greetingFlare animation drives
+  it from invisible through white and back down to a near-dark resting value.
+  no opacity is used here (unlike the fadeUp lines) because the egg span
+  inside this element needs to be able to independently control its own color
+  after the animation — opacity on a parent creates a compositing group that
+  children cannot escape, but color inheritance can be overridden
+*/
+section#start .line01 {
+  font-size: clamp(3.5rem, 10.5vw, 9.5rem);
+  letter-spacing: 0.04em;
+  color: var(--clr-07);
+  animation: greetingFlare 4s ease 0.05s both;
+  margin-bottom: 2rem;
+}
+
 section#start .line02 {
   font-size: clamp(1.2rem, 3vw, 2.4rem);
   letter-spacing: 0.15em;
   color: var(--clr-70);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.2s forwards;
+  animation: fadeUp 0.9s ease 0.2s both;
   margin-bottom: 0.2rem;
   padding-left: clamp(0px, 5vw, 4rem);
-  pointer-events: none;
-  user-select: none;
 }
 
-/* "with maya modeling background" */
 section#start .line03 {
   font-size: clamp(0.75rem, 1.3vw, 1.1rem);
   letter-spacing: clamp(0.1em, 0.5vw, 0.35em);
   color: var(--clr-35);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.32s forwards;
+  animation: fadeUp 0.9s ease 0.32s both;
   margin-bottom: 0.2rem;
-  padding-left: clamp(0px, 11.25vw, 9rem); /* 9rem max ÷ ~80vw container ≈ 11.25vw */
-  pointer-events: none;
-  user-select: none;
+  /* max ÷ ~80vw container = viewport-relative equivalent of the rem max */
+  padding-left: clamp(0px, 11.25vw, 9rem);
 }
 
-/* "and a few needed nuke skillz" */
 section#start .line04 {
   font-size: clamp(0.85rem, 2.1vw, 1.7rem);
   letter-spacing: 0.2em;
   color: var(--clr-55);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.44s forwards;
+  animation: fadeUp 0.9s ease 0.44s both;
   margin-bottom: 2rem;
   padding-left: clamp(0px, 2.5vw, 2rem);
-  pointer-events: none;
-  user-select: none;
 }
 
-/* "located in germany — near ffm" */
 section#start .line05 {
   font-size: clamp(0.75rem, 1.3vw, 1.05rem);
   letter-spacing: clamp(0.2em, 0.8vw, 0.5em);
   color: var(--clr-22);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.56s forwards;
+  animation: fadeUp 0.9s ease 0.56s both;
   margin-bottom: 2rem;
   padding-left: clamp(0px, 7.5vw, 6rem);
-  pointer-events: none;
-  user-select: none;
 }
 
-/* "feel free to check out my" */
 section#start .line06 {
   font-size: clamp(0.8rem, 1.9vw, 1.5rem);
   letter-spacing: 0.18em;
   color: var(--clr-48);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.68s forwards;
+  animation: fadeUp 0.9s ease 0.68s both;
   margin-bottom: 0.5rem;
-  pointer-events: none;
-  user-select: none;
 }
 
-/* "showreel" */
+/*
+  pointer-events:auto overrides the none set on .layer —
+  this is what makes the button actually clickable.
+  user-select intentionally not overridden — inheriting none from .layer
+  keeps button text unselectable, which is correct for interactive controls
+*/
 section#start .line07 {
   font-size: clamp(1.2rem, 3.1vw, 2.5rem);
   letter-spacing: 0.15em;
   color: var(--clr-72);
   animation: fadeUp 0.9s ease 0.73s both;
-  margin-bottom: 1rem;
-  padding-left: clamp(0px, 1.875vw, 1.5rem);
+  margin-bottom: 0.1rem;
+  padding-left: clamp(0px, 3vw, 2rem);
+  pointer-events: auto;
 }
 
-/* "and drop me a line at" */
 section#start .line08 {
   font-size: clamp(0.75rem, 1.3vw, 1.05rem);
   letter-spacing: 0.2em;
   color: var(--clr-22);
-  opacity: 0;
-  animation: fadeUp 0.9s ease 0.88s forwards;
-  margin-bottom: 0.4rem;
-  padding-left: clamp(0px, 3.75vw, 3rem);
-  pointer-events: none;
-  user-select: none;
+  animation: fadeUp 0.9s ease 0.88s both;
+  margin-bottom: 0;
+  padding-left: clamp(0px, 7.5vw, 6rem);
 }
 
-/* email */
+/* same pointer-events override as line07 — email button must be clickable */
 section#start .line09 {
   font-size: clamp(0.9rem, 2.3vw, 1.8rem);
   letter-spacing: clamp(0.08em, 0.35vw, 0.19em);
   color: var(--clr-49);
   animation: fadeUp 0.9s ease 0.9s both;
-  padding-left: clamp(0px, 6vw, 5rem);
+  padding-left: clamp(0px, 12vw, 10rem);
+  /*
+    text-transform:none overrides the uppercase set on .layer —
+    email addresses should never be uppercased
+  */
   text-transform: none;
+  pointer-events: auto;
 }
 
+/*
+  email text is rendered entirely via pseudo-elements, not real DOM text —
+  this keeps the address out of the HTML source to deter scrapers.
+  the span itself has no visible content; ::before and ::after inject it
+*/
 section#start .line09 span::before { content: attr(data-user); }
 section#start .line09 span::after  { content: "@" attr(data-domain); }
 
-/* ── keyframes ──────────────────────────────────────────────────────── */
+/* ── keyframes ────────────────────────────────────────────────────────────── */
 
+/*
+  fill-mode:both on all fadeUp lines means the 0% keyframe (opacity:0,
+  translateY:8px) holds during the animation delay period — so elements
+  start invisible without needing a separate static opacity:0 declaration
+*/
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* flashes in full white, slowly dissolves to ghost */
+/*
+  flares in white (10% keyframe), then slowly dissolves to near-black.
+  uses color rather than opacity so the child #egg span can independently
+  override its color after the animation ends — see line01 comment above.
+  fill-mode:both pins the 0% color (= bg color, invisible) during the
+  0.05s delay, preventing a one-frame flash before the animation starts
+*/
 @keyframes greetingFlare {
-  0%   { opacity: 0; transform: translateY(15px); }
-  10%  { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0.05; }
+  0%   { color: var(--clr-07);  transform: translateY(15px); }
+  10%  { color: var(--clr-100); transform: translateY(0); }
+  100% { color: var(--clr-10); }
 }
 
+/* ── easter egg ───────────────────────────────────────────────────────────── */
+
+/*
+  #egg is a span inside .line01, which has pointer-events:none from .layer.
+  pointer-events:auto here is an explicit override — not inheritance,
+  so it wins regardless of the parent cascade.
+  cursor:pointer is on the base rule (not :hover) so the pointer appears
+  the moment the user enters the element, not only after it's already hovering
+*/
+section #egg {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/*
+  transition is intentionally absent from the base rule and lives only on
+  .ready — this prevents the color transition from firing during greetingFlare.
+  the animation drives color on the parent every frame, and a child transition
+  would chase each inherited change, causing a strobe effect.
+  JS adds .ready via setTimeout after the full animation duration elapses,
+  arming the transition only once the animation has fully settled
+*/
+section #egg.ready {
+  transition: color var(--transition-ui);
+}
+
+section #egg:hover,
+section #egg:focus-visible {
+  outline: none;
+  color: var(--clr-35);
+}
+
+/* ── buttons (section) ────────────────────────────────────────────────────── */
+
+/*
+  position:relative creates a containing block for the ::before pseudo-element
+  which uses position:absolute for the gradient sweep effect.
+  appearance:none (+ webkit prefix) strips all native button styling —
+  necessary for consistent cross-browser rendering.
+  transition on color only — the ::before handles its own inset transition
+*/
 section#start button {
+  position: relative;
   appearance: none;
   -webkit-appearance: none;
   background: none;
   border: none;
-  padding: 0;
+  padding: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  transition: background var(--transition-ui);
+  transition: color var(--transition-ui);
 }
+
 section#start button:hover,
 section#start button:focus-visible {
   outline: none;
-  background: var(--clr-20);
+  color: var(--clr-100);
 }
 
-/* display:none when closed — prevents intercepting pointer events on the page */
+/*
+  decorative gradient sweep — starts fully hidden off the right edge
+  (inset right=100% means zero width), sweeps in from the right on hover.
+  z-index:-1 keeps it behind the button text.
+  the gradient fades to the bg color at its right edge so it blends
+  seamlessly regardless of what's behind the button
+*/
+section#start button::before {
+  content: "";
+  position: absolute;
+  inset: 0 100% 0 0;
+  z-index: -1;
+  background-image: linear-gradient(to right, var(--clr-20), var(--clr-07));
+  transition: inset var(--transition-ui);
+}
+
+/*
+  top/bottom inset 20% creates a vertical band rather than full button height —
+  keeps the gradient contained to the text area.
+  left inset -10% bleeds slightly past the button edge for a natural fade-in
+*/
+section#start button:hover::before,
+section#start button:focus-visible::before {
+  inset: 20% 0 20% -10%;
+}
+
+/* ── dialog ───────────────────────────────────────────────────────────────── */
+
+/*
+  display:none when closed — not visibility:hidden or opacity:0.
+  this matters because a hidden dialog still intercepts pointer events
+  on the page if it's merely invisible, which would block clicks on
+  the showreel and email buttons beneath it
+*/
 dialog#reel {
   width: min(1280px, 100%);
   display: none;
@@ -215,12 +357,18 @@ dialog#reel {
   padding: 0;
   margin: auto;
   max-height: 100vh;
-  max-height: 100dvh;
+  max-height: 100dvh; /* dvh accounts for collapsible browser UI on mobile */
   background: var(--clr-07);
   color-scheme: dark;
 }
 
-/* display:flex on open — opacity:0 holds it invisible until .is-visible is added */
+/*
+  opacity:0 on open holds the dialog invisible immediately after showModal().
+  JS then adds .is-visible after a double rAF, which triggers the transition.
+  this two-step approach is necessary because browsers need at least one
+  frame between display:flex appearing and the opacity transition being
+  eligible to fire — without the rAF the transition is skipped entirely
+*/
 dialog#reel[open] {
   display: flex;
   flex-direction: column;
@@ -228,19 +376,21 @@ dialog#reel[open] {
   transition: opacity var(--transition-dialog);
 }
 
-/* js adds .is-visible after showModal() to trigger the fade-in */
 dialog#reel[open].is-visible {
   opacity: 1;
 }
 
+/*
+  backdrop matches the page bg exactly — creates the illusion that
+  the dialog fades in over the existing content rather than over
+  a separate overlay layer
+*/
 dialog#reel::backdrop {
   background: var(--clr-07);
 }
 
+/* ── dialog header ────────────────────────────────────────────────────────── */
 
-/* ─── dialog bar ─────────────────────────────────────────────────────────── */
-
-/* height mirrors --bar-height so open and closed states feel visually continuous */
 dialog#reel > header {
   width: 100%;
   height: var(--bar-height);
@@ -248,20 +398,28 @@ dialog#reel > header {
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
+  /*
+    flex-shrink:0 prevents the header from being squeezed by the video
+    when the dialog is at max-height — the bar must always stay full height
+  */
   flex-shrink: 0;
 }
 
-/* title sits left — font and tracking match nav buttons exactly */
 dialog#reel > header > h2 {
   font: italic 400 1rem/1 federo;
   text-transform: uppercase;
   letter-spacing: 0.3em;
   color: var(--clr-55);
+  /* cursor:default prevents the text cursor from showing on a non-interactive heading */
   cursor: default;
 }
 
-/* close button sits right */
+/*
+  same reset pattern as section buttons — position:relative for the
+  ::before pseudo-element, appearance:none strips native styling
+*/
 dialog#reel > header > button {
+  position: relative;
   appearance: none;
   -webkit-appearance: none;
   background: none;
@@ -280,26 +438,64 @@ dialog#reel > header > button:hover,
 dialog#reel > header > button:focus-visible {
   outline: none;
   color: var(--clr-100);
-  background: var(--clr-20);
 }
 
-/* ─── reel ───────────────────────────────────────────────────────────────── */
+/*
+  gradient starts hidden off the right edge of the button (left=100%),
+  sweeps hard left across the full header bar on hover.
+  direction is left (vs right on the section buttons) so it emanates
+  from the close button rather than sweeping toward it.
+  top/bottom negative inset lets it bleed slightly beyond button bounds
+  for a looser, more atmospheric feel matching the cinematic aesthetic
+*/
+dialog#reel > header > button::before {
+  content: "";
+  position: absolute;
+  inset: -30% 0 -30% 100%;
+  z-index: -1;
+  background-image: linear-gradient(to left, var(--clr-20), var(--clr-07));
+  transition: inset var(--transition-ui);
+}
+
+/*
+  left=-500% extends the gradient far across the header —
+  this covers the full bar width from the close button on the right
+  all the way to the left edge, which is the intended sweep effect.
+  right=-20px gives a slight bleed past the button's right edge
+*/
+dialog#reel > header > button:hover::before,
+dialog#reel > header > button:focus-visible::before {
+  inset: 30% -20px 30% -500%;
+}
+
+/* ── reel ─────────────────────────────────────────────────────────────────── */
 
 dialog#reel > section.reel {
   width: 100%;
+  /* overflow:hidden clips the video to the section bounds on small viewports */
   overflow: hidden;
 }
 
-/* subtracting --bar-height keeps the video inside the viewport at any height */
 dialog#reel > section.reel > video {
+  /* display:block removes the inline baseline gap browsers add to media elements */
   display: block;
   width: 100%;
-  max-height: calc(100vh - var(--bar-height));
+  /*
+    max-height subtracts the header bar so the video never exceeds the viewport.
+    100vh fallback first, 100dvh second — dvh accounts for mobile browser chrome
+    (address bar, tab bar) that static vh ignores
+  */
+  max-height: calc(100vh  - var(--bar-height));
   max-height: calc(100dvh - var(--bar-height));
+  /*
+    aspect-ratio enforces 16:9 even when the height is constrained —
+    without this the video collapses to zero height if width is set but
+    height is limited by max-height
+  */
   aspect-ratio: 16 / 9;
 }
 
-/* shown only when the browser has no video support */
+/* matches the dialog h2 style — shown only when the browser has no video support */
 dialog#reel > section.reel > video > p {
   font: italic 400 1rem/1 federo;
   text-transform: uppercase;
