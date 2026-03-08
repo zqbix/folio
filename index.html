@@ -2,69 +2,196 @@
 <html lang="en">
 
 <head>
+
+  <!--
+    charset must be the very first meta — browsers sniff encoding
+    before parsing anything else, so declaring it late can cause
+    misinterpretation of characters that appear earlier in the document
+  -->
   <meta charset="UTF-8" />
+
+  <!--
+    CSP locks resource loading to same-origin only.
+    no CDN fonts, no inline scripts, no external anything —
+    this site is fully self-contained so the strictest policy is safe
+    and prevents any accidental or injected third-party requests
+  -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+
+  <!-- standard viewport — initial-scale=1 prevents iOS auto-zoom on load -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    tells the browser this page is dark-only.
+    prevents a white flash on load before CSS kicks in,
+    and keeps browser UI (scrollbars, form controls) in dark mode
+  -->
   <meta name="color-scheme" content="dark" />
+
+  <!-- tints the browser chrome on mobile (Android Chrome, Safari PWA) -->
   <meta name="theme-color" content="#121212" />
+
+  <!-- explicitly allow indexing — default is index/follow but being explicit is safer -->
   <meta name="robots" content="index, follow" />
+
+  <!--
+    no-referrer: when a visitor clicks the email link or any outbound,
+    the destination site won't see the portfolio URL in their logs
+  -->
   <meta name="referrer" content="no-referrer" />
+
   <meta name="description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://zqbix.github.io/folio/" />
-  <meta property="og:title" content="zqbix" />
-  <meta property="og:description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
-  <meta property="og:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
-  <meta property="og:image:width" content="1920" />
+
+  <!-- ── open graph ─────────────────────────────────────────────────────── -->
+  <!--
+    og:image dimensions and type are required for validators and some
+    platforms (LinkedIn) to render the preview card correctly
+  -->
+  <meta property="og:type"         content="website" />
+  <meta property="og:url"          content="https://zqbix.github.io/folio/" />
+  <meta property="og:title"        content="zqbix" />
+  <meta property="og:description"  content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
+  <meta property="og:image"        content="https://zqbix.github.io/folio/reel/reel.jpg" />
+  <meta property="og:image:width"  content="1920" />
   <meta property="og:image:height" content="1080" />
-  <meta property="og:image:type" content="image/jpeg" />
-  <meta property="og:image:alt" content="zqbix — vfx artist reel thumbnail" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="zqbix" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:url" content="https://zqbix.github.io/folio/" />
-  <meta name="twitter:title" content="zqbix" />
+  <meta property="og:image:type"   content="image/jpeg" />
+  <meta property="og:image:alt"    content="zqbix — vfx artist reel thumbnail" />
+  <meta property="og:locale"       content="en_US" />
+  <meta property="og:site_name"    content="zqbix" />
+
+  <!-- ── twitter card ──────────────────────────────────────────────────── -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:url"         content="https://zqbix.github.io/folio/" />
+  <meta name="twitter:title"       content="zqbix" />
   <meta name="twitter:description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
-  <meta name="twitter:image" content="https://zqbix.github.io/folio/reel/reel.jpg" />
-  <meta name="twitter:image:alt" content="zqbix — vfx artist reel thumbnail" />
+  <meta name="twitter:image"       content="https://zqbix.github.io/folio/reel/reel.jpg" />
+  <meta name="twitter:image:alt"   content="zqbix — vfx artist reel thumbnail" />
+
+  <!--
+    canonical prevents duplicate-content penalties if the page is ever served
+    under multiple URLs (http vs https, trailing slash, www vs non-www etc.)
+  -->
   <link rel="canonical" href="https://zqbix.github.io/folio/" />
-  <link rel="icon" href="./img/favicon.svg" type="image/svg+xml" />
-  <link rel="icon" type="image/png" href="./img/favicon.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="./img/apple-touch-icon.png" />
+
+  <!--
+    SVG favicon first — modern browsers prefer it (resolution-independent).
+    PNG fallback for older browsers that don't support SVG favicons.
+    apple-touch-icon is used when the page is saved to an iOS home screen —
+    180×180 is the size Apple recommends to avoid upscaling artifacts
+  -->
+  <link rel="icon"             href="./img/favicon.svg"          type="image/svg+xml" />
+  <link rel="icon"             href="./img/favicon.png"          type="image/png" />
+  <link rel="apple-touch-icon" href="./img/apple-touch-icon.png" sizes="180x180" />
+
   <title>zqbix</title>
+
+  <!--
+    font preload with crossorigin — the fetch mode for fonts must be
+    anonymous (crossorigin) even for same-origin files, otherwise the
+    preloaded response is not reused and the font downloads twice.
+    font-display:optional in CSS means the preload is what makes the
+    font available on first paint with no layout shift
+  -->
   <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin />
+
+  <!--
+    reel thumbnail preloaded at low priority — it is only needed once
+    the dialog opens, so it should not compete with above-the-fold resources.
+    fetchpriority="low" keeps it from delaying LCP
+  -->
   <link rel="preload" href="./reel/reel.jpg" as="image" fetchpriority="low" />
+
   <link rel="stylesheet" href="./css/index.css" />
+
+  <!--
+    defer: script downloads in parallel with HTML parsing and executes
+    after the document is fully parsed — no blocking, no DOMContentLoaded
+    wrapper needed in JS
+  -->
   <script src="./js/index.js" defer></script>
+
 </head>
 
 <body>
 
   <main>
+
     <section id="start" aria-labelledby="line01">
-      <h1 class="layer line01">gude..</h1>
+
+      <!--
+        the second dot lives outside #egg deliberately — only the first dot
+        is the easter egg trigger. both dots look visually identical,
+        making the clickable area impossible to guess without exploration.
+
+        aria-hidden on #egg prevents screen readers from interrupting the
+        h1 readout mid-word ("gude [open projects archive] ..") — the span
+        is still focusable and its own aria-label fires when focused directly
+      -->
+      <h1 class="layer line01">gude<span
+          id="egg"
+          role="link"
+          tabindex="0"
+          aria-hidden="true"
+          aria-label="open projects archive">.</span>.</h1>
+
       <p class="layer line02">i'm a houdini vfx-artist</p>
       <p class="layer line03">with maya modeling background</p>
       <p class="layer line04">and a few needed nuke skillz</p>
       <p class="layer line05">located in germany — near ffm</p>
       <p class="layer line06">feel free to check out my</p>
+
+      <!-- aria-label gives screen readers the full action context -->
       <button class="layer line07" type="button" aria-label="open showreel">showreel</button>
+
       <p class="layer line08">and drop me a line at</p>
-      <button class="layer line09" type="button"><span data-user="zqbix" data-domain="protonmail.com"></span></button>
+
+      <!--
+        email is assembled from data attributes in JS at runtime —
+        stops naive scrapers from harvesting it directly from source.
+        aria-label is also set in JS so it reflects the assembled address.
+        the inner span is the render target; its visible text is injected
+        via CSS ::before / ::after so nothing sits in the DOM in plain text
+      -->
+      <button class="layer line09" type="button">
+        <span data-user="zqbix" data-domain="protonmail.com"></span>
+      </button>
+
     </section>
+
   </main>
 
+  <!--
+    native <dialog> provides showModal(), top-layer stacking, Escape-to-close,
+    and focus trapping for free — no JS reimplementation needed.
+    aria-modal tells AT that content outside the dialog is inert while open.
+    aria-labelledby wires the dialog's accessible name to the visible h2 inside
+  -->
   <dialog id="reel" aria-modal="true" aria-labelledby="reel-title">
+
     <header>
       <h2 id="reel-title">reel</h2>
       <button type="button" aria-label="close showreel">&#10005;</button>
     </header>
+
     <section class="reel">
-      <video poster="./reel/reel.jpg" preload="metadata" controls playsinline aria-label="vfx showreel">
+      <!--
+        poster: shows the thumbnail frame while the video loads.
+        preload="metadata": fetches only duration/dimensions on page load —
+          the full video file is not downloaded until the dialog opens.
+        playsinline: prevents iOS from hijacking playback into fullscreen.
+        controls: native browser controls — no custom player overhead needed
+      -->
+      <video
+        poster="./reel/reel.jpg"
+        preload="metadata"
+        controls
+        playsinline
+        aria-label="vfx showreel">
         <source src="./reel/reel.mp4" type="video/mp4" />
         <p>your browser does not support video</p>
       </video>
     </section>
+
   </dialog>
 
 </body>
