@@ -7,7 +7,7 @@
 */
 @font-face {
   font-family: federo;
-  src: url(../font/federo.ttf);
+  src: url(../font/federo.woff2) format('woff2');
   font-display: optional;
 }
 
@@ -465,7 +465,7 @@ dialog#reel > header > button::before {
 */
 dialog#reel > header > button:hover::before,
 dialog#reel > header > button:focus-visible::before {
-  inset: 30% -20px 30% -500%;
+  inset: 10% -20px 10% -500%;
 }
 
 /* ── reel ─────────────────────────────────────────────────────────────────── */
