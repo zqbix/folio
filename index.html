@@ -39,6 +39,7 @@
     the destination site won't see the portfolio URL in their logs
   -->
   <meta name="referrer" content="no-referrer" />
+  <meta name="author"   content="zqbix" />
 
   <meta name="description" content="vfx artist — procedural simulations and cinematic visual effects for film, episodic and commercial productions" />
 
@@ -92,7 +93,7 @@
     font-display:optional in CSS means the preload is what makes the
     font available on first paint with no layout shift
   -->
-  <link rel="preload" href="./font/federo.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="./font/federo.woff2" as="font" type="font/woff2" crossorigin />
 
   <!--
     reel thumbnail preloaded at low priority — it is only needed once
@@ -187,6 +188,7 @@
         controls
         playsinline
         aria-label="vfx showreel">
+        <source src="./reel/reel.webm" type="video/webm" />
         <source src="./reel/reel.mp4" type="video/mp4" />
         <p>your browser does not support video</p>
       </video>
