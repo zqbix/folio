@@ -3,35 +3,95 @@
 
 <head>
 
+  <!-- charset first — browsers sniff encoding before parsing anything else -->
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="color-scheme" content="dark" />
-  <meta name="theme-color" content="#121212" />
-  <meta name="robots" content="noindex, nofollow" />
-  <meta name="referrer" content="no-referrer" />
-  <meta name="author"   content="zqbix" />
 
+  <!-- CSP locks all resources to same-origin — no external scripts, fonts, or requests -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+
+  <!-- initial-scale=1 prevents iOS auto-zoom on load -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- dark-only page — prevents white flash before CSS loads -->
+  <meta name="color-scheme" content="dark" />
+
+  <!-- tints browser chrome on mobile -->
+  <meta name="theme-color" content="#121212" />
+
+  <!--
+    noindex/nofollow — this page is intentionally hidden behind the easter egg
+    on the main site and should never appear in search results
+  -->
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- suppresses the referrer header on any outbound navigation -->
+  <meta name="referrer" content="no-referrer" />
+
+  <meta name="author" content="zqbix" />
+
+  <!--
+    SVG favicon first — resolution-independent, preferred by modern browsers.
+    PNG fallback for older browsers.
+    apple-touch-icon for iOS home screen saves — 180×180 avoids upscaling
+  -->
   <link rel="icon"             href="../img/favicon.svg"          type="image/svg+xml" />
   <link rel="icon"             href="../img/favicon.png"          type="image/png" />
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180" />
 
   <title>zqbix — folio</title>
 
+  <!--
+    font preload — crossorigin required even for same-origin fonts,
+    otherwise the preloaded response is not reused and the font downloads twice.
+    font-display:optional in CSS means the preload is what makes it
+    available on first paint with no layout shift
+  -->
   <link rel="preload" href="../font/federo.woff2" as="font" type="font/woff2" crossorigin />
 
+  <!--
+    JSON preload — fetch() fires as soon as the deferred script executes,
+    so preloading the manifest lets the browser start the request in parallel
+    with script download rather than waiting for JS to execute first.
+    crossorigin required because fetch() uses cors mode
+  -->
+  <link rel="preload" href="./index.json" as="fetch" crossorigin />
+
   <link rel="stylesheet" href="./index.css" />
+
+  <!-- defer — parses in parallel, executes after DOM is ready, no blocking -->
   <script src="./index.js" defer></script>
 
 </head>
 
 <body>
 
-  <div class="flex-wrap">
-    <div class="folio">
-      <div class="folio-grid"></div>
-    </div>
-  </div>
+  <main>
+
+    <header>
+      <!-- visible page title — also read by screen readers as the page heading -->
+      <h1>folio-dump</h1>
+    </header>
+
+    <!--
+      aria-label makes this an explicitly named landmark for screen readers —
+      without it, the section is an unlabelled region which is less useful
+      for AT navigation. the grid is injected here by JS at load time
+    -->
+    <!--
+      template is inert — not rendered or fetched until cloned by JS.
+      defines the structure for each grid cell
+    -->
+    <template id="grid-item">
+      <a class="cell" target="_blank" rel="noopener noreferrer">
+        <img class="thumb" loading="lazy" decoding="async">
+        <p class="title"></p>
+        <p class="info"></p>
+      </a>
+    </template>
+
+    <section class="grid" aria-label="project archive"></section>
+
+  </main>
 
 </body>
 </html>

@@ -1,17 +1,30 @@
+/*
+  font-display:optional paired with <link rel="preload"> in HTML —
+  optional means: use the font only if it arrives before first paint,
+  never swap in later. eliminates layout shift entirely.
+  the preload makes sure it wins the race on first visit
+*/
 @font-face {
   font-family: federo;
   src: url(../font/federo.woff2) format('woff2');
   font-display: optional;
 }
 
+/* ── design tokens ────────────────────────────────────────────────────────── */
+
+/*
+  only the tokens actually used in this file — no dead weight.
+  --content-width centralises the max-width so header and section
+  stay in sync without repeating the value
+*/
 :root {
-  --clr-07:  hsl(0, 0%, 7%);
-  --clr-20:  hsl(0, 0%, 20%);
-  --clr-55:  hsl(0, 0%, 55%);
-  --clr-100: hsl(0, 0%, 100%);
-  --transition-ui: 0.3s ease;
+  --clr-07:        hsl(0, 0%, 7%);
+  --clr-55:        hsl(0, 0%, 55%);
+  --content-width: min(1920px, 100%);
   --transition-btn: .6s cubic-bezier(.25, .8, .25, 1);
 }
+
+/* ── reset ────────────────────────────────────────────────────────────────── */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -19,6 +32,10 @@
   padding: 0;
 }
 
+/*
+  global motion kill-switch — !important overrides any component-level
+  transition or animation regardless of specificity
+*/
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     transition: none !important;
@@ -26,34 +43,79 @@
   }
 }
 
+/* ── document ─────────────────────────────────────────────────────────────── */
+
 html, body {
   width: 100%;
   background: var(--clr-07);
+  /*
+    text-align:center on body is inherited by all text descendants —
+    buttons, titles, and info lines all center without needing it repeated
+  */
+  text-align: center;
 }
 
-.flex-wrap {
+/* ── layout ───────────────────────────────────────────────────────────────── */
+
+/*
+  flex column so header stacks above section vertically.
+  full width so --content-width on children constrains them independently
+*/
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  width: var(--content-width);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.folio {
-  width: min(1920px, 100%);
+header h1 {
+  font: italic 400 clamp(2rem, 5vw, 5rem)/1 federo;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--clr-55);
+  user-select: none;
+  padding: 40px;
 }
 
-.folio .folio-grid {
+/* ── grid ─────────────────────────────────────────────────────────────────── */
+
+/*
+  auto-fill with minmax: columns are added/removed automatically as the
+  viewport widens — no breakpoints needed.
+  min(360px, 100%) prevents a single cell from overflowing on viewports
+  narrower than 360px by capping the minimum at 100vw
+*/
+.grid {
+  width: var(--content-width);
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
 }
 
+/* ── button (grid cell) ───────────────────────────────────────────────────── */
 
-
-
-
-button {
+/*
+  position:relative creates the containing block for the absolutely
+  positioned img inside — without it the img escapes to the viewport.
+  appearance:none (+ webkit prefix) strips all native browser button styling.
+  overflow:hidden clips the scaled image on hover so it doesn't bleed
+  outside the cell boundary.
+  outline-style:solid on the base (not just :hover) is necessary because
+  outline-style can't be transitioned from none to solid — the browser
+  treats it as a binary switch, not an interpolatable value.
+  outline-color:transparent means it's invisible at rest but already
+  "there", so the color transition to semi-white works smoothly on hover
+*/
+.cell {
+  text-decoration: none;
   position: relative;
-  appearance: none;
-  -webkit-appearance: none;
   background: none;
   border: none;
   display: flex;
@@ -76,11 +138,21 @@ button {
   outline-offset: -15px;
   transition: all var(--transition-btn);
 }
-button:hover,
-button:focus-visible {
+
+/* only the color needs to change — all other outline properties are already set */
+.cell:hover,
+.cell:focus-visible {
   outline-color: hsla(0, 0%, 100%, 0.5);
 }
-button img {
+
+/* ── thumbnail ────────────────────────────────────────────────────────────── */
+
+/*
+  position:absolute + inset:0 takes the image out of flow so it fills
+  the button without affecting the flex layout used to center the text.
+  object-fit:cover fills the square cell regardless of image dimensions
+*/
+.cell img {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -89,13 +161,25 @@ button img {
   object-position: center;
   transition: all var(--transition-btn);
 }
-button:hover img,
-button:focus-visible img {
+
+/*
+  scale + blur + near-zero opacity together: image fades almost entirely
+  out so the text overlay reads clearly against the dark background behind it
+*/
+.cell:hover img,
+.cell:focus-visible img {
   transform: scale(1.15);
   filter: blur(10px);
   opacity: .05;
 }
-button p.title {
+
+/* ── text overlay ─────────────────────────────────────────────────────────── */
+
+/*
+  title starts offset left and blurred — slides in horizontally on hover.
+  horizontal slide differentiates it visually from the info lines below
+*/
+.cell p.title {
   font-size: 1.1rem;
   line-height: 2.5;
   transform: translateX(-30px);
@@ -103,9 +187,18 @@ button p.title {
   opacity: 0;
   transition: all var(--transition-btn);
 }
-button p.info {
+
+/*
+  info starts offset down and blurred — slides up on hover.
+  vertical slide creates depth separation from the title
+*/
+.cell p.info {
   font-size: 0.7rem;
   line-height: 1.5;
+  /*
+    white-space:pre-wrap is required for the \n characters injected by JS
+    to render as actual line breaks — without it they're collapsed to spaces
+  */
   white-space: pre-wrap;
   text-align: center;
   transform: translateY(15px);
@@ -113,14 +206,20 @@ button p.info {
   opacity: 0;
   transition: all var(--transition-btn);
 }
-button:hover p.title,
-button:focus-visible p.title {
+
+.cell:hover p.title,
+.cell:focus-visible p.title {
   opacity: 1;
   transform: none;
   filter: none;
 }
-button:hover p.info,
-button:focus-visible p.info {
+
+/*
+  info at half opacity — intentionally dimmer than the title to establish
+  visual hierarchy between project name and metadata
+*/
+.cell:hover p.info,
+.cell:focus-visible p.info {
   opacity: .5;
   transform: none;
   filter: none;
