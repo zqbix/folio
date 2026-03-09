@@ -66,7 +66,7 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 }
 
 header {
@@ -159,6 +159,7 @@ header h1 {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  z-index: 0;
   transition: all var(--transition-btn);
 }
 
@@ -180,6 +181,7 @@ header h1 {
   horizontal slide differentiates it visually from the info lines below
 */
 .cell p.title {
+  z-index: 1;
   font-size: 1.1rem;
   line-height: 2.5;
   transform: translateX(-30px);
@@ -193,6 +195,7 @@ header h1 {
   vertical slide creates depth separation from the title
 */
 .cell p.info {
+  z-index: 1;
   font-size: 0.7rem;
   line-height: 1.5;
   /*
