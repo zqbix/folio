@@ -1,0 +1,98 @@
+@font-face {
+  font-family: federo;
+  src: url(../font/federo.woff2) format('woff2');
+  font-display: optional;
+}
+
+:root {
+  --clr-07:  hsl(0, 0%, 7%);
+  --clr-10:  hsl(0, 0%, 10%);
+  --clr-40:  hsl(0, 0%, 40%);
+  --clr-60:  hsl(0, 0%, 60%);
+  --clr-80:  hsl(0, 0%, 80%);
+  --clr-100: hsl(0, 0%, 100%);
+
+  --transition-ui:     0.3s ease; /* interactive elements */
+  --transition-dialog: 1s ease;   /* dialog fade — slower feels cinematic */
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+html, body {
+  width: 100%;
+  background: var(--clr-07);
+}
+
+main {
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+main > *:nth-child(1) { animation: fadeUp 1s ease 0.2s both; }
+main > *:nth-child(2) { animation: fadeUp 1s ease 0.4s both; }
+main > *:nth-child(3) { animation: fadeUp 1s ease 0.6s both; }
+main > *:nth-child(4) { animation: fadeUp 1s ease 0.8s both; }
+main > *:nth-child(5) { animation: fadeUp 1s ease 1.0s both; }
+main > *:nth-child(6) { animation: fadeUp 1s ease 1.2s both; }
+main > *:nth-child(7) { animation: fadeUp 1s ease 1.4s both; }
+main > *:nth-child(8) { animation: fadeUp 1s ease 1.6s both; }
+main > *:nth-child(9) { animation: fadeUp 1s ease 1.8s both; }
+main > *:nth-child(10) { animation: fadeUp 1s ease 2.0s both; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+header,
+section {
+  width: min(1280px, 92vw);
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  font-family: federo;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+  pointer-events: none;
+  user-select: none;
+}
+
+h1 {
+  font-size: clamp(3.5rem, 10.5vw, 9.5rem);
+  letter-spacing: 0.04em;
+  color: var(--clr-80);
+  padding-left: 0;
+  margin: 1em 0;
+}
+
+h2 {
+  font-size: clamp(1.2rem, 3vw, 2.4rem);
+  letter-spacing: 0.15em;
+  color: var(--clr-60);
+  padding-left: clamp(0px, 2.5vw, 2rem);
+  margin: 1em 0;
+}
+
+p {
+  font-size: clamp(0.85rem, 2.1vw, 1.7rem);
+  letter-spacing: 0.2em;
+  line-height: 1.2;
+  color: var(--clr-40);
+  padding-left: clamp(0px, 5vw, 4rem);
+  margin: 0 0 5em 0;
+}
