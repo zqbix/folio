@@ -1,142 +1,158 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-
   <meta charset="UTF-8" />
-
   <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'">
-
   <meta name="viewport"    content="width=device-width, initial-scale=1.0" />
   <meta name="color-scheme" content="dark" />
   <meta name="theme-color"  content="#121212" />
   <meta name="robots"       content="noindex, nofollow" />
   <meta name="referrer"     content="no-referrer" />
   <meta name="author"       content="zqbix" />
-
   <link rel="icon"             href="../img/favicon.svg"          type="image/svg+xml" />
   <link rel="icon"             href="../img/favicon.png"          type="image/png" />
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180" />
-
   <title>fuckyeah</title>
-
   <link rel="preload" href="../font/federo.woff2" as="font" type="font/woff2" crossorigin />
-
   <style>
+    @font-face {
+      font-family: "federo";
+      src: url(../font/federo.woff2) format('woff2');
+      font-display: swap;
+    }
+    :root {
+      --clr-07:  hsl(0, 0%, 7%);
+      --clr-10:  hsl(0, 0%, 10%);
+      --clr-20:  hsl(0, 0%, 20%);
+      --clr-40:  hsl(0, 0%, 40%);
+      --clr-60:  hsl(0, 0%, 60%);
+      --clr-80:  hsl(0, 0%, 80%);
+      --clr-100: hsl(0, 0%, 100%);
+      --transition-ui:  0.2s ease;
+      --transition-img:  0.7s ease;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+    html, body {
+      width: 100%;
+      background: var(--clr-07);
+    }
+    main {
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    main > * {
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    header,
+    section {
+      width: min(800px, 92vw);
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+      user-select: none;
+    }
+    h1 {
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(6rem, 18vw, 12rem);
+      line-height: 1;
+      font-family: "federo", sans-serif;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      color: var(--clr-80);
+      padding: 0.5em 0 0.5em clamp(0px, 1vw, 1rem);
+    }
+    h2 {
+      position: relative;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1;
+      font-family: "federo", sans-serif;
+      letter-spacing: 0.15em;
+      word-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-60);
+      padding: 0.5em 0 0.5em clamp(0px, 1vw, 1em);
+      transition: color var(--transition-ui);
+    }
+    section:hover h2 {
+      color: var(--clr-80);
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      inset: 0 100% 0 0;
+      z-index: -1;
+      background-image: linear-gradient(to right, var(--clr-20), var(--clr-07));
+      transition: inset var(--transition-ui);
+    }
+    section:hover h2::before {
+      inset: 0 0 0 -1em;
+    }
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(1.3rem, 3vw, 1.5rem);
+      line-height: 1.3;
+      font-family: "Courier New", monospace;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: lowercase;
+      color: var(--clr-40);
+      border-left: 1px solid var(--clr-20);
+      padding: 1em 0 1em clamp(0px, 3vw, 3rem);
+    }
+    p > span {
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+      text-transform: uppercase;
+      padding: 0 0.5em 0 0.7em;
+      background-color: var(--clr-40);
+      color: var(--clr-07);
+    }
+    img {
+      width: 100%;
+      filter: grayscale(1) blur(10px);
+      opacity: 0.2;
+      transition: all var(--transition-img);
+    }
+    img:hover {
+      filter: grayscale(0) blur(0);
+      opacity: 0.75;
+    }
 
-@font-face {
-  font-family: "federo";
-  src: url(../font/federo.woff2) format('woff2');
-  font-display: swap;
-}
-:root {
-  --clr-07:  hsl(0, 0%, 7%);
-  --clr-10:  hsl(0, 0%, 10%);
-  --clr-20:  hsl(0, 0%, 20%);
-  --clr-40:  hsl(0, 0%, 40%);
-  --clr-60:  hsl(0, 0%, 60%);
-  --clr-80:  hsl(0, 0%, 80%);
-  --clr-100: hsl(0, 0%, 100%);
-  --transition-ui:  0.2s ease; /* interactive elements */
-}
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-html, body {
-  width: 100%;
-  background: var(--clr-07);
-}
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-main > * {
-  animation: fadeUp 1s ease both;
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(50px) scale(0.9); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-header,
-section {
-  width: min(960px, 92vw);
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  pointer-events: auto;
-  user-select: none;
-}
-h1 {
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(4rem, 12vw, 8rem);
-  line-height: 1;
-  font-family: "federo", sans-serif;
-  letter-spacing: normal;
-  word-spacing: normal;
-  white-space: pre-line;
-  text-transform: none;
-  color: var(--clr-80);
-  padding: 0.5em 0 0.5em clamp(0px, 1vw, 1rem);
-}
-h2 {
-  position: relative;
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(1.2rem, 3.6vw, 2.4rem);
-  line-height: 1;
-  font-family: "federo", sans-serif;
-  letter-spacing: 0.15em;
-  word-spacing: 0.1em;
-  white-space: pre-line;
-  text-transform: uppercase;
-  color: var(--clr-60);
-  padding: 0.5em 0 0.5em clamp(0px, 1vw, 1em);
-}
-h2::before {
-  content: "";
-  position: absolute;
-  inset: 0 100% 0 0;
-  z-index: -1;
-  background-image: linear-gradient(to right, var(--clr-40), var(--clr-07));
-  transition: inset var(--transition-ui);
-}
-section:hover h2::before {
-  inset: 0 70% 0 -1em;
-}
-p {
-  font-style: normal;
-  font-weight: 400;
-  font-size: clamp(0.7rem, 2.1vw, 1.4rem);
-  line-height: 1.3;
-  font-family: "Courier New", monospace;
-  letter-spacing: normal;
-  word-spacing: normal;
-  white-space: pre-line;
-  text-transform: none;
-  color: var(--clr-40);
-  border-left: 1px solid var(--clr-20);
-  padding: 1em 0 1em clamp(0px, 3vw, 3rem);
-}
-p > span {
-  font-weight: 900;
-  letter-spacing: 0.2em;
-  white-space: nowrap;
-  text-transform: uppercase;
-  padding: 0 0.5em 0 0.7em;
-  background-color: var(--clr-40);
-  color: var(--clr-07);
-}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -144,144 +160,126 @@ p > span {
 
 
   </style>
-
 </head>
-
 <body>
-
   <main>
-
     <header>
       <h1>fuCk</h1>
     </header>
-
     <section>
-      <h2>die wahrheit</h2>
-      <p>in der nacht auf den 17ten mai diesen jahres
-        feiert die bsl-crew ihr 10-jaehriges jubilaeum
-        im short-because.
-
-        und wie es der zufall so will,
-        ist das meine geburtstags-nacht.
-
+      <h2>realitaet</h2>
+      <img src="./01-bsl.png">
+      <p>in der nacht auf den 17ten mai diesen jahres<br>
+        feiert die bsl-crew ihr 10-jaehriges jubilaeum<br>
+        im short-because.<br>
+        <br>
+        und wie es der zufall so will,<br>
+        ist das meine geburtstags-nacht.<br>
+        <br>
         christian peter wird <span>50</span></p>
     </section>
-
     <section>
-      <h2>das anliegen</h2>
-      <p>es waere wunderpraechtig wenn alle,
-        die <span>auf keinen fall</span> zeit haben,
-        relativ zeitnah bescheid geben koennten.
-        vll sind schon urlaube gebucht usw..
-        alle anderen .. geil.
-        
-        falls ausreichend leutz am start sind,
-        gibts warmes essen, kalte longdrinks
-        und eine herzhafte ueberdosierung im
-        short-because mit anschliessender
-        nachtruhe bei der ansaessigen gendarmerie.
-        
-        falls halt net, dann halt net..
-        infos meinerseits folgen nach erhalt
+      <h2>flucht</h2>
+      <p>es waere wunderpraechtig wenn alle,<br>
+        die <span>auf keinen fall</span> zeit haben,<br>
+        relativ zeitnah bescheid geben koennten.<br>
+        vll sind schon urlaube gebucht usw..<br>
+        <br>
+        alle anderen .. geil.<br>
+        <br>
+        falls ausreichend leutz am start sind,<br>
+        gibts warmes essen, kalte longdrinks<br>
+        und eine herzhafte ueberdosierung im<br>
+        short-because mit anschliessender<br>
+        nachtruhe bei der ansaessigen gendarmerie.<br>
+        <br>      
+        falls halt net, dann halt net..<br>
+        <br>
+        infos meinerseits folgen nach erhalt<br>
         und auswertung der beteiligten stimmen.</p>
     </section>
-
     <section>
-      <h2>das vielleicht</h2>
-      <p>die nun folgenden abschnitte befassen sich
-        mit den theoretischen stationen des abends
-        und allgemeinen informationen.</p>
+      <h2>agenda</h2>
+      <p>die nun folgenden abschnitte befassen sich<br>
+        mit den theoretischen stationen des abends<br>
+        und allgemeinen informationen..</p>
     </section>
-
     <section>
-      <h2>das portal</h2>
-      <p>satan hoechst persoenlich wird sich ab <span>6:66</span>
-        bzw 19:06uhr um den einlass kuemmern.
-        
-        natuerlich koennen aktuelle sexualpartner,
-        und auch solche die es vll mal werden wollen,
-        den abend gemeinsam mit dem geladenen poebel gestalten.</p>
+      <h2>portal</h2>
+      <p>satan hoechst persoenlich wird sich ab <span>6:66</span><br>
+        bzw 19:06uhr um den einlass kuemmern.<br>
+        <br>      
+        natuerlich koennen aktuelle sexualpartner,<br>
+        und auch solche die es vll mal werden wollen,<br>
+        den abend gemeinsam mit dem poebel geniessen.</p>
     </section>
-
     <section>
-      <h2>die basis</h2>
-      <p><span>langos</span> wird am besagten abend ab 20:00uhr
-        im 5-minuten-takt aus satans brennendem arsch
-        direkt in euer maul gefurzt.
-        
-        ich baller noch ne angabe der zutaten
-        hier rein fuer alle allergikerinnen,
-        allergiker oder auch allergibraltar.
-        
-        extra-wuensche koennen gerne geaeussert werden..
-        beim inder nebenan, von der eigenen couch aus.
-        
-        mehl/wasser/hefe/salz/zucker/pfeffer/...</p>
+      <h2>basis</h2>
+      <p><span>langos</span> wird am besagten abend ab 20:00uhr<br>
+        im 5-minuten-takt aus satans brennendem arsch<br>
+        direkt in euer maul geschissen.<br>  
+        <br>      
+        ich baller noch ne angabe der zutaten<br>
+        hier rein fuer alle allergikerinnen,<br>
+        allergiker oder auch allergibraltar.<br>
+        <br>      
+        extra-wuensche koennen gerne geaeussert werden..<br>
+        beim inder nebenan, von der eigenen couch aus.<br> 
+        <br>       
+        mehl wasser hefe salz zucker pfeffer</p>
     </section>
-
     <section>
-      <h2>das tausendstel</h2>
-      <p>die fortlaufende abendliche unterstuetzung
-        wird durch ein 'adk' (aktiv-dual-konzept)
-        realisiert und zielstrebig gewaehrleistet.
-        
-        zum einen durch einen kuehlen longdrink,
-        bestehend aus <span>vodka-wostok-eis</span>
-        
+      <h2>tausendstel</h2>
+      <p>die fortlaufende abendliche unterstuetzung<br>
+        wird durch ein <span>aktiv-dual-konzept</span><br>
+        realisiert und zielstrebig gewaehrleistet.<br>
+        <br>       
+        zum einen durch einen kuehlen longdrink,<br>
+        bestehend aus <span>vodka-wostok-eis</span><br>
+        <br>
         und zum anderen regelt <span>schmucker</span></p>
     </section>
-
     <section>
-      <h2>der wahnsinn</h2>
-      <p>was nicht fehlen sollte, darf auch nicht fehlen..
+      <h2>wahnsinn</h2>
+      <p>was nicht fehlen sollte, darf auch nicht fehlen..<br>
         fuer <span>alles</span> wird gesorgt sein!</p>
     </section>
-
     <section>
-      <h2>die reise</h2>
-      <p>175 zigaretten spaeter..
-
-        die musikveranstaltung wird nach einem
-        kurzen spaziergang mit endlosem geschwaetz,
-        gegen eine mir unbekannte uhrzeit aufgesucht,
-        betreten und nicht ohne frisch gestochenes piercing
+      <h2>reise</h2>
+      <p>175 zigaretten spaeter..<br>
+        <br>
+        die <span>musikveranstaltung</span> wird nach einem<br>
+        kurzen spaziergang mit endlosem geschwaetz,<br>
+        gegen eine mir unbekannte uhrzeit aufgesucht,<br>
+        betreten und nicht ohne frisch gestochenes piercing<br>
         oder die jacke eines tuerstehers wieder verlassen.</p>
     </section>
-
     <section>
-      <h2>der sonderfall moana</h2>
-      <p>aus gegebenem anlass wuerde ich dir
-        die ersten beiden <span>langosen</span> via express
-        direkt auf die couch liefern lassen.
-        
-        entweder fertig gebaut fuer den eigenen ofen,
-        oder schon gebacken fuer den direkt-verzehr.
-
-        wie du wolle .. sachste einfach bscheid, wa?!</p>
+      <h2>sonderfall moana</h2>
+      <p>aus gegebenem anlass wuerde ich dir<br>
+        die ersten beiden <span>langosen via express</span><br>
+        direkt auf die couch liefern lassen.<br>
+        <br>      
+        entweder fertig gebaut fuer den eigenen ofen,<br>
+        oder schon gebacken fuer den direkt-verzehr.<br>
+        <br>
+        wie du wolle .. sachste einfach bescheid.</p>
     </section>
-
     <section>
-      <h2>die zusammfassung</h2>
+      <h2>prost</h2>
       <p>16.05.2026 - 6:66pm</p>
     </section>
-
   </main>
-
   <script>
-
     document.querySelectorAll('main > *').forEach((el, i) => {
       el.style.animationDelay = `${(i + 1) * 0.1}s`;
-
       if (el.tagName === 'SECTION') {
         const h2 = el.querySelector('h2');
         if (!h2) return;
-        h2.id = h2.id || crypto.randomUUID();
+        h2.id = h2.id || h2.textContent.trim().toLowerCase().replace(/\s+/g, '-');
         el.setAttribute('aria-labelledby', h2.id);
       }
     });
-
   </script>
-
 </body>
-
 </html>
