@@ -19,12 +19,12 @@
   <link rel="icon"             href="../img/favicon.png"          type="image/png" />
   <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180" />
 
-  <title>bday-bash</title>
+  <title>fuckyeah</title>
 
   <link rel="preload" href="../font/federo.woff2" as="font" type="font/woff2" crossorigin />
 
   <style>
-    
+
 @font-face {
   font-family: "federo";
   src: url(../font/federo.woff2) format('woff2');
@@ -38,8 +38,7 @@
   --clr-60:  hsl(0, 0%, 60%);
   --clr-80:  hsl(0, 0%, 80%);
   --clr-100: hsl(0, 0%, 100%);
-  --transition-ui:     0.3s ease; /* interactive elements */
-  --transition-dialog: 1s ease;   /* dialog fade — slower feels cinematic */
+  --transition-ui:  0.2s ease; /* interactive elements */
 }
 *, *::before, *::after {
   box-sizing: border-box;
@@ -65,51 +64,84 @@ main > * {
   animation: fadeUp 1s ease both;
 }
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(50px) scale(0.95); }
+  from { opacity: 0; transform: translateY(50px) scale(0.9); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 header,
 section {
-  width: min(1280px, 92vw);
+  width: min(960px, 92vw);
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
-  font-family: "federo", serif;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 1;
-  text-transform: uppercase;
-  white-space: pre-line;
-  pointer-events: none;
+  pointer-events: auto;
   user-select: none;
 }
 h1 {
-  font-size: clamp(3.5rem, 10.5vw, 9.5rem);
-  letter-spacing: 0.04em;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(4rem, 12vw, 8rem);
+  line-height: 1;
+  font-family: "federo", sans-serif;
+  letter-spacing: normal;
+  word-spacing: normal;
+  white-space: pre-line;
+  text-transform: none;
   color: var(--clr-80);
-  padding-left: clamp(0px, 1vw, 0.8rem);
-  margin: 1em 0;
+  padding: 0.5em 0 0.5em clamp(0px, 1vw, 1rem);
 }
 h2 {
-  font-size: clamp(1.2rem, 3vw, 2.4rem);
+  position: relative;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 3.6vw, 2.4rem);
+  line-height: 1;
+  font-family: "federo", sans-serif;
   letter-spacing: 0.15em;
+  word-spacing: 0.1em;
+  white-space: pre-line;
+  text-transform: uppercase;
   color: var(--clr-60);
-  padding-left: clamp(0px, 2.5vw, 2rem);
-  margin: 1em 0;
+  padding: 0.5em 0 0.5em clamp(0px, 1vw, 1em);
+}
+h2::before {
+  content: "";
+  position: absolute;
+  inset: 0 100% 0 0;
+  z-index: -1;
+  background-image: linear-gradient(to right, var(--clr-40), var(--clr-07));
+  transition: inset var(--transition-ui);
+}
+section:hover h2::before {
+  inset: 0 70% 0 -1em;
 }
 p {
-  font-size: clamp(0.85rem, 2.1vw, 1.7rem);
-  letter-spacing: 0.1em;
-  line-height: 1.2;
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(0.7rem, 2.1vw, 1.4rem);
+  line-height: 1.3;
+  font-family: "Courier New", monospace;
+  letter-spacing: normal;
+  word-spacing: normal;
+  white-space: pre-line;
+  text-transform: none;
   color: var(--clr-40);
-  padding-left: clamp(0px, 5vw, 4rem);
-  margin: 0 0 5em 0;
+  border-left: 1px solid var(--clr-20);
+  padding: 1em 0 1em clamp(0px, 3vw, 3rem);
 }
 p > span {
-  letter-spacing: 0.5em;
-  padding: 0 0.2em;
-  background-color: var(--clr-20);
+  font-weight: 900;
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  padding: 0 0.5em 0 0.7em;
+  background-color: var(--clr-40);
   color: var(--clr-07);
 }
+
+
+
+
+
 
   </style>
 
@@ -120,28 +152,25 @@ p > span {
   <main>
 
     <header>
-      <h1>fcuk yeah!</h1>
+      <h1>fuCk</h1>
     </header>
 
     <section>
       <h2>die wahrheit</h2>
-      <p>
-        in der nacht auf den 17. mai diesen jahres
+      <p>in der nacht auf den 17ten mai diesen jahres
         feiert die bsl-crew ihr 10-jaehriges jubilaeum
         im short-because.
-        
+
         und wie es der zufall so will,
         ist das meine geburtstags-nacht.
-        
-        christian peter wird 50.
-      </p>
+
+        christian peter wird <span>50</span></p>
     </section>
 
     <section>
       <h2>das anliegen</h2>
-      <p>
-        es waere wunderpraechtig wenn alle,
-        die <span>auf&nbsp;-&nbsp;keinen&nbsp;-&nbsp;fall</span> zeit haben,
+      <p>es waere wunderpraechtig wenn alle,
+        die <span>auf keinen fall</span> zeit haben,
         relativ zeitnah bescheid geben koennten.
         vll sind schon urlaube gebucht usw..
         alle anderen .. geil.
@@ -154,36 +183,31 @@ p > span {
         
         falls halt net, dann halt net..
         infos meinerseits folgen nach erhalt
-        und auswertung der beteiligten stimmen.
-      </p>
+        und auswertung der beteiligten stimmen.</p>
     </section>
 
     <section>
       <h2>das vielleicht</h2>
-      <p>
-        die nun folgenden abschnitte befassen sich
+      <p>die nun folgenden abschnitte befassen sich
         mit den theoretischen stationen des abends
-        und allgemeinen informationen.
-      </p>
+        und allgemeinen informationen.</p>
     </section>
 
     <section>
       <h2>das portal</h2>
-      <p>
-        die tueren oeffnen sich ab 19:06uhr bzw 6uhr66..
-        die uhrzeit des toifelz!
+      <p>satan hoechst persoenlich wird sich ab <span>6:66</span>
+        bzw 19:06uhr um den einlass kuemmern.
         
         natuerlich koennen aktuelle sexualpartner,
         und auch solche die es vll mal werden wollen,
-        den abend gemeinsam mit dem geladenen poebel gestalten.
-      </p>
+        den abend gemeinsam mit dem geladenen poebel gestalten.</p>
     </section>
 
     <section>
       <h2>die basis</h2>
-      <p>
-        am besagten abend wird ab 20:00uhr langos
-        im 5-minuten-takt aus dem ofen gereicht.
+      <p><span>langos</span> wird am besagten abend ab 20:00uhr
+        im 5-minuten-takt aus satans brennendem arsch
+        direkt in euer maul gefurzt.
         
         ich baller noch ne angabe der zutaten
         hier rein fuer alle allergikerinnen,
@@ -192,60 +216,53 @@ p > span {
         extra-wuensche koennen gerne geaeussert werden..
         beim inder nebenan, von der eigenen couch aus.
         
-        a/b/c/d/e/f/g/h/..
-      </p>
+        mehl/wasser/hefe/salz/zucker/pfeffer/...</p>
     </section>
 
     <section>
       <h2>das tausendstel</h2>
-      <p>
-        die fortlaufende abendliche unterstuetzung
-        wird durch ein 'ADK' (aktiv-dual-konzept)
+      <p>die fortlaufende abendliche unterstuetzung
+        wird durch ein 'adk' (aktiv-dual-konzept)
         realisiert und zielstrebig gewaehrleistet.
         
         zum einen durch einen kuehlen longdrink,
-        bestehend aus vodka, wostok und eis.
+        bestehend aus <span>vodka-wostok-eis</span>
         
-        und zum anderen regelt schmucker.
-      </p>
+        und zum anderen regelt <span>schmucker</span></p>
     </section>
 
     <section>
       <h2>der wahnsinn</h2>
-      <p>
-        was nicht fehlen sollte, darf auch nicht fehlen..
-        fuer alles wird gesorgt sein!
-      </p>
+      <p>was nicht fehlen sollte, darf auch nicht fehlen..
+        fuer <span>alles</span> wird gesorgt sein!</p>
     </section>
 
     <section>
       <h2>die reise</h2>
-      <p>
+      <p>175 zigaretten spaeter..
+
         die musikveranstaltung wird nach einem
         kurzen spaziergang mit endlosem geschwaetz,
         gegen eine mir unbekannte uhrzeit aufgesucht,
         betreten und nicht ohne frisch gestochenes piercing
-        oder die jacke des tuerstehers wieder verlassen.
-      </p>
+        oder die jacke eines tuerstehers wieder verlassen.</p>
     </section>
 
     <section>
       <h2>der sonderfall moana</h2>
-      <p>
-        aus gegebenem anlass wuerde ich dir bei
-        bestehendem interesse die ersten beiden langosen
-        via express direkt auf die couch liefern lassen.
+      <p>aus gegebenem anlass wuerde ich dir
+        die ersten beiden <span>langosen</span> via express
+        direkt auf die couch liefern lassen.
         
-        entweder fertig gebaut zum finalisieren im heimischen ofen,
-        oder schon gebacken zum direkt-verzehr..
-      </p>
+        entweder fertig gebaut fuer den eigenen ofen,
+        oder schon gebacken fuer den direkt-verzehr.
+
+        wie du wolle .. sachste einfach bscheid, wa?!</p>
     </section>
 
     <section>
-      <h2>prost!</h2>
-      <p>
-        eof.
-      </p>
+      <h2>die zusammfassung</h2>
+      <p>16.05.2026 - 6:66pm</p>
     </section>
 
   </main>
