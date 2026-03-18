@@ -30,7 +30,7 @@
       --clr-80:  hsl(0, 0%, 80%);
       --clr-100: hsl(0, 0%, 100%);
       --transition-ui:  0.2s ease;
-      --transition-img:  0.7s ease;
+      --transition-img:  0.9s ease;
     }
     *, *::before, *::after {
       box-sizing: border-box;
@@ -93,6 +93,7 @@
       text-transform: uppercase;
       color: var(--clr-60);
       padding: 0.5em 0 0.5em clamp(0px, 1vw, 1em);
+      z-index: 0;
       transition: color var(--transition-ui);
     }
     section:hover h2 {
@@ -133,32 +134,15 @@
     }
     img {
       width: 100%;
-      filter: grayscale(1) blur(10px);
-      opacity: 0.2;
-      transition: all var(--transition-img);
+      aspect-ratio: 2 / 1;
+      filter: grayscale(1) blur(5px);
+      opacity: 0.1;
+      transition: filter var(--transition-img), opacity var(--transition-img);
     }
-    img:hover {
+    section:hover img {
       filter: grayscale(0) blur(0);
       opacity: 0.75;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   </style>
 </head>
 <body>
@@ -168,7 +152,7 @@
     </header>
     <section>
       <h2>realitaet</h2>
-      <img src="./01-bsl.png">
+      <img src="./bsl.png" alt="beat stay love">
       <p>in der nacht auf den 17ten mai diesen jahres<br>
         feiert die bsl-crew ihr 10-jaehriges jubilaeum<br>
         im short-because.<br>
@@ -192,7 +176,7 @@
         und eine herzhafte ueberdosierung im<br>
         short-because mit anschliessender<br>
         nachtruhe bei der ansaessigen gendarmerie.<br>
-        <br>      
+        <br>
         falls halt net, dann halt net..<br>
         <br>
         infos meinerseits folgen nach erhalt<br>
@@ -208,32 +192,34 @@
       <h2>portal</h2>
       <p>satan hoechst persoenlich wird sich ab <span>6:66</span><br>
         bzw 19:06uhr um den einlass kuemmern.<br>
-        <br>      
+        <br>
         natuerlich koennen aktuelle sexualpartner,<br>
         und auch solche die es vll mal werden wollen,<br>
         den abend gemeinsam mit dem poebel geniessen.</p>
     </section>
     <section>
       <h2>basis</h2>
+      <img src="./langos.png" alt="langos">
       <p><span>langos</span> wird am besagten abend ab 20:00uhr<br>
         im 5-minuten-takt aus satans brennendem arsch<br>
-        direkt in euer maul geschissen.<br>  
-        <br>      
+        direkt in euer maul geschissen.<br>
+        <br>
         ich baller noch ne angabe der zutaten<br>
         hier rein fuer alle allergikerinnen,<br>
         allergiker oder auch allergibraltar.<br>
-        <br>      
+        <br>
         extra-wuensche koennen gerne geaeussert werden..<br>
         beim inder nebenan, von der eigenen couch aus.<br> 
-        <br>       
+        <br>
         mehl wasser hefe salz zucker pfeffer</p>
     </section>
     <section>
       <h2>tausendstel</h2>
+      <img src="./wostok.png" alt="langos">
       <p>die fortlaufende abendliche unterstuetzung<br>
         wird durch ein <span>aktiv-dual-konzept</span><br>
         realisiert und zielstrebig gewaehrleistet.<br>
-        <br>       
+        <br>
         zum einen durch einen kuehlen longdrink,<br>
         bestehend aus <span>vodka-wostok-eis</span><br>
         <br>
@@ -259,7 +245,7 @@
       <p>aus gegebenem anlass wuerde ich dir<br>
         die ersten beiden <span>langosen via express</span><br>
         direkt auf die couch liefern lassen.<br>
-        <br>      
+        <br>
         entweder fertig gebaut fuer den eigenen ofen,<br>
         oder schon gebacken fuer den direkt-verzehr.<br>
         <br>
