@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'none'" />
+  <meta name="viewport"    content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color"  content="#121212" />
+  <meta name="robots"       content="noindex, nofollow" />
+  <meta name="referrer"     content="no-referrer" />
+  <meta name="author"       content="zqbix" />
+  <link rel="icon"             href="../../img/favicon.svg"          type="image/svg+xml" />
+  <link rel="icon"             href="../../img/favicon.png"          type="image/png" />
+  <link rel="apple-touch-icon" href="../../img/apple-touch-icon.png" sizes="180x180" />
+  <title>fuckyeah</title>
+  <link rel="preload" href="../../font/federo.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="./img/bsl.jpg" as="image" />
+  <style>
+    @font-face {
+      font-family: "federo";
+      src: url(../../font/federo.woff2) format('woff2');
+      font-display: swap;
+    }
+    :root {
+      --clr-07:  hsl(0, 0%, 7%);
+      --clr-20:  hsl(0, 0%, 20%);
+      --clr-40:  hsl(0, 0%, 40%);
+      --clr-60:  hsl(0, 0%, 60%);
+      --clr-80:  hsl(0, 0%, 80%);
+      --transition-ui:  0.4s ease;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+    html, body {
+      width: 100%;
+      background: var(--clr-07);
+    }
+    main {
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    main > * {
+      animation: fadeUp 1s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(50px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    header,
+    section {
+      width: min(800px, 92vw);
+      display: flex;
+      flex-direction: column;
+      pointer-events: auto;
+      user-select: none;
+    }
+    h1 {
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(6rem, 18vw, 12rem);
+      line-height: 1;
+      font-family: "federo", sans-serif;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      color: var(--clr-80);
+      padding: 0.5em 0 0.5em clamp(0px, 1vw, 1rem);
+    }
+    h2 {
+      position: relative;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      line-height: 1;
+      font-family: "federo", sans-serif;
+      letter-spacing: 0.15em;
+      word-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-60);
+      padding: 0.5em 0 0.5em clamp(0px, 3vw, 3rem);
+      z-index: 0;
+      transition: color var(--transition-ui);
+    }
+    section:hover h2 {
+      color: var(--clr-80);
+    }
+    h2::before {
+      content: "";
+      position: absolute;
+      inset: 0 100% 0 0;
+      z-index: -1;
+      background-image: linear-gradient(to right, var(--clr-20), var(--clr-07));
+      transition: inset var(--transition-ui);
+    }
+    section:hover h2::before {
+      inset: 0 50% 0 0;
+    }
+    p {
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(1.3rem, 3vw, 1.5rem);
+      line-height: 1.3;
+      font-family: "Courier New", monospace;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: lowercase;
+      color: var(--clr-40);
+      border-left: 1px solid var(--clr-20);
+      padding: 1em 0 1em clamp(0px, 3vw, 3rem);
+    }
+    p > span {
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+      text-transform: uppercase;
+      padding: 0 0.5em 0 0.7em;
+      background-color: var(--clr-40);
+      color: var(--clr-07);
+    }
+    img {
+      width: 100%;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+      filter: grayscale(1);
+      transition: filter var(--transition-ui);
+      pointer-events: none;
+    }
+    section:hover img {
+      filter: grayscale(0);
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>fuCk</h1>
+    </header>
+    <section aria-label="ado/bsl">
+      <h2>ado/bsl</h2>
+      <img src="./img/bsl.jpg" alt="beat stay love" fetchpriority="high" />
+      <p>am fetten arsch der heiligen jungfrau maria..<br />
+        <br />
+        bsl wird <span>10</span> und christian peter wird <span>50</span><br />
+        <br />
+        ..und das ganze auch noch gleichzeitig.</p>
+    </section>
+    <section aria-label="flucht">
+      <h2>flucht</h2>
+      <p>es waere zauberschoen wenn alle,<br />
+        die <span>auf keinen fall</span> zeit haben,<br />
+        relativ zeitnah bescheid geben koennten.<br />
+        vll sind schon urlaube gebucht usw..<br />
+        <br />
+        alle anderen .. geil.<br />
+        <br />
+        falls ausreichend leutz am start sind,<br />
+        gibts kaltes essen, warme longdrinks<br />
+        und eine herzhafte ueberdosierung im<br />
+        short-because mit anschliessender<br />
+        nachtruhe bei der ansaessigen gendarmerie.<br />
+        <br />
+        falls halt net, dann halt net..<br />
+        <br />
+        infos meinerseits folgen nach erhalt<br />
+        und auswertung der beteiligten stimmen.</p>
+    </section>
+    <section aria-label="agenda">
+      <h2>agenda</h2>
+      <p>die nun folgenden abschnitte befassen sich<br />
+        mit den theoretischen stationen des abends<br />
+        und allgemeinen informationen..</p>
+    </section>
+    <section aria-label="portal">
+      <h2>portal</h2>
+      <img src="./img/dvl.jpg" alt="dvl" loading="lazy" />
+      <p>satan hoechst persoenlich wird sich ab <span>6:66</span><br />
+        bzw 19:06uhr um den einlass kuemmern.<br />
+        <br />
+        natuerlich koennen aktuelle sexualpartner,<br />
+        und auch solche die es vll mal werden wollen,<br />
+        den abend gemeinsam mit dem poebel geniessen.</p>
+    </section>
+    <section aria-label="basis">
+      <h2>basis</h2>
+      <img src="./img/langos.jpg" alt="langos" loading="lazy" />
+      <p><span>langos</span> wird am besagten abend ab 20:00uhr<br />
+        im 5-minuten-takt aus satans brennendem arsch<br />
+        direkt in euer maul geschissen.<br />
+        <br />
+        fuer alle allergikerinnen, allergiker<br />
+        oder auch allergibraltar folgt nun eine angabe<br />
+        aller benutzten zutaten..<br />
+        <br />
+        mehl wasser hefe salz zucker<br />
+        pepe pulbiber-aci/-tatli/-smoked<br />
+        schmand knofi fruehlingszwiebeln cheese kabanossi<br />
+        sonnenblumen- und oliven-oil.<br />
+        <br />
+        extra-wuensche koennen gerne geaeussert werden..<br />
+        beim inder nebenan, von der eigenen couch aus.</p>
+    </section>
+    <section aria-label="tausendstel">
+      <h2>tausendstel</h2>
+      <img src="./img/wostok.jpg" alt="wostok" loading="lazy" />
+      <p>die fortlaufende abendliche unterstuetzung<br />
+        wird durch ein sog. <span>aktiv-duales-konzept</span><br />
+        realisiert und zielstrebig gewaehrleistet.<br />
+        <br />
+        zum einen durch einen kuehlen longdrink,<br />
+        bestehend aus <span>vodka-wostok-eis</span><br />
+        <br />
+        und zum anderen regelt <span>schmucker</span></p>
+    </section>
+    <section aria-label="wahnsinn">
+      <h2>wahnsinn</h2>
+      <p>was nicht fehlen sollte, darf auch nicht fehlen..<br />
+        fuer <span>alles</span> wird gesorgt sein!</p>
+    </section>
+    <section aria-label="reise">
+      <h2>reise</h2>
+      <p>175 zigaretten spaeter..<br />
+        <br />
+        die <span>musikveranstaltung</span> wird nach einem<br />
+        kurzen spaziergang mit endlosem geschwaetz,<br />
+        gegen eine mir unbekannte uhrzeit aufgesucht,<br />
+        betreten und nicht ohne frisch gestochenes piercing<br />
+        oder die jacke eines tuerstehers wieder verlassen.</p>
+    </section>
+    <section aria-label="sonderfall moana">
+      <h2>sonderfall moana</h2>
+      <p>aus gegebenem anlass koennten die ersten beiden<br />
+        <span>langosen via express</span> direkt<br />
+        auf deine couch geliefert werden.<br />
+        <br />
+        entweder fertig gebaut fuer den eigenen ofen,<br />
+        oder schon gebacken fuer den lauwarmen<br />
+        direkt-verzehr.<br />
+        <br />
+        wie du wolle .. sachste einfach bescheid.</p>
+    </section>
+    <section aria-label="prost">
+      <h2>prost</h2>
+      <p>16.05.2026 - 6:66pm</p>
+    </section>
+  </main>
+</body>
+</html>
