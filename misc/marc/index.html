@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta http-equiv="X-Robots-Tag" content="none">
+  <title>Private</title>
+  <style>
+    :root {
+      --font:            'Courier New', monospace;
+      --white:           #fff;
+      --text-dim:        rgba(255, 255, 255, 0.4);
+      --border:          rgba(255, 255, 255, 0.22);
+      --border-focus:    rgba(255, 255, 255, 0.5);
+      --input-bg:        rgba(255, 255, 255, 0.06);
+      --input-bg-focus:  rgba(255, 255, 255, 0.1);
+      --btn-bg:          rgba(255, 255, 255, 0.92);
+      --btn-bg-active:   rgba(255, 255, 255, 0.7);
+      --overlay-bg:      rgba(0, 0, 0, 0.35);
+      --ease-reveal:     cubic-bezier(0.4, 0, 0.2, 1);
+      --duration-reveal: 1.4s;
+      --gate-width:      min(360px, calc(100vw - 48px));
+      --icon-size:       52px;
+      --gap:             24px;
+      --radius:          2px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { height: 100%; }
+
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font);
+    }
+
+    .bg,
+    .overlay {
+      position: fixed;
+      top: 0; right: 0; bottom: 0; left: 0;
+    }
+
+    .bg {
+      background: url('marc.webp') center / cover no-repeat;
+      filter: blur(10px) grayscale(1) brightness(0);
+      transform: scale(1.03);
+      will-change: filter, transform;
+      transition:
+        filter    var(--duration-reveal) var(--ease-reveal),
+        transform var(--duration-reveal) var(--ease-reveal);
+    }
+
+    .overlay {
+      background: var(--overlay-bg);
+      transition: opacity var(--duration-reveal) ease;
+      z-index: 1;
+    }
+
+    body.revealed .bg {
+      filter: blur(0) grayscale(0) brightness(1);
+      transform: scale(1);
+    }
+
+    body.revealed .overlay {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    body.revealed .gate {
+      opacity: 0;
+      transform: translateY(-12px);
+      pointer-events: none;
+    }
+
+    .gate {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      width: var(--gate-width);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .burger-icon,
+    .gate-label {
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+      cursor: default;
+    }
+
+    .burger-icon {
+      display: block;
+      margin: 0 auto var(--gap);
+      width: var(--icon-size);
+      height: var(--icon-size);
+      -webkit-user-drag: none;
+      opacity: 0;
+      animation: fadein 1s ease forwards 0.1s;
+    }
+
+    .gate-label {
+      font-size: clamp(13px, 3.5vw, 16px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: var(--gap);
+      text-align: center;
+      line-height: 1.2;
+      opacity: 0;
+      animation: fadein 1s ease forwards 0.5s;
+    }
+
+    .input-row {
+      width: 100%;
+      display: flex;
+      align-items: stretch;
+      opacity: 0;
+      animation: fadein 1s ease forwards 0.9s;
+    }
+
+    .input-row.ready       { opacity: 1; animation: none; }
+    .input-row.ready.shake { animation: shake 0.35s ease; }
+
+    .pw-input {
+      font-family: var(--font);
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-right: none;
+      color: var(--white);
+      font-size: clamp(15px, 4vw, 20px);
+      letter-spacing: 0.12em;
+      padding: 13px 20px;
+      outline: none;
+      flex: 1;
+      min-width: 0;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: border-color 0.2s, background 0.2s;
+      border-radius: var(--radius) 0 0 var(--radius);
+    }
+
+    .pw-input::placeholder { color: rgba(255, 255, 255, 0.2); letter-spacing: 0.08em; }
+    .pw-input:focus        { border-color: var(--border-focus); background: var(--input-bg-focus); }
+
+    .go-btn {
+      font-family: var(--font);
+      background: var(--btn-bg);
+      border: 1px solid var(--btn-bg);
+      color: #111;
+      font-size: clamp(12px, 3vw, 16px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      padding: 13px 22px;
+      cursor: pointer;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .go-btn:hover  { background: var(--white); }
+    .go-btn:active { background: var(--btn-bg-active); }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; }
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%      { transform: translateX(-6px); }
+      40%      { transform: translateX(6px); }
+      60%      { transform: translateX(-4px); }
+      80%      { transform: translateX(4px); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg"></div>
+  <div class="overlay"></div>
+
+  <div class="gate" id="gate">
+    <img class="burger-icon" src="burger-icon.png" alt="burger" draggable="false" />
+    <div class="gate-label">guess the correct password<br>to win a free burger-menu</div>
+    <div class="input-row" id="inputRow">
+      <input
+        class="pw-input"
+        id="pw"
+        type="password"
+        placeholder="••••••••"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button class="go-btn" id="goBtn">Go</button>
+    </div>
+  </div>
+
+  <script>
+    const inputRow = document.getElementById('inputRow');
+    const pw       = document.getElementById('pw');
+    const btn      = document.getElementById('goBtn');
+
+    function ensureReady() {
+      inputRow.classList.add('ready');
+    }
+
+    inputRow.addEventListener('animationend', ensureReady, { once: true });
+
+    function reveal() {
+      ensureReady();
+      if (!pw.value.length) {
+        inputRow.classList.remove('shake');
+        void inputRow.offsetWidth;
+        inputRow.classList.add('shake');
+        return;
+      }
+      document.body.classList.add('revealed');
+    }
+
+    btn.addEventListener('click', reveal);
+    pw.addEventListener('keydown', e => { if (e.key === 'Enter') reveal(); });
+  </script>
+
+</body>
+</html>
