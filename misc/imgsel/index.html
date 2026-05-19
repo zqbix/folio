@@ -332,12 +332,13 @@ const ALL_IMAGES = [
 ];
 const IMAGE_DIR = './img/';
 
-// ── JSONBIN CONFIG ────────────────────────────────────────────
-const BIN_ID  = '6a0cc6546610dd3ae870f336';
-const API_KEY = '$2a$10$3G4lfHO2iFp.mjOvf1cnBumkpTzFGiIczWOThW0VYcQNQZ9QoLMAG';
+// ── GITHUB GIST CONFIG ───────────────────────────────────────
+const GIST_ID  = '62efac5c6bd95e205c92562810f41fa6';
+const TOKEN    = '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';
+const FILENAME = 'state.json';
 // ─────────────────────────────────────────────────────────────
 
-const BIN_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}`;
+const GIST_URL = `https://api.github.com/gists/${GIST_ID}`;
 
 let state     = null;
 let pendingId = null;
@@ -362,20 +363,23 @@ function lockUI(locked) {
   });
 }
 
-// ── JSONBIN ───────────────────────────────────────────────────
+// ── GITHUB GIST ──────────────────────────────────────────────
 
 async function loadState() {
   try {
-    const res = await fetch(BIN_URL + '/latest', {
-      headers: { 'X-Master-Key': API_KEY }
+    const res = await fetch(GIST_URL, {
+      headers: {
+        'Authorization': `token ${TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json'
+      }
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    const rec  = data.record;
+    const raw  = data.files[FILENAME].content;
+    const rec  = JSON.parse(raw);
     if (rec && Array.isArray(rec.remaining)) {
       state = rec;
     } else {
-      // Bin is empty on first run — write initial state
       state = defaultState();
       await saveState();
     }
@@ -383,7 +387,7 @@ async function loadState() {
     document.getElementById('loading-spinner').style.display = 'none';
     document.getElementById('loading-label').style.display  = 'none';
     document.getElementById('loading-error').textContent =
-      `Could not connect to JSONBin.\n\nCheck that BIN_ID and API_KEY are filled in correctly.\n\n(${e.message})`;
+      `Could not connect to GitHub Gist.\n\nCheck GIST_ID and TOKEN.\n\n(${e.message})`;
     console.error(e);
     return;
   }
@@ -398,13 +402,16 @@ async function saveState() {
   setSync('saving …');
   lockUI(true);
   try {
-    const res = await fetch(BIN_URL, {
-      method: 'PUT',
+    const res = await fetch(GIST_URL, {
+      method: 'PATCH',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': API_KEY
+        'Authorization': `token ${TOKEN}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(state)
+      body: JSON.stringify({
+        files: { [FILENAME]: { content: JSON.stringify(state, null, 2) } }
+      })
     });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     setSync('synced', 'var(--ok)');
