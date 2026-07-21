@@ -119,6 +119,19 @@ section#start .layer {
   user-select: none;
 }
 
+/*
+  visible text for every stack line is rendered via this pseudo-element
+  rather than as a literal DOM text node — see the HTML comment above
+  #line01 for the full rationale (translation-engine resistance).
+  all typographic properties (color, letter-spacing, font, text-transform)
+  are inherited properties, so they cascade down from the parent .layer
+  element to this generated content exactly as they did with plain text —
+  no visual difference, just a different content source
+*/
+.word::before {
+  content: attr(data-text);
+}
+
 /* ── stack lines ──────────────────────────────────────────────────────────── */
 
 /*
