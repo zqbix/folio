@@ -122,31 +122,50 @@
     <section id="start" aria-labelledby="line01">
 
       <!--
+        id="line01" is required here — section#start's aria-labelledby="line01"
+        above needs an actual id to resolve against, not a class. without it
+        the section's accessible name silently resolves to nothing
+
         the second dot lives outside #egg deliberately — only the first dot
         is the easter egg trigger. both dots look visually identical,
         making the clickable area impossible to guess without exploration.
 
-        aria-hidden on #egg prevents screen readers from interrupting the
-        h1 readout mid-word ("gude [open projects archive] ..") — the span
-        is still focusable and its own aria-label fires when focused directly
+        aria-label="gude." on the h1 sets its accessible name directly, so
+        browse-mode readout is always "gude." regardless of what's nested
+        inside. aria-hidden on #egg is still needed on top of that: it keeps
+        the egg out of the accessibility tree entirely, so a screen reader
+        stepping through the h1's content doesn't also stop on it as a
+        separate interactive stop. egg remains reachable via Tab, where its
+        own aria-label ("open projects archive") announces independently
+
+        every line's visible text is rendered via a .word span's ::before
+        (content: attr(data-text)) rather than as a literal DOM text node.
+        this keeps translation engines — including a manually forced
+        "translate this page", which ignores translate="no"/notranslate —
+        from having any text node to rewrite. each parent element carries
+        an explicit aria-label mirroring the original copy exactly, so
+        screen readers announce the correct line regardless of whether
+        the browser reads generated content natively
       -->
-      <h1 class="layer line01">gude<span
+      <h1 id="line01" class="layer line01" aria-label="gude."><span
+          class="word"
+          data-text="gude"></span><span
           id="egg"
           role="link"
           tabindex="0"
           aria-hidden="true"
           aria-label="open projects archive">.</span>.</h1>
 
-      <p class="layer line02">i'm a houdini vfx-artist</p>
-      <p class="layer line03">with maya modeling background</p>
-      <p class="layer line04">and a few needed nuke skillz</p>
-      <p class="layer line05">located in germany — near ffm</p>
-      <p class="layer line06">feel free to check out my</p>
+      <p class="layer line02" aria-label="i'm a houdini vfx-artist"><span class="word" data-text="i'm a houdini vfx-artist"></span></p>
+      <p class="layer line03" aria-label="with maya modeling background"><span class="word" data-text="with maya modeling background"></span></p>
+      <p class="layer line04" aria-label="and a few needed nuke skillz"><span class="word" data-text="and a few needed nuke skillz"></span></p>
+      <p class="layer line05" aria-label="located in germany — near ffm"><span class="word" data-text="located in germany — near ffm"></span></p>
+      <p class="layer line06" aria-label="feel free to check out my"><span class="word" data-text="feel free to check out my"></span></p>
 
       <!-- aria-label gives screen readers the full action context -->
-      <button class="layer line07" type="button" aria-label="open showreel">showreel</button>
+      <button class="layer line07" type="button" aria-label="open showreel"><span class="word" data-text="showreel"></span></button>
 
-      <p class="layer line08">and drop me a line at</p>
+      <p class="layer line08" aria-label="and drop me a line at"><span class="word" data-text="and drop me a line at"></span></p>
 
       <!--
         email is assembled from data attributes in JS at runtime —
