@@ -56,22 +56,6 @@
       align-items: center;
       justify-content: center;
     }
-    h1 {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 3;
-      font-family: monospace;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      color: var(--clr-90);
-      animation: fade-h1 1s ease both;
-    }
-    @keyframes fade-h1 {
-      from { opacity: 0; transform: translateY(20px) scale(0.9); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
     button {
       width: 100%;
       background-color: transparent;
@@ -86,26 +70,31 @@
       text-decoration: none;
       cursor: pointer;
       animation: fade-btn 1s ease both;
-      animation-delay: calc(var(--delay) * 0.03s);
+      animation-delay: calc(var(--delay) * 0.04s);
+    }
+    button:first-of-type {
+      padding: 1rem 0;
     }
     @keyframes fade-btn {
-      from { opacity: 0; transform: translateY(40px) scale(0.9); }
+      from { opacity: 0; transform: translateY(40px) scale(0.7) }
       to   { opacity: 1; transform: translateY(0) scale(1); }
     }
     button > span {
       font-style: normal;
       font-weight: 400;
       font-size: 1rem;
-      line-height: 1.5;
+      line-height: 1;
       font-family: monospace;
-      letter-spacing: normal;
+      letter-spacing: 0.5rem;
       word-spacing: normal;
       text-transform: none;
-      color: var(--clr-60);
       transition: color var(--transition-ui);
     }
-    button > span:first-child {
+    button > span:nth-child(1) {
       color: var(--clr-30);
+    }
+    button > span:nth-child(2) {
+      color: var(--clr-60);
     }
     button:hover,
     button:active,
@@ -145,7 +134,7 @@
     pre {
       font-style: normal;
       font-weight: 400;
-      font-size: 0.2rem;
+      font-size: 0.1rem;
       line-height: 1;
       font-family: monospace;
       letter-spacing: normal;
@@ -158,24 +147,23 @@
 <body>
   <main>
     <section>
-      <h1>zq.b0x</h1>
-      <button style="--delay: 0;" popovertarget="zqchromaticaberration"><span>zq</span><span>chromaticaberration</span></button>
-      <button style="--delay: 1;" popovertarget="zqdetailnormals"><span>zq</span><span>detailnormals</span></button>
-      <button style="--delay: 2;" popovertarget="zqedgedistort"><span>zq</span><span>edgedistort</span></button>
-      <button style="--delay: 3;" popovertarget="zqfakecrypto"><span>zq</span><span>fakecrypto</span></button>
-      <button style="--delay: 4;" popovertarget="zqfakemotion"><span>zq</span><span>fakemotion</span></button>
-      <button style="--delay: 5;" popovertarget="zqgrain"><span>zq</span><span>grain</span></button>
-      <button style="--delay: 6;" popovertarget="zqhalation"><span>zq</span><span>halation</span></button>
-      <button style="--delay: 7;" popovertarget="zqlightwrapluma"><span>zq</span><span>lightwrapluma</span></button>
-      <button style="--delay: 8;" popovertarget="zqlightwrapunified"><span>zq</span><span>lightwrapunified</span></button>
-      <button style="--delay: 9;" popovertarget="zqnormaldeband"><span>zq</span><span>normaldeband</span></button>
-      <button style="--delay: 10;" popovertarget="zqnormalfalloff"><span>zq</span><span>normalfalloff</span></button>
-      <button style="--delay: 11;" popovertarget="zqpositionfalloff"><span>zq</span><span>positionfalloff</span></button>
-      <button style="--delay: 12;" popovertarget="zqvanishingpointguide"><span>zq</span><span>vanishingpointguide</span></button>
-      <button style="--delay: 13;" popovertarget="zqvignette"><span>zq</span><span>vignette</span></button>
+      <button style="--delay: 18;"><span>zq</span><span>b0x</span></button>
+      <button style="--delay: 13;" popovertarget="zqchromaticaberration"><span>zq</span><span>chromaticaberration</span></button>
+      <button style="--delay: 9;" popovertarget="zqdetailnormals"><span>zq</span><span>detailnormals</span></button>
+      <button style="--delay: 11;" popovertarget="zqedgedistort"><span>zq</span><span>edgedistort</span></button>
+      <button style="--delay: 6;" popovertarget="zqfakecrypto"><span>zq</span><span>fakecrypto</span></button>
+      <button style="--delay: 9;" popovertarget="zqfakemotion"><span>zq</span><span>fakemotion</span></button>
+      <button style="--delay: 4;" popovertarget="zqgrain"><span>zq</span><span>grain</span></button>
+      <button style="--delay: 4;" popovertarget="zqhalation"><span>zq</span><span>halation</span></button>
+      <button style="--delay: 6;" popovertarget="zqlightwrapluma"><span>zq</span><span>lightwrapluma</span></button>
+      <button style="--delay: 3;" popovertarget="zqlightwrapunified"><span>zq</span><span>lightwrapunified</span></button>
+      <button style="--delay: 3;" popovertarget="zqnormaldeband"><span>zq</span><span>normaldeband</span></button>
+      <button style="--delay: 4;" popovertarget="zqnormalfalloff"><span>zq</span><span>normalfalloff</span></button>
+      <button style="--delay: 0;" popovertarget="zqpositionfalloff"><span>zq</span><span>positionfalloff</span></button>
+      <button style="--delay: 2;" popovertarget="zqvanishingpointguide"><span>zq</span><span>vanishingpointguide</span></button>
+      <button style="--delay: 0;" popovertarget="zqvignette"><span>zq</span><span>vignette</span></button>
     </section>
   </main>
-
   <div popover id="zqchromaticaberration"><pre></pre></div>
   <div popover id="zqdetailnormals"><pre></pre></div>  
   <div popover id="zqedgedistort"><pre></pre></div>
