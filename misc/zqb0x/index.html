@@ -77,9 +77,12 @@
               animation: fade-btn 1s ease both;
               animation-delay: calc(var(--delay) * 0.04s);
 
-              &:first-of-type,
+              &:first-of-type {
+                padding-bottom: min(5vh,10rem);
+              }
               &:last-of-type {
-                padding: 2rem 0;
+                padding-top: min(5vh,10rem);
+                text-align: right;
               }
 
               &:hover,
@@ -90,7 +93,7 @@
               }
 
               > span {
-                font: 400 min(2vw,1rem)/1 monospace;
+                font: 400 min(3vw,1rem)/1 monospace;
                 letter-spacing: min(2vw,0.5rem);
                 transition: color var(--transition-ui);
 
