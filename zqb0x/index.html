@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; font-src 'self'; img-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'unsafe-inline'" />
+  <meta name="viewport"    content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color"  content="#121212" />
+  <meta name="robots"       content="noindex, nofollow" />
+  <meta name="referrer"     content="no-referrer" />
+  <meta name="author"       content="zqbix" />
+  <link rel="icon"             href="../../img/favicon.svg"          type="image/svg+xml" />
+  <link rel="icon"             href="../../img/favicon.png"          type="image/png" />
+  <link rel="apple-touch-icon" href="../../img/apple-touch-icon.png" sizes="180x180" />
+  <title>zq.b0x.by.zqb1x</title>
+  <style>
+    :root {
+      --clr-07:  hsl(0, 0%, 7%);
+      --clr-20:  hsl(0, 0%, 20%);
+      --clr-40:  hsl(0, 0%, 40%);
+      --clr-60:  hsl(0, 0%, 60%);
+      --clr-80:  hsl(0, 0%, 80%);
+      --transition-ui:  0.2s ease;
+    }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+    html, body {
+      width: 100%;
+      background: var(--clr-07);
+    }
+    main {
+      position: fixed;
+      overflow-x: hidden;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+      user-select: none;
+    }
+    h1 {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 3;
+      font-family: monospace;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      color: var(--clr-60);
+      animation: fade-h1 1s ease both;
+    }
+    @keyframes fade-h1 {
+      from { opacity: 0; transform: translateY(20px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    button {
+      background-color: transparent;
+      color: inherit;
+      border: none;
+      padding: 0;
+      border-radius: 0;
+      box-shadow: none;
+      text-align: inherit;
+      font: inherit;
+      font-size: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      animation: fade-btn 1s ease both;
+      animation-delay: calc(var(--delay) * 0.03s);
+    }
+    @keyframes fade-btn {
+      from { opacity: 0; transform: translateY(40px) scale(0.9); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    button > span {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.3;
+      font-family: monospace;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      animation: fade-p 1s ease both;
+      animation-delay: calc(var(--delay) * 0.03s);
+    }
+    button > span:nth-child(1) {
+      color: var(--clr-20);
+      transition: color var(--transition-ui);
+    }
+    button > span:nth-child(2) {
+      color: var(--clr-40);
+    }
+    button:hover,
+    button:active,
+    button:focus {
+      text-decoration: none;
+      outline: none;      
+    }
+    button:hover > span:nth-child(1),
+    button:focus > span:nth-child(1),
+    button:active > span:nth-child(1) {
+      color: var(--clr-80);
+    }
+    :popover-open {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s;
+      opacity: 1;
+      border: none;
+      background: var(--clr-07);
+      &::backdrop {
+        background: var(--clr-07);
+        transition: opacity 0.5s;
+        opacity: 1;
+      }
+      @starting-style {
+        opacity: 0;
+        &::backdrop {
+          opacity: 0;
+          }
+      }
+    }
+    pre {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1;
+      font-family: monospace;
+      letter-spacing: normal;
+      word-spacing: normal;
+      text-transform: none;
+      color: var(--clr-60);
+    }
+  </style>
+</head>
+<body>
+  <main>
+      <h1>zq.b0x</h1>
+      <button style="--delay: 0;" popovertarget="zqchromaticaberration"><span>zq</span><span>chromaticaberration</span></button>
+      <button style="--delay: 1;" popovertarget="zqdetailnormals"><span>zq</span><span>detailnormals</span></button>
+      <button style="--delay: 2;" popovertarget="zqedgedistort"><span>zq</span><span>edgedistort</span></button>
+      <button style="--delay: 3;" popovertarget="zqfakecrypto"><span>zq</span><span>fakecrypto</span></button>
+      <button style="--delay: 4;" popovertarget="zqfakemotion"><span>zq</span><span>fakemotion</span></button>
+      <button style="--delay: 5;" popovertarget="zqgrain"><span>zq</span><span>grain</span></button>
+      <button style="--delay: 6;" popovertarget="zqhalation"><span>zq</span><span>halation</span></button>
+      <button style="--delay: 7;" popovertarget="zqlightwrapluma"><span>zq</span><span>lightwrapluma</span></button>
+      <button style="--delay: 8;" popovertarget="zqlightwrapunified"><span>zq</span><span>lightwrapunified</span></button>
+      <button style="--delay: 9;" popovertarget="zqnormaldeband"><span>zq</span><span>normaldeband</span></button>
+      <button style="--delay: 10;" popovertarget="zqnormalfalloff"><span>zq</span><span>normalfalloff</span></button>
+      <button style="--delay: 11;" popovertarget="zqpositionfalloff"><span>zq</span><span>positionfalloff</span></button>
+      <button style="--delay: 12;" popovertarget="zqvanishingpointguide"><span>zq</span><span>vanishingpointguide</span></button>
+      <button style="--delay: 13;" popovertarget="zqvignette"><span>zq</span><span>vignette</span></button>
+  </main>
+
+  <div popover id="zqchromaticaberration"><pre>zqchromaticaberration placeholder for now.</pre></div>
+  <div popover id="zqdetailnormals"><pre>zqdetailnormals placeholder for now.</pre></div>  
+  <div popover id="zqedgedistort"><pre>zqedgedistort placeholder for now.</pre></div>  
+  <div popover id="zqfakecrypto"><pre>zqfakecrypto placeholder for now.</pre></div>  
+  <div popover id="zqfakemotion"><pre>zqfakemotion placeholder for now.</pre></div>  
+  <div popover id="zqgrain"><pre>zqgrain placeholder for now.</pre></div>  
+  <div popover id="zqhalation"><pre>zqhalation placeholder for now.</pre></div>
+  <div popover id="zqlightwrapluma"><pre>zqlightwrapluma placeholder for now.</pre></div>
+  <div popover id="zqlightwrapunified"><pre>zqlightwrapunified placeholder for now.</pre></div>
+  <div popover id="zqnormaldeband"><pre>zqnormaldeband placeholder for now.</pre></div>
+  <div popover id="zqnormalfalloff"><pre>zqnormalfalloff placeholder for now.</pre></div>
+  <div popover id="zqpositionfalloff"><pre>zqpositionfalloff placeholder for now.</pre></div>
+  <div popover id="zqvanishingpointguide"><pre>zqvanishingpointguide placeholder for now.</pre></div>
+  <div popover id="zqvignette"><pre>zqvignette placeholder for now.</pre></div>
+
+  <script>
+    function escapeHtml(str) {
+      return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&apos;');
+    }
+
+    document.querySelectorAll('[popover]').forEach((el) => {
+      el.addEventListener('beforetoggle', async (event) => {
+        if (event.newState !== 'open' || el.dataset.loaded) return;
+
+        const pre = el.querySelector('pre');
+        const file = `./nk/${el.id}.nk`;
+
+        try {
+          const res = await fetch(file);
+          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+          const raw = await res.text();
+          pre.innerHTML = escapeHtml(raw);
+          el.dataset.loaded = 'true';
+        } catch (err) {
+          pre.textContent = `Could not load ${file}: ${err.message}`;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

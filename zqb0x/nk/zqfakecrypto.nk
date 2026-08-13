@@ -1,0 +1,45 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+Group {
+ name zqFakeCrypto
+ selected true
+ xpos 4013
+ ypos 13999
+ addUserKnob {20 zqfakecrypto l zqFakeCrypto}
+ addUserKnob {26 __COLOR l "" +STARTLINE T "<br>\n<b><i>COLOR</i></b>\n<br>"}
+ addUserKnob {18 clrsample l Pick/Sample}
+ clrsample {0.6823529601 0.2784313858 0.6274510026}
+ addUserKnob {6 clrsample_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 sensitivity l Sensitivity R 0 50}
+ sensitivity 5
+ addUserKnob {4 alphamerge l Alpha M {Replace Merge}}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Fake Crypto\n<br><br>\nPick a color and tweak the globals.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos -267
+  ypos 598
+ }
+ Expression {
+  temp_name0 am
+  temp_expr0 "(a * alphamerge)"
+  expr3 "(clamp(1 - sqrt((r - clr.r) * (r - clr.r) + (g - clr.g) * (g - clr.g) + (b - clr.b) * (b - clr.b)) * sens, 0, 1)) + am"
+  name fakeCrypto
+  xpos -267
+  ypos 661
+  addUserKnob {20 User}
+  addUserKnob {18 clr l "sampled color"}
+  clr {{clrsample.r} {clrsample.g} {clrsample.b}}
+  addUserKnob {6 clr_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+  addUserKnob {7 sens l sensitivity R 0 50}
+  sens {{sensitivity}}
+ }
+ Output {
+  name Output
+  xpos -267
+  ypos 730
+ }
+end_group
