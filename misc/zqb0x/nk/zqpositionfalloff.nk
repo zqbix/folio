@@ -1,0 +1,129 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+add_layer {P P.red P.green P.blue}
+Group {
+ name zqPositionFalloff
+ selected true
+ xpos 4990
+ ypos 14007
+ addUserKnob {20 zqpositionfalloff l zqPositionFalloff}
+ addUserKnob {26 __POSITION l "" +STARTLINE T "<br>\n<b><i>POSiTiON</i></b>\n<br>"}
+ addUserKnob {41 poslayer l P T Shuffle1.in1}
+ addUserKnob {26 __CENTER l "" +STARTLINE T "<br>\n<b><i>CENTER</i></b>\n<br>"}
+ addUserKnob {12 pixelpick l Pick}
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 Expression3_radius l Radius}
+ Expression3_radius 0.5
+ addUserKnob {7 g_falloff l Falloff}
+ g_falloff 1
+ addUserKnob {4 choosealpha l Mask M {"Connected Alpha" "Complete Image" "" "" ""}}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Position Falloff\n<br><br>\nChoose P/Center and adjust accordingly.."}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos 199
+  ypos 315
+ }
+ Dot {
+  name Dot1
+  xpos 233
+  ypos 394
+ }
+ Input {
+  inputs 0
+  name P
+  xpos 43
+  ypos 314
+  number 1
+ }
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {0}
+   B
+   A
+  }
+  in1 P
+  fromInput2 {
+   {1}
+   B
+   A
+  }
+  in2 alpha
+  mappings "4 rgba.alpha 1 0 rgba.alpha 0 3 P.red 0 0 rgba.red 0 0 P.green 0 1 rgba.green 0 1 P.blue 0 2 rgba.blue 0 2"
+  name Shuffle1
+  xpos 43
+  ypos 391
+ }
+set N80078500 [stack 0]
+ Shuffle2 {
+  fromInput1 {
+   {0}
+   B
+  }
+  in1 none
+  out1 alpha
+  fromInput2 {
+   {0}
+   B
+  }
+  mappings "1 white -1 -1 rgba.alpha 0 0"
+  name Shuffle2
+  xpos 113
+  ypos 435
+ }
+push $N80078500
+ Switch {
+  inputs 2
+  which {{choosealpha}}
+  name AlphaSwitch
+  xpos 43
+  ypos 485
+ }
+ Expression {
+  temp_name0 falloff
+  temp_expr0 sqrt((r-xbase)*(r-xbase)+(g-ybase)*(g-ybase)+(b-zbase)*(b-zbase))
+  channel0 {rgba.red -rgba.green -rgba.blue -rgba.alpha}
+  expr0 "((radius - falloff) / radius) * a"
+  expr1 "((radius - falloff) / radius) * a"
+  expr2 "((radius - falloff) / radius) * a"
+  expr3 "((radius - falloff) / radius) * a"
+  name Expression3
+  xpos 43
+  ypos 570
+  addUserKnob {20 User}
+  addUserKnob {12 pixelpick l pixelPick}
+  pixelpick {{parent.pixelpick.x} {parent.pixelpick.y}}
+  addUserKnob {26 ""}
+  addUserKnob {7 radius}
+  radius {{parent.Expression3_radius}}
+  addUserKnob {26 ""}
+  addUserKnob {7 xbase l xBase}
+  xbase {{"\[sample \[node input0] red pixelpick.x pixelpick.y]"}}
+  addUserKnob {7 ybase l yBase}
+  ybase {{"\[sample \[node input0] green pixelpick.x pixelpick.y]"}}
+  addUserKnob {7 zbase l zBase}
+  zbase {{"\[sample \[node input0] blue pixelpick.x pixelpick.y]"}}
+ }
+ Gamma {
+  channels rgba
+  value {{parent.g_falloff} {parent.g_falloff} {parent.g_falloff} {parent.g_falloff}}
+  name Gamma1
+  xpos 43
+  ypos 594
+ }
+ Grade {
+  channels alpha
+  white_clamp true
+  name Grade1
+  xpos 43
+  ypos 630
+ }
+ Output {
+  name Output
+  xpos 43
+  ypos 694
+ }
+end_group

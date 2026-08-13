@@ -1,0 +1,311 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+Group {
+ name zqEdgeDistort
+ selected true
+ xpos 3895
+ ypos 14000
+ lifetimeStart 1
+ lifetimeEnd 1
+ addUserKnob {20 User l zqEdgeDistort}
+ addUserKnob {26 __ALONG_NORMAL l "" +STARTLINE T "<br>\n<b><i>ALONG NORMAL</i></b>\n<br>"}
+ addUserKnob {7 an_effect_amount l Amount R 0 100}
+ an_effect_amount 500
+ addUserKnob {7 an_noise_size l "Noise Size" R 1 100}
+ an_noise_size 50
+ addUserKnob {7 an_noise_offset l "Noise Offset"}
+ addUserKnob {7 an_sharpen_amount l "Sharpen Amount" R 0 10}
+ an_sharpen_amount 2
+ addUserKnob {7 an_sharpen_size l "Sharpen Size" R 0 5}
+ an_sharpen_size 2
+ addUserKnob {7 an_blur_size l "Blur Size" R 0 10}
+ an_blur_size 4
+ addUserKnob {26 __ALONG_TANGENT l "" +STARTLINE T "<br>\n<b><i>ALONG TANGENT</i></b>\n<br>"}
+ addUserKnob {7 at_effect_amount l Amount R 0 100}
+ at_effect_amount 10000
+ addUserKnob {7 at_noise_size l "Noise Size" R 0 100}
+ at_noise_size 200
+ addUserKnob {7 at_noise_offset l "Noise Offset"}
+ addUserKnob {7 at_sharpen_amount l "Sharpen Amount" R 0 10}
+ at_sharpen_amount 5
+ addUserKnob {7 at_sharpen_size l "Sharpen Size" R 0 5}
+ at_sharpen_size 10
+ addUserKnob {7 at_blur_size l "Blur Size" R 0 10}
+ at_blur_size 5
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 effect_spread l Spread R 0 10}
+ effect_spread 50
+ addUserKnob {7 effect_mix l Mix}
+ effect_mix 1
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Edge Distort\n<br><br>\nUse incoming alpha for edge segmentation/masking.."}
+}
+ Noise {
+  inputs 0
+  size {{parent.at_noise_size}}
+  zoffset {{parent.at_noise_offset}}
+  octaves 2
+  gamma 1
+  center {1376 768}
+  name Noise3
+  xpos -335
+  ypos 536
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -175
+  ypos -61
+ }
+ Dot {
+  name Dot74
+  xpos -141
+  ypos 47
+ }
+set N654b3200 [stack 0]
+ Expression {
+  expr0 a
+  expr1 a
+  expr2 a
+  expr3 a
+  name Expression3
+  xpos -567
+  ypos 44
+ }
+ Blur {
+  channels rgba
+  size {{parent.effect_spread}}
+  maskChannelMask rgba.red
+  name Blur21
+  xpos -567
+  ypos 68
+ }
+ Expression {
+  temp_name0 left
+  temp_expr0 r(x-1,y)
+  temp_name1 right
+  temp_expr1 r(x+1,y)
+  temp_name2 up
+  temp_expr2 r(x,y-1)
+  temp_name3 down
+  temp_expr3 r(x,y+1)
+  expr0 "a * (left - right)"
+  expr1 "a * (up - down)"
+  expr2 1
+  expr3 0
+  name Expression1
+  xpos -567
+  ypos 92
+ }
+ Expression {
+  temp_name0 length
+  temp_expr0 "sqrt(r*r + g*g + b*b)"
+  expr0 "r / length "
+  expr1 "g / length"
+  expr2 0
+  expr3 0
+  name Expression2
+  xpos -567
+  ypos 116
+ }
+ Blur {
+  channels rgba
+  size 10
+  name Blur2
+  xpos -567
+  ypos 140
+ }
+ Dot {
+  name Dot2
+  xpos -533
+  ypos 291
+ }
+set N654b3680 [stack 0]
+ Dot {
+  name Dot1
+  xpos -533
+  ypos 515
+ }
+ Expression {
+  expr0 -g(x,y)
+  expr1 r(x,y)
+  expr2 0
+  expr3 0
+  maskChannelMask none
+  name Expression4
+  xpos -483
+  ypos 512
+ }
+ Grade {
+  inputs 1+1
+  multiply -1
+  black_clamp false
+  name Grade1
+  xpos -483
+  ypos 536
+ }
+ Sharpen {
+  channels rgba
+  amount {{parent.at_sharpen_amount}}
+  size {{parent.at_sharpen_size}}
+  name Sharpen2
+  xpos -483
+  ypos 560
+ }
+ Blur {
+  channels rgba
+  size {{parent.at_blur_size}}
+  name Blur3
+  xpos -483
+  ypos 584
+ }
+ Noise {
+  inputs 0
+  output {rgba.red -rgba.green -rgba.blue none}
+  replace true
+  type turbulence
+  size {{parent.an_noise_size}}
+  zoffset {{parent.an_noise_offset}}
+  octaves 2
+  gamma 1
+  center {1024 778}
+  name Noise1
+  xpos -335
+  ypos 288
+ }
+set N65641700 [stack 0]
+ Noise {
+  output {-rgba.red rgba.green -rgba.blue none}
+  type turbulence
+  size {{parent.an_noise_size}}
+  zoffset {{"parent.an_noise_offset + 666"}}
+  octaves 2
+  gamma 1
+  center {1024 778}
+  name Noise2
+  xpos -335
+  ypos 312
+ }
+push $N65641700
+push $N654b3680
+ Grade {
+  inputs 1+1
+  channels {rgba.red -rgba.green -rgba.blue none}
+  multiply 0
+  black_clamp false
+  maskChannelMask rgba.red
+  fringe true
+  name Grade57
+  xpos -483
+  ypos 288
+ }
+ Grade {
+  inputs 1+1
+  channels {-rgba.red rgba.green -rgba.blue none}
+  multiply 0
+  black_clamp false
+  maskChannelMask rgba.green
+  fringe true
+  name Grade58
+  xpos -483
+  ypos 312
+ }
+ Sharpen {
+  channels rgba
+  amount {{parent.an_sharpen_amount}}
+  size {{parent.an_sharpen_size}}
+  name Sharpen1
+  xpos -483
+  ypos 336
+ }
+ Blur {
+  channels rgba
+  size {{parent.an_blur_size}}
+  name Blur1
+  xpos -483
+  ypos 360
+ }
+push $N654b3200
+add_layer {DSTRT_NORMAL DSTRT_NORMAL.red DSTRT_NORMAL.green DSTRT_NORMAL.blue}
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {1}
+   B
+   A
+  }
+  in1 rgb
+  out1 DSTRT_NORMAL
+  fromInput2 {
+   {0}
+   B
+   A
+  }
+  mappings "3 rgba.red 0 0 DSTRT_NORMAL.red 0 0 rgba.green 0 1 DSTRT_NORMAL.green 0 1 rgba.blue 0 2 DSTRT_NORMAL.blue 0 2"
+  name Shuffle16
+  xpos -175
+  ypos 360
+ }
+ IDistort {
+  uv DSTRT_NORMAL
+  uv_scale {{parent.an_effect_amount}}
+  blur_scale 0
+  name IDistort1
+  xpos -175
+  ypos 384
+ }
+add_layer {DSTRT_TANGENT DSTRT_TANGENT.red DSTRT_TANGENT.green DSTRT_TANGENT.blue}
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {1}
+   B
+   A
+  }
+  in1 rgb
+  out1 DSTRT_TANGENT
+  fromInput2 {
+   {0}
+   B
+   A
+  }
+  mappings "3 rgba.red 0 0 DSTRT_TANGENT.red 0 0 rgba.green 0 1 DSTRT_TANGENT.green 0 1 rgba.blue 0 2 DSTRT_TANGENT.blue 0 2"
+  name Shuffle1
+  xpos -175
+  ypos 584
+ }
+ IDistort {
+  uv DSTRT_TANGENT
+  uv_scale {{parent.at_effect_amount}}
+  blur_scale 0
+  name IDistort2
+  xpos -175
+  ypos 608
+ }
+ Remove {
+  channels DSTRT_NORMAL
+  channels2 DSTRT_TANGENT
+  name Remove1
+  xpos -175
+  ypos 747
+ }
+push $N654b3200
+ Dot {
+  name Dot3
+  xpos 28
+  ypos 47
+ }
+ Merge2 {
+  inputs 2
+  operation copy
+  mix {{parent.effect_mix}}
+  name Merge1
+  xpos -6
+  ypos 753
+ }
+ Output {
+  name Output
+  xpos -6
+  ypos 875
+ }
+end_group

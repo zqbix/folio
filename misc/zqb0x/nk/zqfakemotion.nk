@@ -1,0 +1,306 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+Group {
+ name zqFakeMotion
+ selected true
+ xpos 4128
+ ypos 13999
+ addUserKnob {20 User l zqFakeMotion}
+ addUserKnob {26 __BASE_LAYER l "" +STARTLINE T "<br>\n<b><i>BASE LAYER</i></b>\n<br>"}
+ addUserKnob {7 bl_blur l Blur}
+ bl_blur 10
+ addUserKnob {7 bl_multiply l Multiply}
+ bl_multiply 1
+ addUserKnob {7 bl_gamma l Gamma}
+ bl_gamma 1
+ addUserKnob {26 __DETAIL_LAYER l "" +STARTLINE T "<br>\n<b><i>DETAiL LAYER</i></b>\n<br>"}
+ addUserKnob {7 dl_blur l Blur}
+ dl_blur 30
+ addUserKnob {7 dl_erode l Erode}
+ dl_erode 100
+ addUserKnob {7 dl_sharpen_size l "Sharpen Size"}
+ dl_sharpen_size 10
+ addUserKnob {7 dl_sharpen_amount l "Sharpen Amount"}
+ dl_sharpen_amount 100
+ addUserKnob {7 dl_laplacian l Laplacian}
+ dl_laplacian 100
+ addUserKnob {7 dl_multiply l Multiply}
+ dl_multiply 1
+ addUserKnob {7 dl_gamma l Gamma}
+ dl_gamma 1
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 global_effect_amount l "Effect Amount"}
+ global_effect_amount 100
+ addUserKnob {7 global_vector_blur l "Vector Blur"}
+ global_vector_blur 10
+ addUserKnob {12 global_main_direction l "Center/Main Direction"}
+ addUserKnob {4 global_output l Output M {"Full Effect" "Base Layer" "Detail Layer" "Merged Layers" ""}}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Fake Motion\n<br><br>\nTweak the layers and check the full effect..\n<br>\nSet \"Center/Main Direction\" to get proper aligned vectors.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos -83
+  ypos 502
+ }
+ Dot {
+  name Dot54
+  xpos -49
+  ypos 561
+ }
+set N8003b180 [stack 0]
+ Dot {
+  name Dot5
+  xpos -191
+  ypos 561
+ }
+ Saturation {
+  channels rgba
+  saturation 0
+  name Saturation9
+  xpos -225
+  ypos 604
+ }
+set N8007a300 [stack 0]
+push $N8007a300
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy16
+  xpos -225
+  ypos 628
+ }
+ Dot {
+  name Dot62
+  xpos -191
+  ypos 700
+ }
+set N8003ba80 [stack 0]
+ Dot {
+  name Dot101
+  xpos -115
+  ypos 700
+ }
+ Blur {
+  channels rgba
+  size {{parent.dl_blur}}
+  name Blur26
+  xpos -149
+  ypos 735
+ }
+ FilterErode {
+  channels rgba
+  size {{parent.dl_erode}}
+  filter gaussian
+  name FilterErode2
+  xpos -149
+  ypos 777
+ }
+ Sharpen {
+  channels rgba
+  amount {{parent.dl_sharpen_amount}}
+  size {{parent.dl_sharpen_size}}
+  name Sharpen7
+  xpos -149
+  ypos 801
+ }
+ Laplacian {
+  channels rgba
+  size {{parent.dl_laplacian}}
+  name Laplacian2
+  xpos -149
+  ypos 825
+ }
+ Grade {
+  channels rgba
+  multiply {{parent.dl_multiply}}
+  gamma {{parent.dl_gamma}}
+  name Grade63
+  xpos -149
+  ypos 881
+ }
+ Dot {
+  name Dot102
+  xpos -115
+  ypos 937
+ }
+set N8010e480 [stack 0]
+ Dot {
+  name Dot2
+  xpos -115
+  ypos 1336
+ }
+set N8010e900 [stack 0]
+push $N8003ba80
+ Dot {
+  name Dot96
+  xpos -273
+  ypos 700
+ }
+ Blur {
+  channels rgba
+  size {{parent.bl_blur}}
+  maskChannelMask rgba.red
+  name Blur24
+  xpos -307
+  ypos 737
+ }
+ Grade {
+  channels rgba
+  multiply {{parent.bl_multiply}}
+  gamma {{parent.bl_gamma}}
+  name Grade68
+  xpos -307
+  ypos 880
+ }
+ Dot {
+  name Dot103
+  xpos -273
+  ypos 937
+ }
+set N8010f200 [stack 0]
+ Dot {
+  name Dot1
+  xpos -273
+  ypos 1336
+ }
+set N8010f680 [stack 0]
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge1
+  xpos -225
+  ypos 1333
+ }
+push $N8010e900
+push $N8010f680
+push $N8010e480
+push $N8010f200
+ Merge2 {
+  inputs 2
+  operation average
+  name Merge29
+  xpos -225
+  ypos 934
+ }
+ Expression {
+  temp_name0 falloff
+  temp_expr0 "clamp((1 - abs(x - centerx) / (x < centerx ? centerx : width - centerx)) * (1 - abs(y - centery) / (y < centery ? centery : height - centery)))\n"
+  expr0 r*falloff
+  expr1 g*falloff
+  expr2 b*falloff
+  expr3 a*falloff
+  name MAIN_DIRECTION
+  xpos -225
+  ypos 979
+  addUserKnob {20 fo l Falloff}
+  addUserKnob {7 centerx l "Center X"}
+  centerx {{parent.global_main_direction.x}}
+  addUserKnob {7 centery l "Center Y"}
+  centery {{parent.global_main_direction.y}}
+ }
+ Expression {
+  temp_name0 left
+  temp_expr0 r(x-1,y)
+  temp_name1 right
+  temp_expr1 r(x+1,y)
+  temp_name2 up
+  temp_expr2 r(x,y-1)
+  temp_name3 down
+  temp_expr3 r(x,y+1)
+  expr0 "a * (left - right)"
+  expr1 "a * (up - down)"
+  expr2 0
+  expr3 0
+  name NORMAL
+  xpos -225
+  ypos 1003
+ }
+ Expression {
+  expr0 -g(x,y)
+  expr1 r(x,y)
+  expr2 0
+  expr3 0
+  maskChannelMask none
+  name TANGENT
+  xpos -225
+  ypos 1027
+ }
+ Expression {
+  temp_name0 normalize
+  temp_expr0 "max(0.00001, sqrt((r*r) + (g*g) + (b*b)))"
+  expr0 "r / normalize"
+  expr1 "g / normalize"
+  expr2 "b / normalize"
+  expr3 "a / normalize"
+  name NORMALIZE
+  xpos -225
+  ypos 1051
+ }
+ Blur {
+  channels rgba
+  size {{parent.global_vector_blur}}
+  name Blur25
+  xpos -225
+  ypos 1094
+ }
+push $N8003b180
+add_layer {FAKE_MB FAKE_MB.red FAKE_MB.green FAKE_MB.blue}
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {1}
+   B
+   A
+  }
+  in1 rgb
+  out1 FAKE_MB
+  fromInput2 {
+   {0}
+   B
+   A
+  }
+  mappings "3 rgba.green 0 1 FAKE_MB.green 0 1 rgba.blue 0 2 FAKE_MB.blue 0 2 rgba.red 0 0 FAKE_MB.red 0 0"
+  name Shuffle19
+  xpos -83
+  ypos 1094
+ }
+ VectorBlur2 {
+  uv FAKE_MB
+  blur_uv uniform
+  scale {{parent.global_effect_amount}}
+  name FLOW5
+  xpos -83
+  ypos 1150
+ }
+ Remove {
+  channels FAKE_MB
+  name Remove1
+  xpos -83
+  ypos 1207
+ }
+ Dot {
+  name Dot3
+  xpos -49
+  ypos 1388
+ }
+ Switch {
+  inputs 4
+  which {{parent.global_output}}
+  name Switch1
+  xpos -225
+  ypos 1385
+ }
+ Dot {
+  name Dot4
+  xpos -191
+  ypos 1427
+ }
+ Output {
+  name Output
+  xpos -81
+  ypos 1424
+ }
+end_group
