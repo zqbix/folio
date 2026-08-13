@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="Content-Security-Policy"
@@ -20,23 +20,29 @@
       --clr-30:  hsl(0, 0%, 30%);
       --clr-60:  hsl(0, 0%, 60%);
       --clr-90:  hsl(0, 0%, 90%);
-      --transition-ui:  0.3s ease;
+      --clr-ok:  hsl(140, 40%, 55%);
+      --clr-err: hsl(0, 60%, 55%);
+      --transition-ui: 0.3s ease;
     }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
         transition: none !important;
         animation: none !important;
       }
     }
+
     html, body {
       width: 100%;
       background: var(--clr-07);
     }
+
     main {
       position: fixed;
       overflow-x: hidden;
@@ -49,6 +55,7 @@
       pointer-events: auto;
       user-select: none;
     }
+
     section {
       width: auto;
       display: flex;
@@ -56,6 +63,7 @@
       align-items: center;
       justify-content: center;
     }
+
     button {
       width: 100%;
       background-color: transparent;
@@ -66,148 +74,91 @@
       box-shadow: none;
       text-align: left;
       font: inherit;
-      font-size: inherit;
       text-decoration: none;
       cursor: pointer;
       animation: fade-btn 1s ease both;
       animation-delay: calc(var(--delay) * 0.04s);
+
+      &:first-of-type {
+        padding: 1rem 0;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        text-decoration: none;
+        outline: none;
+      }
+
+      > span {
+        font: 400 1rem/1 monospace;
+        letter-spacing: 0.5rem;
+        transition: color var(--transition-ui);
+
+        &:nth-child(1) { color: var(--clr-30); }
+        &:nth-child(2) { color: var(--clr-60); }
+      }
+
+      &:hover > span,
+      &:focus > span,
+      &:active > span {
+        color: var(--clr-90);
+      }
+
+      &.is-copied > span { color: var(--clr-ok); }
+      &.is-error  > span { color: var(--clr-err); }
     }
-    button:first-of-type {
-      padding: 1rem 0;
-    }
+
     @keyframes fade-btn {
-      from { opacity: 0; transform: translateY(40px) scale(0.7) }
+      from { opacity: 0; transform: translateY(40px) scale(0.7); }
       to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    button > span {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 1;
-      font-family: monospace;
-      letter-spacing: 0.5rem;
-      word-spacing: normal;
-      text-transform: none;
-      transition: color var(--transition-ui);
-    }
-    button > span:nth-child(1) {
-      color: var(--clr-30);
-    }
-    button > span:nth-child(2) {
-      color: var(--clr-60);
-    }
-    button:hover,
-    button:active,
-    button:focus {
-      text-decoration: none;
-      outline: none;      
-    }
-    button:hover > span,
-    button:focus > span,
-    button:active > span {
-      color: var(--clr-90);
-    }
-    :popover-open {
-      position: fixed;
-      inset: 0;
-      width: fit-content;
-      height: fit-content;
-      margin: auto;
-      border: none;
-      padding: 0.25em;
-      overflow: auto;
-      background: var(--clr-07);
-      opacity: 1;
-      transition: opacity var(--transition-ui);
-      &::backdrop {
-        background: var(--clr-07);
-        opacity: 1;
-        transition: opacity var(--transition-ui);
-      }
-      @starting-style {
-        opacity: 0;
-        &::backdrop {
-          opacity: 0;
-          }
-      }
-    }
-    pre {
-      font-style: normal;
-      font-weight: 400;
-      font-size: 0.1rem;
-      line-height: 1;
-      font-family: monospace;
-      letter-spacing: normal;
-      word-spacing: normal;
-      text-transform: none;
-      color: var(--clr-60);
     }
   </style>
 </head>
 <body>
   <main>
     <section>
-      <button style="--delay: 18;"><span>zq</span><span>b0x</span></button>
-      <button style="--delay: 13;" popovertarget="zqchromaticaberration"><span>zq</span><span>chromaticaberration</span></button>
-      <button style="--delay: 9;" popovertarget="zqdetailnormals"><span>zq</span><span>detailnormals</span></button>
-      <button style="--delay: 11;" popovertarget="zqedgedistort"><span>zq</span><span>edgedistort</span></button>
-      <button style="--delay: 6;" popovertarget="zqfakecrypto"><span>zq</span><span>fakecrypto</span></button>
-      <button style="--delay: 9;" popovertarget="zqfakemotion"><span>zq</span><span>fakemotion</span></button>
-      <button style="--delay: 4;" popovertarget="zqgrain"><span>zq</span><span>grain</span></button>
-      <button style="--delay: 4;" popovertarget="zqhalation"><span>zq</span><span>halation</span></button>
-      <button style="--delay: 6;" popovertarget="zqlightwrapluma"><span>zq</span><span>lightwrapluma</span></button>
-      <button style="--delay: 3;" popovertarget="zqlightwrapunified"><span>zq</span><span>lightwrapunified</span></button>
-      <button style="--delay: 3;" popovertarget="zqnormaldeband"><span>zq</span><span>normaldeband</span></button>
-      <button style="--delay: 4;" popovertarget="zqnormalfalloff"><span>zq</span><span>normalfalloff</span></button>
-      <button style="--delay: 0;" popovertarget="zqpositionfalloff"><span>zq</span><span>positionfalloff</span></button>
-      <button style="--delay: 2;" popovertarget="zqvanishingpointguide"><span>zq</span><span>vanishingpointguide</span></button>
-      <button style="--delay: 0;" popovertarget="zqvignette"><span>zq</span><span>vignette</span></button>
+      <button type="button" style="--delay: 18;"><span>zq</span><span>b0x</span></button>
+      <button type="button" style="--delay: 13;" data-nk="zqchromaticaberration"><span>zq</span><span>chromaticaberration</span></button>
+      <button type="button" style="--delay: 9;"  data-nk="zqdetailnormals"><span>zq</span><span>detailnormals</span></button>
+      <button type="button" style="--delay: 11;" data-nk="zqedgedistort"><span>zq</span><span>edgedistort</span></button>
+      <button type="button" style="--delay: 6;"  data-nk="zqfakecrypto"><span>zq</span><span>fakecrypto</span></button>
+      <button type="button" style="--delay: 9;"  data-nk="zqfakemotion"><span>zq</span><span>fakemotion</span></button>
+      <button type="button" style="--delay: 4;"  data-nk="zqgrain"><span>zq</span><span>grain</span></button>
+      <button type="button" style="--delay: 4;"  data-nk="zqhalation"><span>zq</span><span>halation</span></button>
+      <button type="button" style="--delay: 6;"  data-nk="zqlightwrapluma"><span>zq</span><span>lightwrapluma</span></button>
+      <button type="button" style="--delay: 3;"  data-nk="zqlightwrapunified"><span>zq</span><span>lightwrapunified</span></button>
+      <button type="button" style="--delay: 3;"  data-nk="zqnormaldeband"><span>zq</span><span>normaldeband</span></button>
+      <button type="button" style="--delay: 4;"  data-nk="zqnormalfalloff"><span>zq</span><span>normalfalloff</span></button>
+      <button type="button" style="--delay: 0;"  data-nk="zqpositionfalloff"><span>zq</span><span>positionfalloff</span></button>
+      <button type="button" style="--delay: 2;"  data-nk="zqvanishingpointguide"><span>zq</span><span>vanishingpointguide</span></button>
+      <button type="button" style="--delay: 0;"  data-nk="zqvignette"><span>zq</span><span>vignette</span></button>
     </section>
   </main>
-  <div popover id="zqchromaticaberration"><pre></pre></div>
-  <div popover id="zqdetailnormals"><pre></pre></div>  
-  <div popover id="zqedgedistort"><pre></pre></div>
-  <div popover id="zqfakecrypto"><pre></pre></div>
-  <div popover id="zqfakemotion"><pre></pre></div>
-  <div popover id="zqgrain"><pre></pre></div>
-  <div popover id="zqhalation"><pre></pre></div>
-  <div popover id="zqlightwrapluma"><pre></pre></div>
-  <div popover id="zqlightwrapunified"><pre></pre></div>
-  <div popover id="zqnormaldeband"><pre></pre></div>
-  <div popover id="zqnormalfalloff"><pre></pre></div>
-  <div popover id="zqpositionfalloff"><pre></pre></div>
-  <div popover id="zqvanishingpointguide"><pre></pre></div>
-  <div popover id="zqvignette"><pre></pre></div>
 
   <script>
-    function escapeHtml(str) {
-      return str
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;');
+    const FEEDBACK_MS = 1200;
+
+    function flash(btn, className) {
+      btn.classList.remove('is-copied', 'is-error');
+      void btn.offsetWidth; // restart animation if re-triggered mid-flash
+      btn.classList.add(className);
+      setTimeout(() => btn.classList.remove(className), FEEDBACK_MS);
     }
 
-    document.querySelectorAll('[popover]').forEach((el) => {
-      el.addEventListener('beforetoggle', async (event) => {
-        if (event.newState !== 'open' || el.dataset.loaded) return;
-
-        const pre = el.querySelector('pre');
-        const file = `./nk/${el.id}.nk`;
-
+    document.querySelectorAll('button[data-nk]').forEach((btn) => {
+      btn.addEventListener('click', async () => {
         try {
-          const res = await fetch(file);
+          const res = await fetch(`./nk/${btn.dataset.nk}.nk`);
           if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
-          const raw = await res.text();
-          pre.innerHTML = escapeHtml(raw);
-          el.dataset.loaded = 'true';
+          await navigator.clipboard.writeText(await res.text());
+          flash(btn, 'is-copied');
         } catch (err) {
-          pre.textContent = `Could not load ${file}: ${err.message}`;
+          console.error(`Could not copy ${btn.dataset.nk}.nk:`, err);
+          flash(btn, 'is-error');
         }
       });
     });
   </script>
-
 </body>
 </html>
