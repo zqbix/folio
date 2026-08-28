@@ -1,0 +1,237 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqChromaticAberrationArtistic
+ selected true
+ xpos -1113
+ ypos 16952
+ addUserKnob {20 zqchromaticaberrationartistic l zqChromaticAberrationArtistic}
+ addUserKnob {26 __EFFECT l "" +STARTLINE T "<br>\n<b><i>EFFECT</i></b>\n<br>"}
+ addUserKnob {7 fx_amount l Amount}
+ fx_amount 0.01
+ addUserKnob {7 fx_quadratic l "Quadratic Blend"}
+ fx_quadratic 0.5
+ addUserKnob {7 fx_center_x l "Center X"}
+ fx_center_x 0.5
+ addUserKnob {7 fx_center_y l "Center Y"}
+ fx_center_y 0.5
+ addUserKnob {26 __ANAMORPHiC_SQUEEZE l "" +STARTLINE T "<br>\n<b><i>ANAMORPHiC SQUEEZE</i></b>\n<br>"}
+ addUserKnob {7 ana_x l X}
+ ana_x 1
+ addUserKnob {7 ana_y l Y}
+ ana_y 1
+ addUserKnob {26 __MASK_BY_LUMA l "" +STARTLINE T "<br>\n<b><i>MASK BY LUMA</i></b>\n<br>"}
+ addUserKnob {7 luma_min l Min}
+ addUserKnob {7 luma_max l Max}
+ luma_max 1
+ addUserKnob {7 luma_blur l Blur}
+ addUserKnob {7 luma_amount l Amount}
+ addUserKnob {26 __SPECTRAL_CROSSTALK l "" +STARTLINE T "<br>\n<b><i>SPECTRAL CROSSTALK</i></b>\n<br>"}
+ addUserKnob {7 spec_blend l Blend}
+ spec_blend 0.3
+ addUserKnob {26 __SMOOTHING l "" +STARTLINE T "<br>\n<b><i>SMOOTHiNG</i></b>\n<br>"}
+ addUserKnob {7 smoo_amount l Amount}
+ smoo_amount 3
+ addUserKnob {7 smoo_falloff l Falloff}
+ smoo_falloff 0.3
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {4 glo_output l Output M {"Final Image" "Luma Mask"}}
+ addUserKnob {7 glo_saturation l Saturation}
+ glo_saturation 1
+ addUserKnob {7 glo_mix l Mix}
+ glo_mix 1
+ addUserKnob {6 glo_invert l "Invert Spectrum" +STARTLINE}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Chromatic Aberration\n<br><br>\nTweak and adjust.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos -750
+  ypos -273
+ }
+ Dot {
+  name Dot2
+  xpos -716
+  ypos -201
+ }
+set N7ff59a80 [stack 0]
+ Dot {
+  name Dot4
+  xpos -582
+  ypos -201
+ }
+set Nf9e0ff80 [stack 0]
+ Saturation {
+  saturation 0
+  name Saturation2
+  xpos -616
+  ypos -160
+ }
+ Shuffle2 {
+  fromInput1 {
+   {0}
+   B
+  }
+  fromInput2 {
+   {0}
+   B
+  }
+  mappings "4 rgba.red 0 0 rgba.red 0 0 rgba.red 0 0 rgba.green 0 1 rgba.red 0 0 rgba.blue 0 2 rgba.red 0 0 rgba.alpha 0 3"
+  name Shuffle1
+  xpos -616
+  ypos -136
+ }
+ Grade {
+  channels rgba
+  blackpoint {{parent.luma_min}}
+  whitepoint {{parent.luma_max}}
+  white_clamp true
+  name Grade1
+  xpos -616
+  ypos -112
+ }
+ Blur {
+  channels rgba
+  size {{parent.luma_blur}}
+  name Blur1
+  xpos -616
+  ypos -88
+ }
+set Ndb9ef200 [stack 0]
+ Dot {
+  name Dot3
+  xpos -582
+  ypos 265
+ }
+push $Ndb9ef200
+push $N7ff59a80
+add_layer {DISTORT DISTORT.red DISTORT.green DISTORT.blue}
+ AddChannels {
+  channels DISTORT
+  name AddChannels1
+  xpos -750
+  ypos -154
+ }
+ Expression {
+  temp_name0 dx
+  temp_expr0 "(x - width*parent.fx_center_x)/(width*0.5)"
+  temp_name1 dy
+  temp_expr1 "(y - height*parent.fx_center_y)/(height*0.5)"
+  temp_name2 r
+  temp_expr2 sqrt(pow(dx*parent.ana_x,2)+pow(dy*parent.ana_y,2))
+  temp_name3 disp
+  temp_expr3 "parent.fx_amount*((1-parent.fx_quadratic)*r + parent.fx_quadratic*pow(r,3))"
+  channel0 {DISTORT.red -DISTORT.green -DISTORT.blue}
+  expr0 (dx*parent.ana_x/max(r,0.0001))*disp*(width*0.5)
+  channel1 {-DISTORT.red DISTORT.green -DISTORT.blue}
+  expr1 (dy*parent.ana_y/max(r,0.0001))*disp*(height*0.5)
+  channel2 none
+  channel3 none
+  name Expression_DISTORT
+  xpos -750
+  ypos -118
+ }
+ Grade {
+  inputs 1+1
+  channels DISTORT
+  multiply 0
+  black_clamp false
+  invert_mask true
+  mix {{"clamp(parent.luma_amount, 0, 1)"}}
+  name Grade2
+  xpos -750
+  ypos -94
+ }
+ Blur {
+  channels DISTORT
+  size 10
+  name Blur2
+  xpos -750
+  ypos -58
+ }
+ IDistort {
+  channels {rgba.red -rgba.green -rgba.blue none}
+  uv DISTORT
+  uv_scale {{"parent.glo_invert ? -1 : 1"}}
+  name IDistort1
+  xpos -750
+  ypos 3
+ }
+ IDistort {
+  channels {-rgba.red -rgba.green rgba.blue none}
+  uv DISTORT
+  uv_scale {{"parent.glo_invert ? 1 : -1"}}
+  name IDistort2
+  xpos -750
+  ypos 27
+ }
+ Expression {
+  expr0 "r*(1-parent.spec_blend*0.3) + b*(parent.spec_blend*0.3)"
+  expr2 "b*(1-parent.spec_blend*0.3) + r*(parent.spec_blend*0.3)"
+  name Expression_SPECTRAL_CROSSTALK
+  xpos -750
+  ypos 79
+ }
+ VectorBlur2 {
+  channels rgb
+  uv DISTORT
+  scale {{parent.smoo_amount}}
+  motion_falloff {{parent.smoo_falloff}}
+  name VectorBlur2
+  xpos -750
+  ypos 103
+ }
+ Dot {
+  name Dot5
+  xpos -716
+  ypos 166
+ }
+push $Nf9e0ff80
+ Dot {
+  name Dot1
+  xpos -489
+  ypos -201
+ }
+set N9fc64480 [stack 0]
+ Merge2 {
+  inputs 2
+  operation minus
+  name Merge2
+  xpos -523
+  ypos 163
+ }
+ Saturation {
+  saturation {{parent.glo_saturation}}
+  name Saturation1
+  xpos -523
+  ypos 208
+ }
+push $N9fc64480
+ Dot {
+  name Dot6
+  xpos -379
+  ypos -201
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  mix {{parent.glo_mix}}
+  name Merge3
+  xpos -413
+  ypos 208
+ }
+ Switch {
+  inputs 2
+  which {{parent.glo_output}}
+  name Switch1
+  xpos -413
+  ypos 262
+ }
+ Output {
+  name Output
+  xpos -413
+  ypos 333
+ }
+end_group

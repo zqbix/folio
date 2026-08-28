@@ -1,0 +1,298 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqChromaticAberrationNerdy
+ knobChanged "\nimport nuke\n\nn = nuke.thisNode()\nk = nuke.thisKnob()\nkn = k.name() if k else ''\n\n# --- Preset -> physics values ---------------------------------------\n# Abbe numbers (Vd) are real catalog values for the named glass\n# (Schott/Ohara/Edmund references). Amount/Edge Bias are this tool's\n# own calibration to make each preset read distinctly - not measured\n# lens data, since quantified CA profiles for specific commercial\n# lens models aren't published anywhere citable.\npresets = \{\n    'Apochromatic (Fluorite)':  \{'abbe': 94.9,  'edge_bias': 0.50, 'amount': 0.02\},\n    'Rare-Earth Low Dispersion':\{'abbe': 84.5,  'edge_bias': 0.50, 'amount': 0.03\},\n    'Fused Silica':             \{'abbe': 67.8,  'edge_bias': 0.55, 'amount': 0.05\},\n    'Clean Modern':             \{'abbe': 64.17, 'edge_bias': 0.65, 'amount': 0.08\},\n    'Lanthanum Crown':          \{'abbe': 59.5,  'edge_bias': 0.60, 'amount': 0.12\},\n    'Vintage Spherical':        \{'abbe': 50.0,  'edge_bias': 0.45, 'amount': 0.35\},\n    'Barium Crown Doublet':     \{'abbe': 47.1,  'edge_bias': 0.50, 'amount': 0.30\},\n    'Vintage Anamorphic':       \{'abbe': 40.0,  'edge_bias': 0.75, 'amount': 0.45, 'squeeze': 2.0\},\n    'Dense Flint':              \{'abbe': 33.85, 'edge_bias': 0.55, 'amount': 0.55\},\n    'Heavy Flint':              \{'abbe': 25.76, 'edge_bias': 0.50, 'amount': 0.70\},\n    'Extreme Dispersion':       \{'abbe': 25.36, 'edge_bias': 0.55, 'amount': 0.90\},\n    'Uncorrected Achromat':     \{'abbe': 28.4,  'edge_bias': 0.50, 'amount': 1.00\},\n\}\n\nif kn == 'preset':\n    p = n\['preset'].value()\n    if p in presets:\n        v = presets\[p]\n        n\['abbe'].setValue(v\['abbe'])\n        n\['amount'].setValue(v\['amount'])\n        n\['edge_bias'].setValue(v\['edge_bias'])\n        if 'squeeze' in v:\n            n\['squeeze'].setValue(v\['squeeze'])\n\n# --- Amount -> strength (raw) ----------------------------------------\nif kn in ('amount', 'preset'):\n    n\['strength'].setValue(n\['amount'].value())\n\n# --- Edge Bias -> k1 / k2, magnitude held constant --------------------\nif kn in ('edge_bias', 'preset'):\n    mag = 1.5\n    b = n\['edge_bias'].value()\n    n\['k1'].setValue(mag * (1.0 - b))\n    n\['k2'].setValue(mag * b)\n\n# --- Fringe Softness / Spread -> internal VectorBlur ------------------\nif kn in ('fringe_softness', 'fringe_spread') or k is None:\n    vb = n.node('VectorBlur1')\n    if vb is not None:\n        vb\['scale'].setValue(n\['fringe_softness'].value())\n        vb\['motion_falloff'].setValue(n\['fringe_spread'].value())\n"
+ tile_color 0xffffffff
+ selected true
+ xpos -1292
+ ypos 16951
+ addUserKnob {20 look l Look}
+ addUserKnob {4 preset l Preset t "Starting points sourced from real optical glass Abbe numbers, ordered mild -> extreme dispersion. Pick one, then fine-tune Amount / Edge Bias / Mix. Switching to Custom leaves current values alone." M {"Apochromatic (Fluorite)" "Rare-Earth Low Dispersion" "Fused Silica" "Clean Modern" "Lanthanum Crown" "Vintage Spherical" "Barium Crown Doublet" "Vintage Anamorphic" "Dense Flint" "Heavy Flint" "Extreme Dispersion" "Uncorrected Achromat" Custom}}
+ preset "Vintage Anamorphic"
+ addUserKnob {7 amount l Amount t "Overall strength of the effect, 0-2. This is the one knob to reach for when a client says 'less' or 'more'." R 0 2}
+ amount 0.45
+ addUserKnob {7 edge_bias l "Edge Bias" t "0 = fringing spread evenly across the frame.\n1 = fringing concentrated toward the corners/edges (the classic anamorphic look).\nDrives k1/k2 under the hood without changing overall strength."}
+ edge_bias 0.75
+ addUserKnob {7 mix l Mix t "Dissolve between clean plate (0) and full effect (1). Use this for quick client-facing dial-back instead of touching Amount."}
+ mix 1
+ addUserKnob {26 div_look l "" +STARTLINE T " "}
+ addUserKnob {7 center_x l "centre x" t "Optical axis, normalised 0-1 of format width."}
+ center_x 0.5
+ addUserKnob {7 center_y l "centre y" t "Optical axis, normalised 0-1 of format height."}
+ center_y 0.5
+ addUserKnob {7 squeeze l "anamorphic squeeze" t "The desqueezed plate's original lens squeeze factor. 1 = spherical, 2 = 2x anamorphic. This has to be entered by hand - Nuke's format doesn't carry a lens squeeze value, and a desqueezed plate's pixel aspect will just read 1.0 regardless of the capture lens." R 1 2}
+ squeeze 1
+ addUserKnob {26 div_look3 l "" +STARTLINE T " "}
+ addUserKnob {41 fringe_softness_link l "Fringe Softness" T fringe_softness}
+ addUserKnob {41 fringe_spread_link l "Fringe Spread" T fringe_spread}
+ addUserKnob {20 physics l "Physics (Advanced)"}
+ addUserKnob {26 physics_note l "" +STARTLINE T "Ground-truth optical parameters. Preset/Amount/Edge Bias on the Look tab write into these -\nedit here directly for hand-matching a specific lens MTF chart."}
+ addUserKnob {7 strength l "strength (raw)" t "Global dispersion gain, kept in sync with Amount above unless you override it here.\n1.0 = uncorrected N-BK7 singlet (physically exact, strong: ~25 px violet at 1080p corner).\nTypical residual of a corrected photo lens: 0.02 - 0.15." R 0 2}
+ strength 0.45
+ addUserKnob {7 abbe l "Abbe number (Vd)" t "Glass dispersion, lower = stronger CA. Catalog values:\nCaF2 (fluorite) = 94.9  |  N-FK51A = 84.5  |  Fused Silica = 67.8\nN-BK7 = 64.17  |  N-LAK9 = 59.5  |  N-BAF10 = 47.1\nF2 = 36.4  |  SF2 = 33.85  |  SF10 = 28.4\nN-SF11 = 25.76  |  SF6 = 25.36" R 20 95}
+ abbe 40
+ addUserKnob {7 k1 l "k1  linear (lateral colour)" t "1st-order transverse CA: displacement proportional to radius. Kept in sync with Edge Bias above unless overridden here." R -1 2}
+ k1 0.375
+ addUserKnob {7 k2 l "k2  quadratic (radial)" t "2nd-order radial term (r^2 component) - elliptical iso-aberration contours under anamorphic squeeze. Kept in sync with Edge Bias above unless overridden here." R -1 2}
+ k2 1.125
+ addUserKnob {26 div_vb l "" +STARTLINE T " "}
+ addUserKnob {7 fringe_softness l "Fringe Softness" t "Feeds VectorBlur1.scale - how much the fringes are smeared/softened rather than sharp-edged. Previously hardcoded at 0.02." R 0 0.1}
+ fringe_softness 0.02
+ addUserKnob {7 fringe_spread l "Fringe Spread" t "Feeds VectorBlur1.motion_falloff - how far the softening reaches. Previously hardcoded at 0.3."}
+ fringe_spread 0.3
+ addUserKnob {26 div1 l "" +STARTLINE T " "}
+ addUserKnob {26 info l "" +STARTLINE T "d(lambda,r) = strength * delta(lambda) * (k1 + k2*r) * (p-c)\ndelta(lambda) = ((1/l^2)-(1/le^2)) / (Vd*((1/lF^2)-(1/lC^2)))\ne-line 546.074 nm is the stationary reference (green stays sharp).\nPositive strength: F/g (blue/violet) fringe outward, C/d inward.\nTint weights close to white exactly: sum of 5 tints = (1,1,1)."}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -522
+  ypos -370
+ }
+ Dot {
+  name Dot1
+  xpos -488
+  ypos -299
+ }
+set N7ff59180 [stack 0]
+ Dot {
+  name Dot12
+  xpos -186
+  ypos -299
+ }
+ Expression {
+  temp_name0 dx
+  temp_expr0 "(x+0.5) - parent.center_x*width"
+  temp_name1 dy
+  temp_expr1 "(y+0.5) - parent.center_y*height"
+  temp_name2 rn
+  temp_expr2 "sqrt(pow(dx/max(parent.squeeze,0.001),2) + dy*dy) / (0.5*sqrt(width*width + height*height))"
+  temp_name3 gm
+  temp_expr3 "-parent.strength*(parent.k1 + parent.k2*rn)"
+  channel0 {forward.u -forward.v}
+  expr0 gm*dx
+  channel1 {-forward.u forward.v}
+  expr1 gm*dy
+  name CA_DisplacementField
+  label "uv = -s(k1+k2r)(p-c)\nfield evaluated ONCE, scaled per line"
+  xpos -220
+  ypos -262
+ }
+ Dot {
+  name Dot4
+  xpos -186
+  ypos -186
+ }
+set N7ff56000 [stack 0]
+ Dot {
+  name Dot3
+  xpos -76
+  ypos -186
+ }
+set Nb582880 [stack 0]
+ Dot {
+  name Dot2
+  xpos 34
+  ypos -186
+ }
+ Multiply {
+  channels forward
+  value {{1.000710/max(parent.abbe,1)}}
+  name Disp_g
+  label "g  435.834 nm  (Hg)\ndelta = +1.000710/Vd"
+  xpos 0
+  ypos -138
+ }
+ IDistort {
+  channels rgb
+  uv forward
+  name IDistort_g
+  xpos 0
+  ypos -78
+ }
+ Multiply {
+  channels rgb
+  value {0.0278425 0 0.35 1}
+  name Tint_g
+  xpos 0
+  ypos -54
+ }
+ Dot {
+  name Dot10
+  xpos 34
+  ypos 79
+ }
+push $Nb582880
+ Multiply {
+  channels forward
+  value {{0.459738/max(parent.abbe,1)}}
+  name Disp_F
+  label "F  486.134 nm  (H-beta)\ndelta = +0.459738/Vd"
+  xpos -110
+  ypos -138
+ }
+ IDistort {
+  channels rgb
+  uv forward
+  name IDistort_F
+  xpos -110
+  ypos -78
+ }
+ Multiply {
+  channels rgb
+  value {0 0.3439475 0.65 1}
+  name Tint_F
+  xpos -110
+  ypos -54
+ }
+ Dot {
+  name Dot9
+  xpos -76
+  ypos 55
+ }
+push $N7ff56000
+ Dot {
+  name Dot5
+  xpos -296
+  ypos -186
+ }
+set N7ff56480 [stack 0]
+ Multiply {
+  channels forward
+  value {{-0.239237/max(parent.abbe,1)}}
+  name Disp_d
+  label "d  587.562 nm  (He)\ndelta = -0.239237/Vd"
+  xpos -330
+  ypos -138
+ }
+ IDistort {
+  channels rgb
+  uv forward
+  name IDistort_d
+  xpos -330
+  ypos -78
+ }
+ Multiply {
+  channels rgb
+  value {0.3 0.073839 0 1}
+  name Tint_d
+  xpos -330
+  ypos -54
+ }
+ Dot {
+  name Dot8
+  xpos -296
+  ypos 31
+ }
+push $N7ff56480
+ Dot {
+  name Dot6
+  xpos -406
+  ypos -186
+ }
+ Multiply {
+  channels forward
+  value {{-0.540262/max(parent.abbe,1)}}
+  name Disp_C
+  label "C  656.281 nm  (H-alpha)\ndelta = -0.540262/Vd"
+  xpos -440
+  ypos -138
+ }
+ IDistort {
+  channels rgb
+  uv forward
+  name IDistort_C
+  xpos -440
+  ypos -78
+ }
+ Multiply {
+  channels rgb
+  value {0.6721575 0 0 1}
+  name Tint_C
+  xpos -440
+  ypos -54
+ }
+ Dot {
+  name Dot7
+  xpos -406
+  ypos 7
+ }
+push $N7ff56000
+ Multiply {
+  channels rgb
+  value {0 0.5822135 0 1}
+  name Tint_e
+  label "e  546.074 nm  (Hg)\ndelta = 0  ->  no IDistort needed"
+  xpos -220
+  ypos -138
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  output rgb
+  name Sum_Ce
+  xpos -220
+  ypos 4
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  output rgb
+  name Sum_d
+  xpos -220
+  ypos 28
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  output rgb
+  name Sum_F
+  xpos -220
+  ypos 52
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  output rgb
+  name Sum_g
+  xpos -220
+  ypos 76
+ }
+ VectorBlur2 {
+  channels rgba
+  uv forward
+  scale {{parent.fringe_softness}}
+  motion_falloff {{parent.fringe_spread}}
+  name VectorBlur1
+  xpos -220
+  ypos 132
+ }
+ Remove {
+  channels forward
+  name CleanupUV
+  label "strip uv field"
+  xpos -220
+  ypos 168
+ }
+push $N7ff59180
+ Dot {
+  name Dot11
+  xpos -488
+  ypos 231
+ }
+ Merge2 {
+  inputs 2
+  mix {{parent.mix}}
+  name Mix_vs_Original
+  label "A = CA result, B = clean plate\nif this dissolves backward, swap A/B inputs"
+  xpos -220
+  ypos 216
+ }
+ Output {
+  name Output
+  xpos -220
+  ypos 308
+ }
+end_group

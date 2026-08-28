@@ -1,0 +1,365 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqDepthBlurBlink
+ knobChanged "\nknob = nuke.thisKnob()\nnode = nuke.thisNode()\n\nif knob.name() == \"meth_choose\":\n    # 1. Get the current active index (0, 1, 2, or 3)\n    index = int(knob.getValue())\n    \n    # 2. Define our naming prefixes for each method slot\n    prefix_list = \['gs_', 'gc_', 'df_', 'bk_']\n    active_prefix = prefix_list\[index]\n    \n    # 3. Sweep through user settings to hide/show them based on the prefix name\n    for k in node.knobs().values():\n        for p in prefix_list:\n            if k.name().startswith(p):\n                k.setVisible(p == active_prefix)\n"
+ selected true
+ xpos -592
+ ypos 16949
+ addUserKnob {20 zqdepthblurblink l zqDepthBlurBlink}
+ addUserKnob {26 __METHOD l "" +STARTLINE T "<br>\n<b><i>METHOD</i></b>\n<br>"}
+ addUserKnob {4 meth_choose l Choose M {"Gauss - Separable X/Y" "Gauss - Classic" "Defocus - Circular" "Bokeh - Custom Input" ""}}
+ addUserKnob {26 gs__GAUSS_SEPARABLE l "" +STARTLINE T "<br>\n<b><i>GAUSS - SEPARABLE X/Y</i></b>\n<br>"}
+ addUserKnob {7 gs_amount l Amount}
+ gs_amount 10
+ addUserKnob {7 gs_samples l Samples}
+ gs_samples 5
+ addUserKnob {6 gs_adaptivequality l Adaptive -STARTLINE}
+ addUserKnob {7 gs_ca_strength l "CA Strength"}
+ addUserKnob {7 gs_ca_radius l "CA Radius"}
+ addUserKnob {7 gs_ca_shift l "CA Shift"}
+ addUserKnob {26 gc__GAUSS_CLASSIC l "" +STARTLINE +HIDDEN T "<br>\n<b><i>GAUSS - CLASSiC</i></b>\n<br>"}
+ addUserKnob {7 gc_amount l Amount +HIDDEN}
+ gc_amount 10
+ addUserKnob {7 gc_samples l Samples +HIDDEN}
+ gc_samples 5
+ addUserKnob {6 gc_adaptivequality l Adaptive -STARTLINE +HIDDEN}
+ addUserKnob {7 gc_ca_strength l "CA Strength" +HIDDEN}
+ addUserKnob {7 gc_ca_radius l "CA Radius" +HIDDEN}
+ addUserKnob {7 gc_ca_shift l "CA Shift" +HIDDEN}
+ addUserKnob {26 df__DEFOCUS_CIRCULAR l "" +STARTLINE +HIDDEN T "<br>\n<b><i>DEFOCUS - CIRCULAR</i></b>\n<br>"}
+ addUserKnob {7 df_amount l Amount +HIDDEN}
+ df_amount 10
+ addUserKnob {7 df_samples l Samples +HIDDEN}
+ df_samples 5
+ addUserKnob {6 df_adaptivequality l Adaptive -STARTLINE +HIDDEN}
+ addUserKnob {7 df_softness l Softness +HIDDEN}
+ df_softness 0.05
+ addUserKnob {7 df_ca_strength l "CA Strength" +HIDDEN}
+ addUserKnob {7 df_ca_radius l "CA Radius" +HIDDEN}
+ addUserKnob {7 df_ca_shift l "CA Shift" +HIDDEN}
+ addUserKnob {26 bk__BOKEH_CUSTOM_INPUT l "" +STARTLINE +HIDDEN T "<br>\n<b><i>BOKEH - CUSTOM iNPUT</i></b>\n<br>"}
+ addUserKnob {7 bk_amount l Amount +HIDDEN}
+ bk_amount 10
+ addUserKnob {7 bk_samples l Samples +HIDDEN}
+ bk_samples 5
+ addUserKnob {6 bk_adaptivequality l Adaptive -STARTLINE +HIDDEN}
+ addUserKnob {7 bk_ca_strength l "CA Strength" +HIDDEN}
+ addUserKnob {7 bk_ca_radius l "CA Radius" +HIDDEN}
+ addUserKnob {7 bk_ca_shift l "CA Shift" +HIDDEN}
+ addUserKnob {7 bk_bokeh_resolution l "Bokeh Resolution" +HIDDEN}
+ bk_bokeh_resolution 512
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Depth Blur/Defocus/Bokeh Blink\n<br><br>\nBokeh method needs <b>zqDepthBokehGenerator</b> or something similar as input!.."}
+}
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width 1800
+  box_height 300
+  box_fixed true
+  resize distort
+  black_outside true
+  name Reformat2
+  xpos -825
+  ypos 1035
+ }
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message "connect an IMAGE and 0-1 DEPTH info!"
+  old_message {
+   {99 111 110 110 101 99 116 32 97 110 32 73 77 65 71 69 32 97 110 100 32 48 45 49 32 68 69 80 84 72 32 105 110 102 111 33}
+  }
+  box {0 0 {width} {height}}
+  xjustify center
+  yjustify center
+  transforms {
+   {0 2}
+  }
+  cursor_position 36
+  font {{ Courier : Italic : CourierItalic.pfa : 0 }}
+  global_font_scale 0.5
+  center {1376 768}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {
+   {1376 768}
+  }
+  group_animations {
+   {0}
+   imported:
+   0
+   selected:
+   items:
+   "root transform/"
+  }
+  animation_layers {
+   {1 11 1376 768 0 0 1 1 0 0 0 0}
+  }
+  enable_background true
+  background_color 0.1
+  background_border_x 500
+  background_border_y 50
+  name Text2
+  xpos -825
+  ypos 1059
+ }
+set Na295200 [stack 0]
+ Text2 {
+  font_size_toolbar 100
+  font_width_toolbar 100
+  font_height_toolbar 100
+  message "connect an IMAGE, 0-1 DEPTH info and a custom BOKEH!"
+  old_message {
+   {99 111 110 110 101 99 116 32 97 110 32 73 77 65 71 69 44 32 48 45 49 32 68 69 80 84 72 32 105 110 102 111 32 97 110 100 32 97 32 99 117 115 116 111 109 32 66 79 75 69 72 33}
+  }
+  box {0 0 {width} {height}}
+  xjustify center
+  yjustify center
+  transforms {
+   {0 2}
+  }
+  cursor_position 52
+  font {{ Courier : Italic : CourierItalic.pfa : 0 }}
+  global_font_scale 0.5
+  center {1376 768}
+  cursor_initialised true
+  autofit_bbox false
+  initial_cursor_position {
+   {1376 768}
+  }
+  group_animations {
+   {0}
+   imported:
+   0
+   selected:
+   items:
+   "root transform/"
+  }
+  animation_layers {
+   {1 11 1376 768 0 0 1 1 0 0 0 0}
+  }
+  enable_background true
+  background_color 0.1
+  background_border_x 500
+  background_border_y 50
+  name Text1
+  xpos -825
+  ypos 1083
+ }
+push $Na295200
+ Input {
+  inputs 0
+  name Bokeh
+  xpos -935
+  ypos 318
+  number 2
+ }
+ Input {
+  inputs 0
+  name Depth
+  xpos -796
+  ypos 318
+  number 1
+ }
+ Dot {
+  name Dot1
+  xpos -762
+  ypos 539
+ }
+set Na2b6d00 [stack 0]
+ Dot {
+  name Dot2
+  xpos -762
+  ypos 575
+ }
+set Na2b7180 [stack 0]
+ Dot {
+  name Dot4
+  xpos -762
+  ypos 619
+ }
+set Na2b7600 [stack 0]
+ Dot {
+  name Dot7
+  xpos -762
+  ypos 665
+ }
+set Na2b7a80 [stack 0]
+ Dot {
+  name Dot9
+  xpos -762
+  ypos 704
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -1243
+  ypos 318
+ }
+ Dot {
+  name Dot14
+  xpos -1209
+  ypos 539
+ }
+set Na36e900 [stack 0]
+ Dot {
+  name Dot13
+  xpos -1209
+  ypos 619
+ }
+set Na36ed80 [stack 0]
+ Dot {
+  name Dot12
+  xpos -1209
+  ypos 665
+ }
+set Na36f200 [stack 0]
+ Dot {
+  name Dot6
+  xpos -1209
+  ypos 704
+ }
+ BlinkScript {
+  inputs 3
+  recompileCount 3
+  ProgramGroup 1
+  KernelDescription "3 \"Bokeh\" iterate pixelWise 9c0182e5886a8869cae4d6b226ce1469e9c090724475b9988b91151c572a815a 4 \"src\" Read Ranged2D \"mask\" Read Point \"bokeh\" Read Random \"dst\" Write Point 7 \"maxRadius\" Float 1 AAAgQQ== \"quality\" Int 1 BQAAAA== \"chromaStrength\" Float 1 AAAAAA== \"chromaRadius\" Float 1 AAAAAA== \"chromaShift\" Float 1 AAAAAA== \"bokehResolution\" Int 1 AAIAAA== \"adaptiveQuality\" Int 1 AAAAAA== 7 \"maxRadius\" 1 1 Default \"quality\" 1 1 Default \"chromaStrength\" 1 1 Default \"chromaRadius\" 1 1 Default \"chromaShift\" 1 1 Default \"bokehResolution\" 1 1 Default \"adaptiveQuality\" 1 1 Default 12 \"srcrangeMin\" Int 2 1 AAAAAAAAAAA= \"srcrangeMax\" Int 2 1 AAAAAAAAAAA= \"maxRadiusInt\" Int 1 1 AAAAAA== \"bokehMaxIndex\" Float 1 1 AAAAAA== \"complexPass\" Bool 1 1 AA== \"chromaStrengthSafe\" Float 1 1 AAAAAA== \"chromaRadiusSafe\" Float 1 1 AAAAAA== \"chromaShiftSafe\" Float 1 1 AAAAAA== \"radiusScaleR\" Float 1 1 AAAAAA== \"radiusScaleB\" Float 1 1 AAAAAA== \"TWO_PI\" Float 1 1 AAAAAA== \"GOLDEN_ANGLE\" Float 1 1 AAAAAA=="
+  kernelSource "kernel Bokeh : public ImageComputationKernel<ePixelWise>\n\{ \n  // Input / Output Images\n  Image<eRead, eAccessRanged2D, eEdgeClamped> src; \n  Image<eRead, eAccessPoint, eEdgeClamped> mask; \n  Image<eRead, eAccessRandom, eEdgeClamped> bokeh; \n  Image<eWrite> dst; \n\n  // Public Parameters\n  param:\n    float maxRadius; \n    int quality; \n    float chromaStrength; \n    float chromaRadius; \n    float chromaShift; \n    int bokehResolution; \n    int adaptiveQuality; \n\n  // Local Variables\n  local:\n    int maxRadiusInt; \n    float bokehMaxIndex; \n    bool complexPass; \n    float chromaStrengthSafe; \n    float chromaRadiusSafe; \n    float chromaShiftSafe; \n    float radiusScaleR; \n    float radiusScaleB; \n    float TWO_PI; \n    float GOLDEN_ANGLE; \n\n  inline float4 sanitizeVec(float4 v) \{\n    if (v.x != v.x || fabs(v.x) > 1.0e30f) v.x = 0.0f;\n    if (v.y != v.y || fabs(v.y) > 1.0e30f) v.y = 0.0f;\n    if (v.z != v.z || fabs(v.z) > 1.0e30f) v.z = 0.0f;\n    if (v.w != v.w || fabs(v.w) > 1.0e30f) v.w = 0.0f;\n    return v;\n  \}\n\n  void define() \n  \{ \n    defineParam(maxRadius, \"maxRadius\", 10.0f); \n    defineParam(quality, \"quality\", 5); \n    defineParam(chromaStrength, \"chromaStrength\", 0.0f); \n    defineParam(chromaRadius, \"chromaRadius\", 0.0f); \n    defineParam(chromaShift, \"chromaShift\", 0.0f); \n    defineParam(bokehResolution, \"bokehResolution\", 512); \n    defineParam(adaptiveQuality, \"adaptiveQuality\", 0); \n  \} \n\n  void init() \n  \{ \n    TWO_PI = 6.2831853f; \n    GOLDEN_ANGLE = 2.3999632f; \n\n    float safeRadius = max(maxRadius, 0.0f); \n    chromaRadiusSafe = clamp(chromaRadius, -0.5f, 0.5f); \n    chromaShiftSafe = clamp(chromaShift, -0.25f, 0.25f); \n    chromaStrengthSafe = clamp(chromaStrength, 0.0f, 16.0f); \n\n    radiusScaleR = max(0.01f, 1.0f + chromaRadiusSafe); \n    radiusScaleB = max(0.01f, 1.0f - chromaRadiusSafe); \n\n    // CRITICAL BUG FIX: Ensure memory mapping footprints contain combined shift limits\n    float maxRadiusScale = 1.0f + fabs(chromaRadiusSafe) + fabs(chromaShiftSafe); \n    float maxChromaticRadius = safeRadius * maxRadiusScale + 3.0f; \n    maxRadiusInt = int(ceil(maxChromaticRadius)) + 1; \n\n    src.setRange(-maxRadiusInt, -maxRadiusInt, maxRadiusInt, maxRadiusInt); \n\n    int safeBokehResolution = max(bokehResolution, 2); \n    bokehMaxIndex = float(safeBokehResolution - 1); \n\n    // Unified operational state flag\n    complexPass = (fabs(chromaRadiusSafe) > 0.000001f || fabs(chromaShiftSafe) > 0.000001f); \n  \} \n\n  void process(int2 pos) \n  \{ \n    float m = clamp(mask().x, 0.0f, 1.0f); \n    float radius = max(maxRadius, 0.0f) * m; \n\n    if (radius < 0.5f) \{ \n      dst() = src(0, 0); \n      return; \n    \} \n\n    int rings = clamp(quality, 1, 160); \n    if (adaptiveQuality != 0) \{ \n      rings = max(int(round(float(rings) * m)), 1); \n    \} \n\n    float radiusR = radius * radiusScaleR; \n    float radiusB = radius * radiusScaleB; \n\n    float4 sumVec = sanitizeVec(src(0, 0)); \n    float4 weightVec = float4(1.0f, 1.0f, 1.0f, 1.0f); \n\n    // TRIPLE-CHECKED OPTIMIZATION: High-level branching hoists calculations out of execution frames\n    if (!complexPass) \{ \n      // Simple Pass: Zero Chromatic Aberration / Dispersion artifacts\n      for (int r = 1; r <= rings; ++r) \{ \n        float normalizedRadius = sqrt((float(r) - 0.5f) / float(rings)); \n        float currentRadius = radius * normalizedRadius; \n\n        int angularSamples = clamp(int(ceil(TWO_PI * currentRadius)), 8, 512); \n        float invAngularSamples = 1.0f / float(angularSamples); \n        float ringRotation = float(r) * GOLDEN_ANGLE; \n\n        for (int a = 0; a < angularSamples; ++a) \{ \n          float angle = (float(a) + 0.5f) * invAngularSamples * TWO_PI + ringRotation; \n          float c = cos(angle); \n          float s = sin(angle); \n\n          float bxRaw = clamp(((c * normalizedRadius) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex);\n          float byRaw = clamp(((s * normalizedRadius) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex);\n          \n          // Precision bug fix: Enforce safe bounds wrapping inside target integers\n          int bx = clamp(int(round(bxRaw)), 0, int(bokehMaxIndex)); \n          int by = clamp(int(round(byRaw)), 0, int(bokehMaxIndex)); \n\n          float4 aperture = bokeh(bx, by); \n          float alphaW = clamp(aperture.w, 0.0f, 1.0f);\n          float weight = clamp(aperture.y, 0.0f, 1.0f) * alphaW; // Primary mono channel map\n          \n          if (weight <= 0.000001f) continue;\n          float4 wV = float4(weight, weight, weight, weight);\n\n          int sx = clamp(int(round(c * currentRadius)), -maxRadiusInt, maxRadiusInt); \n          int sy = clamp(int(round(s * currentRadius)), -maxRadiusInt, maxRadiusInt); \n\n          sumVec += sanitizeVec(src(sx, sy)) * wV; \n          weightVec += wV; \n        \} \n      \} \n    \} else \{ \n      // Complex Pass: Full Custom Dispersion + Chromatic Shift Math\n      for (int r = 1; r <= rings; ++r) \{ \n        float normalizedRadius = sqrt((float(r) - 0.5f) / float(rings)); \n        float currentRadius = radius * normalizedRadius; \n\n        int angularSamples = clamp(int(ceil(TWO_PI * currentRadius)), 8, 512); \n        float invAngularSamples = 1.0f / float(angularSamples); \n        float ringRotation = float(r) * GOLDEN_ANGLE; \n\n        for (int a = 0; a < angularSamples; ++a) \{ \n          float angle = (float(a) + 0.5f) * invAngularSamples * TWO_PI + ringRotation; \n          float c = cos(angle); \n          float s = sin(angle); \n\n          float baseX = c * normalizedRadius; \n          float baseY = s * normalizedRadius; \n\n          // Map shifted texture coordinates smoothly across lookup fields\n          int bxR = clamp(int(round(clamp(( (baseX + c * chromaShiftSafe) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n          int byR = clamp(int(round(clamp(( (baseY + s * chromaShiftSafe) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n          int bxG = clamp(int(round(clamp(( (baseX) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n          int byG = clamp(int(round(clamp(( (baseY) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n          int bxB = clamp(int(round(clamp(( (baseX - c * chromaShiftSafe) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n          int byB = clamp(int(round(clamp(( (baseY - s * chromaShiftSafe) * 0.5f + 0.5f) * bokehMaxIndex, 0.0f, bokehMaxIndex))), 0, int(bokehMaxIndex));\n\n          float4 apR = bokeh(bxR, byR); \n          float4 apG = bokeh(bxG, byG); \n          float4 apB = bokeh(bxB, byB); \n\n          float rawR = clamp(apR.x, 0.0f, 1.0f) * clamp(apR.w, 0.0f, 1.0f); \n          float rawG = clamp(apG.y, 0.0f, 1.0f) * clamp(apG.w, 0.0f, 1.0f); \n          float rawB = clamp(apB.z, 0.0f, 1.0f) * clamp(apB.w, 0.0f, 1.0f); \n\n          float neutral = (rawR + rawG + rawB) * 0.33333333f; \n          float wr = clamp(neutral + (rawR - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n          float wg = clamp(neutral + (rawG - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n          float wb = clamp(neutral + (rawB - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n\n          // Fix alpha weighting equation back to clean uniform geometry\n          float4 wV = float4(wr, wg, wb, wg); \n\n          int sxR = clamp(int(round(baseX * radiusR)), -maxRadiusInt, maxRadiusInt); \n          int syR = clamp(int(round(baseY * radiusR)), -maxRadiusInt, maxRadiusInt); \n          int sxG = clamp(int(round(baseX * radius)),  -maxRadiusInt, maxRadiusInt); \n          int syG = clamp(int(round(baseY * radius)),  -maxRadiusInt, maxRadiusInt); \n          int sxB = clamp(int(round(baseX * radiusB)), -maxRadiusInt, maxRadiusInt); \n          int syB = clamp(int(round(baseY * radiusB)), -maxRadiusInt, maxRadiusInt); \n\n          // Strip individual branch reads down to vectorized operations\n          if (wV.x > 0.000001f) \{ sumVec.x += sanitizeVec(src(sxR, syR)).x * wV.x; weightVec.x += wV.x; \} \n          \n          float4 sG = sanitizeVec(src(sxG, syG));\n          if (wV.y > 0.000001f) \{ sumVec.y += sG.y * wV.y; weightVec.y += wV.y; \} \n          if (wV.w > 0.000001f) \{ sumVec.w += sG.w * wV.w; weightVec.w += wV.w; \} \n          \n          if (wV.z > 0.000001f) \{ sumVec.z += sanitizeVec(src(sxB, syB)).z * wV.z; weightVec.z += wV.z; \} \n        \} \n      \} \n    \} \n\n    dst() = float4(sumVec.x / weightVec.x, sumVec.y / weightVec.y, sumVec.z / weightVec.z, sumVec.w / weightVec.w); \n  \} \n\};\n"
+  rebuild ""
+  Bokeh_maxRadius {{parent.bk_amount}}
+  Bokeh_quality {{parent.bk_samples}}
+  Bokeh_chromaStrength {{parent.bk_ca_strength}}
+  Bokeh_chromaRadius {{parent.bk_ca_radius}}
+  Bokeh_chromaShift {{parent.bk_ca_shift}}
+  Bokeh_bokehResolution {{parent.bk_bokeh_resolution}}
+  Bokeh_adaptiveQuality {{parent.bk_adaptivequality}}
+  rebuild_finalise ""
+  name B0keh
+  xpos -935
+  ypos 695
+ }
+push $Na2b7a80
+push $Na36f200
+ BlinkScript {
+  inputs 2
+  recompileCount 3
+  ProgramGroup 1
+  KernelDescription "3 \"Defocus\" iterate pixelWise 7b4c72aae5a6e3d4487181faf0b35f9f8d9b2f085c32d5a055d942f32d376695 3 \"src\" Read Ranged2D \"mask\" Read Point \"dst\" Write Point 7 \"maxRadius\" Float 1 AAAgQQ== \"quality\" Int 1 BQAAAA== \"chromaStrength\" Float 1 AAAAAA== \"chromaRadius\" Float 1 AAAAAA== \"chromaShift\" Float 1 AAAAAA== \"apertureSoftness\" Float 1 zcxMPQ== \"adaptiveQuality\" Int 1 AAAAAA== 7 \"maxRadius\" 1 1 Default \"quality\" 1 1 Default \"chromaStrength\" 1 1 Default \"chromaRadius\" 1 1 Default \"chromaShift\" 1 1 Default \"apertureSoftness\" 1 1 Default \"adaptiveQuality\" 1 1 Default 12 \"srcrangeMin\" Int 2 1 AAAAAAAAAAA= \"srcrangeMax\" Int 2 1 AAAAAAAAAAA= \"maxRadiusInt\" Int 1 1 AAAAAA== \"apertureSoftnessSafe\" Float 1 1 AAAAAA== \"chromaStrengthSafe\" Float 1 1 AAAAAA== \"chromaRadiusSafe\" Float 1 1 AAAAAA== \"chromaShiftSafe\" Float 1 1 AAAAAA== \"radiusScaleR\" Float 1 1 AAAAAA== \"radiusScaleB\" Float 1 1 AAAAAA== \"simpleAperture\" Bool 1 1 AA== \"TWO_PI\" Float 1 1 AAAAAA== \"GOLDEN_ANGLE\" Float 1 1 AAAAAA=="
+  kernelSource "kernel Defocus : public ImageComputationKernel<ePixelWise>\n\{ \n  // Input / Output Images\n  Image<eRead, eAccessRanged2D, eEdgeClamped> src; \n  Image<eRead, eAccessPoint, eEdgeClamped> mask; \n  Image<eWrite> dst; \n\n  // Public Parameters\n  param:\n    float maxRadius; \n    int quality; \n    float chromaStrength; \n    float chromaRadius; \n    float chromaShift; \n    float apertureSoftness; \n    int adaptiveQuality; \n\n  // Local Variables\n  local:\n    int maxRadiusInt; \n    float apertureSoftnessSafe; \n    float chromaStrengthSafe; \n    float chromaRadiusSafe; \n    float chromaShiftSafe; \n    float radiusScaleR; \n    float radiusScaleB; \n    bool simpleAperture; \n    float TWO_PI; \n    float GOLDEN_ANGLE; \n\n  inline float4 sanitizeVec(float4 v) \{\n    if (v.x != v.x || fabs(v.x) > 1.0e30f) v.x = 0.0f;\n    if (v.y != v.y || fabs(v.y) > 1.0e30f) v.y = 0.0f;\n    if (v.z != v.z || fabs(v.z) > 1.0e30f) v.z = 0.0f;\n    if (v.w != v.w || fabs(v.w) > 1.0e30f) v.w = 0.0f;\n    return v;\n  \}\n\n  // Computes smooth aperture edge softness using standard cubic interpolation\n  inline float circleWeight(float x, float y) \n  \{ \n    float d = sqrt(x * x + y * y); \n    float t = clamp((1.0f - d) / apertureSoftnessSafe + 0.5f, 0.0f, 1.0f); \n    return t * t * (3.0f - 2.0f * t); \n  \} \n\n  void define() \n  \{ \n    defineParam(maxRadius, \"maxRadius\", 10.0f); \n    defineParam(quality, \"quality\", 5); \n    defineParam(chromaStrength, \"chromaStrength\", 0.0f); \n    defineParam(chromaRadius, \"chromaRadius\", 0.0f); \n    defineParam(chromaShift, \"chromaShift\", 0.0f); \n    defineParam(apertureSoftness, \"apertureSoftness\", 0.05f); \n    defineParam(adaptiveQuality, \"adaptiveQuality\", 0); \n  \} \n\n  void init() \n  \{ \n    TWO_PI = 6.2831853f; \n    GOLDEN_ANGLE = 2.3999632f; \n\n    float safeRadius = max(maxRadius, 0.0f); \n    chromaRadiusSafe = clamp(chromaRadius, -0.5f, 0.5f); \n    chromaShiftSafe = clamp(chromaShift, -0.25f, 0.25f); \n    chromaStrengthSafe = clamp(chromaStrength, 0.0f, 16.0f); \n\n    radiusScaleR = max(0.01f, 1.0f + chromaRadiusSafe); \n    radiusScaleB = max(0.01f, 1.0f - chromaRadiusSafe); \n    apertureSoftnessSafe = clamp(apertureSoftness, 0.001f, 0.5f); \n\n    // CRITICAL BUG FIX: Ensure maxRadiusInt accounts for worst-case spatial expansion from shift limits\n    float maxRadiusScale = 1.0f + fabs(chromaRadiusSafe) + fabs(chromaShiftSafe); \n    float maxChromaticRadius = safeRadius * maxRadiusScale + 3.0f; \n    maxRadiusInt = int(ceil(maxChromaticRadius)) + 1; \n\n    src.setRange(-maxRadiusInt, -maxRadiusInt, maxRadiusInt, maxRadiusInt); \n    simpleAperture = (fabs(chromaShiftSafe) < 0.000001f); \n  \} \n\n  void process(int2 pos) \n  \{ \n    float m = clamp(mask().x, 0.0f, 1.0f); \n    float radius = max(maxRadius, 0.0f) * m; \n\n    if (radius < 0.5f) \{ \n      dst() = src(0, 0); \n      return; \n    \} \n\n    int rings = clamp(quality, 1, 160); \n    if (adaptiveQuality != 0) \{ \n      rings = max(int(round(float(rings) * m)), 1); \n    \} \n\n    float radiusR = radius * radiusScaleR; \n    float radiusB = radius * radiusScaleB; \n\n    float4 sumVec = sanitizeVec(src(0, 0)); \n    float4 weightVec = float4(1.0f, 1.0f, 1.0f, 1.0f); \n\n    // TRIPLE-CHECKED OPTIMIZATION: Condition completely hoisted outside entire polar loop network\n    if (simpleAperture) \{ \n      for (int r = 1; r <= rings; ++r) \{ \n        float normalizedRadius = sqrt((float(r) - 0.5f) / float(rings)); \n        float currentRadius = radius * normalizedRadius; \n\n        int angularSamples = clamp(int(ceil(TWO_PI * currentRadius)), 8, 512); \n        float invAngularSamples = 1.0f / float(angularSamples); \n        float ringRotation = float(r) * GOLDEN_ANGLE; \n\n        // Fix original math bug: compute true uniform edge softness profile even in simple pass\n        float wAperture = circleWeight(normalizedRadius, 0.0f);\n        if (wAperture <= 0.000001f) continue;\n\n        float4 wV = float4(wAperture, wAperture, wAperture, wAperture);\n\n        for (int a = 0; a < angularSamples; ++a) \{ \n          float angle = (float(a) + 0.5f) * invAngularSamples * TWO_PI + ringRotation; \n          \n          int sx = int(round(cos(angle) * currentRadius)); \n          int sy = int(round(sin(angle) * currentRadius)); \n\n          // Safeguard boundaries natively\n          sx = clamp(sx, -maxRadiusInt, maxRadiusInt);\n          sy = clamp(sy, -maxRadiusInt, maxRadiusInt);\n\n          sumVec += sanitizeVec(src(sx, sy)) * wV; \n          weightVec += wV; \n        \} \n      \} \n    \} else \{ \n      // Chromatic Aberration/Shift active execution pass\n      for (int r = 1; r <= rings; ++r) \{ \n        float normalizedRadius = sqrt((float(r) - 0.5f) / float(rings)); \n        float currentRadius = radius * normalizedRadius; \n\n        int angularSamples = clamp(int(ceil(TWO_PI * currentRadius)), 8, 512); \n        float invAngularSamples = 1.0f / float(angularSamples); \n        float ringRotation = float(r) * GOLDEN_ANGLE; \n\n        for (int a = 0; a < angularSamples; ++a) \{ \n          float angle = (float(a) + 0.5f) * invAngularSamples * TWO_PI + ringRotation; \n          float c = cos(angle); \n          float s = sin(angle); \n\n          float baseX = c * normalizedRadius; \n          float baseY = s * normalizedRadius; \n\n          float rawR = circleWeight(baseX + c * chromaShiftSafe, baseY + s * chromaShiftSafe); \n          float rawG = circleWeight(baseX, baseY); \n          float rawB = circleWeight(baseX - c * chromaShiftSafe, baseY - s * chromaShiftSafe); \n\n          float neutral = (rawR + rawG + rawB) * 0.33333333f; \n          float wr = clamp(neutral + (rawR - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n          float wg = clamp(neutral + (rawG - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n          float wb = clamp(neutral + (rawB - neutral) * chromaStrengthSafe, 0.0f, 1.0f); \n\n          // Fix original loop math: lock alpha profile to clean geometric green coverage\n          float4 wV = float4(wr, wg, wb, wg); \n\n          int sxR = clamp(int(round(baseX * radiusR)), -maxRadiusInt, maxRadiusInt); \n          int syR = clamp(int(round(baseY * radiusR)), -maxRadiusInt, maxRadiusInt); \n          int sxG = clamp(int(round(baseX * radius)),  -maxRadiusInt, maxRadiusInt); \n          int syG = clamp(int(round(baseY * radius)),  -maxRadiusInt, maxRadiusInt); \n          int sxB = clamp(int(round(baseX * radiusB)), -maxRadiusInt, maxRadiusInt); \n          int syB = clamp(int(round(baseY * radiusB)), -maxRadiusInt, maxRadiusInt); \n\n          // Clean vector gathering replaces branchy individual reads\n          if (wV.x > 0.000001f) \{ sumVec.x += sanitizeVec(src(sxR, syR)).x * wV.x; weightVec.x += wV.x; \} \n          \n          float4 sG = sanitizeVec(src(sxG, syG));\n          if (wV.y > 0.000001f) \{ sumVec.y += sG.y * wV.y; weightVec.y += wV.y; \} \n          if (wV.w > 0.000001f) \{ sumVec.w += sG.w * wV.w; weightVec.w += wV.w; \} \n          \n          if (wV.z > 0.000001f) \{ sumVec.z += sanitizeVec(src(sxB, syB)).z * wV.z; weightVec.z += wV.z; \} \n        \} \n      \} \n    \} \n\n    dst() = float4(sumVec.x / weightVec.x, sumVec.y / weightVec.y, sumVec.z / weightVec.z, sumVec.w / weightVec.w); \n  \} \n\};\n"
+  rebuild ""
+  Defocus_maxRadius {{parent.df_amount}}
+  Defocus_quality {{parent.df_samples}}
+  Defocus_chromaStrength {{parent.df_ca_strength}}
+  Defocus_chromaRadius {{parent.df_ca_radius}}
+  Defocus_chromaShift {{parent.df_ca_shift}}
+  Defocus_apertureSoftness {{parent.df_softness}}
+  Defocus_adaptiveQuality {{parent.df_adaptivequality}}
+  rebuild_finalise ""
+  name Defocus
+  xpos -999
+  ypos 656
+ }
+ Dot {
+  name Dot8
+  xpos -965
+  ypos 865
+ }
+push $Na2b7600
+push $Na36ed80
+ BlinkScript {
+  inputs 2
+  recompileCount 6
+  ProgramGroup 1
+  KernelDescription "3 \"GaussianBlur\" iterate pixelWise 283063f50df4e14841050555fff6e37f5ea6882e0b2cff593f92f63c24d46cc3 3 \"src\" Read Ranged2D \"mask\" Read Point \"dst\" Write Point 6 \"maxRadius\" Float 1 AAAgQQ== \"maxTaps\" Int 1 BQAAAA== \"chromaStrength\" Float 1 AAAAAA== \"chromaRadius\" Float 1 AAAAAA== \"chromaShift\" Float 1 AAAAAA== \"adaptiveQuality\" Int 1 AAAAAA== 6 \"maxRadius\" 1 1 Default \"maxTaps\" 1 1 Default \"chromaStrength\" 1 1 Default \"chromaRadius\" 1 1 Default \"chromaShift\" 1 1 Default \"adaptiveQuality\" 1 1 Default 7 \"srcrangeMin\" Int 2 1 AAAAAAAAAAA= \"srcrangeMax\" Int 2 1 AAAAAAAAAAA= \"maxRadiusInt\" Int 1 1 AAAAAA== \"maxTapsSafe\" Int 1 1 AAAAAA== \"radiusScaleR\" Float 1 1 AAAAAA== \"radiusScaleB\" Float 1 1 AAAAAA== \"chromaShiftSafe\" Float 1 1 AAAAAA=="
+  kernelSource "kernel GaussianBlur : public ImageComputationKernel<ePixelWise>\n\{ \n  // Input / Output Images\n  Image<eRead, eAccessRanged2D, eEdgeClamped> src; \n  Image<eRead, eAccessPoint, eEdgeClamped> mask; \n  Image<eWrite> dst; \n\n  // Public Parameters\n  param:\n    float maxRadius; \n    int maxTaps; \n    float chromaStrength; \n    float chromaRadius; \n    float chromaShift; \n    int adaptiveQuality; \n\n  // Local Variables\n  local:\n    int maxRadiusInt; \n    int maxTapsSafe; \n    float radiusScaleR; \n    float radiusScaleB; \n    float chromaShiftSafe; \n\n  void define() \n  \{ \n    defineParam(maxRadius, \"maxRadius\", 10.0f); \n    defineParam(maxTaps, \"maxTaps\", 5); \n    defineParam(chromaStrength, \"chromaStrength\", 0.0f); \n    defineParam(chromaRadius, \"chromaRadius\", 0.0f); \n    defineParam(chromaShift, \"chromaShift\", 0.0f); \n    defineParam(adaptiveQuality, \"adaptiveQuality\", 0); \n  \} \n\n  void init() \n  \{ \n    float safeRadius = max(maxRadius, 0.0f); \n    float chromaStrengthSafe = clamp(chromaStrength, 0.0f, 4.0f); \n    float chromaRadiusSafe = clamp(chromaRadius * chromaStrengthSafe, -0.5f, 0.5f); \n    chromaShiftSafe = clamp(chromaShift * chromaStrengthSafe, -0.25f, 0.25f); \n\n    radiusScaleR = max(0.01f, 1.0f + chromaRadiusSafe); \n    radiusScaleB = max(0.01f, 1.0f - chromaRadiusSafe); \n\n    // Cap at a safe limit to prevent stack-allocated array overflows in process()\n    maxTapsSafe = clamp(maxTaps, 1, 48); \n\n    float maxRadiusScale = 1.0f + fabs(chromaRadiusSafe) + fabs(chromaShiftSafe); \n    int calculatedRadius = int(ceil(safeRadius * maxRadiusScale)) + 2; \n    \n    maxRadiusInt = max(calculatedRadius, maxTapsSafe); \n    src.setRange(-maxRadiusInt, -maxRadiusInt, maxRadiusInt, maxRadiusInt); \n  \} \n\n  inline float4 sanitizeVec(float4 v) \{\n    if (v.x != v.x || fabs(v.x) > 1.0e30f) v.x = 0.0f;\n    if (v.y != v.y || fabs(v.y) > 1.0e30f) v.y = 0.0f;\n    if (v.z != v.z || fabs(v.z) > 1.0e30f) v.z = 0.0f;\n    if (v.w != v.w || fabs(v.w) > 1.0e30f) v.w = 0.0f;\n    return v;\n  \}\n\n  void process(int2 pos) \n  \{ \n    float m = clamp(mask().x, 0.0f, 1.0f); \n    float radius = max(maxRadius, 0.0f) * m; \n\n    if (radius < 0.5f) \{ \n      dst() = src(0, 0); \n      return; \n    \} \n\n    float sigma = radius * 0.33333333f; \n    float sigmaR = sigma * radiusScaleR; \n    float sigmaB = sigma * radiusScaleB; \n\n    int neededTaps = int(ceil(max(sigmaR, sigmaB) * 3.0f)) + 1; \n    int taps = (adaptiveQuality != 0) ? max(int(round(float(maxTapsSafe) * m)), 1) : maxTapsSafe; \n    taps = clamp(taps, 1, neededTaps); \n\n    int shiftInt = int(round(chromaShiftSafe * radius)); \n\n    float invTwoSigmaR2 = 0.5f / (sigmaR * sigmaR + 1.0e-8f); \n    float invTwoSigmaG2 = 0.5f / (sigma * sigma + 1.0e-8f); \n    float invTwoSigmaB2 = 0.5f / (sigmaB * sigmaB + 1.0e-8f); \n\n    // Allocate 1D lookup buffers on the stack. Safe since maxTapsSafe <= 48.\n    // Indexing math maps loop index \[-48, 48] safely to buffer.\n    float wR_lut\[97];\n    float wG_lut\[97];\n    float wB_lut\[97];\n\n    for (int i = -taps; i <= taps; ++i) \{\n      float f2 = float(i * i);\n      wR_lut\[i + 48] = exp(-f2 * invTwoSigmaR2);\n      wG_lut\[i + 48] = exp(-f2 * invTwoSigmaG2);\n      wB_lut\[i + 48] = exp(-f2 * invTwoSigmaB2);\n    \}\n\n    float sumR = 0.0f, sumG = 0.0f, sumB = 0.0f, sumA = 0.0f; \n    float wR_sum = 0.0f, wG_sum = 0.0f, wB_sum = 0.0f, wA_sum = 0.0f; \n\n    if (shiftInt == 0) \{ \n      for (int dy = -taps; dy <= taps; ++dy) \{ \n        int yIdx = dy + 48;\n        float wRy = wR_lut\[yIdx]; \n        float wGy = wG_lut\[yIdx]; \n        float wBy = wB_lut\[yIdx]; \n\n        for (int dx = -taps; dx <= taps; ++dx) \{ \n          int xIdx = dx + 48;\n          float wR = wRy * wR_lut\[xIdx]; \n          float wG = wGy * wG_lut\[xIdx]; \n          float wB = wBy * wB_lut\[xIdx]; \n\n          float4 s = sanitizeVec(src(dx, dy)); \n\n          sumR += s.x * wR; wR_sum += wR; \n          sumG += s.y * wG; wG_sum += wG; \n          sumB += s.z * wB; wB_sum += wB; \n          sumA += s.w * wG; wA_sum += wG; \n        \} \n      \} \n    \} else \{ \n      for (int dy = -taps; dy <= taps; ++dy) \{ \n        int yIdx = dy + 48;\n        float wRy = wR_lut\[yIdx]; \n        float wGy = wG_lut\[yIdx]; \n        float wBy = wB_lut\[yIdx]; \n\n        for (int dx = -taps; dx <= taps; ++dx) \{ \n          int xIdx = dx + 48;\n          float wR = wRy * wR_lut\[xIdx]; \n          float wG = wGy * wG_lut\[xIdx]; \n          float wB = wBy * wB_lut\[xIdx]; \n\n          int idxR = clamp(dx + shiftInt, -maxRadiusInt, maxRadiusInt);\n          int idxB = clamp(dx - shiftInt, -maxRadiusInt, maxRadiusInt);\n\n          sumR += sanitizeVec(src(idxR, dy)).x * wR; wR_sum += wR; \n          \n          float4 sG = sanitizeVec(src(dx, dy));\n          sumG += sG.y * wG; wG_sum += wG; \n          sumA += sG.w * wG; wA_sum += wG; \n          \n          sumB += sanitizeVec(src(idxB, dy)).z * wB; wB_sum += wB; \n        \} \n      \} \n    \} \n\n    dst() = float4(sumR / wR_sum, sumG / wG_sum, sumB / wB_sum, sumA / wA_sum); \n  \} \n\};\n"
+  rebuild ""
+  GaussianBlur_maxRadius {{parent.gc_amount}}
+  GaussianBlur_maxTaps {{parent.gc_samples}}
+  GaussianBlur_chromaStrength {{parent.gc_ca_strength}}
+  GaussianBlur_chromaRadius {{parent.gc_ca_radius}}
+  GaussianBlur_chromaShift {{parent.gc_ca_shift}}
+  GaussianBlur_adaptiveQuality {{parent.gc_adaptivequality}}
+  rebuild_finalise ""
+  name GaussianBlur
+  xpos -1059
+  ypos 610
+ }
+ Dot {
+  name Dot5
+  xpos -1025
+  ypos 886
+ }
+push $Na2b7180
+push $Na2b6d00
+push $Na36e900
+ BlinkScript {
+  inputs 2
+  recompileCount 1
+  ProgramGroup 1
+  KernelDescription "3 \"SeparableGaussianX\" iterate pixelWise 96d8c06bbe9a6835272c2e46728a954a4c9d9375a49bee5f77fe62a886f4e085 3 \"src\" Read Ranged2D \"mask\" Read Point \"dst\" Write Point 6 \"maxRadius\" Float 1 AAAgQQ== \"maxTaps\" Int 1 BQAAAA== \"chromaStrength\" Float 1 AAAAAA== \"chromaRadius\" Float 1 AAAAAA== \"chromaShift\" Float 1 AAAAAA== \"adaptiveQuality\" Int 1 AAAAAA== 6 \"maxRadius\" 1 1 Default \"maxTaps\" 1 1 Default \"chromaStrength\" 1 1 Default \"chromaRadius\" 1 1 Default \"chromaShift\" 1 1 Default \"adaptiveQuality\" 1 1 Default 7 \"srcrangeMin\" Int 2 1 AAAAAAAAAAA= \"srcrangeMax\" Int 2 1 AAAAAAAAAAA= \"maxRadiusInt\" Int 1 1 AAAAAA== \"maxTapsSafe\" Int 1 1 AAAAAA== \"radiusScaleR\" Float 1 1 AAAAAA== \"radiusScaleB\" Float 1 1 AAAAAA== \"chromaShiftSafe\" Float 1 1 AAAAAA=="
+  kernelSource "kernel SeparableGaussianX : public ImageComputationKernel<ePixelWise>\n\{ \n  Image<eRead, eAccessRanged2D, eEdgeClamped> src; \n  Image<eRead, eAccessPoint, eEdgeClamped> mask; \n  Image<eWrite> dst; \n\n  param:\n    float maxRadius; \n    int maxTaps; \n    float chromaStrength; \n    float chromaRadius; \n    float chromaShift; \n    int adaptiveQuality; \n\n  local:\n    int maxRadiusInt; \n    int maxTapsSafe; \n    float radiusScaleR; \n    float radiusScaleB; \n    float chromaShiftSafe;\n\n  void define() \n  \{ \n    defineParam(maxRadius, \"maxRadius\", 10.0f); \n    defineParam(maxTaps, \"maxTaps\", 5); \n    defineParam(chromaStrength, \"chromaStrength\", 0.0f); \n    defineParam(chromaRadius, \"chromaRadius\", 0.0f); \n    defineParam(chromaShift, \"chromaShift\", 0.0f); \n    defineParam(adaptiveQuality, \"adaptiveQuality\", 0); \n  \} \n\n  void init() \n  \{ \n    float safeRadius = max(maxRadius, 0.0f); \n    float chromaStrengthSafe = clamp(chromaStrength, 0.0f, 4.0f); \n    float chromaRadiusSafe = clamp(chromaRadius * chromaStrengthSafe, -0.5f, 0.5f); \n    chromaShiftSafe = clamp(chromaShift * chromaStrengthSafe, -0.25f, 0.25f); \n\n    radiusScaleR = max(0.01f, 1.0f + chromaRadiusSafe); \n    radiusScaleB = max(0.01f, 1.0f - chromaRadiusSafe); \n\n    maxTapsSafe = clamp(maxTaps, 1, 128); \n\n    // Safely encompass worst-case displacement to prevent crash\n    float maxRadiusScale = 1.0f + fabs(chromaRadiusSafe) + fabs(chromaShiftSafe); \n    maxRadiusInt = int(ceil(safeRadius * maxRadiusScale)) + 2; \n\n    src.setRange(-maxRadiusInt, 0, maxRadiusInt, 0); \n  \} \n\n  inline float4 sanitizeVec(float4 v) \{\n    // Fast vector-native check for NaNs and Infinities\n    if (v.x != v.x || fabs(v.x) > 1.0e30f) v.x = 0.0f;\n    if (v.y != v.y || fabs(v.y) > 1.0e30f) v.y = 0.0f;\n    if (v.z != v.z || fabs(v.z) > 1.0e30f) v.z = 0.0f;\n    if (v.w != v.w || fabs(v.w) > 1.0e30f) v.w = 0.0f;\n    return v;\n  \}\n\n  void process(int2 pos) \n  \{ \n    float m = clamp(mask().x, 0.0f, 1.0f); \n    float radius = max(maxRadius, 0.0f) * m; \n\n    if (radius < 0.5f) \{ \n      dst() = src(0, 0); \n      return; \n    \} \n\n    float sigma = radius * 0.33333333f; \n    float sigmaR = sigma * radiusScaleR; \n    float sigmaB = sigma * radiusScaleB; \n\n    int neededTaps = int(ceil(max(sigmaR, sigmaB) * 3.0f)) + 1; \n    int taps = (adaptiveQuality != 0) ? max(int(round(float(maxTapsSafe) * m)), 1) : maxTapsSafe; \n    taps = clamp(taps, 1, neededTaps); \n\n    int shiftInt = int(round(chromaShiftSafe * radius)); \n\n    float invTwoSigmaR2 = 0.5f / (sigmaR * sigmaR + 1.0e-8f); \n    float invTwoSigmaG2 = 0.5f / (sigma * sigma + 1.0e-8f); \n    float invTwoSigmaB2 = 0.5f / (sigmaB * sigmaB + 1.0e-8f); \n\n    float sumR = 0.0f, sumG = 0.0f, sumB = 0.0f, sumA = 0.0f; \n    float wR_sum = 0.0f, wG_sum = 0.0f, wB_sum = 0.0f, wA_sum = 0.0f; \n\n    // TRIPLE-CHECKED OPTIMIZATION: Branch hoisted entirely out of the loop\n    if (shiftInt == 0) \{ \n      for (int i = -taps; i <= taps; ++i) \{ \n        float fi = float(i); \n        float wR = exp(-(fi * fi) * invTwoSigmaR2); \n        float wG = exp(-(fi * fi) * invTwoSigmaG2); \n        float wB = exp(-(fi * fi) * invTwoSigmaB2); \n        \n        float4 s = sanitizeVec(src(i, 0)); \n\n        sumR += s.x * wR; wR_sum += wR; \n        sumG += s.y * wG; wG_sum += wG; \n        sumB += s.z * wB; wB_sum += wB; \n        sumA += s.w * wG; wA_sum += wG; // Fixed Alpha channel matching Green spatial spread\n      \} \n    \} else \{ \n      for (int i = -taps; i <= taps; ++i) \{ \n        float fi = float(i); \n        float wR = exp(-(fi * fi) * invTwoSigmaR2); \n        float wG = exp(-(fi * fi) * invTwoSigmaG2); \n        float wB = exp(-(fi * fi) * invTwoSigmaB2); \n\n        // Clamp the internal index offset to guarantee memory safety bounds\n        int idxR = clamp(i + shiftInt, -maxRadiusInt, maxRadiusInt);\n        int idxB = clamp(i - shiftInt, -maxRadiusInt, maxRadiusInt);\n\n        sumR += sanitizeVec(src(idxR, 0)).x * wR; wR_sum += wR; \n        float4 sG = sanitizeVec(src(i, 0));\n        sumG += sG.y * wG; wG_sum += wG; \n        sumA += sG.w * wG; wA_sum += wG; \n        sumB += sanitizeVec(src(idxB, 0)).z * wB; wB_sum += wB; \n      \} \n    \} \n\n    dst() = float4(sumR / wR_sum, sumG / wG_sum, sumB / wB_sum, sumA / wA_sum); \n  \} \n\};\n"
+  rebuild ""
+  SeparableGaussianX_maxRadius {{parent.gs_amount}}
+  SeparableGaussianX_maxTaps {{parent.gs_samples}}
+  SeparableGaussianX_chromaStrength {{parent.gs_ca_strength}}
+  SeparableGaussianX_chromaRadius {{parent.gs_ca_radius}}
+  SeparableGaussianX_chromaShift {{parent.gs_ca_shift}}
+  SeparableGaussianX_adaptiveQuality {{parent.gs_adaptivequality}}
+  rebuild_finalise ""
+  name SeparableGaussianX
+  xpos -1117
+  ypos 530
+ }
+ BlinkScript {
+  inputs 2
+  recompileCount 3
+  ProgramGroup 1
+  KernelDescription "3 \"SeparableGaussianY\" iterate pixelWise ee4035952f0d155fdc7f04421649a39f6dcd948476cb3f415790d1cdca752076 3 \"src\" Read Ranged2D \"mask\" Read Point \"dst\" Write Point 6 \"maxRadius\" Float 1 AAAgQQ== \"maxTaps\" Int 1 BQAAAA== \"chromaStrength\" Float 1 AAAAAA== \"chromaRadius\" Float 1 AAAAAA== \"chromaShift\" Float 1 AAAAAA== \"adaptiveQuality\" Int 1 AAAAAA== 6 \"maxRadius\" 1 1 Default \"maxTaps\" 1 1 Default \"chromaStrength\" 1 1 Default \"chromaRadius\" 1 1 Default \"chromaShift\" 1 1 Default \"adaptiveQuality\" 1 1 Default 7 \"srcrangeMin\" Int 2 1 AAAAAAAAAAA= \"srcrangeMax\" Int 2 1 AAAAAAAAAAA= \"maxRadiusInt\" Int 1 1 AAAAAA== \"maxTapsSafe\" Int 1 1 AAAAAA== \"radiusScaleR\" Float 1 1 AAAAAA== \"radiusScaleB\" Float 1 1 AAAAAA== \"chromaShiftSafe\" Float 1 1 AAAAAA=="
+  kernelSource "kernel SeparableGaussianY : public ImageComputationKernel<ePixelWise>\n\{ \n  // Input / Output Images\n  Image<eRead, eAccessRanged2D, eEdgeClamped> src; \n  Image<eRead, eAccessPoint, eEdgeClamped> mask; \n  Image<eWrite> dst; \n\n  // Public Parameters\n  param:\n    float maxRadius; \n    int maxTaps; \n    float chromaStrength; \n    float chromaRadius; \n    float chromaShift; \n    int adaptiveQuality; \n\n  // Local Variables\n  local:\n    int maxRadiusInt; \n    int maxTapsSafe; \n    float radiusScaleR; \n    float radiusScaleB; \n    float chromaShiftSafe;\n\n  void define() \n  \{ \n    defineParam(maxRadius, \"maxRadius\", 10.0f); \n    defineParam(maxTaps, \"maxTaps\", 5); \n    defineParam(chromaStrength, \"chromaStrength\", 0.0f); \n    defineParam(chromaRadius, \"chromaRadius\", 0.0f); \n    defineParam(chromaShift, \"chromaShift\", 0.0f); \n    defineParam(adaptiveQuality, \"adaptiveQuality\", 0); \n  \} \n\n  void init() \n  \{ \n    float safeRadius = max(maxRadius, 0.0f); \n    float chromaStrengthSafe = clamp(chromaStrength, 0.0f, 4.0f); \n    float chromaRadiusSafe = clamp(chromaRadius * chromaStrengthSafe, -0.5f, 0.5f); \n    chromaShiftSafe = clamp(chromaShift * chromaStrengthSafe, -0.25f, 0.25f); \n\n    radiusScaleR = max(0.01f, 1.0f + chromaRadiusSafe); \n    radiusScaleB = max(0.01f, 1.0f - chromaRadiusSafe); \n\n    maxTapsSafe = clamp(maxTaps, 1, 128); \n\n    // Safely encompass worst-case displacement to prevent crash\n    float maxRadiusScale = 1.0f + fabs(chromaRadiusSafe) + fabs(chromaShiftSafe); \n    maxRadiusInt = int(ceil(safeRadius * maxRadiusScale)) + 2; \n\n    // Vertical sweep range allocation\n    src.setRange(0, -maxRadiusInt, 0, maxRadiusInt); \n  \} \n\n  inline float4 sanitizeVec(float4 v) \{\n    // Fast vector-native check for NaNs and Infinities\n    if (v.x != v.x || fabs(v.x) > 1.0e30f) v.x = 0.0f;\n    if (v.y != v.y || fabs(v.y) > 1.0e30f) v.y = 0.0f;\n    if (v.z != v.z || fabs(v.z) > 1.0e30f) v.z = 0.0f;\n    if (v.w != v.w || fabs(v.w) > 1.0e30f) v.w = 0.0f;\n    return v;\n  \}\n\n  void process(int2 pos) \n  \{ \n    float m = clamp(mask().x, 0.0f, 1.0f); \n    float radius = max(maxRadius, 0.0f) * m; \n\n    // Early exit if blur radius is too small\n    if (radius < 0.5f) \{ \n      dst() = src(0, 0); \n      return; \n    \} \n\n    float sigma = radius * 0.33333333f; \n    float sigmaR = sigma * radiusScaleR; \n    float sigmaB = sigma * radiusScaleB; \n\n    int neededTaps = int(ceil(max(sigmaR, sigmaB) * 3.0f)) + 1; \n    int taps = (adaptiveQuality != 0) ? max(int(round(float(maxTapsSafe) * m)), 1) : maxTapsSafe; \n    taps = clamp(taps, 1, neededTaps); \n\n    int shiftInt = int(round(chromaShiftSafe * radius)); \n\n    float invTwoSigmaR2 = 0.5f / (sigmaR * sigmaR + 1.0e-8f); \n    float invTwoSigmaG2 = 0.5f / (sigma * sigma + 1.0e-8f); \n    float invTwoSigmaB2 = 0.5f / (sigmaB * sigmaB + 1.0e-8f); \n\n    float sumR = 0.0f, sumG = 0.0f, sumB = 0.0f, sumA = 0.0f; \n    float wR_sum = 0.0f, wG_sum = 0.0f, wB_sum = 0.0f, wA_sum = 0.0f; \n\n    // TRIPLE-CHECKED OPTIMIZATION: Branch hoisted entirely out of the loop\n    if (shiftInt == 0) \{ \n      for (int i = -taps; i <= taps; ++i) \{ \n        float fi = float(i); \n        float wR = exp(-(fi * fi) * invTwoSigmaR2); \n        float wG = exp(-(fi * fi) * invTwoSigmaG2); \n        float wB = exp(-(fi * fi) * invTwoSigmaB2); \n        \n        float4 s = sanitizeVec(src(0, i)); \n\n        sumR += s.x * wR; wR_sum += wR; \n        sumG += s.y * wG; wG_sum += wG; \n        sumB += s.z * wB; wB_sum += wB; \n        sumA += s.w * wG; wA_sum += wG; // Fixed Alpha channel matching Green spatial spread\n      \} \n    \} else \{ \n      for (int i = -taps; i <= taps; ++i) \{ \n        float fi = float(i); \n        float wR = exp(-(fi * fi) * invTwoSigmaR2); \n        float wG = exp(-(fi * fi) * invTwoSigmaG2); \n        float wB = exp(-(fi * fi) * invTwoSigmaB2); \n\n        // Clamp the internal index offset to guarantee memory safety bounds vertically\n        int idyR = clamp(i + shiftInt, -maxRadiusInt, maxRadiusInt);\n        int idyB = clamp(i - shiftInt, -maxRadiusInt, maxRadiusInt);\n\n        sumR += sanitizeVec(src(0, idyR)).x * wR; wR_sum += wR; \n        float4 sG = sanitizeVec(src(0, i));\n        sumG += sG.y * wG; wG_sum += wG; \n        sumA += sG.w * wG; wA_sum += wG; \n        sumB += sanitizeVec(src(0, idyB)).z * wB; wB_sum += wB; \n      \} \n    \} \n\n    dst() = float4(sumR / wR_sum, sumG / wG_sum, sumB / wB_sum, sumA / wA_sum); \n  \} \n\};\n"
+  rebuild ""
+  SeparableGaussianY_maxRadius {{parent.gs_amount}}
+  SeparableGaussianY_maxTaps {{parent.gs_samples}}
+  SeparableGaussianY_chromaStrength {{parent.gs_ca_strength}}
+  SeparableGaussianY_chromaRadius {{parent.gs_ca_radius}}
+  SeparableGaussianY_chromaShift {{parent.gs_ca_shift}}
+  SeparableGaussianY_adaptiveQuality {{parent.gs_adaptivequality}}
+  rebuild_finalise ""
+  name SeparableGaussianY
+  xpos -1117
+  ypos 566
+ }
+ Dot {
+  name Dot3
+  xpos -1083
+  ypos 917
+ }
+ Switch {
+  inputs 4
+  which {{parent.meth_choose}}
+  name SwitchMethod
+  xpos -935
+  ypos 914
+ }
+ Switch {
+  inputs 2
+  which {{"(parent.meth_choose != 3) && ((\[exists parent.input0] == 0) || (\[exists parent.input1] == 0))\n?\n1\n:\n0"}}
+  name Switch1
+  xpos -935
+  ypos 1059
+ }
+ Switch {
+  inputs 2
+  which {{"(parent.meth_choose == 3) && ((\[exists parent.input0] == 0) || (\[exists parent.input1] == 0) || (\[exists parent.input2] == 0))\n?\n1\n:\n0"}}
+  name Switch2
+  xpos -935
+  ypos 1083
+ }
+ Output {
+  name Output
+  xpos -935
+  ypos 1261
+ }
+end_group
