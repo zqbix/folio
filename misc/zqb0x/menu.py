@@ -19,6 +19,7 @@ zqMenu.addCommand("zq Grain",                                     "nuke.nodePast
 zqMenu.addCommand("zq Halation",                                  "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqhalation.nk")),                                icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Lightwrap Luma",                            "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqlightwrapluma.nk")),                           icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Lightwrap Unified",                         "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqlightwrapunified.nk")),                        icon=os.path.join(iconDir, "zqicon.png"))
+zqMenu.addCommand("zq NAN iNF",                                   "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqnaninf.nk")),                                  icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Normal Deband",                             "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqnormaldeband.nk")),                            icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Normal Falloff",                            "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqnormalfalloff.nk")),                           icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Position Falloff",                          "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqpositionfalloff.nk")),                         icon=os.path.join(iconDir, "zqicon.png"))
