@@ -4,16 +4,16 @@ push $cut_paste_input
 Group {
  name zqFakeMotion
  selected true
- xpos 76
- ypos 2684
+ xpos 67
+ ypos 2703
  addUserKnob {20 User l zqFakeMotion}
  addUserKnob {26 __BASE_LAYER l "" +STARTLINE T "<br>\n<b><i>BASE LAYER</i></b>\n<br>"}
  addUserKnob {7 bl_blur l Blur}
- bl_blur 250
+ bl_blur 100
  addUserKnob {7 bl_multiply l Multiply}
  bl_multiply 1
  addUserKnob {7 bl_gamma l Gamma}
- bl_gamma 3
+ bl_gamma 1
  addUserKnob {26 __DETAIL_LAYER l "" +STARTLINE T "<br>\n<b><i>DETAiL LAYER</i></b>\n<br>"}
  addUserKnob {7 dl_blur l Blur}
  dl_blur 30
@@ -26,15 +26,15 @@ Group {
  addUserKnob {7 dl_laplacian l Laplacian}
  dl_laplacian 100
  addUserKnob {7 dl_multiply l Multiply}
+ dl_multiply 1
  addUserKnob {7 dl_gamma l Gamma}
  dl_gamma 1
  addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
  addUserKnob {7 global_effect_amount l "Effect Amount"}
  global_effect_amount 100
  addUserKnob {7 global_vector_blur l "Vector Blur"}
- global_vector_blur 100
+ global_vector_blur 10
  addUserKnob {12 global_main_direction l "Center/Main Direction"}
- global_main_direction {1632 1500}
  addUserKnob {4 global_output l Output M {"Full Effect" "Base Layer" "Detail Layer" "Merged Layers" ""}}
  addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Fake Motion\n<br><br>\nTweak the layers and check the full effect..\n<br>\nSet \"Center/Main Direction\" to get proper aligned vectors.."}
 }
@@ -49,7 +49,7 @@ Group {
   xpos -49
   ypos 561
  }
-set N18aabb00 [stack 0]
+set N32b8d680 [stack 0]
  Dot {
   name Dot5
   xpos -191
@@ -62,8 +62,8 @@ set N18aabb00 [stack 0]
   xpos -225
   ypos 604
  }
-set N1a0c8800 [stack 0]
-push $N1a0c8800
+set N32bd3e00 [stack 0]
+push $N32bd3e00
  Copy {
   inputs 2
   from0 rgba.red
@@ -77,7 +77,7 @@ push $N1a0c8800
   xpos -191
   ypos 700
  }
-set N18aac880 [stack 0]
+set N32b8df80 [stack 0]
  Dot {
   name Dot101
   xpos -115
@@ -126,14 +126,14 @@ set N18aac880 [stack 0]
   xpos -115
   ypos 937
  }
-set N2575cd80 [stack 0]
+set N32b8e880 [stack 0]
  Dot {
   name Dot2
   xpos -115
   ypos 1336
  }
-set N2575c480 [stack 0]
-push $N18aac880
+set N32b8ed00 [stack 0]
+push $N32b8df80
  Dot {
   name Dot96
   xpos -273
@@ -160,13 +160,13 @@ push $N18aac880
   xpos -273
   ypos 937
  }
-set N2575c000 [stack 0]
+set N32b8f600 [stack 0]
  Dot {
   name Dot1
   xpos -273
   ypos 1336
  }
-set N2575e880 [stack 0]
+set N32b8fa80 [stack 0]
  Merge2 {
   inputs 2
   operation average
@@ -174,8 +174,8 @@ set N2575e880 [stack 0]
   xpos -225
   ypos 1333
  }
-push $N2575c480
-push $N2575e880
+push $N32b8ed00
+push $N32b8fa80
  Input {
   inputs 0
   name Mask
@@ -188,8 +188,8 @@ push $N2575e880
   xpos -371
   ypos 1127
  }
-push $N2575cd80
-push $N2575c000
+push $N32b8e880
+push $N32b8f600
  Merge2 {
   inputs 2
   operation average
@@ -267,7 +267,7 @@ push $N2575c000
   xpos -225
   ypos 1124
  }
-push $N18aabb00
+push $N32b8d680
 add_layer {FAKE_MB FAKE_MB.red FAKE_MB.green FAKE_MB.blue}
  Shuffle2 {
   inputs 2
