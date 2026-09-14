@@ -15,6 +15,7 @@ zqMenu.addCommand("zq Detail Normals",                            "nuke.nodePast
 zqMenu.addCommand("zq Edge Distort",                              "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqedgedistort.nk")),                             icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Fake Crypto",                               "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqfakecrypto.nk")),                              icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Fake Motion",                               "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqfakemotion.nk")),                              icon=os.path.join(iconDir, "zqicon.png"))
+zqMenu.addCommand("zq Glow",                                      "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqglow.nk")),                                    icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Gradient To Vector",                        "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqgradienttovector.nk")),                        icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Grain",                                     "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqgrain.nk")),                                   icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Halation",                                  "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqhalation.nk")),                                icon=os.path.join(iconDir, "zqicon.png"))
