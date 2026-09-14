@@ -1,0 +1,224 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+Group {
+ name zqHalation
+ selected true
+ xpos 4347
+ ypos 13995
+ addUserKnob {20 zqhalation l zqHalation}
+ addUserKnob {26 __KEY l "" +STARTLINE T "<br>\n<b><i>KEY</i></b>\n<br>"}
+ addUserKnob {7 key_min l Min}
+ key_min 0.5
+ addUserKnob {7 key_max l Max}
+ key_max 1
+ addUserKnob {26 __SHAPE l "" +STARTLINE T "<br>\n<b><i>SHAPE</i></b>\n<br>"}
+ addUserKnob {7 shape_dilate l Dilate}
+ shape_dilate 1
+ addUserKnob {7 shape_blur l Blur}
+ shape_blur 5
+ addUserKnob {26 __COLOR l "" +STARTLINE T "<br>\n<b><i>COLOR</i></b>\n<br>"}
+ addUserKnob {7 clr_r l R}
+ clr_r 1
+ addUserKnob {7 clr_g l G}
+ clr_g 0.2
+ addUserKnob {7 clr_b l B}
+ clr_b 0.1
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 g_intensity l Intensity}
+ g_intensity 1
+ addUserKnob {4 g_output l Output M {"Effect Only" "Full Image" "" "" ""}}
+ addUserKnob {6 g_usemask l "Use connected mask" -STARTLINE}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Halation\n<br><br>\nTweak.."}
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -117
+  ypos 429
+  number 1
+ }
+ Dot {
+  name Dot5
+  xpos -83
+  ypos 920
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos -344
+  ypos 429
+ }
+ Dot {
+  name Dot20
+  xpos -310
+  ypos 492
+ }
+set N658d0880 [stack 0]
+ Grade {
+  channels alpha
+  multiply 0
+  name Grade17
+  xpos -344
+  ypos 531
+ }
+ Saturation {
+  saturation 0
+  mode Maximum
+  name Saturation2
+  xpos -344
+  ypos 567
+ }
+ Grade {
+  blackpoint {{parent.key_min}}
+  whitepoint {{parent.key_max}}
+  name KEY
+  xpos -344
+  ypos 591
+ }
+ Dot {
+  name Dot1
+  xpos -310
+  ypos 641
+ }
+set N658d0d00 [stack 0]
+ Dot {
+  name Dot4
+  xpos -310
+  ypos 695
+ }
+set N658d1180 [stack 0]
+push $N658d0d00
+ Dot {
+  name Dot2
+  xpos -436
+  ypos 641
+ }
+ Dilate {
+  channels rgb
+  size {{parent.shape_dilate}}
+  name Dilate1
+  xpos -470
+  ypos 668
+ }
+ CopyBBox {
+  inputs 2
+  name CopyBBox1
+  xpos -470
+  ypos 692
+ }
+ Blur {
+  channels rgb
+  size {{parent.shape_blur}}
+  name Blur
+  xpos -470
+  ypos 716
+ }
+ Dot {
+  name Dot3
+  xpos -436
+  ypos 740
+ }
+push $N658d1180
+ Merge2 {
+  inputs 2
+  operation screen
+  name Merge8
+  xpos -344
+  ypos 737
+ }
+set N65960300 [stack 0]
+push $N65960300
+ Copy {
+  inputs 2
+  from0 rgba.red
+  to0 rgba.alpha
+  name Copy6
+  xpos -344
+  ypos 781
+ }
+ Grade {
+  white {{parent.clr_r} {parent.clr_g} {parent.clr_b} 1}
+  multiply {{parent.g_intensity}}
+  black_clamp false
+  name COLOR
+  xpos -344
+  ypos 845
+ }
+ Dot {
+  name Dot8
+  xpos -310
+  ypos 876
+ }
+set N7feb4000 [stack 0]
+ Dot {
+  name Dot9
+  xpos -230
+  ypos 876
+ }
+ Grade {
+  inputs 1+1
+  channels rgba
+  multiply 0
+  invert_mask true
+  name Grade1
+  xpos -264
+  ypos 917
+ }
+ Dot {
+  name Dot10
+  xpos -230
+  ypos 966
+ }
+push $N7feb4000
+ Switch {
+  inputs 2
+  which {{parent.g_usemask}}
+  name Switch2
+  xpos -344
+  ypos 963
+ }
+ Dot {
+  name Dot21
+  xpos -310
+  ypos 1025
+ }
+set N7feb4d80 [stack 0]
+push $N658d0880
+ Dot {
+  name Dot19
+  xpos -142
+  ypos 492
+ }
+ Merge2 {
+  inputs 2
+  operation screen
+  output {rgba.red rgba.green rgba.blue -rgba.alpha}
+  name Merge7
+  xpos -176
+  ypos 1022
+ }
+ Dot {
+  name Dot7
+  xpos -142
+  ypos 1115
+ }
+push $N7feb4d80
+ Dot {
+  name Dot6
+  xpos -310
+  ypos 1115
+ }
+ Switch {
+  inputs 2
+  which {{parent.g_output}}
+  name Switch1
+  xpos -252
+  ypos 1112
+ }
+ Output {
+  name Output
+  xpos -252
+  ypos 1203
+ }
+end_group

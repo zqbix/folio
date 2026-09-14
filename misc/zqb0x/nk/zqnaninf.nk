@@ -1,0 +1,141 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqNanInf
+ selected true
+ xpos -195
+ ypos 17182
+ addUserKnob {20 zqnaninf l zqNanInf}
+ addUserKnob {26 __METHOD l "" +STARTLINE T "<br>\n<b><i>METHOD</i></b>\n<br>"}
+ addUserKnob {4 meth_choose l Choose M {"Color Replacement" "Erode / Dilate / Blur" "" ""}}
+ addUserKnob {26 __COLOR_REPLACEMENT l "" +STARTLINE T "<br>\n<b><i>COLOR REPLACEMENT</i></b>\n<br>"}
+ addUserKnob {19 clr_color l Color}
+ clr_color {0 0 0 0}
+ addUserKnob {6 clr_color_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {26 __ERODE_DILATE_BLUR l "" +STARTLINE T "<br>\n<b><i>ERODE / DiLATE / BLUR</i></b>\n<br>"}
+ addUserKnob {7 edb_erodedilate l "Erode / Dilate"}
+ addUserKnob {7 edb_blur l Blur}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - NAN iNF\n<br><br>\nChoose method, tweak and live a lucky life.."}
+}
+ Input {
+  inputs 0
+  name Input
+  xpos -267
+  ypos 547
+ }
+ Dot {
+  name Dot140
+  xpos -233
+  ypos 633
+ }
+set Nc5001200 [stack 0]
+ Dot {
+  name Dot234
+  xpos -123
+  ypos 633
+ }
+set Nc6e37f80 [stack 0]
+ Expression {
+  temp_name0 mask
+  temp_expr0 "(isnan(r) || isinf(r) || isnan(g) || isinf(g) || isnan(b) || isinf(b) || isnan(a) || isinf(a)) ? 1 : 0"
+  expr0 0
+  expr1 0
+  expr2 0
+  expr3 mask
+  name Expression5
+  xpos 35
+  ypos 630
+ }
+ Dot {
+  name Dot345
+  xpos 69
+  ypos 723
+ }
+push $Nc6e37f80
+ Expression {
+  expr0 "isnan(r) || isinf(r) ? 0 : r"
+  expr1 "isnan(g) || isinf(g) ? 0 : g"
+  expr2 "isnan(b) || isinf(b) ? 0 : b"
+  expr3 "isnan(a) || isinf(a) ? 0 : a"
+  name Expression6
+  xpos -157
+  ypos 666
+ }
+set Naa211200 [stack 0]
+ Dilate {
+  channels rgba
+  size {{parent.edb_erodedilate}}
+  name Dilate30
+  xpos -47
+  ypos 666
+ }
+ Blur {
+  channels rgba
+  size {{parent.edb_blur}}
+  name Blur31
+  xpos -47
+  ypos 690
+ }
+ Copy {
+  inputs 2
+  from0 rgba.alpha
+  to0 rgba.alpha
+  name Copy32
+  xpos -47
+  ypos 714
+ }
+ Premult {
+  name Premult38
+  xpos -47
+  ypos 750
+ }
+push $Naa211200
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge50
+  xpos -157
+  ypos 750
+ }
+ Dot {
+  name Dot3
+  xpos -123
+  ypos 792
+ }
+push $Nc5001200
+ Dot {
+  name Dot2
+  xpos -343
+  ypos 633
+ }
+ Expression {
+  channel0 {rgba.red -rgba.green -rgba.blue none}
+  expr0 "isnan(r) || isinf(r) ? parent.clr_color.r : r"
+  channel1 {-rgba.red rgba.green -rgba.blue none}
+  expr1 "isnan(g) || isinf(g) ? parent.clr_color.g : g"
+  channel2 {-rgba.red -rgba.green rgba.blue none}
+  expr2 "isnan(b) || isinf(b) ? parent.clr_color.b : b"
+  expr3 "isnan(a) || isinf(a) ? parent.clr_color.a : a"
+  name Expression1
+  xpos -377
+  ypos 703
+ }
+ Dot {
+  name Dot1
+  xpos -343
+  ypos 792
+ }
+ Switch {
+  inputs 2
+  which {{parent.meth_choose}}
+  name Switch1
+  xpos -267
+  ypos 789
+ }
+ Output {
+  name Output
+  xpos -267
+  ypos 860
+ }
+end_group

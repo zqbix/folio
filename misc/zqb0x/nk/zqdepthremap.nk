@@ -1,0 +1,96 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqDepthRemap
+ selected true
+ xpos -977
+ ypos 16948
+ addUserKnob {20 zqdepthremap l zqDepthRemap}
+ addUserKnob {26 __REMAP l "" +STARTLINE T "<br>\n<b><i>REMAP TO 0-1</i></b>\n<br>"}
+ addUserKnob {7 rmp_black l Black}
+ addUserKnob {7 rmp_white l White}
+ rmp_white 1
+ addUserKnob {26 __SHIFT l "" +STARTLINE T "<br>\n<b><i>SHIFT</i></b>\n<br>"}
+ addUserKnob {7 shft_shift l Shift}
+ shft_shift 0.5
+ addUserKnob {7 shft_falloff l Falloff}
+ shft_falloff 1
+ addUserKnob {26 __FRONT l "" +STARTLINE T "<br>\n<b><i>FRONT</i></b>\n<br>"}
+ addUserKnob {7 f_int l Intensity}
+ f_int 1
+ addUserKnob {7 f_falloff l Falloff}
+ f_falloff 1
+ addUserKnob {26 __BACK l "" +STARTLINE T "<br>\n<b><i>BACK</i></b>\n<br>"}
+ addUserKnob {7 b_int l Intensity}
+ b_int 1
+ addUserKnob {7 b_falloff l Falloff}
+ b_falloff 1
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Depth Remap\n<br><br>\nShuffle z to rgba..\n<br>\nRemap to 0-1 and shift it..\n<br>\nFinetune front/back if needed.."}
+}
+ Input {
+  inputs 0
+  name Depth
+  xpos -267
+  ypos 464
+ }
+ Grade {
+  channels rgba
+  blackpoint {{parent.rmp_black}}
+  whitepoint {{parent.rmp_white}}
+  name Grade_REMAP
+  xpos -267
+  ypos 553
+ }
+set N9b19700 [stack 0]
+ Grade {
+  channels rgba
+  blackpoint {{"clamp(parent.shft_shift, 0.0001, 0.9999)"}}
+  whitepoint 0
+  name Grade_SHIFT_FRONT
+  xpos -326
+  ypos 604
+ }
+ Grade {
+  channels rgba
+  white {{"clamp(parent.f_int, 0, 1)"}}
+  gamma {{"max(parent.f_falloff, 0.0001)"}}
+  name Grade_FRONT
+  xpos -326
+  ypos 652
+ }
+push $N9b19700
+ Grade {
+  channels rgba
+  blackpoint {{"clamp(parent.shft_shift, 0.0001, 0.9999)"}}
+  name Grade_SHIFT_BACK
+  xpos -200
+  ypos 602
+ }
+ Grade {
+  channels rgba
+  white {{"clamp(parent.b_int, 0, 1)"}}
+  gamma {{"max(parent.b_falloff, 0.0001)"}}
+  name Grade_BACK
+  xpos -200
+  ypos 656
+ }
+ Merge2 {
+  inputs 2
+  name Merge71
+  xpos -258
+  ypos 719
+ }
+ Gamma {
+  channels rgba
+  value {{"max(0.0001, parent.shft_falloff)"}}
+  name Gamma1
+  xpos -258
+  ypos 809
+ }
+ Output {
+  name Output
+  xpos -258
+  ypos 911
+ }
+end_group

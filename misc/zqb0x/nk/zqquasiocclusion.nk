@@ -1,0 +1,95 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqQuasiOcclusion
+ tile_color 0xffffffff
+ selected true
+ xpos -869
+ ypos 17090
+ addUserKnob {20 zqquasiocclusion l zqQuasiOcclusion}
+ addUserKnob {26 __CHOOSE_INGREDIENTS l "" +STARTLINE T "<br>\n<b><i>CHOOSE INGREDIENTS</i></b>\n<br>"}
+ addUserKnob {41 QuasiOcclusionKernel_nImg l N T zQuasiOcclusionBlink.QuasiOcclusionKernel_nImg}
+ addUserKnob {41 QuasiOcclusionKernel_pImg l P T zQuasiOcclusionBlink.QuasiOcclusionKernel_pImg}
+ addUserKnob {41 QuasiOcclusionKernel_zImg l Z T zQuasiOcclusionBlink.QuasiOcclusionKernel_zImg}
+ addUserKnob {26 __BASE_SETTINGS l "" +STARTLINE T "<br>\n<b><i>BASE SETTiNGS</i></b>\n<br>"}
+ addUserKnob {6 base_invert l Invert +STARTLINE}
+ addUserKnob {7 base_zfar l zFar}
+ base_zfar 2
+ addUserKnob {7 base_searchradius l "Search Radius"}
+ base_searchradius 0.05
+ addUserKnob {7 base_refdepth l "Reference Depth"}
+ base_refdepth 1
+ addUserKnob {6 base_scalebydepth l "Scale By Depth" +STARTLINE}
+ base_scalebydepth true
+ addUserKnob {7 base_pxradius l "Pixel Radius"}
+ base_pxradius 20
+ addUserKnob {26 __TWEAKS l "" +STARTLINE T "<br>\n<b><i>TWEAKS</i></b>\n<br>"}
+ addUserKnob {7 twix_bias l Bias}
+ twix_bias 0.01
+ addUserKnob {7 twix_samples l Samples}
+ twix_samples 20
+ addUserKnob {7 twix_intensity l Intensity}
+ twix_intensity 1
+ addUserKnob {7 twix_strength l Strength}
+ twix_strength 2
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Quasi Occlusion\n<br><br>\nN and P must use the same coordinate-space (cam- and/or world-space)..\n<br>\nTweak parameters from top to bottom, makes sense .."}
+}
+ Input {
+  inputs 0
+  name Z
+  xpos 162
+  ypos -298
+  number 2
+ }
+ Dot {
+  name Dot2
+  xpos 196
+  ypos -232
+ }
+ Input {
+  inputs 0
+  name P
+  xpos 58
+  ypos -298
+  number 1
+ }
+ Input {
+  inputs 0
+  name N
+  xpos -48
+  ypos -298
+ }
+ Dot {
+  name Dot1
+  xpos -14
+  ypos -232
+ }
+ BlinkScript {
+  inputs 3
+  recompileCount 17
+  ProgramGroup 1
+  KernelDescription "3 \"QuasiOcclusionKernel\" iterate pixelWise b4ad577a935aef7dfda640f6cb3f11afef4f462b7c3c91f3cbd20fb0659c83ce 4 \"nImg\" Read Random \"pImg\" Read Random \"zImg\" Read Random \"dst\" Write Point 10 \"radius\" Float 1 AACgQA== \"pixelRadius\" Float 1 AADAQQ== \"bias\" Float 1 CtejPA== \"intensity\" Float 1 AACAPw== \"strength\" Float 1 AAAAQA== \"numSamples\" Int 1 EAAAAA== \"zFar\" Float 1 ACR0SQ== \"invert\" Bool 1 AA== \"scaleByDepth\" Bool 1 AA== \"refDepth\" Float 1 AAAgQQ== 10 \"radius\" 1 1 Default \"pixelRadius\" 1 1 Default \"bias\" 1 1 Default \"intensity\" 1 1 Default \"strength\" 1 1 Default \"numSamples\" 1 1 Default \"zFar\" 1 1 Default \"invert\" 1 1 Default \"scaleByDepth\" 1 1 Default \"refDepth\" 1 1 Default 12 \"goldenAngle\" Float 1 1 AAAAAA== \"cosGA\" Float 1 1 AAAAAA== \"sinGA\" Float 1 1 AAAAAA== \"imgW\" Float 1 1 AAAAAA== \"imgH\" Float 1 1 AAAAAA== \"invImgW\" Float 1 1 AAAAAA== \"invImgH\" Float 1 1 AAAAAA== \"rad2\" Float 1 1 AAAAAA== \"invRad2\" Float 1 1 AAAAAA== \"vvEps\" Float 1 1 AAAAAA== \"invertSign\" Float 1 1 AAAAAA== \"combinedScale\" Float 1 1 AAAAAA=="
+  kernelSource "// QuasiOcclusion - screen-space ambient occlusion from Normal + Position + Z\n//\n// Based on the Alchemy AO formula (McGuire et al., \"The Alchemy Screen-Space\n// Ambient Obscurance Algorithm\", HPG 2011). Works directly in 3D position\n// space, so it needs no camera projection matrix - only a screen-space pixel\n// radius to choose which neighbouring pixels to test.\n//\n// REQUIREMENT: N and P must be in the SAME coordinate space (both\n// camera-space, or both world-space). If they're mismatched the occlusion\n// will be geometrically wrong. This can't be checked from inside the\n// kernel - verify against your renderer's AOV documentation.\n//\n// This computes an approximation (screen-space, limited sample count,\n// no true ray tracing) - it will miss occlusion from surfaces outside\n// the search radius or hidden behind other geometry from this camera view.\n//\n// REVISION NOTES (this pass):\n//  - Fixed a scale-dependent epsilon: the near-sample denominator now\n//    scales with 'radius' instead of a fixed absolute constant, so it\n//    behaves consistently regardless of whether your scene is in mm,\n//    cm, or metres. Prevents firefly spikes from near-coincident samples.\n//  - Exposed 'strength' as its own knob - previously a hardcoded 2.0x\n//    scale with no control separate from the 'intensity' contrast curve.\n//  - Removed the per-sample sin()/cos() calls (2 transcendental calls x\n//    every sample x every pixel) via an angle-sum recurrence - the\n//    sample angles increase by a fixed step each iteration, so each\n//    rotation is derived from the previous one with cheap multiply-adds\n//    instead of fresh trig calls. sin/cos of the fixed step angle are\n//    computed once, in init(), not per pixel.\n//  - Hoisted every per-run-invariant scalar (radius^2, its reciprocal,\n//    the new epsilon, strength/numSamples, the invert sign, 1/width,\n//    1/height) into init() so they're computed once for the whole\n//    image, not once per pixel.\n//  - sqrt() in the sample loop is intentionally kept - it's required\n//    for correct uniform-area disk sampling (a linear radius mapping\n//    would bunch samples toward the centre), so removing it would trade\n//    correctness for speed rather than removing genuine redundancy.\n\nkernel QuasiOcclusionKernel : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessRandom, eEdgeClamped> nImg;  // normal (world or camera space - must match pImg)\n  Image<eRead, eAccessRandom, eEdgeClamped> pImg;  // position (world or camera space - must match nImg)\n  Image<eRead, eAccessRandom, eEdgeClamped> zImg;  // camera-space depth (Nuke Z convention: distance from camera)\n  Image<eWrite> dst;\n\n  param:\n    float radius;         // world-space occlusion radius, in scene units\n    float pixelRadius;    // screen-space search radius, in pixels\n    float bias;           // self-occlusion bias, raise if you see banding/acne on flat surfaces\n    float intensity;      // power curve (contrast/gamma) on the final AO - >1 deepens, <1 flattens\n    float strength;       // linear scale on the occlusion amount - independent of intensity's contrast curve\n    int   numSamples;     // taps per pixel - more = smoother, slower\n    float zFar;           // pixels with Z beyond this are treated as background (no occlusion, AO = 1)\n    bool  invert;         // flip if your renderer's N/P handedness inverts the occlusion sign\n    bool  scaleByDepth;   // approximate perspective correction - see note below\n    float refDepth;       // the depth at which pixelRadius is \"correct\", when scaleByDepth is on\n\n  local:\n    float goldenAngle;\n    float cosGA;          // cos(goldenAngle), precomputed once - drives the per-sample rotation recurrence\n    float sinGA;          // sin(goldenAngle), precomputed once\n    float imgW;\n    float imgH;\n    float invImgW;\n    float invImgH;\n    float rad2;           // radius^2, precomputed once\n    float invRad2;         // 1/rad2, so the falloff term can multiply instead of divide\n    float vvEps;           // near-sample denominator epsilon, scaled to 'radius' instead of a fixed constant\n    float invertSign;      // +1 or -1, precomputed once so the loop multiplies instead of branching\n    float combinedScale;   // strength/numSamples folded into one multiply at the end\n\n  void define()\n  \{\n    defineParam(radius,        \"radius\",        5.0f);\n    defineParam(pixelRadius,   \"pixelRadius\",   24.0f);\n    defineParam(bias,          \"bias\",          0.02f);\n    defineParam(intensity,     \"intensity\",     1.0f);\n    defineParam(strength,      \"strength\",      2.0f);\n    defineParam(numSamples,    \"numSamples\",    16);\n    defineParam(zFar,          \"zFar\",          1000000.0f);\n    defineParam(invert,        \"invert\",        false);\n    defineParam(scaleByDepth,  \"scaleByDepth\",  false);\n    defineParam(refDepth,      \"refDepth\",      10.0f);\n  \}\n\n  void init()\n  \{\n    goldenAngle = 2.39996323f;\n    cosGA = cos(goldenAngle);\n    sinGA = sin(goldenAngle);\n\n    imgW = (float) dst.bounds.width();\n    imgH = (float) dst.bounds.height();\n    invImgW = 1.0f / max(imgW, 1.0f);\n    invImgH = 1.0f / max(imgH, 1.0f);\n\n    rad2 = max(radius * radius, 0.0001f);\n    invRad2 = 1.0f / rad2;\n    // scaled to the radius the user already calibrated to their scene,\n    // instead of a fixed absolute constant that would be wrong at a\n    // different scene scale.\n    vvEps = rad2 * 1e-4f;\n\n    invertSign = invert ? -1.0f : 1.0f;\n\n    int n = max(numSamples, 1);\n    combinedScale = strength / float(n);\n  \}\n\n  // Simple positional hash -> pseudo-random angle per pixel, used to\n  // rotate the sample kernel so undersampling shows up as noise instead\n  // of a fixed banded/directional pattern. Takes a 0-1 normalized\n  // coordinate - sin() loses precision badly on large arguments, so\n  // hashing raw pixel coordinates (thousands in a 4K frame) produces a\n  // coarse, quantized rotation instead of clean per-pixel noise, which\n  // reads as occlusion biased toward one direction, and shifts to a\n  // different direction on every shot as resolution/framing changes.\n  float hash(float2 uv)\n  \{\n    float h = sin(dot(uv, float2(127.1f, 311.7f))) * 43758.5453123f;\n    return h - floor(h);\n  \}\n\n  void process(int2 pos)\n  \{\n    float2 p2 = float2(pos.x + 0.5f, pos.y + 0.5f);\n\n    float z0 = bilinear(zImg, p2.x, p2.y, 0);\n    if (z0 >= zFar) \{\n      dst()\[0] = 1.0f;\n      dst()\[1] = 1.0f;\n      dst()\[2] = 1.0f;\n      if (dst.kComps > 3) dst()\[3] = 1.0f;\n      return;\n    \}\n\n    float3 P0 = float3(bilinear(pImg, p2.x, p2.y, 0),\n                        bilinear(pImg, p2.x, p2.y, 1),\n                        bilinear(pImg, p2.x, p2.y, 2));\n    float3 N0 = float3(bilinear(nImg, p2.x, p2.y, 0),\n                        bilinear(nImg, p2.x, p2.y, 1),\n                        bilinear(nImg, p2.x, p2.y, 2));\n    float n0len = sqrt(max(dot(N0, N0), 0.0001f));\n    N0 = N0 / n0len;\n\n    float pr = pixelRadius;\n    if (scaleByDepth) \{\n      pr = pixelRadius * refDepth / max(z0, 0.0001f);\n    \}\n\n    float randAngle = hash(float2(p2.x * invImgW, p2.y * invImgH)) * 6.2831853f;\n    float ca = cos(randAngle);\n    float sa = sin(randAngle);\n\n    // per-pixel rotation state for the sample kernel, advanced via the\n    // angle-sum recurrence below instead of calling cos()/sin() fresh\n    // for every sample.\n    float cosTheta = 1.0f;   // cos(0)\n    float sinTheta = 0.0f;   // sin(0)\n\n    float occSum = 0.0f;\n    int n = max(numSamples, 1);\n\n    for (int i = 0; i < n; i++) \{\n      float r = sqrt((float(i) + 0.5f) / float(n));\n      float ox = r * cosTheta;\n      float oy = r * sinTheta;\n\n      // advance the rotation state for the NEXT iteration now, before\n      // any early-exit below - a continue after this point must not\n      // skip it, or every sample after a skipped one drifts to the\n      // wrong angle.\n      float nextCos = cosTheta * cosGA - sinTheta * sinGA;\n      float nextSin = sinTheta * cosGA + cosTheta * sinGA;\n      cosTheta = nextCos;\n      sinTheta = nextSin;\n\n      float rx = ox * ca - oy * sa;\n      float ry = ox * sa + oy * ca;\n      float2 sp = p2 + float2(rx, ry) * pr;\n\n      float sz = bilinear(zImg, sp.x, sp.y, 0);\n      if (sz >= zFar) continue;\n\n      float3 Ps = float3(bilinear(pImg, sp.x, sp.y, 0),\n                          bilinear(pImg, sp.x, sp.y, 1),\n                          bilinear(pImg, sp.x, sp.y, 2));\n\n      float3 v = Ps - P0;\n      float vv = dot(v, v);\n      float vn = dot(v, N0) * invertSign;\n\n      float f = clamp(1.0f - vv * invRad2, 0.0f, 1.0f);\n      float contrib = (f * f * f) * max(vn - bias, 0.0f) / (vv + vvEps);\n      // firefly guard: a single near-coincident sample shouldn't be\n      // able to dominate the whole accumulation.\n      contrib = min(contrib, 4.0f);\n      occSum += contrib;\n    \}\n\n    float ao = clamp(1.0f - occSum * combinedScale, 0.0f, 1.0f);\n    ao = pow(max(ao, 0.0f), max(intensity, 0.01f));\n\n    dst()\[0] = ao;\n    dst()\[1] = ao;\n    dst()\[2] = ao;\n    if (dst.kComps > 3) dst()\[3] = 1.0f;\n  \}\n\};\n"
+  rebuild ""
+  QuasiOcclusionKernel_radius {{parent.base_searchradius}}
+  QuasiOcclusionKernel_pixelRadius {{parent.base_pxradius}}
+  QuasiOcclusionKernel_bias {{parent.twix_bias}}
+  QuasiOcclusionKernel_intensity {{parent.twix_intensity}}
+  QuasiOcclusionKernel_strength {{parent.twix_strength}}
+  QuasiOcclusionKernel_numSamples {{parent.twix_samples}}
+  QuasiOcclusionKernel_zFar {{parent.base_zfar}}
+  QuasiOcclusionKernel_invert {{parent.base_invert}}
+  QuasiOcclusionKernel_scaleByDepth {{parent.base_scalebydepth}}
+  QuasiOcclusionKernel_refDepth {{parent.base_refdepth}}
+  rebuild_finalise ""
+  name zQuasiOcclusionBlink
+  xpos 58
+  ypos -241
+ }
+ Output {
+  name Output
+  xpos 58
+  ypos -162
+ }
+end_group

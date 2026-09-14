@@ -1,0 +1,94 @@
+set cut_paste_input [stack 0]
+version 17.0 v4
+push $cut_paste_input
+Group {
+ name zqNormalDeband
+ selected true
+ xpos 4727
+ ypos 14003
+ addUserKnob {20 zqnormaldeband l zqNormalDeband}
+ addUserKnob {26 __INPUT l "" +STARTLINE T "<br>\n<b><i>iNPUT</i></b>\n<br>"}
+ addUserKnob {4 inputrange l Range M {0/1 -1/1 "" "" "" "" "" ""}}
+ addUserKnob {26 __DITHER l "" +STARTLINE T "<br>\n<b><i>DiTHER</i></b>\n<br>"}
+ addUserKnob {7 ditheramount l Amount R 0 0.1}
+ ditheramount 0.01
+ addUserKnob {26 __SHARPEN l "" +STARTLINE T "<br>\n<b><i>SHARPEN</i></b>\n<br>"}
+ addUserKnob {7 sharpensize l Size}
+ sharpensize 1
+ addUserKnob {7 sharpenamount l Amount}
+ sharpenamount 1
+ addUserKnob {26 __BILATERAL l "" +STARTLINE T "<br>\n<b><i>BiLATERAL</i></b>\n<br>"}
+ addUserKnob {7 bilasize l Size}
+ bilasize 4
+ addUserKnob {7 bilapositionalsigma l "Position Sigma"}
+ bilapositionalsigma 2
+ addUserKnob {7 bilacolorsigma l "Color Sigma"}
+ bilacolorsigma 0.02
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Normal Deband\n<br><br>\nAdjust input-range and tweak if needed.."}
+}
+ Input {
+  inputs 0
+  name N
+  xpos 187
+  ypos -689
+ }
+ Grade {
+  multiply 2
+  add -1
+  black_clamp false
+  name Grade9
+  xpos 187
+  ypos -616
+  disable {{parent.inputrange}}
+ }
+ Expression {
+  temp_name0 dither
+  temp_expr0 "((random(x,y,frame) * 2) - 1) * dithermult"
+  channel0 {rgba.red -rgba.green -rgba.blue none}
+  expr0 "r + dither"
+  channel1 {-rgba.red rgba.green -rgba.blue none}
+  expr1 "g + dither"
+  channel2 {-rgba.red -rgba.green rgba.blue none}
+  expr2 "b + dither"
+  expr3 a
+  name Expression2
+  xpos 187
+  ypos -592
+  addUserKnob {20 User}
+  addUserKnob {7 dithermult l "Dither Amount" R 0 0.1}
+  dithermult {{parent.ditheramount}}
+ }
+ Sharpen {
+  channels rgb
+  amount {{parent.sharpenamount}}
+  size {{parent.sharpensize}}
+  name Sharpen3
+  xpos 187
+  ypos -568
+ }
+ Bilateral2 {
+  channels rgb
+  size {{parent.bilasize}}
+  positionalSigma {{parent.bilapositionalsigma}}
+  colorSigma {{parent.bilacolorsigma}}
+  name Bilateral2
+  xpos 187
+  ypos -544
+ }
+ Expression {
+  temp_name0 rn
+  temp_expr0 sqrt(r*r+g*g+b*b)
+  expr0 r/rn
+  expr1 g/rn
+  expr2 b/rn
+  fringe true
+  name renormalize
+  xpos 187
+  ypos -520
+ }
+ Output {
+  name Output
+  xpos 187
+  ypos -441
+ }
+end_group

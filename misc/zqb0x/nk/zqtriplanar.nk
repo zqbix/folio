@@ -1,0 +1,108 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqTriplanar
+ selected true
+ xpos -987
+ ypos 17089
+ addUserKnob {20 zqtriplanar l zqTriplanar}
+ addUserKnob {26 __CHOOSE_INGREDIENTS l "" +STARTLINE T "<br>\n<b><i>CHOOSE iNGREDiENTS</i></i>\n<br>"}
+ addUserKnob {41 TriplanarMapping_pIn l "P - Normalized 0-1" T BlinkScript2.TriplanarMapping_pIn}
+ addUserKnob {41 TriplanarMapping_nIn l "N - Normalized 0-1" T BlinkScript2.TriplanarMapping_nIn}
+ addUserKnob {41 TriplanarMapping_tex l Texture T BlinkScript2.TriplanarMapping_tex}
+ addUserKnob {41 TriplanarMapping_maskIn l Mask T BlinkScript2.TriplanarMapping_maskIn}
+ addUserKnob {26 __TEXTURE l "" +STARTLINE T "<br>\n<b><i>TEXTURE</i></i>\n<br>"}
+ addUserKnob {7 tex_scale l Scale}
+ tex_scale 1
+ addUserKnob {12 tex_resolution l Resolution}
+ tex_resolution {{input2.width} {input2.height}}
+ addUserKnob {6 tex_usemask l "Use Mask" +STARTLINE}
+ addUserKnob {26 __MAPPiNG l "" +STARTLINE T "<br>\n<b><i>MAPPiNG</i></i>\n<br>"}
+ addUserKnob {13 map_rotate l Rotate}
+ addUserKnob {7 map_blendsharp l "Blend Sharpness"}
+ map_blendsharp 5
+ addUserKnob {7 map_seamblur l "Seam Blur"}
+ map_seamblur 5
+}
+ Input {
+  inputs 0
+  name Mask
+  xpos -24
+  ypos 550
+  number 3
+ }
+ Input {
+  inputs 0
+  name Texture
+  xpos -236
+  ypos 550
+  number 2
+ }
+ Dot {
+  name Dot1
+  xpos -202
+  ypos 623
+ }
+set Ncf9d9600 [stack 0]
+ Expression {
+  expr0 0
+  expr1 0
+  expr2 0
+  expr3 1
+  name Expression1
+  xpos -155
+  ypos 620
+ }
+ Switch {
+  inputs 2
+  which {{parent.tex_usemask}}
+  name Switch1
+  xpos -24
+  ypos 620
+ }
+ Dot {
+  name Dot2
+  xpos 10
+  ypos 690
+ }
+push $Ncf9d9600
+ Input {
+  inputs 0
+  name N
+  xpos -355
+  ypos 550
+  number 1
+ }
+ Input {
+  inputs 0
+  name P
+  xpos -475
+  ypos 550
+ }
+ BlinkScript {
+  inputs 4
+  recompileCount 20
+  ProgramGroup 1
+  KernelDescription "3 \"TriplanarMapping\" iterate pixelWise 950c693b1c04ba1f738f7800c7789ac1b094b1a00bf923eaedda680889523544 5 \"pIn\" Read Point \"nIn\" Read Random \"tex\" Read Random \"maskIn\" Read Point \"dst\" Write Point 8 \"Scale\" Float 1 AACAPw== \"Blend Sharpness\" Float 1 AACAQA== \"Texture Resolution\" Int 2 AAQAAAAEAAA= \"Rotate X Plane (deg)\" Float 1 AAAAAA== \"Rotate Y Plane (deg)\" Float 1 AAAAAA== \"Rotate Z Plane (deg)\" Float 1 AAAAAA== \"Use Mask\" Int 1 AQAAAA== \"Seam Blur Radius (px)\" Int 1 AAAAAA== 8 \"scale\" 1 1 Default \"sharpness\" 1 1 Default \"texRes\" 2 1 Default \"rotX\" 1 1 Default \"rotY\" 1 1 Default \"rotZ\" 1 1 Default \"useMask\" 1 1 Default \"blurRadius\" 1 1 Default 2 \"texW\" Float 1 1 AAAAAA== \"texH\" Float 1 1 AAAAAA=="
+  kernelSource "kernel TriplanarMapping : ImageComputationKernel<ePixelWise>\n\{\n  Image<eRead, eAccessPoint> pIn;\n  Image<eRead, eAccessRandom, eEdgeClamped> nIn;         // now random-access for neighbor sampling\n  Image<eRead, eAccessRandom, eEdgeClamped> tex;\n  Image<eRead, eAccessPoint> maskIn;\n  Image<eWrite> dst;\n\n  param:\n    float scale;\n    float sharpness;\n    int2 texRes;\n    float rotX;\n    float rotY;\n    float rotZ;\n    int useMask;\n    int blurRadius;   // pixels; 0 = off, no cost\n\n  local:\n    float texW;\n    float texH;\n\n  void define()\n  \{\n    defineParam(scale, \"Scale\", 1.0f);\n    defineParam(sharpness, \"Blend Sharpness\", 4.0f);\n    defineParam(texRes, \"Texture Resolution\", int2(1024, 1024));\n    defineParam(rotX, \"Rotate X Plane (deg)\", 0.0f);\n    defineParam(rotY, \"Rotate Y Plane (deg)\", 0.0f);\n    defineParam(rotZ, \"Rotate Z Plane (deg)\", 0.0f);\n    defineParam(useMask, \"Use Mask\", 1);\n    defineParam(blurRadius, \"Seam Blur Radius (px)\", 0);\n  \}\n\n  void init()\n  \{\n    texW = float(texRes.x);\n    texH = float(texRes.y);\n  \}\n\n  float frac1(float x) \{ return x - floor(x); \}\n  float2 frac2(float2 v) \{ return float2(frac1(v.x), frac1(v.y)); \}\n  float3 abs3(float3 v) \{ return float3(fabs(v.x), fabs(v.y), fabs(v.z)); \}\n\n  float2 rotate2D(float2 uv, float angleDeg)\n  \{\n    float rad = angleDeg * 3.14159265f / 180.0f;\n    float s = sin(rad);\n    float c = cos(rad);\n    float2 centered = uv - float2(0.5f, 0.5f);\n    float2 rotated;\n    rotated.x = centered.x * c - centered.y * s;\n    rotated.y = centered.x * s + centered.y * c;\n    return rotated + float2(0.5f, 0.5f);\n  \}\n\n  // box-blur the normal across a (2r+1)^2 neighborhood, then renormalize\n  float3 blurredNormal(int2 pos, int r)\n  \{\n    if (r <= 0)\n    \{\n      SampleType(nIn) n0 = nIn(pos.x, pos.y);\n      return normalize(float3(n0.x, n0.y, n0.z));\n    \}\n\n    float3 sum = float3(0.0f, 0.0f, 0.0f);\n    int count = 0;\n    for (int dy = -r; dy <= r; dy++)\n    \{\n      for (int dx = -r; dx <= r; dx++)\n      \{\n        SampleType(nIn) ns = nIn(pos.x + dx, pos.y + dy);\n        sum = sum + float3(ns.x, ns.y, ns.z);\n        count++;\n      \}\n    \}\n    sum = sum / float(count);\n    return normalize(sum);\n  \}\n\n  void process(int2 pos)\n  \{\n    SampleType(pIn) p = pIn();\n    float3 P = float3(p.x, p.y, p.z) * scale;\n\n    float3 N = blurredNormal(pos, blurRadius);\n\n    float3 blend = abs3(N);\n    blend.x = pow(blend.x, sharpness);\n    blend.y = pow(blend.y, sharpness);\n    blend.z = pow(blend.z, sharpness);\n    float sum = blend.x + blend.y + blend.z;\n    blend = blend / max(sum, 1e-6f);\n\n    float2 uvX = rotate2D(frac2(float2(P.y, P.z)), rotX);\n    float2 uvY = rotate2D(frac2(float2(P.x, P.z)), rotY);\n    float2 uvZ = rotate2D(frac2(float2(P.x, P.y)), rotZ);\n    uvX = frac2(uvX);\n    uvY = frac2(uvY);\n    uvZ = frac2(uvZ);\n\n    float4 colX = bilinear(tex, uvX.x * texW, uvX.y * texH);\n    float4 colY = bilinear(tex, uvY.x * texW, uvY.y * texH);\n    float4 colZ = bilinear(tex, uvZ.x * texW, uvZ.y * texH);\n\n    dst() = colX * blend.x + colY * blend.y + colZ * blend.z;\n\n    bool hasMask = (maskIn.bounds.x2 > maskIn.bounds.x1) &&\n                   (maskIn.bounds.y2 > maskIn.bounds.y1);\n    if (useMask == 1 && hasMask)\n    \{\n      SampleType(maskIn) m = maskIn();\n      float maskVal = m.x;\n    \}\n  \}\n\};"
+  rebuild ""
+  TriplanarMapping_Scale {{parent.tex_scale}}
+  TriplanarMapping_BlendSharpness {{parent.map_blendsharp}}
+  TriplanarMapping_TextureResolution {{parent.tex_resolution.x} {parent.tex_resolution.y}}
+  TriplanarMapping_RotateXPlanedeg {{parent.map_rotate.x}}
+  TriplanarMapping_RotateYPlanedeg {{parent.map_rotate.y}}
+  TriplanarMapping_RotateZPlanedeg {{parent.map_rotate.z}}
+  TriplanarMapping_UseMask {{parent.tex_usemask}}
+  TriplanarMapping_SeamBlurRadiuspx {{parent.map_seamblur}}
+  rebuild_finalise ""
+  name BlinkScript2
+  xpos -236
+  ypos 681
+ }
+ Output {
+  name Output
+  xpos -236
+  ypos 761
+ }
+end_group
