@@ -4,8 +4,8 @@ push $cut_paste_input
 Group {
  name zqGlow
  selected true
- xpos 3069
- ypos 8827
+ xpos 2794
+ ypos 8745
  addUserKnob {20 zqglow l zqGlow}
  addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
  addUserKnob {7 base_keymin l "Key Min"}
@@ -13,6 +13,7 @@ Group {
  base_keymax 1
  addUserKnob {7 base_mixog l "Mix Original"}
  addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {41 operation l Merge T Merge1.operation}
  addUserKnob {7 glo_maxsize l "Max Size"}
  glo_maxsize 100
  addUserKnob {4 glo_quality l Quality M {5 10 15 20 ""}}
@@ -26,6 +27,7 @@ Group {
  glo_saturation 1
  addUserKnob {7 glo_intensity l Intensity}
  glo_intensity 1
+ addUserKnob {4 glo_output l Output M {Merged "Glow Only" Base ""}}
  addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Glow\n<br><br>\nTweak.."}
 }
  Input {
@@ -39,10 +41,10 @@ Group {
   xpos -26
   ypos -544
  }
-set N50ab1f80 [stack 0]
+set N5c3a4480 [stack 0]
  Group {
   name BASE
-  xpos 206
+  xpos 110
   ypos -552
   addUserKnob {20 User}
   addUserKnob {7 key_min l "Key Min"}
@@ -63,7 +65,7 @@ set N50ab1f80 [stack 0]
    xpos 50
    ypos 647
   }
-set N50ab2880 [stack 0]
+set N548ec900 [stack 0]
   Dot {
    name Dot192
    xpos -60
@@ -74,7 +76,7 @@ set N50ab2880 [stack 0]
    xpos -60
    ypos 863
   }
-push $N50ab2880
+push $N548ec900
   Dot {
    name Dot2
    xpos 126
@@ -98,7 +100,7 @@ push $N50ab2880
    xpos 126
    ypos 760
   }
-push $N50ab2880
+push $N548ec900
   Copy {
    inputs 2
    from0 rgba.red
@@ -128,31 +130,32 @@ push $N50ab2880
  end_group
  Dot {
   name Dot2
-  xpos 240
+  xpos 144
   ypos 282
  }
-set N197e2480 [stack 0]
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N197e2480
-push $N50ab1f80
+set N54898d00 [stack 0]
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N54898d00
+push $N5c3a4480
  Grade {
   channels all
   multiply 0
@@ -1517,14 +1520,14 @@ push $N50ab1f80
   value {{"1 / \[value parent.glo_quality]"}}
   name Multiply1
   xpos -60
-  ypos 335
+  ypos 342
  }
  Blur {
   channels rgba
   size {{parent.glo_blur}}
   name Blur1
   xpos -60
-  ypos 359
+  ypos 366
  }
  Multiply {
   channels rgba
@@ -1539,9 +1542,37 @@ push $N50ab1f80
   xpos -60
   ypos 451
  }
+set N26abe00 [stack 0]
+push $N26abe00
+push $N5c3a4480
+ Dot {
+  name Dot3
+  xpos -202
+  ypos -544
+ }
+ Dot {
+  name Dot4
+  xpos -202
+  ypos 553
+ }
+ Merge2 {
+  inputs 2
+  operation plus
+  mix {1}
+  name Merge1
+  xpos -60
+  ypos 550
+ }
+ Switch {
+  inputs 3
+  which {{parent.glo_output}}
+  name Switch1
+  xpos 110
+  ypos 550
+ }
  Output {
   name Output
-  xpos -60
-  ypos 548
+  xpos 110
+  ypos 703
  }
 end_group
