@@ -4,8 +4,8 @@ push $cut_paste_input
 Group {
  name zqGlow
  selected true
- xpos 4478
- ypos 9009
+ xpos 3069
+ ypos 8827
  addUserKnob {20 zqglow l zqGlow}
  addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
  addUserKnob {7 base_keymin l "Key Min"}
@@ -21,6 +21,7 @@ Group {
  glo_expo 1
  addUserKnob {7 glo_contrast l Contrast R 1 2}
  glo_contrast 1
+ addUserKnob {7 glo_blur l Blur}
  addUserKnob {7 glo_saturation l Saturation}
  glo_saturation 1
  addUserKnob {7 glo_intensity l Intensity}
@@ -38,7 +39,7 @@ Group {
   xpos -26
   ypos -544
  }
-set Nc64e000 [stack 0]
+set N50ab1f80 [stack 0]
  Group {
   name BASE
   xpos 206
@@ -62,7 +63,7 @@ set Nc64e000 [stack 0]
    xpos 50
    ypos 647
   }
-set Nc64e900 [stack 0]
+set N50ab2880 [stack 0]
   Dot {
    name Dot192
    xpos -60
@@ -73,7 +74,7 @@ set Nc64e900 [stack 0]
    xpos -60
    ypos 863
   }
-push $Nc64e900
+push $N50ab2880
   Dot {
    name Dot2
    xpos 126
@@ -97,7 +98,7 @@ push $Nc64e900
    xpos 126
    ypos 760
   }
-push $Nc64e900
+push $N50ab2880
   Copy {
    inputs 2
    from0 rgba.red
@@ -130,28 +131,28 @@ push $Nc64e900
   xpos 240
   ypos 282
  }
-set Nc650400 [stack 0]
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc650400
-push $Nc64e000
+set N197e2480 [stack 0]
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N197e2480
+push $N50ab1f80
  Grade {
   channels all
   multiply 0
@@ -1516,7 +1517,14 @@ push $Nc64e000
   value {{"1 / \[value parent.glo_quality]"}}
   name Multiply1
   xpos -60
-  ypos 330
+  ypos 335
+ }
+ Blur {
+  channels rgba
+  size {{parent.glo_blur}}
+  name Blur1
+  xpos -60
+  ypos 359
  }
  Multiply {
   channels rgba
