@@ -1,0 +1,1539 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqGlow
+ selected true
+ xpos 4478
+ ypos 9009
+ addUserKnob {20 zqglow l zqGlow}
+ addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
+ addUserKnob {7 base_keymin l "Key Min"}
+ addUserKnob {7 base_keymax l "Key Max"}
+ base_keymax 1
+ addUserKnob {7 base_mixog l "Mix Original"}
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 glo_maxsize l "Max Size"}
+ glo_maxsize 100
+ addUserKnob {4 glo_quality l Quality M {5 10 15 20 ""}}
+ glo_quality 10
+ addUserKnob {7 glo_expo l Exponent R 1 5}
+ glo_expo 1
+ addUserKnob {7 glo_contrast l Contrast R 1 2}
+ glo_contrast 1
+ addUserKnob {7 glo_saturation l Saturation}
+ glo_saturation 1
+ addUserKnob {7 glo_intensity l Intensity}
+ glo_intensity 1
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Glow\n<br><br>\nTweak.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos -60
+  ypos -591
+ }
+ Dot {
+  name Dot1
+  xpos -26
+  ypos -544
+ }
+set Nc64e000 [stack 0]
+ Group {
+  name BASE
+  xpos 206
+  ypos -552
+  addUserKnob {20 User}
+  addUserKnob {7 key_min l "Key Min"}
+  key_min {{parent.base_keymin}}
+  addUserKnob {7 key_max l "Key Max"}
+  key_max {{parent.base_keymax}}
+  addUserKnob {7 mix_original l "Mix Original"}
+  mix_original {{parent.base_mixog}}
+ }
+  Input {
+   inputs 0
+   name INPUT
+   xpos 16
+   ypos 563
+  }
+  Dot {
+   name Dot138
+   xpos 50
+   ypos 647
+  }
+set Nc64e900 [stack 0]
+  Dot {
+   name Dot192
+   xpos -60
+   ypos 647
+  }
+  Dot {
+   name Dot1
+   xpos -60
+   ypos 863
+  }
+push $Nc64e900
+  Dot {
+   name Dot2
+   xpos 126
+   ypos 647
+  }
+  Saturation {
+   saturation 0
+   name Saturation12
+   xpos 92
+   ypos 678
+  }
+  Grade {
+   blackpoint {{parent.key_min}}
+   whitepoint {{parent.key_max}}
+   name Grade106
+   xpos 92
+   ypos 719
+  }
+  Dot {
+   name Dot3
+   xpos 126
+   ypos 760
+  }
+push $Nc64e900
+  Copy {
+   inputs 2
+   from0 rgba.red
+   to0 rgba.alpha
+   name Copy31
+   xpos 16
+   ypos 751
+  }
+  Premult {
+   name Premult33
+   xpos 16
+   ypos 806
+  }
+  Merge2 {
+   inputs 2
+   operation copy
+   mix {{parent.mix_original}}
+   name Merge61
+   xpos 16
+   ypos 860
+  }
+  Output {
+   name OUTPUT
+   xpos 16
+   ypos 958
+  }
+ end_group
+ Dot {
+  name Dot2
+  xpos 240
+  ypos 282
+ }
+set Nc650400 [stack 0]
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc650400
+push $Nc64e000
+ Grade {
+  channels all
+  multiply 0
+  name Grade1
+  xpos -60
+  ypos -494
+ }
+ Group {
+  inputs 2
+  name _0
+  xpos -60
+  ypos -406
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  addUserKnob {7 calc l Calc}
+  addUserKnob {7 blur l Blur}
+  addUserKnob {7 mult l Multiply}
+  addUserKnob {7 switch l Switch}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Output {
+   name Output
+   xpos -275
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _1
+  xpos -60
+  ypos -372
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _2
+  xpos -60
+  ypos -338
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _3
+  xpos -60
+  ypos -304
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _4
+  xpos -60
+  ypos -270
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _5
+  xpos -60
+  ypos -236
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _6
+  xpos -60
+  ypos -202
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _7
+  xpos -60
+  ypos -168
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _8
+  xpos -60
+  ypos -134
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _9
+  xpos -60
+  ypos -100
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _10
+  xpos -60
+  ypos -66
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _11
+  xpos -60
+  ypos -32
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _12
+  xpos -60
+  ypos 2
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _13
+  xpos -60
+  ypos 36
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _14
+  xpos -60
+  ypos 70
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _15
+  xpos -60
+  ypos 104
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _16
+  xpos -60
+  ypos 138
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _17
+  xpos -60
+  ypos 172
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _18
+  xpos -60
+  ypos 206
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _19
+  xpos -60
+  ypos 240
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Group {
+  inputs 2
+  name _20
+  xpos -60
+  ypos 274
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  addUserKnob {7 mult l Multiply}
+  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Base
+   xpos -87
+   ypos -23
+   number 1
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   name Blur32
+   xpos -87
+   ypos 29
+  }
+  Multiply {
+   channels rgba
+   value {{parent.mult}}
+   name Multiply1
+   xpos -87
+   ypos 53
+  }
+  Dot {
+   name Dot2
+   xpos -53
+   ypos 99
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -275
+   ypos -23
+  }
+  Dot {
+   name Dot1
+   xpos -241
+   ypos 99
+  }
+  Merge2 {
+   inputs 2
+   operation plus
+   name Merge60
+   xpos -184
+   ypos 96
+  }
+  Output {
+   name Output
+   xpos -184
+   ypos 171
+  }
+ end_group
+ Multiply {
+  channels rgba
+  value {{"1 / \[value parent.glo_quality]"}}
+  name Multiply1
+  xpos -60
+  ypos 330
+ }
+ Multiply {
+  channels rgba
+  value {{parent.glo_intensity}}
+  name Multiply2
+  xpos -60
+  ypos 427
+ }
+ Saturation {
+  saturation {{parent.glo_saturation}}
+  name Saturation1
+  xpos -60
+  ypos 451
+ }
+ Output {
+  name Output
+  xpos -60
+  ypos 548
+ }
+end_group
