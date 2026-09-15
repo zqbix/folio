@@ -4,8 +4,8 @@ push $cut_paste_input
 Group {
  name zqGlow
  selected true
- xpos 2794
- ypos 8745
+ xpos 2968
+ ypos 8897
  addUserKnob {20 zqglow l zqGlow}
  addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
  addUserKnob {7 base_keymin l "Key Min"}
@@ -17,7 +17,7 @@ Group {
  addUserKnob {7 glo_maxsize l "Max Size"}
  glo_maxsize 100
  addUserKnob {4 glo_quality l Quality M {5 10 15 20 ""}}
- glo_quality 10
+ glo_quality 20
  addUserKnob {7 glo_expo l Exponent R 1 5}
  glo_expo 1
  addUserKnob {7 glo_contrast l Contrast R 1 2}
@@ -41,7 +41,7 @@ Group {
   xpos -26
   ypos -544
  }
-set N5c3a4480 [stack 0]
+set N11adbf80 [stack 0]
  Group {
   name BASE
   xpos 110
@@ -65,7 +65,7 @@ set N5c3a4480 [stack 0]
    xpos 50
    ypos 647
   }
-set N548ec900 [stack 0]
+set N3c841b00 [stack 0]
   Dot {
    name Dot192
    xpos -60
@@ -76,7 +76,7 @@ set N548ec900 [stack 0]
    xpos -60
    ypos 863
   }
-push $N548ec900
+push $N3c841b00
   Dot {
    name Dot2
    xpos 126
@@ -100,7 +100,7 @@ push $N548ec900
    xpos 126
    ypos 760
   }
-push $N548ec900
+push $N3c841b00
   Copy {
    inputs 2
    from0 rgba.red
@@ -133,29 +133,29 @@ push $N548ec900
   xpos 144
   ypos 282
  }
-set N54898d00 [stack 0]
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N54898d00
-push $N5c3a4480
+set N9d9a8900 [stack 0]
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N9d9a8900
+push $N11adbf80
  Grade {
   channels all
   multiply 0
@@ -204,10 +204,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -270,10 +272,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -336,10 +340,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -402,10 +408,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -468,10 +476,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -534,10 +544,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -600,10 +612,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -666,10 +680,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -732,10 +748,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -798,10 +816,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -864,10 +884,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -930,10 +952,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -996,10 +1020,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1062,10 +1088,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1128,10 +1156,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1194,10 +1224,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1260,10 +1292,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1326,10 +1360,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1392,10 +1428,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1458,10 +1496,12 @@ push $N5c3a4480
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
   step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 blur l Blur}
-  blur {{"parent.glo_maxsize * this.step / \[value parent.glo_quality]"}}
+  blur {{"max(2, parent.glo_maxsize * this.x)"}}
   addUserKnob {7 mult l Multiply}
-  mult {{"pow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) > 0.5\n?\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) * max(0.0001, parent.glo_contrast)\n:\npow(1-((this.step-1)/\[value parent.glo_quality]), max(1, parent.glo_expo)) / max(0.0001, parent.glo_contrast)"}}
+  mult {{"(1 - this.x) > 0.5\n?\n(1 - this.x) * max(0.0001, parent.glo_contrast)\n:\n(1 - this.x) / max(0.0001, parent.glo_contrast)"}}
   addUserKnob {7 switch l Switch}
   switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
  }
@@ -1542,9 +1582,9 @@ push $N5c3a4480
   xpos -60
   ypos 451
  }
-set N26abe00 [stack 0]
-push $N26abe00
-push $N5c3a4480
+set Nf35c8000 [stack 0]
+push $Nf35c8000
+push $N11adbf80
  Dot {
   name Dot3
   xpos -202
@@ -1558,7 +1598,6 @@ push $N5c3a4480
  Merge2 {
   inputs 2
   operation plus
-  mix {1}
   name Merge1
   xpos -60
   ypos 550
