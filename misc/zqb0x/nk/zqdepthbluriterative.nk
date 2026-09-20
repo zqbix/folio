@@ -4,8 +4,8 @@ push $cut_paste_input
 Group {
  name zqDepthBlurIterative
  selected true
- xpos -712
- ypos 16951
+ xpos -540
+ ypos 1139
  addUserKnob {20 zqdepthbluriterative l zqDepthBlurIterative}
  addUserKnob {26 __METHOD l "" +STARTLINE T "<br>\n<b><i>METHOD</i></b>\n<br>"}
  addUserKnob {4 meth_choose l Choose M {Blur Defocus Bokeh ""}}
@@ -15,9 +15,9 @@ Group {
  addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
  addUserKnob {7 glo_amount l Amount}
  glo_amount 10
- addUserKnob {4 glo_quality l Quality M {0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15}}
- glo_quality 5
- addUserKnob {4 glo_divisions l Divisions M {Linear ^1.5 ^2 ^2.5 ^3 ^3.5 ^4 ""}}
+ addUserKnob {4 glo_quality l Quality M {5 10 15 20}}
+ addUserKnob {7 glo_expo l Exponent R 1 5}
+ glo_expo 1
  addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Depth Blur/Defocus/Bokeh Iterative\n<br><br>\nIterative node-setup, so pretty slow with large blur-amounts..\n<br>\nBokeh method needs <b>zqDepthBokehGenerator</b> or something similar as input!.."}
 }
  Reformat {
@@ -30,7 +30,7 @@ Group {
   black_outside true
   name Reformat2
   xpos 50
-  ypos 168
+  ypos 294
  }
  Text2 {
   font_size_toolbar 100
@@ -72,9 +72,9 @@ Group {
   background_border_y 50
   name Text2
   xpos 50
-  ypos 192
+  ypos 318
  }
-set N9b96300 [stack 0]
+set N9089f700 [stack 0]
  Text2 {
   font_size_toolbar 100
   font_width_toolbar 100
@@ -115,9 +115,9 @@ set N9b96300 [stack 0]
   background_border_y 50
   name Text1
   xpos 50
-  ypos 216
+  ypos 342
  }
-push $N9b96300
+push $N9089f700
  Input {
   inputs 0
   name Bokeh
@@ -128,9 +128,9 @@ push $N9b96300
  Dot {
   name Dot1
   xpos -306
-  ypos 72
+  ypos 225
  }
-set N9bf0900 [stack 0]
+set Ncb94e900 [stack 0]
  Input {
   inputs 0
   name Depth
@@ -150,39 +150,49 @@ set N9bf0900 [stack 0]
  Dot {
   name Dot2
   xpos 260
-  ypos 72
+  ypos 225
  }
-set N9bf1200 [stack 0]
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
-push $N9bf0900
-push $N9bf1200
+set Ncb94fb00 [stack 0]
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
+push $Ncb94e900
+push $Ncb94fb00
  Input {
   inputs 0
   name Image
@@ -193,7 +203,7 @@ push $N9bf1200
   inputs 3
   name _0
   xpos -60
-  ypos -446
+  ypos -484
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -232,7 +242,7 @@ push $N9bf1200
   inputs 3
   name _1
   xpos -60
-  ypos -412
+  ypos -450
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -240,7 +250,7 @@ push $N9bf1200
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -291,19 +301,19 @@ push $N9bf1200
    xpos -364
    ypos -105
   }
-set N9c90000 [stack 0]
+set N1e8a0d80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9c90480 [stack 0]
+set N1e8a0480 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9c90900 [stack 0]
+set N1e8a1200 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -312,7 +322,7 @@ set N9c90900 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9c90900
+push $N1e8a1200
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -320,7 +330,7 @@ push $N9c90900
    xpos -209
    ypos -61
   }
-push $N9c90480
+push $N1e8a0480
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -338,7 +348,7 @@ push $N9c90480
    name Switch1
    xpos -100
   }
-push $N9c90000
+push $N1e8a0d80
   Dot {
    name Dot1
    xpos -364
@@ -361,7 +371,7 @@ push $N9c90000
   inputs 3
   name _2
   xpos -60
-  ypos -378
+  ypos -416
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -369,7 +379,7 @@ push $N9c90000
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -420,19 +430,19 @@ push $N9c90000
    xpos -364
    ypos -105
   }
-set N9c92d00 [stack 0]
+set N893ecd80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9c93180 [stack 0]
+set N893ed200 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9c93600 [stack 0]
+set N893ed680 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -441,7 +451,7 @@ set N9c93600 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9c93600
+push $N893ed680
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -449,7 +459,7 @@ push $N9c93600
    xpos -209
    ypos -61
   }
-push $N9c93180
+push $N893ed200
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -467,7 +477,7 @@ push $N9c93180
    name Switch1
    xpos -100
   }
-push $N9c92d00
+push $N893ecd80
   Dot {
    name Dot1
    xpos -364
@@ -490,7 +500,7 @@ push $N9c92d00
   inputs 3
   name _3
   xpos -60
-  ypos -344
+  ypos -382
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -498,7 +508,7 @@ push $N9c92d00
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -549,19 +559,19 @@ push $N9c92d00
    xpos -364
    ypos -105
   }
-set N9d33b00 [stack 0]
+set N893efa80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9d33f80 [stack 0]
+set N8df12000 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9d34400 [stack 0]
+set N8df12480 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -570,7 +580,7 @@ set N9d34400 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9d34400
+push $N8df12480
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -578,7 +588,7 @@ push $N9d34400
    xpos -209
    ypos -61
   }
-push $N9d33f80
+push $N8df12000
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -596,7 +606,7 @@ push $N9d33f80
    name Switch1
    xpos -100
   }
-push $N9d33b00
+push $N893efa80
   Dot {
    name Dot1
    xpos -364
@@ -619,7 +629,7 @@ push $N9d33b00
   inputs 3
   name _4
   xpos -60
-  ypos -310
+  ypos -348
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -627,7 +637,7 @@ push $N9d33b00
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -678,19 +688,19 @@ push $N9d33b00
    xpos -364
    ypos -105
   }
-set N9dce900 [stack 0]
+set N8df14880 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9dced80 [stack 0]
+set N8df14d00 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9dcf200 [stack 0]
+set N8df15180 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -699,7 +709,7 @@ set N9dcf200 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9dcf200
+push $N8df15180
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -707,12 +717,12 @@ push $N9dcf200
    xpos -209
    ypos -61
   }
-push $N9dced80
+push $N8df14d00
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
    xpos -319
-   ypos -61
+   ypos -62
   }
   Dot {
    name Dot5
@@ -725,7 +735,7 @@ push $N9dced80
    name Switch1
    xpos -100
   }
-push $N9dce900
+push $N8df14880
   Dot {
    name Dot1
    xpos -364
@@ -748,7 +758,7 @@ push $N9dce900
   inputs 3
   name _5
   xpos -60
-  ypos -276
+  ypos -314
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -756,7 +766,7 @@ push $N9dce900
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -807,19 +817,19 @@ push $N9dce900
    xpos -364
    ypos -105
   }
-set N9dd1600 [stack 0]
+set N32813680 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9dd1a80 [stack 0]
+set N32813b00 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9e58000 [stack 0]
+set N32813f80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -828,7 +838,7 @@ set N9e58000 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9e58000
+push $N32813f80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -836,7 +846,7 @@ push $N9e58000
    xpos -209
    ypos -61
   }
-push $N9dd1a80
+push $N32813b00
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -854,7 +864,7 @@ push $N9dd1a80
    name Switch1
    xpos -100
   }
-push $N9dd1600
+push $N32813680
   Dot {
    name Dot1
    xpos -364
@@ -877,7 +887,7 @@ push $N9dd1600
   inputs 3
   name _6
   xpos -60
-  ypos -242
+  ypos -280
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -885,7 +895,7 @@ push $N9dd1600
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -936,19 +946,19 @@ push $N9dd1600
    xpos -364
    ypos -105
   }
-set N9e5a400 [stack 0]
+set N34b44480 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9e5a880 [stack 0]
+set N34b44900 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9e5ad00 [stack 0]
+set N34b44d80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -957,7 +967,7 @@ set N9e5ad00 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9e5ad00
+push $N34b44d80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -965,7 +975,7 @@ push $N9e5ad00
    xpos -209
    ypos -61
   }
-push $N9e5a880
+push $N34b44900
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -983,7 +993,7 @@ push $N9e5a880
    name Switch1
    xpos -100
   }
-push $N9e5a400
+push $N34b44480
   Dot {
    name Dot1
    xpos -364
@@ -1006,7 +1016,7 @@ push $N9e5a400
   inputs 3
   name _7
   xpos -60
-  ypos -208
+  ypos -246
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1014,7 +1024,7 @@ push $N9e5a400
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1065,19 +1075,19 @@ push $N9e5a400
    xpos -364
    ypos -105
   }
-set N9f11200 [stack 0]
+set N34b47180 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9f11680 [stack 0]
+set N34b47600 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9f11b00 [stack 0]
+set N34b47a80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1086,7 +1096,7 @@ set N9f11b00 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9f11b00
+push $N34b47a80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1094,7 +1104,7 @@ push $N9f11b00
    xpos -209
    ypos -61
   }
-push $N9f11680
+push $N34b47600
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1112,7 +1122,7 @@ push $N9f11680
    name Switch1
    xpos -100
   }
-push $N9f11200
+push $N34b47180
   Dot {
    name Dot1
    xpos -364
@@ -1135,7 +1145,7 @@ push $N9f11200
   inputs 3
   name _8
   xpos -60
-  ypos -174
+  ypos -212
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1143,7 +1153,7 @@ push $N9f11200
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1194,19 +1204,19 @@ push $N9f11200
    xpos -364
    ypos -105
   }
-set N9fa2000 [stack 0]
+set Ne5ee1f80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9fa2480 [stack 0]
+set Ne5ee2400 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9fa2900 [stack 0]
+set Ne5ee2880 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1215,7 +1225,7 @@ set N9fa2900 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9fa2900
+push $Ne5ee2880
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1223,7 +1233,7 @@ push $N9fa2900
    xpos -209
    ypos -61
   }
-push $N9fa2480
+push $Ne5ee2400
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1241,7 +1251,7 @@ push $N9fa2480
    name Switch1
    xpos -100
   }
-push $N9fa2000
+push $Ne5ee1f80
   Dot {
    name Dot1
    xpos -364
@@ -1264,7 +1274,7 @@ push $N9fa2000
   inputs 3
   name _9
   xpos -60
-  ypos -140
+  ypos -178
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1272,7 +1282,7 @@ push $N9fa2000
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1323,19 +1333,19 @@ push $N9fa2000
    xpos -364
    ypos -105
   }
-set N9fa4d00 [stack 0]
+set N57a36d80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set N9fa5180 [stack 0]
+set N57a37200 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set N9fa5600 [stack 0]
+set N57a37680 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1344,7 +1354,7 @@ set N9fa5600 [stack 0]
    xpos -100
    ypos -114
   }
-push $N9fa5600
+push $N57a37680
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1352,7 +1362,7 @@ push $N9fa5600
    xpos -209
    ypos -61
   }
-push $N9fa5180
+push $N57a37200
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1370,7 +1380,7 @@ push $N9fa5180
    name Switch1
    xpos -100
   }
-push $N9fa4d00
+push $N57a36d80
   Dot {
    name Dot1
    xpos -364
@@ -1393,7 +1403,7 @@ push $N9fa4d00
   inputs 3
   name _10
   xpos -60
-  ypos -106
+  ypos -144
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1401,7 +1411,7 @@ push $N9fa4d00
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1452,19 +1462,19 @@ push $N9fa4d00
    xpos -364
    ypos -105
   }
-set Na041b00 [stack 0]
+set N57a39a80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na041f80 [stack 0]
+set Na00ba000 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na042400 [stack 0]
+set Na00ba480 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1473,7 +1483,7 @@ set Na042400 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na042400
+push $Na00ba480
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1481,7 +1491,7 @@ push $Na042400
    xpos -209
    ypos -61
   }
-push $Na041f80
+push $Na00ba000
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1499,7 +1509,7 @@ push $Na041f80
    name Switch1
    xpos -100
   }
-push $Na041b00
+push $N57a39a80
   Dot {
    name Dot1
    xpos -364
@@ -1522,7 +1532,7 @@ push $Na041b00
   inputs 3
   name _11
   xpos -60
-  ypos -72
+  ypos -110
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1530,7 +1540,7 @@ push $Na041b00
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1581,19 +1591,19 @@ push $Na041b00
    xpos -364
    ypos -105
   }
-set Na0ea900 [stack 0]
+set Na00bc880 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na0ead80 [stack 0]
+set Na00bcd00 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na0eb200 [stack 0]
+set Na00bd180 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1602,7 +1612,7 @@ set Na0eb200 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na0eb200
+push $Na00bd180
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1610,7 +1620,7 @@ push $Na0eb200
    xpos -209
    ypos -61
   }
-push $Na0ead80
+push $Na00bcd00
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1628,7 +1638,7 @@ push $Na0ead80
    name Switch1
    xpos -100
   }
-push $Na0ea900
+push $Na00bc880
   Dot {
    name Dot1
    xpos -364
@@ -1651,7 +1661,7 @@ push $Na0ea900
   inputs 3
   name _12
   xpos -60
-  ypos -38
+  ypos -76
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1659,7 +1669,7 @@ push $Na0ea900
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1710,19 +1720,19 @@ push $Na0ea900
    xpos -364
    ypos -105
   }
-set Na0ed600 [stack 0]
+set N24889680 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na0eda80 [stack 0]
+set N24889b00 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na16c000 [stack 0]
+set N24889f80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1731,7 +1741,7 @@ set Na16c000 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na16c000
+push $N24889f80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1739,7 +1749,7 @@ push $Na16c000
    xpos -209
    ypos -61
   }
-push $Na0eda80
+push $N24889b00
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1757,7 +1767,7 @@ push $Na0eda80
    name Switch1
    xpos -100
   }
-push $Na0ed600
+push $N24889680
   Dot {
    name Dot1
    xpos -364
@@ -1780,7 +1790,7 @@ push $Na0ed600
   inputs 3
   name _13
   xpos -60
-  ypos -4
+  ypos -42
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1788,7 +1798,7 @@ push $Na0ed600
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1839,19 +1849,19 @@ push $Na0ed600
    xpos -364
    ypos -105
   }
-set Na16e400 [stack 0]
+set N629fe480 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na16e880 [stack 0]
+set N629fe900 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na16ed00 [stack 0]
+set N629fed80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1860,7 +1870,7 @@ set Na16ed00 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na16ed00
+push $N629fed80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1868,7 +1878,7 @@ push $Na16ed00
    xpos -209
    ypos -61
   }
-push $Na16e880
+push $N629fe900
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -1886,7 +1896,7 @@ push $Na16e880
    name Switch1
    xpos -100
   }
-push $Na16e400
+push $N629fe480
   Dot {
    name Dot1
    xpos -364
@@ -1909,7 +1919,7 @@ push $Na16e400
   inputs 3
   name _14
   xpos -60
-  ypos 30
+  ypos -8
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -1917,7 +1927,7 @@ push $Na16e400
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -1968,19 +1978,19 @@ push $Na16e400
    xpos -364
    ypos -105
   }
-set Na221200 [stack 0]
+set N62a01180 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na221680 [stack 0]
+set N62a01600 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na221b00 [stack 0]
+set N62a01a80 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -1989,7 +1999,7 @@ set Na221b00 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na221b00
+push $N62a01a80
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -1997,7 +2007,7 @@ push $Na221b00
    xpos -209
    ypos -61
   }
-push $Na221680
+push $N62a01600
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -2015,7 +2025,7 @@ push $Na221680
    name Switch1
    xpos -100
   }
-push $Na221200
+push $N62a01180
   Dot {
    name Dot1
    xpos -364
@@ -2038,7 +2048,7 @@ push $Na221200
   inputs 3
   name _15
   xpos -60
-  ypos 64
+  ypos 26
   disable {{this.switch}}
   addUserKnob {20 User}
   addUserKnob {7 step l "Quality Step"}
@@ -2046,7 +2056,7 @@ push $Na221200
   addUserKnob {7 min l "Mask Min"}
   min {{input.max}}
   addUserKnob {7 max l "Mask Max"}
-  max {{"parent.glo_divisions == 0\n?\nthis.step / parent.glo_quality\n:\npow(this.step / parent.glo_quality, \[string map \{\"^\" \"\"\} \[value parent.glo_divisions]])"}}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
   addUserKnob {7 def l Defocus}
   def {{"parent.glo_amount * this.max"}}
   addUserKnob {7 ar l "Aspect Ratio"}
@@ -2097,19 +2107,19 @@ push $Na221200
    xpos -364
    ypos -105
   }
-set Na2b4000 [stack 0]
+set Ne575bf80 [stack 0]
   Dot {
    name Dot4
    xpos -285
    ypos -105
   }
-set Na2b4480 [stack 0]
+set Ne575c400 [stack 0]
   Dot {
    name Dot3
    xpos -175
    ypos -105
   }
-set Na2b4900 [stack 0]
+set Ne575c880 [stack 0]
   Convolve2 {
    inputs 2
    filter_channel none
@@ -2118,7 +2128,7 @@ set Na2b4900 [stack 0]
    xpos -100
    ypos -114
   }
-push $Na2b4900
+push $Ne575c880
   Defocus {
    defocus {{parent.def}}
    ratio {{"max(0.00001, parent.ar)"}}
@@ -2126,7 +2136,7 @@ push $Na2b4900
    xpos -209
    ypos -61
   }
-push $Na2b4480
+push $Ne575c400
   Blur {
    size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
    name Blur1
@@ -2144,7 +2154,652 @@ push $Na2b4480
    name Switch1
    xpos -100
   }
-push $Na2b4000
+push $Ne575bf80
+  Dot {
+   name Dot1
+   xpos -364
+   ypos 92
+  }
+  Keymix {
+   inputs 3
+   bbox B
+   name Keymix1
+   xpos -100
+   ypos 83
+  }
+  Output {
+   name Output
+   xpos -100
+   ypos 180
+  }
+ end_group
+ Group {
+  inputs 3
+  name _16
+  xpos -60
+  ypos 60
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 min l "Mask Min"}
+  min {{input.max}}
+  addUserKnob {7 max l "Mask Max"}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 def l Defocus}
+  def {{"parent.glo_amount * this.max"}}
+  addUserKnob {7 ar l "Aspect Ratio"}
+  ar {{parent.bd_ar}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.max > 1 ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Depth
+   xpos 46
+   ypos -232
+   number 1
+  }
+  Grade {
+   channels alpha
+   blackpoint {{parent.min}}
+   whitepoint {{parent.max}}
+   name Grade1
+   xpos 46
+   ypos 83
+  }
+  Input {
+   inputs 0
+   name Bokeh
+   xpos -100
+   ypos -232
+   number 2
+  }
+  Reformat {
+   type "to box"
+   box_width {{"clamp((parent.def * 2), 1, 512)"}}
+   box_height {{box_width}}
+   box_fixed true
+   filter sinc4
+   name Reformat1
+   xpos -100
+   ypos -177
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -398
+   ypos -232
+  }
+  Dot {
+   name Dot2
+   xpos -364
+   ypos -105
+  }
+set N1cccd80 [stack 0]
+  Dot {
+   name Dot4
+   xpos -285
+   ypos -105
+  }
+set N1ccd200 [stack 0]
+  Dot {
+   name Dot3
+   xpos -175
+   ypos -105
+  }
+set N1ccd680 [stack 0]
+  Convolve2 {
+   inputs 2
+   filter_channel none
+   use_input_channels true
+   name Convolve1
+   xpos -100
+   ypos -114
+  }
+push $N1ccd680
+  Defocus {
+   defocus {{parent.def}}
+   ratio {{"max(0.00001, parent.ar)"}}
+   name Defocus1
+   xpos -209
+   ypos -61
+  }
+push $N1ccd200
+  Blur {
+   size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
+   name Blur1
+   xpos -319
+   ypos -61
+  }
+  Dot {
+   name Dot5
+   xpos -285
+   ypos 3
+  }
+  Switch {
+   inputs 3
+   which {{parent.parent.meth_choose}}
+   name Switch1
+   xpos -100
+  }
+push $N1cccd80
+  Dot {
+   name Dot1
+   xpos -364
+   ypos 92
+  }
+  Keymix {
+   inputs 3
+   bbox B
+   name Keymix1
+   xpos -100
+   ypos 83
+  }
+  Output {
+   name Output
+   xpos -100
+   ypos 180
+  }
+ end_group
+ Group {
+  inputs 3
+  name _17
+  xpos -60
+  ypos 94
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 min l "Mask Min"}
+  min {{input.max}}
+  addUserKnob {7 max l "Mask Max"}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 def l Defocus}
+  def {{"parent.glo_amount * this.max"}}
+  addUserKnob {7 ar l "Aspect Ratio"}
+  ar {{parent.bd_ar}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.max > 1 ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Depth
+   xpos 46
+   ypos -232
+   number 1
+  }
+  Grade {
+   channels alpha
+   blackpoint {{parent.min}}
+   whitepoint {{parent.max}}
+   name Grade1
+   xpos 46
+   ypos 83
+  }
+  Input {
+   inputs 0
+   name Bokeh
+   xpos -100
+   ypos -232
+   number 2
+  }
+  Reformat {
+   type "to box"
+   box_width {{"clamp((parent.def * 2), 1, 512)"}}
+   box_height {{box_width}}
+   box_fixed true
+   filter sinc4
+   name Reformat1
+   xpos -100
+   ypos -177
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -398
+   ypos -232
+  }
+  Dot {
+   name Dot2
+   xpos -364
+   ypos -105
+  }
+set N1ccfa80 [stack 0]
+  Dot {
+   name Dot4
+   xpos -285
+   ypos -105
+  }
+set N42052000 [stack 0]
+  Dot {
+   name Dot3
+   xpos -175
+   ypos -105
+  }
+set N42052480 [stack 0]
+  Convolve2 {
+   inputs 2
+   filter_channel none
+   use_input_channels true
+   name Convolve1
+   xpos -100
+   ypos -114
+  }
+push $N42052480
+  Defocus {
+   defocus {{parent.def}}
+   ratio {{"max(0.00001, parent.ar)"}}
+   name Defocus1
+   xpos -209
+   ypos -61
+  }
+push $N42052000
+  Blur {
+   size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
+   name Blur1
+   xpos -319
+   ypos -61
+  }
+  Dot {
+   name Dot5
+   xpos -285
+   ypos 3
+  }
+  Switch {
+   inputs 3
+   which {{parent.parent.meth_choose}}
+   name Switch1
+   xpos -100
+  }
+push $N1ccfa80
+  Dot {
+   name Dot1
+   xpos -364
+   ypos 92
+  }
+  Keymix {
+   inputs 3
+   bbox B
+   name Keymix1
+   xpos -100
+   ypos 83
+  }
+  Output {
+   name Output
+   xpos -100
+   ypos 180
+  }
+ end_group
+ Group {
+  inputs 3
+  name _18
+  xpos -60
+  ypos 128
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 min l "Mask Min"}
+  min {{input.max}}
+  addUserKnob {7 max l "Mask Max"}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 def l Defocus}
+  def {{"parent.glo_amount * this.max"}}
+  addUserKnob {7 ar l "Aspect Ratio"}
+  ar {{parent.bd_ar}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.max > 1 ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Depth
+   xpos 46
+   ypos -232
+   number 1
+  }
+  Grade {
+   channels alpha
+   blackpoint {{parent.min}}
+   whitepoint {{parent.max}}
+   name Grade1
+   xpos 46
+   ypos 83
+  }
+  Input {
+   inputs 0
+   name Bokeh
+   xpos -100
+   ypos -232
+   number 2
+  }
+  Reformat {
+   type "to box"
+   box_width {{"clamp((parent.def * 2), 1, 512)"}}
+   box_height {{box_width}}
+   box_fixed true
+   filter sinc4
+   name Reformat1
+   xpos -100
+   ypos -177
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -398
+   ypos -232
+  }
+  Dot {
+   name Dot2
+   xpos -364
+   ypos -105
+  }
+set N42054880 [stack 0]
+  Dot {
+   name Dot4
+   xpos -285
+   ypos -105
+  }
+set N42054d00 [stack 0]
+  Dot {
+   name Dot3
+   xpos -175
+   ypos -105
+  }
+set N42055180 [stack 0]
+  Convolve2 {
+   inputs 2
+   filter_channel none
+   use_input_channels true
+   name Convolve1
+   xpos -100
+   ypos -114
+  }
+push $N42055180
+  Defocus {
+   defocus {{parent.def}}
+   ratio {{"max(0.00001, parent.ar)"}}
+   name Defocus1
+   xpos -209
+   ypos -61
+  }
+push $N42054d00
+  Blur {
+   size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
+   name Blur1
+   xpos -319
+   ypos -61
+  }
+  Dot {
+   name Dot5
+   xpos -285
+   ypos 3
+  }
+  Switch {
+   inputs 3
+   which {{parent.parent.meth_choose}}
+   name Switch1
+   xpos -100
+  }
+push $N42054880
+  Dot {
+   name Dot1
+   xpos -364
+   ypos 92
+  }
+  Keymix {
+   inputs 3
+   bbox B
+   name Keymix1
+   xpos -100
+   ypos 83
+  }
+  Output {
+   name Output
+   xpos -100
+   ypos 180
+  }
+ end_group
+ Group {
+  inputs 3
+  name _19
+  xpos -60
+  ypos 162
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 min l "Mask Min"}
+  min {{input.max}}
+  addUserKnob {7 max l "Mask Max"}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 def l Defocus}
+  def {{"parent.glo_amount * this.max"}}
+  addUserKnob {7 ar l "Aspect Ratio"}
+  ar {{parent.bd_ar}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.max > 1 ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Depth
+   xpos 46
+   ypos -232
+   number 1
+  }
+  Grade {
+   channels alpha
+   blackpoint {{parent.min}}
+   whitepoint {{parent.max}}
+   name Grade1
+   xpos 46
+   ypos 83
+  }
+  Input {
+   inputs 0
+   name Bokeh
+   xpos -100
+   ypos -232
+   number 2
+  }
+  Reformat {
+   type "to box"
+   box_width {{"clamp((parent.def * 2), 1, 512)"}}
+   box_height {{box_width}}
+   box_fixed true
+   filter sinc4
+   name Reformat1
+   xpos -100
+   ypos -177
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -398
+   ypos -232
+  }
+  Dot {
+   name Dot2
+   xpos -364
+   ypos -105
+  }
+set N88be1680 [stack 0]
+  Dot {
+   name Dot4
+   xpos -285
+   ypos -105
+  }
+set N88be1b00 [stack 0]
+  Dot {
+   name Dot3
+   xpos -175
+   ypos -105
+  }
+set N88be1f80 [stack 0]
+  Convolve2 {
+   inputs 2
+   filter_channel none
+   use_input_channels true
+   name Convolve1
+   xpos -100
+   ypos -114
+  }
+push $N88be1f80
+  Defocus {
+   defocus {{parent.def}}
+   ratio {{"max(0.00001, parent.ar)"}}
+   name Defocus1
+   xpos -209
+   ypos -61
+  }
+push $N88be1b00
+  Blur {
+   size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
+   name Blur1
+   xpos -319
+   ypos -61
+  }
+  Dot {
+   name Dot5
+   xpos -285
+   ypos 3
+  }
+  Switch {
+   inputs 3
+   which {{parent.parent.meth_choose}}
+   name Switch1
+   xpos -100
+  }
+push $N88be1680
+  Dot {
+   name Dot1
+   xpos -364
+   ypos 92
+  }
+  Keymix {
+   inputs 3
+   bbox B
+   name Keymix1
+   xpos -100
+   ypos 83
+  }
+  Output {
+   name Output
+   xpos -100
+   ypos 180
+  }
+ end_group
+ Group {
+  inputs 3
+  name _20
+  xpos -60
+  ypos 196
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 min l "Mask Min"}
+  min {{input.max}}
+  addUserKnob {7 max l "Mask Max"}
+  max {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 def l Defocus}
+  def {{"parent.glo_amount * this.max"}}
+  addUserKnob {7 ar l "Aspect Ratio"}
+  ar {{parent.bd_ar}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.max > 1 ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Depth
+   xpos 46
+   ypos -232
+   number 1
+  }
+  Grade {
+   channels alpha
+   blackpoint {{parent.min}}
+   whitepoint {{parent.max}}
+   name Grade1
+   xpos 46
+   ypos 83
+  }
+  Input {
+   inputs 0
+   name Bokeh
+   xpos -100
+   ypos -232
+   number 2
+  }
+  Reformat {
+   type "to box"
+   box_width {{"clamp((parent.def * 2), 1, 512)"}}
+   box_height {{box_width}}
+   box_fixed true
+   filter sinc4
+   name Reformat1
+   xpos -100
+   ypos -177
+  }
+  Input {
+   inputs 0
+   name Image
+   xpos -398
+   ypos -232
+  }
+  Dot {
+   name Dot2
+   xpos -364
+   ypos -105
+  }
+set N72134480 [stack 0]
+  Dot {
+   name Dot4
+   xpos -285
+   ypos -105
+  }
+set N72134900 [stack 0]
+  Dot {
+   name Dot3
+   xpos -175
+   ypos -105
+  }
+set N72134d80 [stack 0]
+  Convolve2 {
+   inputs 2
+   filter_channel none
+   use_input_channels true
+   name Convolve1
+   xpos -100
+   ypos -114
+  }
+push $N72134d80
+  Defocus {
+   defocus {{parent.def}}
+   ratio {{"max(0.00001, parent.ar)"}}
+   name Defocus1
+   xpos -209
+   ypos -61
+  }
+push $N72134900
+  Blur {
+   size {{"parent.def * max(0.00001, parent.ar)"} {parent.def}}
+   name Blur1
+   xpos -319
+   ypos -61
+  }
+  Dot {
+   name Dot5
+   xpos -285
+   ypos 3
+  }
+  Switch {
+   inputs 3
+   which {{parent.parent.meth_choose}}
+   name Switch1
+   xpos -100
+  }
+push $N72134480
   Dot {
    name Dot1
    xpos -364
@@ -2168,18 +2823,18 @@ push $Na2b4000
   which {{"(parent.meth_choose != 2) && ((\[exists parent.input0] == 0) || (\[exists parent.input1] == 0))\n?\n1\n:\n0"}}
   name Switch1
   xpos -60
-  ypos 192
+  ypos 318
  }
  Switch {
   inputs 2
   which {{"(parent.meth_choose == 2) && ((\[exists parent.input0] == 0) || (\[exists parent.input1] == 0) || (\[exists parent.input2] == 0))\n?\n1\n:\n0"}}
   name Switch2
   xpos -60
-  ypos 216
+  ypos 342
  }
  Output {
   name Output
   xpos -60
-  ypos 278
+  ypos 404
  }
 end_group
