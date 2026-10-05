@@ -1,0 +1,1765 @@
+set cut_paste_input [stack 0]
+version 17.1 v1
+push $cut_paste_input
+Group {
+ name zqEdgeExtend
+ selected true
+ xpos 2259
+ ypos 3792
+ addUserKnob {20 zqedgeextend l zqEdgeExtend}
+ addUserKnob {26 __GLOBAL l "" +STARTLINE T "<br>\n<b><i>GLOBAL</i></b>\n<br>"}
+ addUserKnob {7 glo_size l Size R 0 100}
+ glo_size 50
+ addUserKnob {4 glo_quality l Quality M {5 10 15 20}}
+ addUserKnob {7 glo_expo l Exponent R 1 5}
+ glo_expo 1
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Edge Extend\n<br><br>\nPremultiplied RGBA has to be provided.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos 1890
+  ypos -314
+ }
+set Nb05c4400 [stack 0]
+ Group {
+  name _0
+  xpos 2179
+  ypos -659
+  disable {{this.switch}}
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  addUserKnob {7 x l X}
+  addUserKnob {7 blur l Blur}
+  addUserKnob {7 switch l Switch}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -253
+   ypos 49
+   number 1
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -393
+   ypos 48
+  }
+  Output {
+   name Output
+   xpos -314
+   ypos 170
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _1
+  xpos 2179
+  ypos -625
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Nc16c6000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Nc16c6000
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _2
+  xpos 2179
+  ypos -591
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N9a644d80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N9a644d80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _3
+  xpos 2179
+  ypos -557
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N905ee400 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N905ee400
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _4
+  xpos 2179
+  ypos -523
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N905ec000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N905ec000
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _5
+  xpos 2179
+  ypos -489
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N30d3600 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N30d3600
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _6
+  xpos 2179
+  ypos -455
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Na5617f80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Na5617f80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _7
+  xpos 2179
+  ypos -421
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Nfbe76000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Nfbe76000
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _8
+  xpos 2179
+  ypos -387
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N9e0e9a80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N9e0e9a80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _9
+  xpos 2179
+  ypos -353
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N2ba42880 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N2ba42880
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _10
+  xpos 2179
+  ypos -319
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N8e486000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N8e486000
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _11
+  xpos 2179
+  ypos -285
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Nf8197680 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Nf8197680
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _12
+  xpos 2179
+  ypos -251
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N256e4000 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N256e4000
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _13
+  xpos 2179
+  ypos -217
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N600c4480 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N600c4480
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _14
+  xpos 2179
+  ypos -183
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N21e7ba80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N21e7ba80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _15
+  xpos 2179
+  ypos -149
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N99ab8d80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N99ab8d80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _16
+  xpos 2179
+  ypos -115
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Na2290d80 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Na2290d80
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _17
+  xpos 2179
+  ypos -81
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N96f65b00 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N96f65b00
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _18
+  xpos 2179
+  ypos -47
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set Nd5db680 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $Nd5db680
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _19
+  xpos 2179
+  ypos -13
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N62131200 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N62131200
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+push $Nb05c4400
+ Group {
+  inputs 2
+  name _20
+  xpos 2179
+  ypos 21
+  addUserKnob {20 User}
+  addUserKnob {7 step l "Quality Step"}
+  step {{"\[string map \{\"_\" \"\"\} \[value name]]"}}
+  addUserKnob {7 x l X}
+  x {{"pow(this.step / \[value parent.glo_quality], max(1, parent.glo_expo))"}}
+  addUserKnob {7 blur l Blur}
+  blur {{"max(1, parent.glo_size * this.x)"}}
+  addUserKnob {7 switch l Switch}
+  switch {{"this.step > \[value parent.glo_quality] ? 1 : 0"}}
+ }
+  Input {
+   inputs 0
+   name Image
+   xpos -152
+   ypos -5
+   number 1
+  }
+  Dot {
+   name Dot1
+   xpos -118
+   ypos 64
+  }
+set N3e5a6d00 [stack 0]
+  Dot {
+   name Dot2
+   xpos -19
+   ypos 64
+  }
+  Dot {
+   name Dot3
+   xpos -19
+   ypos 191
+  }
+  Input {
+   inputs 0
+   name Original
+   xpos -294
+   ypos -5
+  }
+  Blur {
+   channels rgba
+   size {{parent.blur}}
+   maskChannelInput rgba.alpha
+   invert_mask true
+   name Blur97
+   xpos -294
+   ypos 75
+  }
+  Unpremult {
+   name Unpremult18
+   xpos -294
+   ypos 111
+  }
+  Premult {
+   name Premult81
+   xpos -294
+   ypos 135
+  }
+push $N3e5a6d00
+  Merge2 {
+   inputs 2
+   operation under
+   name Merge97
+   xpos -152
+   ypos 135
+  }
+  Switch {
+   inputs 2
+   which {{parent.switch}}
+   name Switch1
+   xpos -152
+   ypos 188
+  }
+  Output {
+   name Output
+   xpos -152
+   ypos 235
+  }
+ end_group
+ Unpremult {
+  name Unpremult1
+  xpos 2179
+  ypos 102
+ }
+ Output {
+  name Output
+  xpos 2180
+  ypos 161
+ }
+end_group

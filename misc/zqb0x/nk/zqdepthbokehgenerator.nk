@@ -4,8 +4,8 @@ Group {
  inputs 0
  name zqDepthBokehGenerator
  selected true
- xpos -850
- ypos 16950
+ xpos 1849
+ ypos 4141
  addUserKnob {20 zqDepthBokehGenerator l zqdepthbokehgenerator}
  addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
  addUserKnob {4 base_shape l Shape M {Trigon Tetragon Pentagon Hexagon Septagon ""}}
@@ -14,6 +14,7 @@ Group {
  base_resolution 512
  addUserKnob {26 __SHAPE l "" +STARTLINE T "<br>\n<b><i>SHAPE</i></b>\n<br>"}
  addUserKnob {7 shape_inside l Inside}
+ shape_inside 1
  addUserKnob {7 shape_outside l Outside}
  shape_outside 1
  addUserKnob {7 shape_falloff l Falloff}
@@ -24,6 +25,7 @@ Group {
  addUserKnob {7 shape_pinch l Pinch}
  shape_pinch 1
  addUserKnob {7 shape_edgeblur l Edgeblur}
+ shape_edgeblur 5
  addUserKnob {26 __COLOR_FRINGE l "" +STARTLINE T "<br>\n<b><i>COLOR FRiNGE</i></b>\n<br>"}
  addUserKnob {7 cf_shift l Shift}
  addUserKnob {7 cf_rotate l Rotate}
@@ -42,7 +44,7 @@ Group {
  addUserKnob {7 glo_r l Rotate}
  addUserKnob {7 glo_scale l Scale}
  glo_scale 1
- addUserKnob {4 glo_alpha l Alpha M {"Full White" "Full Black" "Luma Key"}}
+ addUserKnob {4 glo_alpha l Alpha M {"Luma Key" "Full White" "Full Black" ""}}
  addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Depth Bokeh Generator\n<br><br>\nTweak, fiddle, edit.."}
 }
  Reformat {
@@ -89,7 +91,7 @@ Group {
   xpos -233
   ypos 1045
  }
-set N98dff80 [stack 0]
+set N8f430480 [stack 0]
  Shuffle2 {
   fromInput1 {
    {0}
@@ -121,7 +123,7 @@ set N98dff80 [stack 0]
   xpos -377
   ypos 1090
  }
-push $N98dff80
+push $N8f430480
  Merge2 {
   inputs 2
   operation under
@@ -135,7 +137,7 @@ push $N98dff80
   xpos -233
   ypos 1114
  }
-set N98e0400 [stack 0]
+set Ne5aa6900 [stack 0]
  Dot {
   name Dot3
   xpos -343
@@ -148,7 +150,7 @@ set N98e0400 [stack 0]
   xpos -377
   ypos 1153
  }
-push $N98e0400
+push $Ne5aa6900
  Merge2 {
   inputs 2
   bbox B
@@ -232,14 +234,14 @@ push $N98e0400
   xpos -267
   ypos 1423
  }
-set N9b17900 [stack 0]
+set N96414300 [stack 0]
  Keyer {
   operation "luminance key"
   name Keyer1
   xpos -157
   ypos 1483
  }
-push $N9b17900
+push $N96414300
  Shuffle2 {
   fromInput1 {
    {0}
@@ -256,7 +258,7 @@ push $N9b17900
   xpos -267
   ypos 1489
  }
-push $N9b17900
+push $N96414300
  Shuffle2 {
   fromInput1 {
    {0}
