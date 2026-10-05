@@ -4,8 +4,8 @@ Group {
  inputs 0
  name zqDepthBokehGenerator
  selected true
- xpos 1849
- ypos 4141
+ xpos 1856
+ ypos 4155
  addUserKnob {20 zqDepthBokehGenerator l zqdepthbokehgenerator}
  addUserKnob {26 __BASE l "" +STARTLINE T "<br>\n<b><i>BASE</i></b>\n<br>"}
  addUserKnob {4 base_shape l Shape M {Trigon Tetragon Pentagon Hexagon Septagon ""}}
@@ -91,7 +91,7 @@ Group {
   xpos -233
   ypos 1045
  }
-set N8f430480 [stack 0]
+set Nabd3f80 [stack 0]
  Shuffle2 {
   fromInput1 {
    {0}
@@ -123,7 +123,7 @@ set N8f430480 [stack 0]
   xpos -377
   ypos 1090
  }
-push $N8f430480
+push $Nabd3f80
  Merge2 {
   inputs 2
   operation under
@@ -137,7 +137,7 @@ push $N8f430480
   xpos -233
   ypos 1114
  }
-set Ne5aa6900 [stack 0]
+set Nabd4400 [stack 0]
  Dot {
   name Dot3
   xpos -343
@@ -150,7 +150,7 @@ set Ne5aa6900 [stack 0]
   xpos -377
   ypos 1153
  }
-push $Ne5aa6900
+push $Nabd4400
  Merge2 {
   inputs 2
   bbox B
@@ -234,14 +234,7 @@ push $Ne5aa6900
   xpos -267
   ypos 1423
  }
-set N96414300 [stack 0]
- Keyer {
-  operation "luminance key"
-  name Keyer1
-  xpos -157
-  ypos 1483
- }
-push $N96414300
+set N310de00 [stack 0]
  Shuffle2 {
   fromInput1 {
    {0}
@@ -255,10 +248,10 @@ push $N96414300
   }
   mappings "1 black -1 -1 rgba.alpha 0 0"
   name Shuffle3
-  xpos -267
+  xpos -157
   ypos 1489
  }
-push $N96414300
+push $N310de00
  Shuffle2 {
   fromInput1 {
    {0}
@@ -272,8 +265,15 @@ push $N96414300
   }
   mappings "1 white -1 -1 rgba.alpha 0 0"
   name Shuffle2
-  xpos -377
+  xpos -267
   ypos 1489
+ }
+push $N310de00
+ Keyer {
+  operation "luminance key"
+  name Keyer1
+  xpos -400
+  ypos 1479
  }
  Switch {
   inputs 3
