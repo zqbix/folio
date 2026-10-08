@@ -3,7 +3,6 @@ version 17.1 v2
 push $cut_paste_input
 Group {
  name zqSpot
- knobChanged "\nwith nuke.thisNode():\n    roto = nuke.toNode(\"RotoMain\")\n    if roto:\n        roto\['curves'].fromScript(roto\['curves'].toScript())\n"
  selected true
  xpos 3197
  ypos 11169
