@@ -5,8 +5,8 @@ Group {
  name zqSpot
  knobChanged "\nwith nuke.thisNode():\n    roto = nuke.toNode(\"RotoMain\")\n    if roto:\n        roto\['curves'].fromScript(roto\['curves'].toScript())\n"
  selected true
- xpos 3521
- ypos 10079
+ xpos 3208
+ ypos 11167
  addUserKnob {20 zqspot l zqSpot}
  addUserKnob {26 __POSiTiON l "" +STARTLINE T "<br>\n<b><i>POSiTiON</b></i>\n<br>"}
  addUserKnob {12 pos_translate l Translate}
@@ -26,6 +26,8 @@ Group {
  int_multiply 1
  addUserKnob {7 int_gamma l Gamma}
  int_gamma 1
+ addUserKnob {26 __MERGE l "" +STARTLINE T "<br>\n<b><i>MERGE</b></i>\n<br>"}
+ addUserKnob {41 operation T Merge2.operation}
  addUserKnob {6 int_exportlightonly l "Export Light Only" +STARTLINE}
  addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Spot\n<br><br>\nFake spotlight.."}
 }
@@ -81,7 +83,7 @@ Group {
   xpos -332
   ypos -428
  }
-set N90b06480 [stack 0]
+set Nc48ab600 [stack 0]
  Dot {
   name Dot5
   xpos -511
@@ -100,25 +102,25 @@ set N90b06480 [stack 0]
   xpos -511
   ypos -320
  }
-set Naa73f180 [stack 0]
+set Nc48ab180 [stack 0]
  Dot {
   name Dot6
   xpos -511
   ypos -284
  }
-set Naa73fa80 [stack 0]
+set Nfc3fa880 [stack 0]
  Dot {
   name Dot14
   xpos -511
   ypos -248
  }
-set Naf698400 [stack 0]
+set N65f1f600 [stack 0]
  Dot {
   name Dot15
   xpos -511
   ypos -212
  }
-set N120d1200 [stack 0]
+set N65f1fa80 [stack 0]
  Dot {
   name Dot16
   xpos -511
@@ -131,31 +133,31 @@ set N120d1200 [stack 0]
   xpos -476
   ypos -185
  }
-push $N90b06480
+push $Nc48ab600
  Dot {
   name Dot1
   xpos -238
   ypos -428
  }
-set N90b06000 [stack 0]
+set N861f6480 [stack 0]
  Dot {
   name Dot3
   xpos -147
   ypos -428
  }
-set N90b06900 [stack 0]
+set N861f6900 [stack 0]
  Dot {
   name Dot11
   xpos -49
   ypos -428
  }
-set N9a12da80 [stack 0]
+set N861f6d80 [stack 0]
  Dot {
   name Dot12
   xpos 44
   ypos -428
  }
-set N9a231b00 [stack 0]
+set N861f7200 [stack 0]
  Dot {
   name Dot13
   xpos 137
@@ -173,7 +175,7 @@ set N9a231b00 [stack 0]
   xpos 137
   ypos -176
  }
-push $N120d1200
+push $N65f1fa80
  Grade {
   channels alpha
   blackpoint 0.6
@@ -182,7 +184,7 @@ push $N120d1200
   xpos -476
   ypos -221
  }
-push $N9a231b00
+push $N861f7200
  Blur {
   channels alpha
   size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.8)"}}
@@ -195,7 +197,7 @@ push $N9a231b00
   xpos 44
   ypos -212
  }
-push $Naf698400
+push $N65f1f600
  Grade {
   channels alpha
   blackpoint 0.4
@@ -204,7 +206,7 @@ push $Naf698400
   xpos -476
   ypos -257
  }
-push $N9a12da80
+push $N861f6d80
  Blur {
   channels alpha
   size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.6)"}}
@@ -217,7 +219,7 @@ push $N9a12da80
   xpos -49
   ypos -248
  }
-push $Naa73fa80
+push $Nfc3fa880
  Grade {
   channels alpha
   blackpoint 0.2
@@ -226,7 +228,7 @@ push $Naa73fa80
   xpos -476
   ypos -293
  }
-push $N90b06900
+push $N861f6900
  Blur {
   channels alpha
   size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.4)"}}
@@ -239,7 +241,7 @@ push $N90b06900
   xpos -147
   ypos -284
  }
-push $Naa73f180
+push $Nc48ab180
  Grade {
   channels alpha
   whitepoint 0.2
@@ -247,7 +249,7 @@ push $Naa73f180
   xpos -476
   ypos -329
  }
-push $N90b06000
+push $N861f6480
  Blur {
   channels alpha
   size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.2)"}}
@@ -260,7 +262,7 @@ push $N90b06000
   xpos -238
   ypos -320
  }
-push $N90b06480
+push $Nc48ab600
  Blur {
   channels alpha
   size {{parent.dim_blur_start}}
@@ -312,8 +314,8 @@ push $N90b06480
   xpos -366
   ypos -92
  }
-set Nbd049900 [stack 0]
-push $Nbd049900
+set N548a4d00 [stack 0]
+push $N548a4d00
  Dot {
   name Dot8
   xpos -234
