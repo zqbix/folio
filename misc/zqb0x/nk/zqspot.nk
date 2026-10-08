@@ -1,0 +1,412 @@
+set cut_paste_input [stack 0]
+version 17.1 v2
+push $cut_paste_input
+Group {
+ name zqSpot
+ knobChanged "\nwith nuke.thisNode():\n    roto = nuke.toNode(\"RotoMain\")\n    if roto:\n        roto\['curves'].fromScript(roto\['curves'].toScript())\n"
+ selected true
+ xpos 3521
+ ypos 10079
+ addUserKnob {20 zqspot l zqSpot}
+ addUserKnob {26 __POSiTiON l "" +STARTLINE T "<br>\n<b><i>POSiTiON</b></i>\n<br>"}
+ addUserKnob {12 pos_translate l Translate}
+ addUserKnob {7 pos_rotate l Rotate R -180 180}
+ addUserKnob {26 __DiMENSiONS l "" +STARTLINE T "<br>\n<b><i>DiMENSiONS</b></i>\n<br>"}
+ addUserKnob {7 dim_width l Width R 1 100}
+ dim_width 10
+ addUserKnob {7 dim_distance l Distance R 1 100}
+ dim_distance 100
+ addUserKnob {7 dim_taper l Taper R 0 100}
+ addUserKnob {7 dim_blur_start l "Blur Start" R 0 100}
+ addUserKnob {7 dim_blur_end l "Blur End" R 0 100}
+ addUserKnob {26 __iNTENSiTY l "" +STARTLINE T "<br>\n<b><i>iNTENSiTY</b></i>\n<br>"}
+ addUserKnob {7 int_falloff l Falloff}
+ int_falloff 1
+ addUserKnob {7 int_multiply l Multiply}
+ int_multiply 1
+ addUserKnob {7 int_gamma l Gamma}
+ int_gamma 1
+ addUserKnob {6 int_exportlightonly l "Export Light Only" +STARTLINE}
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Spot\n<br><br>\nFake spotlight.."}
+}
+ Reformat {
+  inputs 0
+  type "to box"
+  box_width {{"max(1, parent.dim_width * 0.5)\n+\nmax(0, parent.dim_taper)\n+\nmax(0, max(parent.dim_blur_start, parent.dim_blur_end))"}}
+  box_height {{parent.dim_distance}}
+  box_fixed true
+  resize none
+  name Reformat1
+  xpos -366
+  ypos -606
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  crop false
+  name Crop3
+  xpos -366
+  ypos -582
+ }
+ Expression {
+  expr3 1
+  name Expression2
+  xpos -366
+  ypos -558
+ }
+ Transform {
+  translate {{"-(parent.dim_width * 0.5)"} 0}
+  rotate {{"-degrees(atan(parent.dim_taper / parent.dim_distance))"}}
+  scale {1 1.5}
+  center {{input.width} {input.height}}
+  name Transform1
+  xpos -366
+  ypos -534
+ }
+ Crop {
+  box {0 0 {input.width} {input.height}}
+  reformat true
+  crop false
+  name Crop1
+  xpos -366
+  ypos -510
+ }
+ Invert {
+  channels alpha
+  name Invert1
+  xpos -366
+  ypos -486
+ }
+ Dot {
+  name Dot2
+  xpos -332
+  ypos -428
+ }
+set N90b06480 [stack 0]
+ Dot {
+  name Dot5
+  xpos -511
+  ypos -428
+ }
+ Expression {
+  temp_name0 gradient
+  temp_expr0 1-(y/input.height)
+  expr3 gradient
+  name Expression3
+  xpos -545
+  ypos -383
+ }
+ Dot {
+  name Dot4
+  xpos -511
+  ypos -320
+ }
+set Naa73f180 [stack 0]
+ Dot {
+  name Dot6
+  xpos -511
+  ypos -284
+ }
+set Naa73fa80 [stack 0]
+ Dot {
+  name Dot14
+  xpos -511
+  ypos -248
+ }
+set Naf698400 [stack 0]
+ Dot {
+  name Dot15
+  xpos -511
+  ypos -212
+ }
+set N120d1200 [stack 0]
+ Dot {
+  name Dot16
+  xpos -511
+  ypos -176
+ }
+ Grade {
+  channels alpha
+  blackpoint 0.8
+  name Grade5
+  xpos -476
+  ypos -185
+ }
+push $N90b06480
+ Dot {
+  name Dot1
+  xpos -238
+  ypos -428
+ }
+set N90b06000 [stack 0]
+ Dot {
+  name Dot3
+  xpos -147
+  ypos -428
+ }
+set N90b06900 [stack 0]
+ Dot {
+  name Dot11
+  xpos -49
+  ypos -428
+ }
+set N9a12da80 [stack 0]
+ Dot {
+  name Dot12
+  xpos 44
+  ypos -428
+ }
+set N9a231b00 [stack 0]
+ Dot {
+  name Dot13
+  xpos 137
+  ypos -428
+ }
+ Blur {
+  channels alpha
+  size {{parent.dim_blur_end}}
+  name Blur6
+  xpos 103
+  ypos -396
+ }
+ Dot {
+  name Dot19
+  xpos 137
+  ypos -176
+ }
+push $N120d1200
+ Grade {
+  channels alpha
+  blackpoint 0.6
+  whitepoint 0.8
+  name Grade4
+  xpos -476
+  ypos -221
+ }
+push $N9a231b00
+ Blur {
+  channels alpha
+  size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.8)"}}
+  name Blur5
+  xpos 10
+  ypos -396
+ }
+ Dot {
+  name Dot18
+  xpos 44
+  ypos -212
+ }
+push $Naf698400
+ Grade {
+  channels alpha
+  blackpoint 0.4
+  whitepoint 0.6
+  name Grade3
+  xpos -476
+  ypos -257
+ }
+push $N9a12da80
+ Blur {
+  channels alpha
+  size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.6)"}}
+  name Blur4
+  xpos -83
+  ypos -396
+ }
+ Dot {
+  name Dot17
+  xpos -49
+  ypos -248
+ }
+push $Naa73fa80
+ Grade {
+  channels alpha
+  blackpoint 0.2
+  whitepoint 0.4
+  name Grade2
+  xpos -476
+  ypos -293
+ }
+push $N90b06900
+ Blur {
+  channels alpha
+  size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.4)"}}
+  name Blur2
+  xpos -181
+  ypos -395
+ }
+ Dot {
+  name Dot7
+  xpos -147
+  ypos -284
+ }
+push $Naa73f180
+ Grade {
+  channels alpha
+  whitepoint 0.2
+  name Grade1
+  xpos -476
+  ypos -329
+ }
+push $N90b06000
+ Blur {
+  channels alpha
+  size {{"parent.dim_blur_start + ((parent.dim_blur_end - parent.dim_blur_start) * 0.2)"}}
+  name Blur3
+  xpos -272
+  ypos -393
+ }
+ Dot {
+  name Dot9
+  xpos -238
+  ypos -320
+ }
+push $N90b06480
+ Blur {
+  channels alpha
+  size {{parent.dim_blur_start}}
+  name Blur1
+  xpos -366
+  ypos -393
+ }
+ Keymix {
+  inputs 3
+  name Keymix1
+  xpos -366
+  ypos -329
+ }
+ Keymix {
+  inputs 3
+  name Keymix2
+  xpos -366
+  ypos -293
+ }
+ Keymix {
+  inputs 3
+  name Keymix3
+  xpos -366
+  ypos -257
+ }
+ Keymix {
+  inputs 3
+  name Keymix4
+  xpos -366
+  ypos -221
+ }
+ Keymix {
+  inputs 3
+  name Keymix5
+  xpos -366
+  ypos -185
+ }
+ Crop {
+  box {0 0 {"input.width * 2"} {input.height}}
+  reformat true
+  crop false
+  name Crop2
+  xpos -366
+  ypos -133
+ }
+ Expression {
+  expr3 "x >= (input.width * 0.5) ? 0 : a"
+  name Expression4
+  xpos -366
+  ypos -92
+ }
+set Nbd049900 [stack 0]
+push $Nbd049900
+ Dot {
+  name Dot8
+  xpos -234
+  ypos -89
+ }
+ Reformat {
+  type scale
+  flop true
+  name Reformat2
+  xpos -268
+  ypos -71
+ }
+ Dot {
+  name Dot10
+  xpos -234
+  ypos -47
+ }
+ Merge2 {
+  inputs 2
+  name Merge1
+  xpos -366
+  ypos -50
+ }
+ Expression {
+  expr3 y/input.height*a
+  mix {{parent.int_falloff}}
+  name Expression1
+  xpos -366
+  ypos -3
+ }
+ Grade {
+  channels alpha
+  multiply {{parent.int_multiply}}
+  gamma {{parent.int_gamma}}
+  name Grade6
+  xpos -366
+  ypos 49
+ }
+ Shuffle2 {
+  fromInput1 {
+   {0}
+   B
+  }
+  in1 alpha
+  fromInput2 {
+   {0}
+   B
+  }
+  mappings "4 rgba.alpha 0 0 rgba.red 0 0 rgba.alpha 0 0 rgba.green 0 1 rgba.alpha 0 0 rgba.blue 0 2 rgba.alpha 0 0 rgba.alpha 0 3"
+  name Shuffle1
+  xpos -366
+  ypos 117
+ }
+ Transform {
+  translate {{-center.x} {-center.y}}
+  center {{"input.width * 0.5"} {input.height}}
+  name Transform2
+  xpos -366
+  ypos 179
+ }
+ Transform {
+  translate {{parent.pos_translate.x} {parent.pos_translate.y}}
+  rotate {{parent.pos_rotate}}
+  name Transform3
+  xpos -366
+  ypos 203
+ }
+ Input {
+  inputs 0
+  name Image
+  xpos 264
+  ypos -569
+ }
+ Expression {
+  expr0 0
+  expr1 0
+  expr2 0
+  expr3 0
+  name Expression5
+  xpos 264
+  ypos 118
+  disable {{"1 - parent.int_exportlightonly"}}
+ }
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge2
+  xpos 264
+  ypos 203
+ }
+ Output {
+  name Output
+  xpos 264
+  ypos 288
+ }
+end_group
