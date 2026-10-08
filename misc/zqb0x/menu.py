@@ -27,6 +27,7 @@ zqMenu.addCommand("zq Normal Deband",                             "nuke.nodePast
 zqMenu.addCommand("zq Normal Falloff",                            "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqnormalfalloff.nk")),                           icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Position Falloff",                          "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqpositionfalloff.nk")),                         icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Quasi Occlusion",                           "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqquasiocclusion.nk")),                          icon=os.path.join(iconDir, "zqicon.png"))
+zqMenu.addCommand("zq Spot",                                      "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqspot.nk")),                                    icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Triplanar",                                 "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqtriplanar.nk")),                               icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Vanishing Point Guide",                     "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqvanishingpointguide.nk")),                     icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Vignette",                                  "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqvignette.nk")),                                icon=os.path.join(iconDir, "zqicon.png"))
