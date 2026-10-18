@@ -1,0 +1,144 @@
+set cut_paste_input [stack 0]
+version 17.1 v2
+push 0
+push $cut_paste_input
+Group {
+ inputs 2
+ name zqEnvironmentReflect
+ selected true
+ xpos 5500
+ ypos 17333
+ addUserKnob {20 zqenvreflect l zqEnvironmentReflect}
+ addUserKnob {26 __ENVMAP l "" +STARTLINE T "<br>\n<b><i>ENViRONMENT MAP</i></b>\n<br>"}
+ addUserKnob {41 env_rotorder l "Rotation Order" T SphericalTransform11.rotationOrderOutput}
+ addUserKnob {13 env_rotangles l "Rotation Angles"}
+ env_rotangles {0 0 0}
+ addUserKnob {26 __PREViEW l "" +STARTLINE T "<br>\n<b><i>PREViEW</i></b>\n<br>"}
+ addUserKnob {6 pre_enable l Enable +STARTLINE}
+ addUserKnob {7 pre_posx l "Position x"}
+ pre_posx 0.5
+ addUserKnob {7 pre_posy l "Position y"}
+ pre_posy 0.5
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Environment Reflect\n<br><br>\nConnect Normals (-1/1)..\n<br>\nConnect LatLong environment..\n<br>\nTweak.."}
+}
+ Input {
+  inputs 0
+  name Normals
+  xpos 297
+  ypos 593
+  number 1
+ }
+ Expression {
+  temp_name0 len
+  temp_expr0 "max(0.0001, sqrt(r*r + g*g + b*b))"
+  expr0 r/len
+  expr1 g/len
+  expr2 b/len
+  name Expression47
+  xpos 297
+  ypos 651
+ }
+ Grade {
+  blackpoint -1
+  black_clamp false
+  name Grade131
+  xpos 297
+  ypos 704
+ }
+ Input {
+  inputs 0
+  name LatLong
+  xpos 61
+  ypos 593
+ }
+ SphericalTransform2 {
+  modeInput "Rotation Angles"
+  rotationOrderInput YXZ
+  modeOutput "Rotation Angles"
+  rotationOrderOutput XYZ
+  rotationAnglesOutput {{parent.env_rotangles.x} {parent.env_rotangles.y} {parent.env_rotangles.z}}
+  formatMode "To Width"
+  format "1024 1024 0 0 1024 1024 1 square_1K"
+  width {{input.width}}
+  scale 0.9
+  name SphericalTransform11
+  xpos 61
+  ypos 700
+ }
+ Dot {
+  name Dot468
+  xpos 95
+  ypos 780
+ }
+set N3f4ced00 [stack 0]
+ STMap {
+  inputs 2
+  channels rgb
+  uv rgb
+  name STMap9
+  xpos 297
+  ypos 777
+ }
+ Dot {
+  name Dot2
+  xpos 331
+  ypos 977
+ }
+set N4b67d200 [stack 0]
+ NoOp {
+  name GetWH
+  xpos 185
+  ypos 974
+ }
+push $N3f4ced00
+ SphericalTransform2 {
+  projTypeOutput "Mirror Ball"
+  modeOutput "Rotation Angles"
+  formatMode "To Width"
+  format "512 512 0 0 512 512 1 square_512"
+  width {{"input.width * 0.5"}}
+  scale 0.5
+  name SphericalTransform12
+  xpos 61
+  ypos 844
+ }
+ Radial {
+  output alpha
+  area {0 0 {input.bbox.r} {input.bbox.t}}
+  softness 0.01
+  name Radial6
+  xpos 61
+  ypos 868
+ }
+ Premult {
+  name Premult77
+  xpos 61
+  ypos 904
+ }
+ Transform {
+  translate {{"(parent.GetWH.width * clamp(parent.pre_posx, 0, 1)) - this.center.x"} {"(parent.GetWH.height * clamp(parent.pre_posy, 0, 1)) - this.center.y"}}
+  center {{"input.bbox.r * 0.5"} {"input.bbox.t * 0.5"}}
+  name Transform13
+  xpos 61
+  ypos 974
+ }
+ Dot {
+  name Dot1
+  xpos 95
+  ypos 1033
+ }
+push $N4b67d200
+ Merge2 {
+  inputs 2
+  bbox B
+  name Merge112
+  xpos 297
+  ypos 1030
+  disable {{"1 - parent.pre_enable"}}
+ }
+ Output {
+  name Output
+  xpos 297
+  ypos 1135
+ }
+end_group
