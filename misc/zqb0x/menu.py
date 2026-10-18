@@ -14,6 +14,7 @@ zqMenu.addCommand("zq Depth Remap",                               "nuke.nodePast
 zqMenu.addCommand("zq Detail Normals",                            "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqdetailnormals.nk")),                           icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Edge Distort",                              "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqedgedistort.nk")),                             icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Edge Extend",                               "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqedgeextend.nk")),                              icon=os.path.join(iconDir, "zqicon.png"))
+zqMenu.addCommand("zq Environment Reflect",                       "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqenvironmentreflect.nk")),                      icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Fake Crypto",                               "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqfakecrypto.nk")),                              icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Fake Motion",                               "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqfakemotion.nk")),                              icon=os.path.join(iconDir, "zqicon.png"))
 zqMenu.addCommand("zq Glow",                                      "nuke.nodePaste(r'{}')".format(os.path.join(nkDir, "zqglow.nk")),                                    icon=os.path.join(iconDir, "zqicon.png"))
