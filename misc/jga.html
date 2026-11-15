@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; img-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'" />
+  <meta name="viewport"    content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color"  content="#121212" />
+  <meta name="robots"       content="noindex, nofollow" />
+  <meta name="referrer"     content="no-referrer" />
+  <link rel="icon"             href="../img/favicon.svg"          type="image/svg+xml" />
+  <link rel="icon"             href="../img/favicon.png"          type="image/png" />
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png" sizes="180x180" />
+  <title>JGA</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --clr-07: hsl(0, 0%, 7%);
+      --clr-20: hsl(0, 0%, 20%);
+      --clr-40: hsl(0, 0%, 55%);
+      --clr-60: hsl(0, 0%, 60%);
+      --clr-80: hsl(0, 0%, 80%);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--clr-07);
+      font-family: ui-monospace, "Courier New", monospace;
+    }
+
+    main {
+      padding: 100px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+
+    header,
+    section {
+      width: min(800px, 92vw);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      letter-spacing: 0.2rem;
+      word-spacing: 0.1rem;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    h1 {
+      font-weight: 800;
+      font-size: clamp(1.5rem, 5vw, 2rem);
+      color: var(--clr-80);
+    }
+
+    h2 {
+      font-weight: 800;
+      font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+      color: var(--clr-80);
+    }
+
+    h3 {
+      font-weight: 400;
+      font-size: clamp(1.1rem, 4vw, 1.5rem);
+      color: var(--clr-60);
+      padding-left: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      margin-left: 1rem;
+      padding-left: 1rem;
+      border-left: 1px solid var(--clr-20);
+    }
+
+    li {
+      font-size: 1rem;
+      line-height: 1.4;
+      letter-spacing: 0.02rem;
+      word-spacing: 0.05rem;
+      text-transform: lowercase;
+      color: var(--clr-40);
+    }
+
+    @media (min-width: 600px) {
+      h3 { padding-left: 2rem; }
+      ul { margin-left: 2rem; padding-left: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>&#10084;</h1>
+    </header>
+
+    <section aria-labelledby="frame">
+      <h2 id="frame">the frame</h2>
+      <ul>
+        <li>viele stationen aufgeteilt in mini- und maxi-events.</li>
+        <li>events sind quasi alleinstehende module.</li>
+        <li>events können nach belieben angeordnet und auch verworfen werden.</li>
+      </ul>
+      <ul>
+        <li>transfer via verschiedenen interessanten mietwagen.</li>
+        <li>wechselnde fahrer von uns, natürlich mit chauffeur-kleidung.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="events">
+      <h2 id="events">the events</h2>
+
+      <h3>mini beispiele</h3>
+      <ul>
+        <li>mittagessen bei [person tbd] (theoretisch 4x möglich).</li>
+        <li>essen frisch in eigener küche zubereitet.</li>
+        <li>serviert von gemieteten, knackigen, halb-nackten frauen.</li>
+        <li>schmuddel-lektüre zum durchblättern natürlich vor ort.</li>
+      </ul>
+      <ul>
+        <li>kaffee/kuchen mit unerwartetem überraschungsgast.</li>
+      </ul>
+      <ul>
+        <li>kippe und bier zwischendurch im nirgendwo oder an der tanke.</li>
+      </ul>
+
+      <h3>maxi beispiele</h3>
+      <ul>
+        <li>übertrieben fettes abendessen, z. B. teppanyaki im sushimoto <span class="keep">FFM</span>.</li>
+      </ul>
+      <ul>
+        <li>es erhält 200€ bargeld.</li>
+        <li>es wird an einem dubiosen, dunklen ort abgesetzt.</li>
+        <li>fahrer fährt vollgas weg.</li>
+        <li>es muss planlos in verlassenes haus/halle/garage.</li>
+        <li>finden wird es dort einen verfickt geilen poker-bargeld-event.</li>
+      </ul>
+      <ul>
+        <li>kneipen-tour (tbd).</li>
+      </ul>
+      <ul>
+        <li>hotel-übernachtung.</li>
+        <li>zimmer komplett zerlegen.</li>
+        <li>tv ausm fenster schmeißen.</li>
+        <li>feueralarm auslösen.</li>
+        <li>treppenhäuser mit kot beschmieren.</li>
+        <li>komplett ausrasten.</li>
+        <li>zigaretten rauchen.</li>
+        <li>viel lsd.</li>
+      </ul>
+      <ul>
+        <li>usw.</li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
