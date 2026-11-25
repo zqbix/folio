@@ -1,0 +1,250 @@
+set cut_paste_input [stack 0]
+version 17.1 v3
+push $cut_paste_input
+Group {
+ name zqUnderwater
+ selected true
+ xpos 1381
+ ypos 18373
+ addUserKnob {20 zqunderwater l zqUnderwater}
+ addUserKnob {26 __DEPTH l "" +STARTLINE T "<br>\n<b><i>DEPTH</i></b>\n<br>"}
+ addUserKnob {41 from0 l Depth T Copy1.from0}
+ addUserKnob {7 z_min l Min}
+ addUserKnob {7 z_max l Max}
+ z_max 1
+ addUserKnob {26 __PREGRADE l "" +STARTLINE T "<br>\n<b><i>PRE-GRADE</i></b>\n<br>"}
+ addUserKnob {7 pre_black l Blackpoint R -1 1}
+ addUserKnob {7 pre_white l Whitepoint R 0 2}
+ pre_white 1
+ addUserKnob {7 pre_gamma l Gamma R 0 2}
+ pre_gamma 1
+ addUserKnob {26 __FALLOFF l "" +STARTLINE T "<br>\n<b><i>FALLOFF</i></b>\n<br>"}
+ addUserKnob {18 fo_clr l Color}
+ fo_clr {0.3999999762 0.5320000052 1}
+ addUserKnob {6 fo_clr_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 fo_dist l Distance}
+ addUserKnob {7 fo_mix l Mix}
+ addUserKnob {26 __FOG l "" +STARTLINE T "<br>\n<b><i>FOG</i></b>\n<br>"}
+ addUserKnob {18 fog_clr l Color}
+ fog_clr {0.1800000072 0.3000000119 0.2567999959}
+ addUserKnob {6 fog_clr_panelDropped l "panel dropped state" -STARTLINE +HIDDEN}
+ addUserKnob {7 fog_dist l Distance}
+ addUserKnob {7 fog_mix l Mix}
+ addUserKnob {26 __SCHMUTZ_NOISE l "" +STARTLINE T "<br>\n<b><i>SCHMUTZ NOiSE</i></b>\n<br>"}
+ addUserKnob {14 schmutz_size l Size R 0 100}
+ schmutz_size {500 100}
+ addUserKnob {7 schmutz_z l Animate}
+ addUserKnob {7 schmutz_gain l Gain}
+ schmutz_gain 0.5
+ addUserKnob {7 schmutz_gamma l Gamma}
+ schmutz_gamma 0.5
+ addUserKnob {7 schmutz_blur l Blur}
+ schmutz_blur 50
+ addUserKnob {7 schmutz_intensity l Intensity}
+ addUserKnob {26 __SCHMUTZ_GRADE l "" +STARTLINE T "<br>\n<b><i>SCHMUTZ GRADE</i></b>\n<br>"}
+ addUserKnob {7 schmutz_g_black l Blackpoint R -1 1}
+ addUserKnob {7 schmutz_g_white l Whitepoint R 0 2}
+ schmutz_g_white 1
+ addUserKnob {7 schmutz_g_gamma l Gamma R 0 2}
+ schmutz_g_gamma 1
+ addUserKnob {26 __zqb0x l "" +STARTLINE T "<br><br><br>\n<b><i>zqb0x</i></b> - Underwater\n<br><br>\nUnderwater look/feel based on z-depth..\n<br>\nTweak from top to bottom and you should be fine.."}
+}
+ Input {
+  inputs 0
+  name Image
+  xpos 331
+  ypos 502
+ }
+ Dot {
+  name Dot1
+  xpos 365
+  ypos 560
+ }
+set N905d680 [stack 0]
+ Dot {
+  name Dot4
+  xpos 500
+  ypos 560
+ }
+set N905db00 [stack 0]
+push $N905db00
+ Copy {
+  inputs 2
+  from0 depth.Z
+  to0 rgba.alpha
+  name Copy1
+  xpos 466
+  ypos 591
+ }
+ Expression {
+  expr0 0
+  expr1 0
+  expr2 0
+  name Expression1
+  xpos 466
+  ypos 627
+ }
+ Grade {
+  channels alpha
+  blackpoint {{parent.z_min}}
+  whitepoint {{parent.z_max}}
+  name Grade64
+  xpos 466
+  ypos 651
+ }
+ Dot {
+  name Dot248
+  xpos 500
+  ypos 742
+ }
+set N905df80 [stack 0]
+ Dot {
+  name Dot249
+  xpos 500
+  ypos 789
+ }
+ Grade {
+  channels alpha
+  black {{"clamp(parent.fog_dist, 0, 1)"}}
+  name Grade68
+  xpos 351
+  ypos 780
+ }
+push $N905df80
+ Grade {
+  channels alpha
+  black {{"clamp(parent.fo_dist, 0, 1)"}}
+  name Grade67
+  xpos 349
+  ypos 733
+ }
+push $N905d680
+ Dot {
+  name Dot2
+  xpos 221
+  ypos 560
+ }
+ Grade {
+  blackpoint {{parent.pre_black}}
+  whitepoint {{parent.pre_white}}
+  gamma {{"max(0.0001, parent.pre_gamma)"}}
+  name Grade66
+  xpos 187
+  ypos 628
+ }
+ Grade {
+  inputs 1+1
+  multiply {{parent.fo_clr.r} {parent.fo_clr.g} {parent.fo_clr.b} 1}
+  mix {{"clamp(parent.fo_mix, 0, 1)"}}
+  name Grade57
+  xpos 187
+  ypos 739
+ }
+ Grade {
+  inputs 1+1
+  multiply 0
+  add {{parent.fog_clr.r} {parent.fog_clr.g} {parent.fog_clr.b} 0}
+  mix {{"clamp(parent.fog_mix, 0, 1)"}}
+  name Grade69
+  xpos 187
+  ypos 786
+ }
+ Dot {
+  name Dot3
+  xpos 221
+  ypos 874
+ }
+set N905ed00 [stack 0]
+ Noise {
+  output alpha
+  replace true
+  size {{parent.schmutz_size.w} {parent.schmutz_size.h}}
+  zoffset {{parent.schmutz_z}}
+  octaves 2
+  gain {{"max(0.0001, parent.schmutz_gain)"}}
+  gamma {{"max(0.0001, parent.schmutz_gamma)"}}
+  center {1376 768}
+  name Noise1
+  xpos 350
+  ypos 865
+ }
+ Expression {
+  temp_name0 newR
+  temp_expr0 "(a(x-1,y)) - (a(x+1,y))"
+  temp_name1 newG
+  temp_expr1 "(a(x,y-1)) - (a(x,y+1))"
+  temp_name2 normalize
+  temp_expr2 "max(0.00001, hypot(newR, newG))"
+  expr0 "newR / normalize * a"
+  expr1 "newG / normalize * a"
+  expr2 a
+  expr3 a
+  name calc_normal
+  xpos 350
+  ypos 901
+ }
+ Blur {
+  channels rgb
+  size {{parent.schmutz_blur}}
+  name Blur3
+  xpos 350
+  ypos 925
+ }
+set N91bcd00 [stack 0]
+ Expression {
+  temp_name0 len
+  temp_expr0 "max(0.0001, sqrt(r*r + g*g + b*b))"
+  expr0 0
+  expr1 0
+  expr2 0
+  expr3 len
+  name Expression2
+  xpos 350
+  ypos 973
+ }
+push $N91bcd00
+push $N905ed00
+add_layer {DISTORT DISTORT.red DISTORT.green DISTORT.blue}
+ Shuffle2 {
+  inputs 2
+  fromInput1 {
+   {1}
+   B
+   A
+  }
+  in1 rgb
+  out1 DISTORT
+  fromInput2 {
+   {0}
+   B
+   A
+  }
+  mappings "3 rgba.red 0 0 DISTORT.red 0 0 rgba.green 0 1 DISTORT.green 0 1 rgba.blue 0 2 DISTORT.blue 0 2"
+  name Shuffle1
+  xpos 187
+  ypos 925
+ }
+ IDistort {
+  channels rgba
+  uv DISTORT
+  uv_scale {{parent.schmutz_intensity}}
+  blur_scale 0
+  name IDistort1
+  xpos 187
+  ypos 949
+ }
+ Grade {
+  inputs 1+1
+  blackpoint {{parent.schmutz_g_black}}
+  whitepoint {{parent.schmutz_g_white}}
+  gamma {{"max(0.0001, parent.schmutz_g_gamma)"}}
+  name Grade2
+  xpos 187
+  ypos 973
+ }
+ Output {
+  name Output
+  xpos 187
+  ypos 1060
+ }
+end_group
